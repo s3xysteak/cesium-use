@@ -1,0 +1,26 @@
+html,
+body,
+#app {
+  @apply c-base-c h-full m-0 p-0 bg-base-bg;
+}
+
+::-webkit-scrollbar {
+  width: 0.45rem;
+  height: 0.45rem;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-#fcfcfc/40 dark:bg-#2c2c2c/40 rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-#8b8b8b dark:bg-#9f9f9f rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-#636363 dark:bg-#d1d1d1;
+}
+
+::-webkit-scrollbar-corner {
+  @apply bg-transparent;
+}
