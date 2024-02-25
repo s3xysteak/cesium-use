@@ -2,6 +2,8 @@
   "name": "cesium-use",
   "private": false,
   "version": "0.1.0",
+  "description": "Vue powered CesiumJS utility library",
+  "author": "s3xysteak",
   "type": "module",
   "license": "MIT",
   "keywords": [
@@ -12,6 +14,11 @@
   "files": [
     "dist"
   ],
+  "homepage": "https://github.com/s3xysteak/cesium-use",
+  "bugs": "https://github.com/s3xysteak/cesium-use/issues",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "main": "./dist/cesium-use.umd.cjs",
   "module": "./dist/cesium-use.js",
   "types": "./dist/index.d.ts",
