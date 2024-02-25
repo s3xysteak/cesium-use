@@ -26,17 +26,17 @@ editEntity.polygon(
 
 ```ts
 export const editEntity: {
-  point: (entity: Entity, ...args: PointGraphics.ConstructorOptions[]) => void
+  point: (entity: Entity, ...args: PointGraphics.ConstructorOptions[]): void
 
   polyline: (
     entity: Entity,
     ...args: PolylineGraphics.ConstructorOptions[]
-  ) => void
+  ): void
 
   polygon: (
     entity: Entity,
     ...args: PolygonGraphics.ConstructorOptions[]
-  ) => void
+  ): void
 }
 ```
 

@@ -78,21 +78,21 @@ export interface UsePointsOptions {
   height?: number | string
   billboardOptions: UsePointsBillboardOptions
   labelOptions: UsePointsLabelOptions
-  onEach?: (item: { label: Cesium.Label; billboard: Cesium.Billboard }) => void
+  onEach?: (item: { label: Cesium.Label; billboard: Cesium.Billboard }): void
 }
 
 export function usePoints<UsePointsItem extends Object = {}>(
   data: MaybeRefOrGetter<UsePointsItem[]>,
-  options: (item: UsePointsItem) => UsePointsOptions
+  options: (item: UsePointsItem): UsePointsOptions
 ): {
   billboardCollection: Cesium.BillboardCollection
   labelCollection: Cesium.LabelCollection
   points: Map<string, { label: Cesium.Label; billboard: Cesium.Billboard }>
-  toggleShow: (state?: boolean) => void
+  toggleShow: (state?: boolean): void
   flyTo: (
     id: UsePointsOptions['id'],
-    fn?: (billboard: Cesium.Billboard, coordinate: Cesium.Cartesian3) => void
-  ) => Promise<Cesium.Billboard>
+    fn?: (billboard: Cesium.Billboard, coordinate: Cesium.Cartesian3): void
+  ): Promise<Cesium.Billboard>
 }
 ```
 

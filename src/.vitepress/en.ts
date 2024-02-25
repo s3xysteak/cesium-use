@@ -39,7 +39,7 @@ export const en = defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/s3xysteak/cesium-use' }
     ]
   }
 })

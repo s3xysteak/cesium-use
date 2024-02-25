@@ -59,6 +59,33 @@ console.log(viewer instanceof Cesium.Viewer) // true
 </template>
 ```
 
+你还可以在 js 中调用`getViewer`，只需要确保在**调用这个函数的上下文**能获取到 viewer 实例即可。这在编写函数或整理代码结构时是十分方便的。
+
+```js
+// utils/doSomething.js
+export function doSomething() {
+  const viewer = getViewer()
+  // ...
+}
+```
+
+```vue
+<script setup>
+import { doSomething } from '@/utils/doSomething.js'
+
+// 如果这里的getViewer()可以正确执行。
+getViewer()
+// 那么函数内部的getViewer()也应当可以正确执行。
+doSomething()
+</script>
+
+<template>
+  <div />
+</template>
+```
+
+事实上，绝大部分 CesiumUse 的函数都是这么做的。
+
 ## 类型声明
 
 :::details
@@ -66,9 +93,9 @@ console.log(viewer instanceof Cesium.Viewer) // true
 ```ts
 export const getViewer = (): Cesium.Viewer
 
-export const setViewer = (v: Cesium.Viewer) => void
+export const setViewer = (v: Cesium.Viewer): void
 
-export const useViewerProvider = (v: Cesium.Viewer) => void
+export const useViewerProvider = (v: Cesium.Viewer): void
 ```
 
 :::
@@ -135,4 +162,4 @@ onMounted(() => {
 </script>
 ```
 
-更多内容请移步[ Vue 官方](https://cn.vuejs.org/guide/components/provide-inject.html)。
+更多依赖注入内容请移步[ Vue 官方文档](https://cn.vuejs.org/guide/components/provide-inject.html)。

@@ -24,7 +24,7 @@ collection.add({
 
 export const entityCollection = (
   ...args: ConstructorParameters<typeof Cesium.EntityCollection>
-) => new EntityCollection(...args)
+): new EntityCollection(...args)
 
 class EntityCollection extends Cesium.EntityCollection {
   // ...

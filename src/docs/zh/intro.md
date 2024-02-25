@@ -78,24 +78,12 @@ func(() => valGetter) // Getter
 
 为了方便管理 Viewer 实例，Cesium Use 提供了三个方法以供使用。
 
-```js {4,6,10-13}
-onMounted(() => {
-  const viewer = new Cesium.Viewer(element)
+- `getViewer` 获取 viewer 实例。
+- `setViewer` 通过一个模块级顶级变量保存 viewer。
+- `useViewerProvider` 利用 vue 的依赖注入实现 viewer 在组件间的传递。
 
-  setViewer(viewer) // 通过一个模块级顶级变量保存viewer。
+和许多 Vue 库的实践不同，Cesium Use **推荐**使用`setViewer`而不是基于依赖注入的`useViewerProvider`。因为依赖注入只能在 setup 调用栈中使用，而在 CesiumJS 中很难保证在同一个调用栈中完成所有实现。
 
-  useViewerProvider(viewer) // 这会利用vue的依赖注入实现viewer在组件间的传递。
-})
-
-onMounted(() => {
-  // 首先尝试通过依赖注入获取viewer。
-  // 如果失败则通过模块级顶级变量获取viewer。
-  // 如果再失败则抛出错误。
-  const viewer = getViewer()
-})
-```
-
-和许多 Vue 库的实践不同，Cesium Use **推荐**使用`setViewer`而不是`useViewerProvider`。因为依赖注入只能在 setup 调用栈中使用，而在 CesiumJS 中很难保证在同一个调用栈中完成所有实现。  
 更多相关内容见 [viewerStore](/core/viewerStore/index-zh.md)。
 
 ### 组件结构的最佳实践
@@ -110,7 +98,7 @@ onMounted(() => {
 
 在`earth-container.vue`中:
 
-```vue
+```vue {5,10-11,19}
 <script setup>
 import * as Cesium from 'cesium'
 import Earth from './Earth.vue'
