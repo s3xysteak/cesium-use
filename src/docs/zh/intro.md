@@ -84,7 +84,7 @@ func(() => valGetter) // Getter
 
 和许多 Vue 库的实践不同，Cesium Use **推荐**使用`setViewer`而不是基于依赖注入的`useViewerProvider`。因为依赖注入只能在 setup 调用栈中使用，而在 CesiumJS 中很难保证在同一个调用栈中完成所有实现。
 
-更多相关内容见 [viewerStore](/core/viewerStore/index-zh.md)。
+更多相关内容见 [viewerStore](core/viewerStore.md)。
 
 ### 组件结构的最佳实践
 
