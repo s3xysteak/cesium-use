@@ -11,5 +11,6 @@ export const shared = defineConfig({
   },
   vite: {
     publicDir: 'docs/public'
-  }
+  },
+  base: '/cesium-use/'
 })
