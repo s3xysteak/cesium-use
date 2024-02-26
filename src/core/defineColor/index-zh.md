@@ -9,9 +9,7 @@ const viewer = getViewer()
 viewer.entities.add({
   polygon: {
     // ...
-    material: defineColor('#334455/80')
-    // 等价于
-    // material: Cesium.Color.fromCssColorString('#334455').withAlpha(0.8)
+    material: defineColor('#334455/80') // 颜色为#334455，透明度0.8
   }
 })
 ```

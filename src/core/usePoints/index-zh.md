@@ -47,7 +47,7 @@ toggleShow() // 反转所有点位的显隐状态
 
 const { label, billboard } = points.get(1) //获取id为1的点位
 
-data.value = [{ id: 1, lon: '86', lat: '27' }] // 这会触发更新，原来的点位会被清楚
+data.value = [{ id: 1, lon: '86', lat: '27' }] // 这会触发更新，原来的点位会被清除
 data.value = [] // 相当于清除所有定位
 ```
 

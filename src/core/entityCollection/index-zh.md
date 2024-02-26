@@ -6,6 +6,7 @@
 
 ```js
 const collection = entityCollection()
+// 这会同步到上下文的viewer，无需手动再执行viewer.entities.add()
 collection.add({
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([-100, 30, -80, 70, -10, 40])
