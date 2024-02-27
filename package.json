@@ -31,6 +31,7 @@
     "dev": "vite",
     "test": "vitest",
     "build": "run-p type:check \"build:only {@}\" --",
+    "release": "pnpm build && pnpm publish",
     "build:only": "vite build",
     "type:check": "vue-tsc --build --force",
     "docs:dev": "vitepress dev src",
