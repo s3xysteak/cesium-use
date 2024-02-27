@@ -11,15 +11,15 @@ export const en = defineConfig({
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: 'Install', link: '/usage' }
     ],
 
     sidebar: [
       {
-        text: 'Examples',
+        text: 'Quick Start',
         items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+          { text: 'Introduce', link: '/intro' },
+          { text: 'Install', link: '/usage' }
         ]
       },
       {
