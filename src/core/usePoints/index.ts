@@ -16,7 +16,10 @@ export interface UsePointsOptions {
   height?: number | string
   billboardOptions: UsePointsBillboardOptions
   labelOptions: UsePointsLabelOptions
-  onEach?: (item: { label: Cesium.Label; billboard: Cesium.Billboard }) => void
+  onEach?: (
+    item: { label: Cesium.Label; billboard: Cesium.Billboard },
+    index: number
+  ) => void
 }
 
 export function usePoints<UsePointsItem extends Object = {}>(
@@ -51,7 +54,7 @@ export function usePoints<UsePointsItem extends Object = {}>(
     billboardCollection.removeAll()
     labelCollection.removeAll()
 
-    toValue(data).forEach(item => {
+    toValue(data).forEach((item, index) => {
       const {
         id,
         longitude: lon,
@@ -86,7 +89,7 @@ export function usePoints<UsePointsItem extends Object = {}>(
           labelOptions
         )
       )
-      onEach && onEach({ label, billboard })
+      onEach && onEach({ label, billboard }, index)
 
       points.set(id, { label, billboard })
     })

@@ -27,7 +27,7 @@ const { points, flyTo, toggleShow } = usePoints(data, item => ({
     image: img
   },
   labelOptions: { text: String(item.id) },
-  onEach({ label, billboard }) {
+  onEach({ label, billboard }, index) {
     // 在生成每个点位后执行的回调函数
 
     console.log(label)
@@ -78,7 +78,10 @@ export interface UsePointsOptions {
   height?: number | string
   billboardOptions: UsePointsBillboardOptions
   labelOptions: UsePointsLabelOptions
-  onEach?: (item: { label: Cesium.Label; billboard: Cesium.Billboard }): void
+  onEach?: (
+    item: { label: Cesium.Label; billboard: Cesium.Billboard },
+    index: number
+  ) => void
 }
 
 export function usePoints<UsePointsItem extends Object = {}>(
