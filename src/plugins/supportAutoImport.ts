@@ -13,7 +13,7 @@ export const supportAutoImportPlugin = (): Plugin => {
     transform(code, id) {
       if (id.endsWith('src/core/viewerStore/index.ts')) {
         const dirNameList = readdirSync(
-          fileURLToPath(new URL('../../core', import.meta.url))
+          fileURLToPath(new URL('../core', import.meta.url))
         ).filter(file => ignoreList.every(i => i !== file))
 
         const resultArrString = JSON.stringify([...concatList, ...dirNameList])
@@ -35,14 +35,14 @@ export const supportAutoImportPlugin = (): Plugin => {
 
 export const supportAutoImportDts: PluginOptions['afterBuild'] = dtsMap => {
   const dirNameList = readdirSync(
-    fileURLToPath(new URL('../../core', import.meta.url))
+    fileURLToPath(new URL('../core', import.meta.url))
   ).filter(file => ignoreList.every(i => i !== file))
   const resultArr = [...concatList, ...dirNameList]
   const mapType = `Partial<Record<'${resultArr.join("'|'")}', string>>`
   const result = `export declare const autoImport: (map?: ${mapType}) => { 'cesium-use': (string | [string, string])[] };`
 
   const path = fileURLToPath(
-    new URL('../../../dist/index.d.ts', import.meta.url)
+    new URL('../../dist/index.d.ts', import.meta.url)
   ).replace(/\\/g, '/')
 
   writeFileSync(path, dtsMap.get(path) + '\r\n' + result + '\r\n')

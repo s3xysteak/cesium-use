@@ -16,7 +16,7 @@ import pkg from './package.json'
 import {
   supportAutoImportPlugin,
   supportAutoImportDts
-} from './src/shared/supportAutoImport'
+} from './src/plugins/supportAutoImport'
 
 export default defineConfig({
   plugins: [
