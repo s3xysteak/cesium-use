@@ -1,6 +1,9 @@
 export const toTypeString = (value: unknown): string =>
   Object.prototype.toString.call(value)
 
+export const isUndefined = (val: unknown): val is undefined =>
+  typeof val === 'undefined'
+
 export const isArray = Array.isArray
 
 export const isMap = (val: unknown): val is Map<any, any> =>

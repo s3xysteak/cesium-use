@@ -24,6 +24,7 @@ declare global {
   const isSet: typeof import('../src/shared/general')['isSet']
   const isString: typeof import('../src/shared/general')['isString']
   const isSymbol: typeof import('../src/shared/general')['isSymbol']
+  const isUndefined: typeof import('../src/shared/general')['isUndefined']
   const it: typeof import('vitest')['it']
   const setViewer: typeof import('../src/core/viewerStore/index')['setViewer']
   const suite: typeof import('vitest')['suite']
