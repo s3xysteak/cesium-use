@@ -9,3 +9,4 @@ export * from './core/editEntity'
 export * from './core/entityCollection'
 export * from './core/usePoints'
 export * from './core/useUnderground'
+export * from './core/flyToArea';
