@@ -27,7 +27,7 @@ export default defineConfig({
 
     dts({ rollupTypes: true, afterBuild: supportAutoImportDts }),
     AutoImport({
-      dirs: ['src/core/viewerStore'],
+      dirs: ['src/core/viewerStore', 'src/shared'],
       imports: ['vitest'],
       dts: 'types/auto-imports.d.ts'
     }),
