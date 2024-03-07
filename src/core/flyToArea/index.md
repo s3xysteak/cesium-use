@@ -11,7 +11,10 @@ flyToArea([[100, 20], ['120', 40], Cesium.Cartesian3.fromDegrees(110, 30)], {
 })
 ```
 
-By default, no action is taken when there is no data in the array, and the viewpoint flies to an overhead position only when there is a single piece of data.
+By default:
+
+- When there is nothing in the array, no action will be taken.
+- When there is only 1 element in the array, the viewpoint will fly to an overhead position on the coordinate.
 
 ## Type Declarations
 

@@ -7,26 +7,21 @@ export interface LoadGeojsonConfig<CustomReturns = any> {
   custom?: (dataSource: Cesium.GeoJsonDataSource) => CustomReturns
 }
 
-export async function loadGeojson(
-  config: Omit<LoadGeojsonConfig, 'custom'>
-): Promise<Cesium.GeoJsonDataSource>
-export async function loadGeojson<CustomReturns>(
-  config: Omit<LoadGeojsonConfig<CustomReturns>, 'onEntity'> &
-    Required<Pick<LoadGeojsonConfig<CustomReturns>, 'custom'>>
-): Promise<CustomReturns>
-
-export async function loadGeojson<CustomReturns>(
-  config: LoadGeojsonConfig<CustomReturns>
-): Promise<CustomReturns | Cesium.GeoJsonDataSource> {
+export async function loadGeojson<T extends LoadGeojsonConfig>(
+  config: T
+): Promise<
+  T['custom'] extends (...args: any[]) => infer R ? R : Cesium.GeoJsonDataSource
+> {
   const { url, dataSourceOptions, onEntity, custom } = config
 
   const dataSource = await Cesium.GeoJsonDataSource.load(url, dataSourceOptions)
 
-  if (custom) return custom(dataSource)
+  if (custom) return custom.bind(config)(dataSource)
 
   dataSource.entities.values.forEach(entity => {
-    onEntity && onEntity(entity)
+    onEntity && onEntity.bind(config)(entity)
   })
 
-  return dataSource
+  // TODO: improve type
+  return dataSource as any
 }
