@@ -8,9 +8,11 @@ const entity = viewer.entities.add({
     hierarchy: Cesium.Cartesian3.fromDegreesArray([-100, 30, -80, 70, -10, 40])
   }
 })
-editEntity.polygon(
-  entity,
-  { material: Cesium.Color.AQUA },
+editEntity(
+  entity.polygon as Cesium.PolygonGraphics,
+  {
+    material: Cesium.Color.AQUA
+  },
   { material: Cesium.Color.RED }
 )
 </script>

@@ -12,8 +12,8 @@ const entity = viewer.entities.add({
   }
 })
 
-editEntity.polygon(
-  entity,
+editEntity(
+  entity.polygon,
   { material: Cesium.Color.AQUA },
   { material: Cesium.Color.RED }
 )
@@ -25,21 +25,15 @@ editEntity.polygon(
 ::: details
 
 ```ts
-export const editEntity: {
-  point: (entity: Entity, ...args: PointGraphics.ConstructorOptions[]): void
+export type EditEntityAttributes =
+  | PolygonGraphics
+  | PolylineGraphics
+  | PointGraphics
 
-  polyline: (
-    entity: Entity,
-    ...args: PolylineGraphics.ConstructorOptions[]
-  ): void
-
-  polygon: (
-    entity: Entity,
-    ...args: PolygonGraphics.ConstructorOptions[]
-  ): void
-
-  // ...
-}
+export function editEntity<T extends EditEntityAttributes>(
+  attr: T,
+  ...args: any[]
+): T
 ```
 
 :::

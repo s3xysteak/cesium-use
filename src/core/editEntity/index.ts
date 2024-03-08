@@ -1,25 +1,28 @@
-import type {
-  Entity,
-  PolylineGraphics,
-  PolygonGraphics,
-  PointGraphics
-} from 'cesium'
+import type { PolylineGraphics, PolygonGraphics, PointGraphics } from 'cesium'
 
-interface EditEntityMap {
-  point: PointGraphics.ConstructorOptions
-  polyline: PolylineGraphics.ConstructorOptions
-  polygon: PolygonGraphics.ConstructorOptions
-}
+export type EditEntityAttributes =
+  | PolygonGraphics
+  | PolylineGraphics
+  | PointGraphics
 
-const list = ['point', 'polyline', 'polygon'] as const
+export function editEntity(
+  attr: PolygonGraphics,
+  ...args: PolygonGraphics.ConstructorOptions[]
+): PolygonGraphics
 
-export const editEntity = list.reduce((acc, attr) => {
-  acc[attr] = createEditEntity(attr)
-  return acc
-}, {} as { [K in (typeof list)[number]]: ReturnType<typeof createEditEntity<K>> })
+export function editEntity(
+  attr: PolylineGraphics,
+  ...args: PolylineGraphics.ConstructorOptions[]
+): PolylineGraphics
 
-function createEditEntity<T extends keyof EditEntityMap>(attr: T) {
-  return (entity: Entity, ...args: EditEntityMap[T][]) => {
-    entity[attr] = Object.assign(entity[attr] ?? {}, ...args)
-  }
+export function editEntity(
+  attr: PointGraphics,
+  ...args: PointGraphics.ConstructorOptions[]
+): PointGraphics
+
+export function editEntity<T extends EditEntityAttributes>(
+  attr: T,
+  ...args: any[]
+): T {
+  return Object.assign(attr ?? {}, ...args)
 }
