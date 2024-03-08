@@ -20,7 +20,7 @@ Assuming there is such a directory structure:
 
 Code in `earth-container.vue`:
 
-```vue {10,11}
+```vue {10,15}
 <script setup>
 import * as Cesium from 'cesium'
 import Earth from './Earth/Earth.vue'
@@ -31,9 +31,16 @@ onMounted(() => {
   const viewer = new Cesium.Viewer(viewerContainer)
 
   setViewer(viewer)
-  // useViewerProvider(viewer)
   isViewerMounted.value = true
 })
+
+// const viewer = shallowRef()
+// useViewerProvider(viewer)
+// onMounted(() => {
+//   viewer.value = new Cesium.Viewer(viewerContainer)
+
+//   isViewerMounted.value = true
+// })
 </script>
 
 <template>
@@ -91,11 +98,11 @@ In fact, this is how the majority of functions in Cesium Use are implemented.
 :::details
 
 ```ts
-export const getViewer = (): Cesium.Viewer
+export const getViewer = (): Viewer
 
-export const setViewer = (v: Cesium.Viewer): void
+export const setViewer = (v: Viewer): void
 
-export const useViewerProvider = (v: Cesium.Viewer): void
+export const useViewerProvider = (v: ShallowRef<Viewer>): void
 ```
 
 :::

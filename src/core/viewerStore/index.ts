@@ -4,11 +4,12 @@ import {
   toValue,
   inject,
   provide,
-  type InjectionKey
+  type InjectionKey,
+  type ShallowRef
 } from 'vue'
 import type { Viewer } from 'cesium'
 
-const INJECT_KEY_VIEWER: InjectionKey<Viewer> = Symbol('viewer')
+const INJECT_KEY_VIEWER: InjectionKey<ShallowRef<Viewer>> = Symbol('viewer')
 
 const viewer = shallowRef<Viewer>()
 
@@ -27,6 +28,6 @@ export const setViewer = (v: Viewer) => {
   viewer.value = v
 }
 
-export const useViewerProvider = (v: Viewer) => {
+export const useViewerProvider = (v: ShallowRef<Viewer>) => {
   provide(INJECT_KEY_VIEWER, v)
 }
