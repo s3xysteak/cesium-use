@@ -1,14 +1,9 @@
-import {
-  defineConfig,
-  presetUno,
-  presetIcons,
-  presetAttributify,
-  toEscapedSelector as e
-} from 'unocss'
+import { defineConfig, presetUno, presetIcons, presetAttributify } from 'unocss'
 
 import transformerDirectives from '@unocss/transformer-directives'
 
 export default defineConfig({
+  shortcuts: [['flex-center', 'items-center justify-center']],
   presets: [
     presetUno(),
     presetIcons(),
