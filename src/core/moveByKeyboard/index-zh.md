@@ -20,6 +20,10 @@ moveByKeyboard({
 `distancePerFrame`接受响应式的数字类型参数，以动态调整移动速度。当你希望禁用移动时，可以直接将其设置`{ distancePerFrame: 0 }`。  
 可以通过`keybinding`选项修改按键绑定。
 
+### 可选的按键
+
+按键绑定基于`vueuse`的`useMagicKeys`实现，更多可选的按键见[mozilla](https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent/key)
+
 ## 类型声明
 
 ::: details
