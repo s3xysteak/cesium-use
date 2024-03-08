@@ -1,9 +1,20 @@
-import type { PolylineGraphics, PolygonGraphics, PointGraphics } from 'cesium'
+import type {
+  PolylineGraphics,
+  PolygonGraphics,
+  PointGraphics,
+  BoxGraphics
+} from 'cesium'
 
 export type EditEntityAttributes =
   | PolygonGraphics
   | PolylineGraphics
   | PointGraphics
+  | BoxGraphics
+
+export function editEntity(
+  attr: BoxGraphics,
+  ...args: BoxGraphics.ConstructorOptions[]
+): BoxGraphics
 
 export function editEntity(
   attr: PolygonGraphics,
