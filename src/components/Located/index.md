@@ -1,8 +1,8 @@
 # Located
 
-将 DOM 固定在指定坐标上。
+Locate a DOM element on a coordinate.
 
-## 使用
+## Usage
 
 ```vue
 <script setup>
@@ -26,15 +26,15 @@ const pos = shallowRef([-100, 10])
 </template>
 ```
 
-其中:
+Where:
 
-- `v-model` 绑定一个布尔值，控制了`Located`的显示与隐藏。
-- `as` 可以将`Located`改变为想要的 DOM，默认为`'div'`，也可以像示例代码一样传递组件。
-- `placement`提供了一系列预设方位，默认为`bottomRight`表示 DOM 在坐标的右下方(即 DOM 的左上角固定在坐标上。)
-- `coordinate` 用于控制`Located`固定的坐标。
-- `offset` 用于调整 DOM 定位的偏移。`top` 和 `left` 为 css 单位。
+- `v-model` binds a boolean value that controls the display and hiding of `Located`.
+- `as` can change `Located` to the desired DOM, defaulting to `'div'`, or pass a component as shown in the example code.
+- `placement` provides a series of preset positions, defaulting to `bottomRight`, indicating the DOM is positioned at the bottom right of the coordinates (i.e., the top left corner of the DOM is fixed on the coordinates).
+- `coordinate` is used to control the fixed coordinates of `Located`.
+- `offset` is used to adjust the positioning offset of the DOM. `top` and `left` are in CSS units.
 
-## 类型声明
+## Type Declarations
 
 :::details
 
@@ -58,13 +58,13 @@ interface Props {
   coordinate: MaybeCartesian3OrLonLat
 
   /**
-   * 元素方位
+   * DOM element placement
    * @default 'bottomRight'
    */
   placement?: Placement
 
   /**
-   * DOM的css偏差
+   * Dom css offset
    */
   offset?: Partial<{
     left: number

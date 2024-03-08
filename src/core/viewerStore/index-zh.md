@@ -20,7 +20,7 @@ viewerStore 是最特殊的一章节，因为并不存在 viewerStore 这个函�
 
 在`earth-container.vue`中:
 
-```vue {10,11}
+```vue {10,15}
 <script setup>
 import * as Cesium from 'cesium'
 import Earth from './Earth/Earth.vue'
@@ -31,9 +31,16 @@ onMounted(() => {
   const viewer = new Cesium.Viewer(viewerContainer)
 
   setViewer(viewer)
-  // useViewerProvider(viewer)
   isViewerMounted.value = true
 })
+
+// const viewer = shallowRef()
+// useViewerProvider(viewer)
+// onMounted(() => {
+//   viewer.value = new Cesium.Viewer(viewerContainer)
+
+//   isViewerMounted.value = true
+// })
 </script>
 
 <template>
@@ -91,11 +98,11 @@ doSomething()
 :::details
 
 ```ts
-export const getViewer = (): Cesium.Viewer
+export const getViewer = (): Viewer
 
-export const setViewer = (v: Cesium.Viewer): void
+export const setViewer = (v: Viewer): void
 
-export const useViewerProvider = (v: Cesium.Viewer): void
+export const useViewerProvider = (v: ShallowRef<Viewer>): void
 ```
 
 :::

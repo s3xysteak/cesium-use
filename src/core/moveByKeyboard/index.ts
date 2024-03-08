@@ -2,21 +2,50 @@ import * as Cesium from 'cesium'
 import { toValue, watchEffect, type MaybeRefOrGetter } from 'vue'
 import { useMagicKeys } from '@vueuse/core'
 
+export type MoveByKeyboardKeybindingList =
+  | 'forward'
+  | 'backward'
+  | 'left'
+  | 'right'
+  | 'down'
+  | 'up'
 export interface MoveByKeyboardOptions {
   distancePerFrame?: MaybeRefOrGetter<number>
+  keybinding?: Partial<Record<MoveByKeyboardKeybindingList, string>>
 }
 
 export function moveByKeyboard(options: MoveByKeyboardOptions = {}) {
-  const { distancePerFrame = 4 } = options
+  const { distancePerFrame = 4, keybinding: _keybinding } = options
+  const keybinding: Record<MoveByKeyboardKeybindingList, string> =
+    Object.assign(
+      {
+        forward: 'w',
+        backward: 's',
+        left: 'a',
+        right: 'd',
+        down: 'shift',
+        up: 'space'
+      },
+      _keybinding
+    )
 
-  const viewer = getViewer()
-  const { w, s, a, d, shift, space } = useMagicKeys()
-  const magicKeys = { w, s, a, d, shift, space }
+  const keys = useMagicKeys()
+  const magicKeys = {
+    forward: keys[keybinding.forward],
+    backward: keys[keybinding.backward],
+    left: keys[keybinding.left],
+    right: keys[keybinding.right],
+    down: keys[keybinding.down],
+    up: keys[keybinding.up]
+  }
 
-  const camera = viewer.camera
+  const camera = getViewer().camera
 
-  const keyToCameraMoveMap: Record<string, (num: number) => void> = {
-    w: num =>
+  const keyToCameraMoveMap: Record<
+    MoveByKeyboardKeybindingList,
+    (num: number) => void
+  > = {
+    forward: num =>
       camera.move(
         Cesium.Cartesian3.negate(
           getXVector(camera.direction, camera.position),
@@ -24,10 +53,11 @@ export function moveByKeyboard(options: MoveByKeyboardOptions = {}) {
         ),
         num
       ),
-    s: num => camera.move(getXVector(camera.direction, camera.position), num),
-    a: num => camera.moveLeft(num),
-    d: num => camera.moveRight(num),
-    shift: num =>
+    backward: num =>
+      camera.move(getXVector(camera.direction, camera.position), num),
+    left: num => camera.moveLeft(num),
+    right: num => camera.moveRight(num),
+    down: num =>
       camera.move(
         Cesium.Cartesian3.negate(
           Cesium.Cartesian3.normalize(camera.position, new Cesium.Cartesian3()),
@@ -35,14 +65,14 @@ export function moveByKeyboard(options: MoveByKeyboardOptions = {}) {
         ),
         num
       ),
-    space: num =>
+    up: num =>
       camera.move(
         Cesium.Cartesian3.normalize(camera.position, new Cesium.Cartesian3()),
         num
       )
   }
 
-  const move = (key: string) => {
+  const move = (key: MoveByKeyboardKeybindingList) => {
     const requestIdList: number[] = []
 
     const start = () => {
@@ -66,7 +96,7 @@ export function moveByKeyboard(options: MoveByKeyboardOptions = {}) {
   }
 
   for (let [key, value] of Object.entries(magicKeys)) {
-    const { animate } = move(key)
+    const { animate } = move(key as any)
     watchEffect(() => {
       animate(value.value)
     })

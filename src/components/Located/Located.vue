@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed, type Component } from 'vue'
 import { useElementBounding } from '@vueuse/core'
-import * as Cesium from 'cesium'
+import type { MaybeCartesian3OrLonLat } from '@/shared/coordinate'
 
 type Rect = {
   width: number
@@ -32,17 +32,8 @@ const placementMap: Record<Placement, (rect: Rect) => Rect> = {
   left: rect => ({ width: -rect.width, height: -rect.height / 2 })
 }
 
-type LonLatAlt =
-  | number[]
-  | {
-      lon: number
-      lat: number
-      alt?: number
-    }
-  | Cesium.Cartesian3
-
 interface Props {
-  coordinate: LonLatAlt
+  coordinate: MaybeCartesian3OrLonLat
 
   /**
    * 元素方位
@@ -90,24 +81,9 @@ const update = () => {
   const coordinate = props.coordinate
   if (!coordinate) return
 
-  const position =
-    coordinate instanceof Cesium.Cartesian3
-      ? viewer.scene.cartesianToCanvasCoordinates(coordinate)
-      : Array.isArray(coordinate)
-      ? viewer.scene.cartesianToCanvasCoordinates(
-          Cesium.Cartesian3.fromDegrees(
-            coordinate[0],
-            coordinate[1],
-            coordinate[2]
-          )
-        )
-      : viewer.scene.cartesianToCanvasCoordinates(
-          Cesium.Cartesian3.fromDegrees(
-            coordinate.lon,
-            coordinate.lat,
-            coordinate.alt
-          )
-        )
+  const position = viewer.scene.cartesianToCanvasCoordinates(
+    toCartesian3(coordinate)
+  )
 
   // position在奇怪的时候会是undefined，并不知道为什么
   if (!position) {

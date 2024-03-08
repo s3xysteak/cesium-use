@@ -27,7 +27,7 @@ export interface FlyToAreaOptions {
 }
 
 function flyToArea(
-  posList: maybeCartesian3OrLonLat[],
+  posList: MaybeCartesian3OrLonLat[],
   options?: Partial<FlyToAreaOptions>
 ): void
 ```
