@@ -6,7 +6,15 @@ const input = ref<string>('10')
 const speed = computed(() =>
   Number.isNaN(Number(input.value)) ? 4 : Number(input.value)
 )
-moveByKeyboard({ distancePerFrame: speed })
+moveByKeyboard({
+  distancePerFrame: speed,
+  keybinding: {
+    forward: 'ArrowUp',
+    backward: 'ArrowDown',
+    left: 'ArrowLeft',
+    right: 'ArrowRight'
+  }
+})
 </script>
 
 <template>
