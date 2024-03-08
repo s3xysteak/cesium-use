@@ -1,13 +1,8 @@
 import * as Cesium from 'cesium'
 
-export type NumberOrString = number | string
+export type MaybeCartesian3OrLonLat = Cesium.Cartesian3 | (number | string)[]
 
-export type maybeCartesian3OrLonLat =
-  | Cesium.Cartesian3
-  | [NumberOrString, NumberOrString]
-  | [NumberOrString, NumberOrString, NumberOrString]
-
-export function toCartesian3(source: maybeCartesian3OrLonLat) {
+export function toCartesian3(source: MaybeCartesian3OrLonLat) {
   if (source instanceof Cesium.Cartesian3) {
     return source
   }
