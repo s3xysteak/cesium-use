@@ -2,7 +2,8 @@ import type {
   PolylineGraphics,
   PolygonGraphics,
   PointGraphics,
-  BoxGraphics
+  BoxGraphics,
+  CylinderGraphics
 } from 'cesium'
 
 export type EditEntityAttributes =
@@ -10,6 +11,12 @@ export type EditEntityAttributes =
   | PolylineGraphics
   | PointGraphics
   | BoxGraphics
+  | CylinderGraphics
+
+export function editEntity(
+  attr: CylinderGraphics,
+  ...args: CylinderGraphics.ConstructorOptions[]
+): CylinderGraphics
 
 export function editEntity(
   attr: BoxGraphics,
