@@ -12,6 +12,6 @@ if (!isValidVersion(version)) {
   process.exit(1)
 }
 
-execSync(`npm version ${version} -m "release: %s"`, { stdio: 'inherit' })
+execSync(`npm version ${version} -m "release: v%s"`, { stdio: 'inherit' })
 execSync('git push --tags', { stdio: 'inherit' })
 execSync('git push', { stdio: 'inherit' })

@@ -6,6 +6,10 @@
   "author": "s3xysteak",
   "type": "module",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/s3xysteak/cesium-use.git"
+  },
   "keywords": [
     "cesium",
     "vue",
