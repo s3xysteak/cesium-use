@@ -1,13 +1,12 @@
 import { consola } from 'consola'
 import { execSync } from 'node:child_process'
 
-type Version = 'major' | 'minor' | 'patch'
-const isValidVersion = (version: string) => {
-  return ['major', 'minor', 'patch'].includes(version)
-}
+const versionList = ['major', 'minor', 'patch'] as const
+type Version = (typeof versionList)[number]
 
 const version = process.argv[2] as Version
-if (!isValidVersion(version)) {
+
+if (!versionList.includes(version)) {
   consola.error(new Error('Invalid version'))
   process.exit(1)
 }
