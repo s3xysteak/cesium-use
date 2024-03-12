@@ -1,8 +1,8 @@
 import * as Cesium from 'cesium'
 
-export const entityCollection = (
-  ...args: ConstructorParameters<typeof Cesium.EntityCollection>
-) => new EntityCollection(...args)
+export function entityCollection(...args: ConstructorParameters<typeof Cesium.EntityCollection>) {
+  return new EntityCollection(...args)
+}
 
 class EntityCollection extends Cesium.EntityCollection {
   viewer: Cesium.Viewer
@@ -20,14 +20,13 @@ class EntityCollection extends Cesium.EntityCollection {
   getOrCreateEntity(id: string) {
     const result = this.getById(id)
     if (result) {
-      if (!this.viewer.entities.contains(result)) {
+      if (!this.viewer.entities.contains(result))
         throw new Error('the entity in the collection but not in the viewer.')
-      }
-    } else {
+    }
+    else {
       // result必为undefined
-      if (this.viewer.entities.getById(id) !== undefined) {
+      if (this.viewer.entities.getById(id) !== undefined)
         throw new Error('the entity not in the collection but in the viewer.')
-      }
     }
     const entity = super.getOrCreateEntity(id)
 
@@ -38,14 +37,14 @@ class EntityCollection extends Cesium.EntityCollection {
   remove(entity: Cesium.Entity) {
     const me = super.remove(entity)
     const v = this.viewer.entities.remove(entity)
-    if (me !== v) {
+    if (me !== v)
       throw new Error('The collection and viewer states are inconsistent.')
-    }
+
     return me
   }
 
   removeAll() {
-    this.values.forEach(entity => {
+    this.values.forEach((entity) => {
       this.viewer.entities.remove(entity)
     })
     super.removeAll()
@@ -54,9 +53,9 @@ class EntityCollection extends Cesium.EntityCollection {
   removeById(id: string) {
     const me = super.removeById(id)
     const v = this.viewer.entities.removeById(id)
-    if (me !== v) {
+    if (me !== v)
       throw new Error('The collection and viewer states are inconsistent.')
-    }
+
     return me
   }
 }

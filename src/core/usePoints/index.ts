@@ -1,5 +1,6 @@
 import * as Cesium from 'cesium'
-import { MaybeRefOrGetter, toValue, watchEffect } from 'vue'
+import type { MaybeRefOrGetter } from 'vue'
+import { toValue, watchEffect } from 'vue'
 
 export type UsePointsBillboardOptions =
   Cesium.BillboardGraphics.ConstructorOptions & {
@@ -17,36 +18,36 @@ export interface UsePointsOptions {
   billboardOptions: UsePointsBillboardOptions
   labelOptions: UsePointsLabelOptions
   onEach?: (
-    item: { label: Cesium.Label; billboard: Cesium.Billboard },
+    item: { label: Cesium.Label, billboard: Cesium.Billboard },
     index: number
   ) => void
 }
 
-export function usePoints<UsePointsItem extends Object = {}>(
+export function usePoints<UsePointsItem extends object = object>(
   data: MaybeRefOrGetter<UsePointsItem[]>,
-  options: (item: UsePointsItem) => UsePointsOptions
+  options: (item: UsePointsItem) => UsePointsOptions,
 ) {
   const viewer = getViewer()
 
   const points: Map<
     string,
-    { label: Cesium.Label; billboard: Cesium.Billboard }
+    { label: Cesium.Label, billboard: Cesium.Billboard }
   > = new Map()
 
   const labelCollection = new Cesium.LabelCollection({ scene: viewer.scene })
   viewer.scene.primitives.add(labelCollection)
   const billboardCollection = new Cesium.BillboardCollection({
-    scene: viewer.scene
+    scene: viewer.scene,
   })
   viewer.scene.primitives.add(billboardCollection)
 
   const defaultBillboardOptions: UsePointsOptions['billboardOptions'] = {
     heightReference: Cesium.HeightReference.RELATIVE_TO_TERRAIN,
-    disableDepthTestDistance: Number.POSITIVE_INFINITY
+    disableDepthTestDistance: Number.POSITIVE_INFINITY,
   }
   const defaultLabelOptions: UsePointsOptions['labelOptions'] = {
     heightReference: Cesium.HeightReference.RELATIVE_TO_TERRAIN,
-    disableDepthTestDistance: Number.POSITIVE_INFINITY
+    disableDepthTestDistance: Number.POSITIVE_INFINITY,
   }
 
   watchEffect(() => {
@@ -62,32 +63,32 @@ export function usePoints<UsePointsItem extends Object = {}>(
         height: alt,
         billboardOptions,
         labelOptions,
-        onEach
+        onEach,
       } = options?.(item)
 
       const pos: [number, number, number | undefined] = [
         Number(lon),
         Number(lat),
-        alt === undefined ? undefined : Number(alt)
+        alt === undefined ? undefined : Number(alt),
       ]
 
       const billboard = billboardCollection.add(
         Object.assign(
           defaultBillboardOptions,
           {
-            position: Cesium.Cartesian3.fromDegrees(...pos)
+            position: Cesium.Cartesian3.fromDegrees(...pos),
           },
-          billboardOptions
-        )
+          billboardOptions,
+        ),
       )
       const label = labelCollection.add(
         Object.assign(
           defaultLabelOptions,
           {
-            position: Cesium.Cartesian3.fromDegrees(...pos)
+            position: Cesium.Cartesian3.fromDegrees(...pos),
           },
-          labelOptions
-        )
+          labelOptions,
+        ),
       )
       onEach && onEach({ label, billboard }, index)
 
@@ -96,19 +97,19 @@ export function usePoints<UsePointsItem extends Object = {}>(
   })
 
   const toggleShow = (state?: boolean) => {
-    billboardCollection.show =
-      state === undefined ? !billboardCollection.show : state
+    billboardCollection.show
+      = state === undefined ? !billboardCollection.show : state
     labelCollection.show = state === undefined ? !labelCollection.show : state
   }
 
   const flyTo = async (
     id: UsePointsOptions['id'],
-    fn?: (billboard: Cesium.Billboard, coordinate: Cesium.Cartesian3) => void
+    fn?: (billboard: Cesium.Billboard, coordinate: Cesium.Cartesian3) => void,
   ) => {
     const point = points.get(id)
-    if (point === undefined) {
+    if (point === undefined)
       throw new Error('cannot find point with the id.')
-    }
+
     const { billboard } = point
     const coordinate = (
       billboard as Cesium.Billboard & {
@@ -123,8 +124,8 @@ export function usePoints<UsePointsItem extends Object = {}>(
         position: pos,
         label: {
           text: 'here!',
-          fillColor: Cesium.Color.TRANSPARENT
-        }
+          fillColor: Cesium.Color.TRANSPARENT,
+        },
       })
 
       await viewer.flyTo(entity)
@@ -140,6 +141,6 @@ export function usePoints<UsePointsItem extends Object = {}>(
     labelCollection,
     points,
     toggleShow,
-    flyTo
+    flyTo,
   }
 }

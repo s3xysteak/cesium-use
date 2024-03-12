@@ -1,5 +1,6 @@
-import { consola } from 'consola'
 import { execSync } from 'node:child_process'
+import process from 'node:process'
+import { consola } from 'consola'
 
 const versionList = ['major', 'minor', 'patch'] as const
 type Version = (typeof versionList)[number]

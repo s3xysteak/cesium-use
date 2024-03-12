@@ -34,13 +34,13 @@ export function useEvent(
       action(e)
     },
     type,
-    modifier
+    modifier,
   )
 
-  getCurrentInstance() &&
-    onUnmounted(() => {
-      handler.destroy()
-    })
+  getCurrentInstance()
+  && onUnmounted(() => {
+    handler.destroy()
+  })
 
   return handler
 }

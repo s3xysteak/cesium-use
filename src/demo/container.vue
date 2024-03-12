@@ -9,7 +9,7 @@ const isMounted = useMounted()
 const container = ref<HTMLDivElement>()
 onMounted(() => {
   const viewer = new Cesium.Viewer(container.value as HTMLDivElement, {
-    terrain: Cesium.Terrain.fromWorldTerrain()
+    terrain: Cesium.Terrain.fromWorldTerrain(),
   })
 
   viewer.scene.globe.depthTestAgainstTerrain = true
@@ -19,7 +19,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div h-full w-full ref="container"></div>
+  <div ref="container" h-full w-full />
 
   <RouterView v-if="isMounted" />
 </template>

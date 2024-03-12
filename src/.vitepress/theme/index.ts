@@ -8,5 +8,5 @@ export default {
   ...Theme,
 
   // Thanks to Unocss!
-  Layout: () => h(Layout)
+  Layout: () => h(Layout),
 }

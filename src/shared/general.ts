@@ -1,37 +1,45 @@
-export const toTypeString = (value: unknown): string =>
-  Object.prototype.toString.call(value)
+export function toTypeString(value: unknown): string {
+  return Object.prototype.toString.call(value)
+}
 
-export const isUndefined = (val: unknown): val is undefined =>
-  typeof val === 'undefined'
+export function isUndefined(val: unknown): val is undefined {
+  return typeof val === 'undefined'
+}
 
 export const isArray = Array.isArray
 
-export const isMap = (val: unknown): val is Map<any, any> =>
-  toTypeString(val) === '[object Map]'
+export function isMap(val: unknown): val is Map<any, any> {
+  return toTypeString(val) === '[object Map]'
+}
 
-export const isSet = (val: unknown): val is Set<any> =>
-  toTypeString(val) === '[object Set]'
+export function isSet(val: unknown): val is Set<any> {
+  return toTypeString(val) === '[object Set]'
+}
 
-export const isDate = (val: unknown): val is Date =>
-  toTypeString(val) === '[object Date]'
+export function isDate(val: unknown): val is Date {
+  return toTypeString(val) === '[object Date]'
+}
 
-export const isRegExp = (val: unknown): val is RegExp =>
-  toTypeString(val) === '[object RegExp]'
+export function isRegExp(val: unknown): val is RegExp {
+  return toTypeString(val) === '[object RegExp]'
+}
 
-export const isFunction = (val: unknown): val is Function =>
-  typeof val === 'function'
+export function isFunction(val: unknown): val is Function {
+  return typeof val === 'function'
+}
 
 export const isString = (val: unknown): val is string => typeof val === 'string'
 
 export const isSymbol = (val: unknown): val is symbol => typeof val === 'symbol'
 
-export const isObject = (val: unknown): val is Record<any, any> =>
-  val !== null && typeof val === 'object'
+export function isObject(val: unknown): val is Record<any, any> {
+  return val !== null && typeof val === 'object'
+}
 
-export const isPromise = <T = any>(val: unknown): val is Promise<T> => {
+export function isPromise<T = any>(val: unknown): val is Promise<T> {
   return (
-    (isObject(val) || isFunction(val)) &&
-    isFunction((val as any).then) &&
-    isFunction((val as any).catch)
+    (isObject(val) || isFunction(val))
+    && isFunction((val as any).then)
+    && isFunction((val as any).catch)
   )
 }

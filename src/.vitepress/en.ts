@@ -11,7 +11,7 @@ export const en = defineConfig({
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Install', link: '/usage' }
+      { text: 'Install', link: '/usage' },
     ],
 
     sidebar: [
@@ -19,27 +19,27 @@ export const en = defineConfig({
         text: 'Quick Start',
         items: [
           { text: 'Introduce', link: '/intro' },
-          { text: 'Install', link: '/usage' }
-        ]
+          { text: 'Install', link: '/usage' },
+        ],
       },
       {
         text: 'core',
         items: coreList.map(dir => ({
           text: dir,
-          link: `core/${dir}.md`
-        }))
+          link: `core/${dir}.md`,
+        })),
       },
       {
         text: 'component',
         items: componentsList.map(dir => ({
           text: dir,
-          link: `components/${dir}.md`
-        }))
-      }
+          link: `components/${dir}.md`,
+        })),
+      },
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/s3xysteak/cesium-use' }
-    ]
-  }
+      { icon: 'github', link: 'https://github.com/s3xysteak/cesium-use' },
+    ],
+  },
 })

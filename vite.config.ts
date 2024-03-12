@@ -1,6 +1,6 @@
 /// <reference types="vitest" />
 
-import { fileURLToPath, URL } from 'node:url'
+import { URL, fileURLToPath } from 'node:url'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -14,8 +14,8 @@ import UnoCSS from 'unocss/vite'
 
 import pkg from './package.json'
 import {
+  supportAutoImportDts,
   supportAutoImportPlugin,
-  supportAutoImportDts
 } from './src/plugins/supportAutoImport'
 
 export default defineConfig({
@@ -29,10 +29,10 @@ export default defineConfig({
     AutoImport({
       dirs: ['src/core/viewerStore', 'src/shared'],
       imports: ['vitest'],
-      dts: 'types/auto-imports.d.ts'
+      dts: 'types/auto-imports.d.ts',
     }),
 
-    supportAutoImportPlugin()
+    supportAutoImportPlugin(),
   ],
   test: {
     environment: 'jsdom',
@@ -40,22 +40,22 @@ export default defineConfig({
       ...configDefaults.exclude,
       'e2e/*',
       '**/public/**',
-      '**/.{vscode,svn}/**'
+      '**/.{vscode,svn}/**',
     ],
-    root: fileURLToPath(new URL('./', import.meta.url))
+    root: fileURLToPath(new URL('./', import.meta.url)),
   },
   build: {
     lib: {
       entry: './src/index.ts',
-      name: 'cesium-use'
+      name: 'cesium-use',
     },
     rollupOptions: {
-      external: Object.keys(pkg.dependencies || {})
-    }
+      external: Object.keys(pkg.dependencies || {}),
+    },
   },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  }
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
 })

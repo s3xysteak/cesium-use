@@ -1,15 +1,16 @@
 <script setup lang="tsx">
-import { ref, computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import Located from './Located.vue'
 
 const show = ref(true)
 const lon = ref('-100')
 const lat = ref('40')
-const getNum = (num: any, init: number) =>
-  Number.isNaN(Number(num)) ? init : Number(num)
+function getNum(num: any, init: number) {
+  return Number.isNaN(Number(num)) ? init : Number(num)
+}
 const coordinate = computed(() => [
   getNum(lon.value, -100),
-  getNum(lat.value, 40)
+  getNum(lat.value, 40),
 ])
 
 const MyButton = defineComponent((_, { slots }) => () => (
@@ -19,8 +20,8 @@ const MyButton = defineComponent((_, { slots }) => () => (
 
 <template>
   <div absolute top-10 left-10 flex="~ col">
-    <input placeholder="lon" v-model="lon" />
-    <input placeholder="lat" v-model="lat" />
+    <input v-model="lon" placeholder="lon">
+    <input v-model="lat" placeholder="lat">
   </div>
 
   <Located
@@ -29,6 +30,8 @@ const MyButton = defineComponent((_, { slots }) => () => (
     placement="top"
     :coordinate="coordinate"
   >
-    <div h-10 w-12 rounded>hello world!</div>
+    <div h-10 w-12 rounded>
+      hello world!
+    </div>
   </Located>
 </template>

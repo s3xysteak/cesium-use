@@ -10,11 +10,11 @@ export const zh = defineConfig({
 
   themeConfig: {
     outline: {
-      label: '页面导航'
+      label: '页面导航',
     },
     nav: [
       { text: '主页', link: '/zh/' },
-      { text: '安装', link: '/zh/usage' }
+      { text: '安装', link: '/zh/usage' },
     ],
 
     sidebar: [
@@ -22,27 +22,27 @@ export const zh = defineConfig({
         text: '开始',
         items: [
           { text: '简介', link: '/zh/intro' },
-          { text: '安装', link: '/zh/usage' }
-        ]
+          { text: '安装', link: '/zh/usage' },
+        ],
       },
       {
         text: '核心',
         items: coreList.map(dir => ({
           text: dir,
-          link: `/zh/core/${dir}.md`
-        }))
+          link: `/zh/core/${dir}.md`,
+        })),
       },
       {
         text: '组件',
         items: componentsList.map(dir => ({
           text: dir,
-          link: `/zh/components/${dir}.md`
-        }))
-      }
+          link: `/zh/components/${dir}.md`,
+        })),
+      },
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/s3xysteak/cesium-use' }
-    ]
-  }
+      { icon: 'github', link: 'https://github.com/s3xysteak/cesium-use' },
+    ],
+  },
 })

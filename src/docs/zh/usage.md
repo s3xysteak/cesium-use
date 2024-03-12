@@ -22,7 +22,7 @@ $ yarn add cesium-use
 
 ## 自动引入
 
-这是一个可选步骤，因为使用自动引入会极大改善开发体验，因此强烈建议使用自动引入。  
+这是一个可选步骤，因为使用自动引入会极大改善开发体验，因此强烈建议使用自动引入。
 使用如下命令安装`unplugin-auto-import`:
 
 ```sh
@@ -51,7 +51,7 @@ export default defineConfig({
 })
 ```
 
-`autoImport`接受一个可选的对象作为参数，表示 `name -> alias` 的映射。  
+`autoImport`接受一个可选的对象作为参数，表示 `name -> alias` 的映射。
 以`autoImport({ defineColor: 'color' })`为例：
 
 ```js

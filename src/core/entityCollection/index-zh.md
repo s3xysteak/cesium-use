@@ -23,9 +23,9 @@ collection.add({
 ```ts
 // 与Cesium.EntityCollection的使用完全相同，只是重写了增删改查方法
 
-export const entityCollection = (
-  ...args: ConstructorParameters<typeof Cesium.EntityCollection>
-): new EntityCollection(...args)
+export function entityCollection(...args: ConstructorParameters<typeof Cesium.EntityCollection>) {
+  return new EntityCollection(...args)
+}
 
 class EntityCollection extends Cesium.EntityCollection {
   // ...

@@ -1,5 +1,6 @@
 import * as Cesium from 'cesium'
-import { MaybeRefOrGetter, ref, toValue, watchEffect } from 'vue'
+import type { MaybeRefOrGetter } from 'vue'
+import { ref, toValue, watchEffect } from 'vue'
 
 export interface UseUndergroundOptions {
   frontFaceAlphaByDistance: ConstructorParameters<typeof Cesium.NearFarScalar>
@@ -7,16 +8,16 @@ export interface UseUndergroundOptions {
 
 export function useUnderground(
   initialState = false,
-  options?: MaybeRefOrGetter<Partial<UseUndergroundOptions>>
+  options?: MaybeRefOrGetter<Partial<UseUndergroundOptions>>,
 ) {
   const viewer = getViewer()
 
   function underOn() {
-    const { frontFaceAlphaByDistance = [600.0, 0, 8000, 0.9] } =
-      toValue(options) ?? {}
+    const { frontFaceAlphaByDistance = [600.0, 0, 8000, 0.9] }
+      = toValue(options) ?? {}
 
-    viewer.scene.globe.translucency.frontFaceAlphaByDistance =
-      new Cesium.NearFarScalar(...frontFaceAlphaByDistance)
+    viewer.scene.globe.translucency.frontFaceAlphaByDistance
+      = new Cesium.NearFarScalar(...frontFaceAlphaByDistance)
   }
   function underOff() {
     viewer.scene.globe.translucency.frontFaceAlphaByDistance = undefined as any
@@ -35,6 +36,6 @@ export function useUnderground(
   })
 
   return {
-    state
+    state,
   }
 }

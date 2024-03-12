@@ -1,11 +1,11 @@
 import {
-  shallowRef,
+  type InjectionKey,
+  type ShallowRef,
   getCurrentInstance,
-  toValue,
   inject,
   provide,
-  type InjectionKey,
-  type ShallowRef
+  shallowRef,
+  toValue,
 } from 'vue'
 import type { Viewer } from 'cesium'
 
@@ -13,21 +13,23 @@ const INJECT_KEY_VIEWER: InjectionKey<ShallowRef<Viewer>> = Symbol('viewer')
 
 const viewer = shallowRef<Viewer>()
 
-export const getViewer = (): Viewer => {
+export function getViewer(): Viewer {
   if (getCurrentInstance()) {
     const viewerInject = toValue(inject(INJECT_KEY_VIEWER, undefined))
-    if (viewerInject) return viewerInject
+    if (viewerInject)
+      return viewerInject
   }
 
   const v = toValue(viewer)
-  if (!v) throw new Error('cannot get viewer.')
+  if (!v)
+    throw new Error('cannot get viewer.')
   return v
 }
 
-export const setViewer = (v: Viewer) => {
+export function setViewer(v: Viewer) {
   viewer.value = v
 }
 
-export const useViewerProvider = (v: ShallowRef<Viewer>) => {
+export function useViewerProvider(v: ShallowRef<Viewer>) {
   provide(INJECT_KEY_VIEWER, v)
 }

@@ -39,7 +39,7 @@ const pos = shallowRef([-100, 10])
 :::details
 
 ```ts
-type Rect = {
+interface Rect {
   width: number
   height: number
 }

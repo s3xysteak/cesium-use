@@ -1,12 +1,12 @@
 # useEvent
 
-It serves as a simplified version of `ScreenSpaceEventHandler` with function overloading.  
+It serves as a simplified version of `ScreenSpaceEventHandler` with function overloading.
 `useEvent` will attempt to automatically unregister events when the component is unmounted. If the current context is not within the setup call stack, you can manually unregister events using its return value.
 
 ## Usage
 
 ```js {10}
-const handler = useEvent(e => {
+const handler = useEvent((e) => {
   viewer.entities.add({
     position: viewer.scene.pickPosition(e.position),
     point: {

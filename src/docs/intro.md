@@ -25,7 +25,7 @@ const viewer = getViewer()
 const show = ref(true)
 const pos = shallowRef()
 
-useEvent(e => {
+useEvent((e) => {
   pos.value = viewer.scene.pickPosition(e.position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 </script>
@@ -62,13 +62,13 @@ Example:
 ```js
 import { func } from 'cesium-use' // This function doesn't actually exist; this is just an example.
 
-let valRaw = 1 // Primitive value
+const valRaw = 1 // Primitive value
 func(valRaw)
 
 const valRef = ref(1) // Reactive
 func(valRef)
 
-let valGetter = 1
+const valGetter = 1
 func(() => valGetter) // Getter
 ```
 
@@ -88,7 +88,7 @@ For more related content, refer to [viewerStore](core/viewerStore.md).
 
 ### Best Practices for Component Structure
 
-It is recommended to have a parent component that houses the viewer, ensuring that child components render after the viewer is mounted.  
+It is recommended to have a parent component that houses the viewer, ensuring that child components render after the viewer is mounted.
 For example, this structure:
 
 ```md
@@ -136,5 +136,5 @@ console.log(viewer instanceof Cesium.Viewer) // true
 </template>
 ```
 
-In essence, it is strongly recommended to initialize the viewer in a separate component.  
+In essence, it is strongly recommended to initialize the viewer in a separate component.
 Using the example of `earth-container.vue`, this component solely handles the viewer instantiation and renders child components after the viewer is instantiated. Subsequent operations are carried out in `Earth.vue` and other child components. This approach ensures smooth retrieval of the viewer instance instantiated in the container component in subsequent code.

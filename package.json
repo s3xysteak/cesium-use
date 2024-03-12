@@ -1,35 +1,35 @@
 {
   "name": "cesium-use",
-  "private": false,
+  "type": "module",
   "version": "0.2.3",
+  "private": false,
   "description": "Vue powered CesiumJS utility library",
   "author": "s3xysteak",
-  "type": "module",
   "license": "MIT",
+  "homepage": "https://github.com/s3xysteak/cesium-use",
   "repository": {
     "type": "git",
     "url": "https://github.com/s3xysteak/cesium-use.git"
   },
+  "bugs": "https://github.com/s3xysteak/cesium-use/issues",
   "keywords": [
     "cesium",
     "vue",
     "utils"
   ],
-  "files": [
-    "dist"
-  ],
-  "homepage": "https://github.com/s3xysteak/cesium-use",
-  "bugs": "https://github.com/s3xysteak/cesium-use/issues",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
-  "main": "./dist/cesium-use.umd.cjs",
-  "module": "./dist/cesium-use.js",
-  "types": "./dist/index.d.ts",
   "exports": {
     "types": "./dist/index.d.ts",
     "import": "./dist/cesium-use.js",
     "require": "./dist/cesium-use.umd.cjs"
+  },
+  "main": "./dist/cesium-use.umd.cjs",
+  "module": "./dist/cesium-use.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "dev": "vite",

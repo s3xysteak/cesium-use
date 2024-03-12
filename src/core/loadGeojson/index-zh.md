@@ -25,7 +25,7 @@ async function loadPrimitive() {
     // 如果设置了custom回调，则loadGeojson返回custom()的返回值。
     custom(dataSource) {
       // ...
-      dataSource.entities.values.forEach(e => {
+      dataSource.entities.values.forEach((e) => {
         // ...
       })
       return primitive
@@ -42,7 +42,7 @@ async function loadPrimitive() {
 const primitive = await loadGeojson({
   url: 'geojson/water.json',
 
-  custom: dataSource => {} // [!code --]
+  custom: (dataSource) => {}, // [!code --]
 
   custom(dataSource) { // [!code ++]
     console.log(this.url) // 'geojson/water.json' // [!code ++]

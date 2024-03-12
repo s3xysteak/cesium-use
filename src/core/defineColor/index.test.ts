@@ -8,11 +8,11 @@ describe('color', () => {
     expect(defineColor('#fff')).toEqual(Color.fromCssColorString('#ffffff'))
 
     expect(defineColor('#fff/10')).toEqual(
-      Color.fromCssColorString('#ffffff').withAlpha(0.1)
+      Color.fromCssColorString('#ffffff').withAlpha(0.1),
     )
 
     expect(defineColor('#ffffff/20')).toEqual(
-      Color.fromCssColorString('#ffffff').withAlpha(0.2)
+      Color.fromCssColorString('#ffffff').withAlpha(0.2),
     )
   })
 })

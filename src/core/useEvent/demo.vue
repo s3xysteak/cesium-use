@@ -4,26 +4,27 @@ import * as Cesium from 'cesium'
 import { useEvent } from '@/index'
 
 const viewer = getViewer()
-const addPoint = (e: { position: any }) => {
+function addPoint(e: { position: any }) {
   viewer.entities.add({
     position: viewer.scene.pickPosition(e.position),
     point: {
       pixelSize: 30,
       outlineWidth: 10,
-      color: Cesium.Color.fromRandom({ alpha: 1 })
-    }
+      color: Cesium.Color.fromRandom({ alpha: 1 }),
+    },
   })
 }
-useEvent(e => {
+useEvent((e) => {
   addPoint(e)
 }, Cesium.ScreenSpaceEventType.RIGHT_CLICK)
 
 // How to use `useEvent` without vue instance
 
-const delay = (time: number) =>
-  new Promise(res => {
+function delay(time: number) {
+  return new Promise((res) => {
     setTimeout(res, time)
   })
+}
 
 const clickText = ref('left click do not work now')
 async function onClick() {
@@ -38,5 +39,7 @@ async function onClick() {
 </script>
 
 <template>
-  <button absolute top-10 left-10 @click="onClick">{{ clickText }}</button>
+  <button absolute top-10 left-10 @click="onClick">
+    {{ clickText }}
+  </button>
 </template>

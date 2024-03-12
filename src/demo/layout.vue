@@ -8,8 +8,8 @@ const routes = router
   .map(item => item.name)
   .filter(
     item =>
-      typeof item === 'string' &&
-      !['layout', 'home', 'container'].includes(item)
+      typeof item === 'string'
+      && !['layout', 'home', 'container'].includes(item),
   ) as string[]
 
 function onClick(name: string) {
@@ -17,8 +17,9 @@ function onClick(name: string) {
 }
 
 const search = ref('')
-const isShow = (name: string) =>
-  search.value === '' || name.toLowerCase().includes(search.value.toLowerCase())
+function isShow(name: string) {
+  return search.value === '' || name.toLowerCase().includes(search.value.toLowerCase())
+}
 </script>
 
 <template>
@@ -34,7 +35,7 @@ const isShow = (name: string) =>
         leading-4
         rounded-full
         type="text"
-      />
+      >
     </header>
     <main
       all:transition
@@ -43,15 +44,15 @@ const isShow = (name: string) =>
       grid="~ gap-8 lg:cols-4 md:cols-3 sm:cols-2"
     >
       <div
-        @click="onClick(item)"
+        v-for="item in routes"
+        v-show="isShow(item)"
+        :key="item"
         class="group"
         select-none
         cursor-pointer
         box-border
         h-45
-        v-for="item in routes"
-        :key="item"
-        v-show="isShow(item)"
+        @click="onClick(item)"
       >
         <div
           group-hover:scale-110

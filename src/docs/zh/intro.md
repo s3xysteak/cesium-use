@@ -25,7 +25,7 @@ const viewer = getViewer()
 const show = ref(true)
 const pos = shallowRef()
 
-useEvent(e => {
+useEvent((e) => {
   pos.value = viewer.scene.pickPosition(e.position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 </script>
@@ -62,13 +62,13 @@ Cesium Use 生来就完全支持 Getter 风格的响应式传参，所有期望�
 ```js
 import { func } from 'cesium-use' // 事实上并没有这个函数，这里只是举例。
 
-let valRaw = 1 // 原始值
+const valRaw = 1 // 原始值
 func(valRaw)
 
 const valRef = ref(1) // 响应式
 func(valRef)
 
-let valGetter = 1
+const valGetter = 1
 func(() => valGetter) // Getter
 ```
 
@@ -88,7 +88,7 @@ func(() => valGetter) // Getter
 
 ### 组件结构的最佳实践
 
-建议以一个承载 viewer 的组件作为祖先组件，在 viewer 被挂在后在保证子组件渲染。  
+建议以一个承载 viewer 的组件作为祖先组件，在 viewer 被挂在后在保证子组件渲染。
 例如这样的结构：
 
 ```md
@@ -136,5 +136,5 @@ console.log(viewer instanceof Cesium.Viewer) // true
 </template>
 ```
 
-也就是说，强烈建议在一个单独的组件中完成 viewer 的初始化。  
+也就是说，强烈建议在一个单独的组件中完成 viewer 的初始化。
 以上述的`earth-container.vue`为例，他仅仅完成实例化 viewer 这一步操作，并且在实例化 viewer 后再渲染后代组件。其他后续操作都在`Earth.vue`以及其他子组件中进行。这样能保证在后续代码中顺利获取已经在容器组件中实例化的 viewer 实例。

@@ -41,7 +41,7 @@ defineColor('#f00/80')
 ::: details
 
 ```ts
-export const defineColor = (str: string): Cesium.Color
+export const defineColor = (str: string) => Cesium.Color
 ```
 
 :::

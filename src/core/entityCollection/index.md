@@ -23,9 +23,9 @@ The `entityCollection` will internally retrieve the viewer instance through `get
 ```ts
 // It functions identically to Cesium's EntityCollection, with the exception of overridden methods for adding, removing, updating, and querying entities.
 
-export const entityCollection = (
-  ...args: ConstructorParameters<typeof Cesium.EntityCollection>
-): new EntityCollection(...args)
+export function entityCollection(...args: ConstructorParameters<typeof Cesium.EntityCollection>) {
+  return new EntityCollection(...args)
+}
 
 class EntityCollection extends Cesium.EntityCollection {
   // ...

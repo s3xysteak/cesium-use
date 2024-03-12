@@ -3,13 +3,13 @@ import * as Cesium from 'cesium'
 export type MaybeCartesian3OrLonLat = Cesium.Cartesian3 | (number | string)[]
 
 export function toCartesian3(source: MaybeCartesian3OrLonLat) {
-  if (source instanceof Cesium.Cartesian3) {
+  if (source instanceof Cesium.Cartesian3)
     return source
-  }
 
   if (
     source.some((val, index) => {
-      if (index === 2 && isUndefined(val)) return false
+      if (index === 2 && isUndefined(val))
+        return false
 
       return Number.isNaN(Number(val))
     })

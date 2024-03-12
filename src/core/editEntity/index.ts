@@ -1,9 +1,9 @@
 import type {
-  PolylineGraphics,
-  PolygonGraphics,
-  PointGraphics,
   BoxGraphics,
-  CylinderGraphics
+  CylinderGraphics,
+  PointGraphics,
+  PolygonGraphics,
+  PolylineGraphics,
 } from 'cesium'
 
 export type EditEntityAttributes =

@@ -54,7 +54,7 @@ data.value = [] // Equal to clear all points
 函数返回的`points` 是一个 Map 类型的数据，存放了 `id -> { label, billboard }` 的键值对，你可以通过对 Map 的操作来获取对应点位的数据。
 
 ::: warning Tips for manually modifying points
-When adding, removing, or updating points using `points`, remember to manually synchronize with `billboardCollection` and `labelCollection`.  
+When adding, removing, or updating points using `points`, remember to manually synchronize with `billboardCollection` and `labelCollection`.
 Since `usePoints` is intended to be a function for generating data points based on a dataset, manually modifying the points within it is considered a rare edge case. There are currently no plans to introduce new APIs for easier manual modifications.
 :::
 
@@ -79,23 +79,23 @@ export interface UsePointsOptions {
   billboardOptions: UsePointsBillboardOptions
   labelOptions: UsePointsLabelOptions
   onEach?: (
-    item: { label: Cesium.Label; billboard: Cesium.Billboard },
+    item: { label: Cesium.Label, billboard: Cesium.Billboard },
     index: number
   ) => void
 }
 
-export function usePoints<UsePointsItem extends Object = {}>(
+export function usePoints<UsePointsItem extends object = object>(
   data: MaybeRefOrGetter<UsePointsItem[]>,
-  options: (item: UsePointsItem): UsePointsOptions
+  options: (item: UsePointsItem) => UsePointsOptions
 ): {
   billboardCollection: Cesium.BillboardCollection
   labelCollection: Cesium.LabelCollection
-  points: Map<string, { label: Cesium.Label; billboard: Cesium.Billboard }>
-  toggleShow: (state?: boolean): void
+  points: Map<string, { label: Cesium.Label, billboard: Cesium.Billboard }>
+  toggleShow: (state?: boolean) => void
   flyTo: (
     id: UsePointsOptions['id'],
-    fn?: (billboard: Cesium.Billboard, coordinate: Cesium.Cartesian3): void
-  ): Promise<Cesium.Billboard>
+    fn?: (billboard: Cesium.Billboard, coordinate: Cesium.Cartesian3) => void
+  ) => Promise<Cesium.Billboard>
 }
 ```
 

@@ -8,7 +8,7 @@ export interface FlyToAreaOptions {
 
 export function flyToArea(
   posList: MaybeCartesian3OrLonLat[],
-  options?: Partial<FlyToAreaOptions>
+  options?: Partial<FlyToAreaOptions>,
 ) {
   const { onSingle, onEmpty } = options ?? {}
 
@@ -22,14 +22,14 @@ export function flyToArea(
     onSingle
       ? onSingle()
       : viewer.camera.flyTo({
-          destination: toCartesian3(posList[0])
-        })
+        destination: toCartesian3(posList[0]),
+      })
     return
   }
 
   const pointsPosList = posList.map(item => toCartesian3(item))
 
   viewer.camera.flyToBoundingSphere(
-    Cesium.BoundingSphere.fromPoints(pointsPosList)
+    Cesium.BoundingSphere.fromPoints(pointsPosList),
   )
 }

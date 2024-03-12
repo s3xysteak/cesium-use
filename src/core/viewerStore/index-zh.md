@@ -98,11 +98,11 @@ doSomething()
 :::details
 
 ```ts
-export const getViewer = (): Viewer
+export const getViewer: () => Viewer
 
-export const setViewer = (v: Viewer): void
+export const setViewer: (v: Viewer) => void
 
-export const useViewerProvider = (v: ShallowRef<Viewer>): void
+export const useViewerProvider: (v: ShallowRef<Viewer>) => void
 ```
 
 :::
@@ -155,7 +155,7 @@ onMounted(() => {
 // 正确
 const viewer = getViewer()
 
-const getData = async () => {
+async function getData() {
   // 错误，因为此时在异步任务中
   const viewer = getViewer()
   // ...

@@ -25,7 +25,7 @@ async function loadPrimitive() {
     // loadGeojson return what custom() returns when set the custom callback.
     custom(dataSource) {
       // ...
-      dataSource.entities.values.forEach(e => {
+      dataSource.entities.values.forEach((e) => {
         // ...
       })
       return primitive
@@ -42,7 +42,7 @@ For `onEntity` and `custom`, you can use them through **methods** rather than th
 const primitive = await loadGeojson({
   url: 'geojson/water.json',
 
-  custom: dataSource => {} // [!code --]
+  custom: (dataSource) => {}, // [!code --]
 
   custom(dataSource) { // [!code ++]
     console.log(this.url) // 'geojson/water.json' // [!code ++]

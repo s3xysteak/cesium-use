@@ -1,6 +1,6 @@
 # usePointerPosition
 
-Obtain the current mouse's latitude, longitude, and altitude reactively.  
+Obtain the current mouse's latitude, longitude, and altitude reactively.
 Implement optional throttling based on `vueuse`'s `useThrottleFn`.
 
 ## Usage

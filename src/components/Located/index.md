@@ -39,7 +39,7 @@ Where:
 :::details
 
 ```ts
-type Rect = {
+interface Rect {
   width: number
   height: number
 }

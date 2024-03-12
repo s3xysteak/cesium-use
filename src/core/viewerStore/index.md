@@ -98,11 +98,11 @@ In fact, this is how the majority of functions in Cesium Use are implemented.
 :::details
 
 ```ts
-export const getViewer = (): Viewer
+export const getViewer: () => Viewer
 
-export const setViewer = (v: Viewer): void
+export const setViewer: (v: Viewer) => void
 
-export const useViewerProvider = (v: ShallowRef<Viewer>): void
+export const useViewerProvider: (v: ShallowRef<Viewer>) => void
 ```
 
 :::
@@ -154,7 +154,7 @@ onMounted(() => {
 // Correct
 const viewer = getViewer()
 
-const getData = async () => {
+async function getData() {
   // Incorrect, as this is within an asynchronous task
   const viewer = getViewer()
   // ...

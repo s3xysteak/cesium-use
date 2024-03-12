@@ -22,7 +22,7 @@ $ yarn add cesium-use
 
 ## Automatic Import
 
-This is an optional step, but using automatic import significantly enhances the development experience. Therefore, it is strongly recommended to use automatic import.  
+This is an optional step, but using automatic import significantly enhances the development experience. Therefore, it is strongly recommended to use automatic import.
 To install `unplugin-auto-import`, use the following command:
 
 ```sh
@@ -51,7 +51,7 @@ export default defineConfig({
 })
 ```
 
-The `autoImport` function accepts an optional object as a parameter, representing the `name -> alias` mapping.  
+The `autoImport` function accepts an optional object as a parameter, representing the `name -> alias` mapping.
 For example, using `autoImport({ defineColor: 'color' })`:
 
 ```js

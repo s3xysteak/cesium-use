@@ -7,10 +7,10 @@ export const shared = defineConfig({
     'docs/:markdown.md': ':markdown.md',
     'docs/:lang/:markdown.md': ':lang/:markdown.md',
     ':part/:module/index.md': ':part/:module.md',
-    ':part/:module/index-zh.md': 'zh/:part/:module.md'
+    ':part/:module/index-zh.md': 'zh/:part/:module.md',
   },
   vite: {
-    publicDir: 'docs/public'
+    publicDir: 'docs/public',
   },
-  base: '/cesium-use/'
+  base: '/cesium-use/',
 })

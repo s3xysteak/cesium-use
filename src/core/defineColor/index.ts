@@ -1,9 +1,8 @@
 import * as Cesium from 'cesium'
 
-export const defineColor = (str: string): Cesium.Color => {
-  if (str.startsWith('rgb') || str.startsWith('hsl')) {
+export function defineColor(str: string): Cesium.Color {
+  if (str.startsWith('rgb') || str.startsWith('hsl'))
     return Cesium.Color.fromCssColorString(str)
-  }
 
   const [color, op] = str.split('/')
 

@@ -34,12 +34,12 @@ export function usePointerPosition(options: UsePointerPositionOptions = {}) {
       lat.value = Cesium.Math.toDegrees(latitude).toFixed(5)
       alt.value = height.toFixed(2)
     }, throttle),
-    Cesium.ScreenSpaceEventType.MOUSE_MOVE
+    Cesium.ScreenSpaceEventType.MOUSE_MOVE,
   )
 
   return {
     lon,
     lat,
-    alt
+    alt,
   }
 }
