@@ -40,7 +40,9 @@
     "type:check": "vue-tsc --build --force",
     "docs:dev": "vitepress dev src",
     "docs:build": "vitepress build src",
-    "docs:preview": "vitepress preview src"
+    "docs:preview": "vitepress preview src",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@vueuse/core": "^10.9.0",
@@ -48,8 +50,9 @@
     "vue": "^3.4.21"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^2.8.1",
     "@tsconfig/node20": "^20.1.2",
-    "@types/node": "^20.11.25",
+    "@types/node": "^20.11.26",
     "@unocss/reset": "^0.58.5",
     "@unocss/transformer-directives": "^0.58.5",
     "@vitejs/plugin-vue": "^5.0.4",
@@ -57,12 +60,13 @@
     "@vue/test-utils": "^2.4.4",
     "@vue/tsconfig": "^0.5.1",
     "consola": "^3.2.3",
+    "eslint": "^8.57.0",
     "jsdom": "^23.2.0",
     "npm-run-all2": "^6.1.2",
     "typescript": "^5.4.2",
     "unocss": "^0.58.5",
     "unplugin-auto-import": "^0.17.5",
-    "vite": "^5.1.5",
+    "vite": "^5.1.6",
     "vite-plugin-cesium-build": "^0.2.4",
     "vite-plugin-dts": "^3.7.3",
     "vitepress": "1.0.0-rc.44",
