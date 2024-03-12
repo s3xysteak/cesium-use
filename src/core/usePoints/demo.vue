@@ -34,8 +34,7 @@ const { flyTo, toggleShow } = usePoints(data, item => ({
 
 useEvent((e) => {
   const viewer = getViewer()
-  const _picked = viewer.scene.pick(e.position)
-  // console.log(_picked)
+  viewer.scene.pick(e.position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 </script>
 
