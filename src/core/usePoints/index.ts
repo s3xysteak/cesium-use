@@ -2,14 +2,11 @@ import * as Cesium from 'cesium'
 import type { MaybeRefOrGetter } from 'vue'
 import { toValue, watchEffect } from 'vue'
 
-export type UsePointsBillboardOptions =
-  Cesium.BillboardGraphics.ConstructorOptions & {
-    position?: Cesium.Cartesian3
-  }
+// TODO: Type improvement
+export type UsePointsBillboardOptions = Omit<Cesium.Billboard.ConstructorOptions, 'position'>
 
-export type UsePointsLabelOptions = Cesium.LabelGraphics.ConstructorOptions & {
-  position?: Cesium.Cartesian3
-}
+// TODO: Typo improvement
+export type UsePointsLabelOptions = Omit<Cesium.Label.ConstructorOptions, 'position'>
 export interface UsePointsOptions {
   id: any
   longitude: number | string

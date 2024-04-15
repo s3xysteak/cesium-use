@@ -48,9 +48,13 @@ export default defineConfig({
     lib: {
       entry: './src/index.ts',
       name: 'cesium-use',
+      formats: ['es'],
     },
     rollupOptions: {
-      external: Object.keys(pkg.dependencies || {}),
+      external: [
+        ...Object.keys(pkg.dependencies || {}),
+        ...Object.keys(pkg.devDependencies || {}),
+      ],
     },
   },
   resolve: {
