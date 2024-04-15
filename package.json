@@ -44,10 +44,12 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
+  "peerDependencies": {
+    "cesium": "^1.100.0",
+    "vue": "^3.4.0"
+  },
   "dependencies": {
-    "@vueuse/core": "^10.9.0",
-    "cesium": "^1.115.0",
-    "vue": "^3.4.21"
+    "@vueuse/core": "^10.9.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.8.1",
