@@ -5,10 +5,18 @@ import { useEvent } from '@/index'
 
 export interface UsePointerPositionOptions {
   throttle?: Parameters<typeof useThrottleFn>[1]
+  longitudeToFixed?: number
+  latitudeToFixed?: number
+  heightToFixed?: number
 }
 
 export function usePointerPosition(options: UsePointerPositionOptions = {}) {
-  const { throttle } = options
+  const {
+    throttle,
+    longitudeToFixed = 6,
+    latitudeToFixed = 6,
+    heightToFixed = 2,
+  } = options
 
   const viewer = getViewer()
 
@@ -30,9 +38,9 @@ export function usePointerPosition(options: UsePointerPositionOptions = {}) {
       const cartographic = Cesium.Cartographic.fromCartesian(position)
       const { longitude, latitude, height } = cartographic
 
-      lon.value = Cesium.Math.toDegrees(longitude).toFixed(5)
-      lat.value = Cesium.Math.toDegrees(latitude).toFixed(5)
-      alt.value = height.toFixed(2)
+      lon.value = Cesium.Math.toDegrees(longitude).toFixed(longitudeToFixed)
+      lat.value = Cesium.Math.toDegrees(latitude).toFixed(latitudeToFixed)
+      alt.value = height.toFixed(heightToFixed)
     }, throttle),
     Cesium.ScreenSpaceEventType.MOUSE_MOVE,
   )
