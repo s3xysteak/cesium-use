@@ -9,9 +9,12 @@ import {
 } from 'vue'
 import type { Viewer } from 'cesium'
 
+// It can be null or undefined because it may be garbage collected.
+type StoredViewerInst = Viewer | null | undefined
+
 const INJECT_KEY_VIEWER: InjectionKey<ShallowRef<Viewer>> = Symbol('viewer')
 
-const viewer = shallowRef<Viewer>()
+const viewer = shallowRef<StoredViewerInst>()
 
 export function getViewer(): Viewer {
   if (getCurrentInstance()) {
@@ -26,7 +29,7 @@ export function getViewer(): Viewer {
   return v
 }
 
-export function setViewer(v: Viewer) {
+export function setViewer(v: StoredViewerInst) {
   viewer.value = v
 }
 
