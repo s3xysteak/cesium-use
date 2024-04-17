@@ -6,7 +6,7 @@ const input = ref('')
 const throttle = computed(() =>
   Number.isNaN(Number(input.value)) ? 0 : Number(input.value),
 )
-const { alt, lat, lon } = usePointerPosition({
+const [lon, lat, alt] = usePointerPosition({
   throttle,
 })
 </script>

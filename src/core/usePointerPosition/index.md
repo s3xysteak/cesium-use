@@ -7,7 +7,10 @@ Implement optional throttling based on `vueuse`'s `useThrottleFn`.
 
 ```vue
 <script setup>
-const { alt, lat, lon } = usePointerPosition({
+// const { longitude, latitude, altitude } = usePointerPosition()
+
+// If you prefer the array destructuring syntax.
+const [lon, lat, alt] = usePointerPosition({
   throttle: 150 // Throttling for 150ms.
 })
 </script>
@@ -28,13 +31,16 @@ const { alt, lat, lon } = usePointerPosition({
 ```ts
 export interface UsePointerPositionOptions {
   throttle?: Parameters<typeof useThrottleFn>[1]
+  longitudeToFixed?: number
+  latitudeToFixed?: number
+  heightToFixed?: number
 }
 
 export function usePointerPosition(options: UsePointerPositionOptions = {}): {
-  lon: Ref<string>
-  lat: Ref<string>
-  alt: Ref<string>
-}
+  longitude: Ref<string>
+  latitude: Ref<string>
+  altitude: Ref<string>
+} & Ref<string>[]
 ```
 
 :::

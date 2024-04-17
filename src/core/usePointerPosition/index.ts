@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import { useThrottleFn } from '@vueuse/core'
+import { makeDestructurable, useThrottleFn } from '@vueuse/core'
 import * as Cesium from 'cesium'
 import { useEvent } from '@/index'
 
@@ -45,9 +45,16 @@ export function usePointerPosition(options: UsePointerPositionOptions = {}) {
     Cesium.ScreenSpaceEventType.MOUSE_MOVE,
   )
 
-  return {
-    lon,
-    lat,
-    alt,
-  }
+  return makeDestructurable(
+    {
+      longitude: lon,
+      latitude: lat,
+      altitude: alt,
+    },
+    [
+      lon,
+      lat,
+      alt,
+    ],
+  )
 }

@@ -1,13 +1,16 @@
 # usePointerPosition
 
 响应式的获取当前鼠标的经纬度与高程。
-基于`vueuse`的`useThrottleFn`实现可选的节流。
+基于 `vueuse` 的 `useThrottleFn` 实现可选的节流。
 
 ## 使用
 
 ```vue
 <script setup>
-const { alt, lat, lon } = usePointerPosition({
+// const { longitude, latitude, altitude } = usePointerPosition()
+
+// 如果你更喜欢解构数组的形式
+const [lon, lat, alt] = usePointerPosition({
   throttle: 150 // 150ms的节流
 })
 </script>
@@ -28,13 +31,16 @@ const { alt, lat, lon } = usePointerPosition({
 ```ts
 export interface UsePointerPositionOptions {
   throttle?: Parameters<typeof useThrottleFn>[1]
+  longitudeToFixed?: number
+  latitudeToFixed?: number
+  heightToFixed?: number
 }
 
 export function usePointerPosition(options: UsePointerPositionOptions = {}): {
-  lon: Ref<string>
-  lat: Ref<string>
-  alt: Ref<string>
-}
+  longitude: Ref<string>
+  latitude: Ref<string>
+  altitude: Ref<string>
+} & Ref<string>[]
 ```
 
 :::
