@@ -40,14 +40,14 @@ useEvent((e) => {
 
 <template>
   <div absolute top-0 left-0 flex="~ col">
-    <button @click="random">
+    <button bg-light @click="random">
       random
     </button>
-    <button @click="toggleShow()">
+    <button bg-light @click="toggleShow()">
       show
     </button>
 
-    <button v-for="i in data" :key="i.id" @click="flyTo(i.id)">
+    <button v-for="i in data" :key="i.id" bg-light @click="flyTo(i.id)">
       {{ i.id }}
     </button>
   </div>
