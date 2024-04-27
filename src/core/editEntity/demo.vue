@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as Cesium from 'cesium'
-import { editEntity } from './index'
+import { editEntity } from '.'
 
 const viewer = getViewer()
 const entity = viewer.entities.add({
@@ -9,11 +9,17 @@ const entity = viewer.entities.add({
   },
 })
 editEntity(
-  entity.polygon as Cesium.PolygonGraphics,
+  entity,
   {
-    material: Cesium.Color.AQUA,
+    polygon: {
+      material: Cesium.Color.AQUA,
+    },
   },
-  { material: Cesium.Color.RED },
+  {
+    polygon: {
+      material: Cesium.Color.RED,
+    },
+  },
 )
 </script>
 

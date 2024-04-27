@@ -13,9 +13,17 @@ const entity = viewer.entities.add({
 })
 
 editEntity(
-  entity.polygon,
-  { material: Cesium.Color.AQUA },
-  { material: Cesium.Color.RED }
+  entity,
+  {
+    polygon: {
+      material: Cesium.Color.AQUA,
+    },
+  },
+  {
+    polygon: {
+      material: Cesium.Color.RED,
+    },
+  },
 )
 // 这会将entity的材质改为红色
 ```
@@ -25,15 +33,7 @@ editEntity(
 ::: details
 
 ```ts
-export type EditEntityAttributes =
-  | PolygonGraphics
-  | PolylineGraphics
-  | PointGraphics
-
-export function editEntity<T extends EditEntityAttributes>(
-  attr: T,
-  ...args: any[]
-): T
+function editEntity(entity: Entity, ...args: Entity.ConstructorOptions[]): Entity
 ```
 
 :::

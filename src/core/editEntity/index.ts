@@ -1,46 +1,91 @@
-import type {
-  BoxGraphics,
-  CylinderGraphics,
-  PointGraphics,
-  PolygonGraphics,
-  PolylineGraphics,
-} from 'cesium'
+import type { Entity } from 'cesium'
 
-export type EditEntityAttributes =
-  | PolygonGraphics
-  | PolylineGraphics
-  | PointGraphics
-  | BoxGraphics
-  | CylinderGraphics
+export function editEntity(entity: Entity, ...args: Entity.ConstructorOptions[]): Entity {
+  return mergeDeep(entity, ...args)
+}
 
-export function editEntity(
-  attr: CylinderGraphics,
-  ...args: CylinderGraphics.ConstructorOptions[]
-): CylinderGraphics
+/** merge in 2 depth */
+function mergeDeep<T extends object = object, S extends object = T>(obj: T, ...args: S[]) {
+  return args.reduce((acc, arg) => {
+    objectKeys(arg).forEach((key) => {
+      // @ts-expect-error - key
+      if (isObject(arg[key]) && isObject(acc[key]))
+        // @ts-expect-error - key
+        Object.assign(acc[key], arg[key])
+      else
+        // @ts-expect-error - key
+        acc[key] = arg[key]
+    })
+    return acc
+  }, obj)
+}
 
-export function editEntity(
-  attr: BoxGraphics,
-  ...args: BoxGraphics.ConstructorOptions[]
-): BoxGraphics
+function isObject(val: any): val is object {
+  return Object.prototype.toString.call(val) === '[object Object]'
+}
+function objectKeys<T extends object>(obj: T): (keyof T)[] {
+  return Object.keys(obj) as (keyof T)[]
+}
 
-export function editEntity(
-  attr: PolygonGraphics,
-  ...args: PolygonGraphics.ConstructorOptions[]
-): PolygonGraphics
+if (import.meta.vitest) {
+  const { describe, expect, it } = import.meta.vitest
 
-export function editEntity(
-  attr: PolylineGraphics,
-  ...args: PolylineGraphics.ConstructorOptions[]
-): PolylineGraphics
+  describe('mergeDeep', () => {
+    it('should work', () => {
+      const obj1 = {
+        a: 1,
+        b: true,
+        c: {
+          d: 4,
+          e: 'e',
+        },
+      }
+      const obj2 = {
+        a: 'one',
+        c: {
+          d: 'four',
+        },
+        f: 6,
+      }
 
-export function editEntity(
-  attr: PointGraphics,
-  ...args: PointGraphics.ConstructorOptions[]
-): PointGraphics
+      expect(mergeDeep(obj1, obj2)).toEqual({
+        a: 'one',
+        b: true,
+        c: {
+          d: 'four',
+          e: 'e',
+        },
+        f: 6,
+      })
+    })
 
-export function editEntity<T extends EditEntityAttributes>(
-  attr: T,
-  ...args: any[]
-): T {
-  return Object.assign(attr ?? {}, ...args)
+    it('should ignore depth bigger than 2', () => {
+      const obj1 = {
+        a: {
+          b: {
+            c: {
+              d: 4,
+            },
+          },
+        },
+      }
+      const obj2 = {
+        a: {
+          b: {
+            one: 1,
+            two: 2,
+          },
+        },
+      }
+
+      expect(mergeDeep(obj1, obj2)).toEqual({
+        a: {
+          b: {
+            one: 1,
+            two: 2,
+          },
+        },
+      })
+    })
+  })
 }
