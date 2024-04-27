@@ -1,4 +1,5 @@
 import type { Entity } from 'cesium'
+import { isObject } from '@/shared/general'
 
 export function editEntity(entity: Entity, ...args: Entity.ConstructorOptions[]): Entity {
   return mergeDeep(entity, ...args)
@@ -20,9 +21,6 @@ function mergeDeep<T extends object = object, S extends object = T>(obj: T, ...a
   }, obj)
 }
 
-function isObject(val: any): val is object {
-  return Object.prototype.toString.call(val) === '[object Object]'
-}
 function objectKeys<T extends object>(obj: T): (keyof T)[] {
   return Object.keys(obj) as (keyof T)[]
 }
