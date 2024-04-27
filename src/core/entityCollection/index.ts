@@ -35,12 +35,7 @@ class EntityCollection extends Cesium.EntityCollection {
   }
 
   remove(entity: Cesium.Entity) {
-    const me = super.remove(entity)
-    const v = this.viewer.entities.remove(entity)
-    if (me !== v)
-      throw new Error('The collection and viewer states are inconsistent.')
-
-    return me
+    return super.remove(entity)
   }
 
   removeAll() {
