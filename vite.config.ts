@@ -28,7 +28,6 @@ export default defineConfig({
     dts({ rollupTypes: true, afterBuild: supportAutoImportDts }),
     AutoImport({
       dirs: ['src/core/viewerStore', 'src/shared'],
-      imports: ['vitest'],
       dts: 'types/auto-imports.d.ts',
     }),
 
@@ -43,6 +42,7 @@ export default defineConfig({
       '**/.{vscode,svn}/**',
     ],
     root: fileURLToPath(new URL('./', import.meta.url)),
+    includeSource: ['src/core/**/*.ts'],
   },
   build: {
     lib: {
@@ -61,5 +61,8 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
+  },
+  define: {
+    'import.meta.vitest': 'undefined',
   },
 })

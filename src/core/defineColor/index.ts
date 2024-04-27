@@ -10,3 +10,23 @@ export function defineColor(str: string): Cesium.Color {
     ? Cesium.Color.fromCssColorString(color).withAlpha(Number(op) / 100)
     : Cesium.Color.fromCssColorString(color)
 }
+
+if (import.meta.vitest) {
+  const { describe, expect, it } = import.meta.vitest
+
+  describe('color', () => {
+    it('should work', () => {
+      expect(defineColor('#ffffff')).toEqual(Cesium.Color.fromCssColorString('#ffffff'))
+
+      expect(defineColor('#fff')).toEqual(Cesium.Color.fromCssColorString('#ffffff'))
+
+      expect(defineColor('#fff/10')).toEqual(
+        Cesium.Color.fromCssColorString('#ffffff').withAlpha(0.1),
+      )
+
+      expect(defineColor('#ffffff/20')).toEqual(
+        Cesium.Color.fromCssColorString('#ffffff').withAlpha(0.2),
+      )
+    })
+  })
+}
