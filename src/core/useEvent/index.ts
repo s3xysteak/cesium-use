@@ -15,6 +15,7 @@ export function useEvent(
   type:
     | Cesium.ScreenSpaceEventType.LEFT_CLICK
     | Cesium.ScreenSpaceEventType.RIGHT_CLICK
+    | Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
 ): Cesium.ScreenSpaceEventHandler
 
 export function useEvent(
