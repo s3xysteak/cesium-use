@@ -1,7 +1,7 @@
 import type { Entity } from 'cesium'
 import { isObject } from '@/shared/general'
 
-export function editEntity(entity: Entity, ...args: Entity.ConstructorOptions[]): Entity {
+export function editEntity<T extends Entity | Entity.ConstructorOptions>(entity: T, ...args: Entity.ConstructorOptions[]): T {
   return mergeDeep(entity, ...args)
 }
 
