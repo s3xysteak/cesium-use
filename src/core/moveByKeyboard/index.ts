@@ -79,7 +79,10 @@ export function moveByKeyboard(options: MoveByKeyboardOptions = {}) {
       const id = requestAnimationFrame(start)
       requestIdList.push(id)
 
-      keyToCameraMoveMap[key](toValue(distancePerFrame))
+      const speed = toValue(distancePerFrame)
+      if (speed === 0)
+        return
+      keyToCameraMoveMap[key](speed)
     }
     const end = () => {
       requestIdList.forEach((id) => {
