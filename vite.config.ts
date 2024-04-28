@@ -66,6 +66,7 @@ export default defineConfig({
     'import.meta.vitest': 'undefined',
   },
   server: {
+    host: '0.0.0.0',
     warmup: {
       clientFiles: [
         './src/demo/container.vue',
