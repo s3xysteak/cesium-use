@@ -1,15 +1,7 @@
 <script setup lang="ts">
-import * as Cesium from 'cesium'
 import { useMeasureDistance } from '.'
 
-const { state, clearAll } = useMeasureDistance({
-  lineEntityProps: {
-    polyline: {
-      width: 2,
-      material: Cesium.Color.ORANGE,
-    },
-  },
-})
+const { state, clearAll } = useMeasureDistance()
 </script>
 
 <template>

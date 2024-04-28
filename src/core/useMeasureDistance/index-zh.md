@@ -29,6 +29,7 @@ interface UseMeasureDistanceOptions {
   startEntityProps?: Cesium.Entity.ConstructorOptions
   turnEntityProps?: Cesium.Entity.ConstructorOptions
   endEntityProps?: Cesium.Entity.ConstructorOptions
+  closeEntityProps?: Cesium.Entity.ConstructorOptions
 }
 
 interface LineEntityData {

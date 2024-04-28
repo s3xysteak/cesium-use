@@ -1,6 +1,6 @@
 import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, ref, shallowRef, watch } from 'vue'
-import { editEntity, entityCollection, useEvent } from '@/index'
+import { defineColor, editEntity, entityCollection, useEvent } from '@/index'
 import { at } from '@/shared/general'
 
 interface UseMeasureDistanceOptions {
@@ -8,6 +8,7 @@ interface UseMeasureDistanceOptions {
   startEntityProps?: Cesium.Entity.ConstructorOptions
   turnEntityProps?: Cesium.Entity.ConstructorOptions
   endEntityProps?: Cesium.Entity.ConstructorOptions
+  closeEntityProps?: Cesium.Entity.ConstructorOptions
 }
 
 interface LineEntityData {
@@ -44,15 +45,36 @@ interface UseMeasureDistanceReturn {
   clearAll: () => void
 }
 
+const initialEntityProps: Cesium.Entity.ConstructorOptions = {
+  label: {
+    showBackground: true,
+    fillColor: Cesium.Color.BLACK,
+    style: Cesium.LabelStyle.FILL,
+    backgroundColor: defineColor('#ffffff/80'),
+    font: '14px sans-serif',
+    horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
+    verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+    pixelOffset: new Cesium.Cartesian2(0, -15),
+    disableDepthTestDistance: Number.POSITIVE_INFINITY,
+  },
+  point: {
+    color: Cesium.Color.WHITE,
+    outlineColor: Cesium.Color.RED,
+    outlineWidth: 2,
+    pixelSize: 6,
+    heightReference: Cesium.HeightReference.NONE,
+    disableDepthTestDistance: Number.POSITIVE_INFINITY,
+  },
+}
+
 export function useMeasureDistance(options: UseMeasureDistanceOptions = {}): UseMeasureDistanceReturn {
   const {
     lineEntityProps = {},
-    endEntityProps = {},
     startEntityProps = {},
     turnEntityProps = {},
+    endEntityProps = {},
+    closeEntityProps = {},
   } = options
-
-  const viewer = getViewer()
 
   const state = ref(false)
   const current = shallowRef<LineEntityData>()
@@ -62,6 +84,8 @@ export function useMeasureDistance(options: UseMeasureDistanceOptions = {}): Use
   const __currentTurnList = shallowRef<Cesium.Entity[]>([])
   const __fullLength = ref(0)
 
+  const viewer = getViewer()
+
   const createEntity = (): LineEntityData => {
     const positions: Cesium.Cartesian3[] = []
 
@@ -69,9 +93,11 @@ export function useMeasureDistance(options: UseMeasureDistanceOptions = {}): Use
 
     entities.add(editEntity({
       polyline: {
+        width: 2,
         positions: new Cesium.CallbackProperty(() => positions, false),
         clampToGround: true,
         classificationType: Cesium.ClassificationType.TERRAIN,
+        material: defineColor('#ff0000/60'),
       },
     }, lineEntityProps))
 
@@ -96,10 +122,25 @@ export function useMeasureDistance(options: UseMeasureDistanceOptions = {}): Use
   })
 
   useEvent(({ position }) => {
-    if (!state.value || !current.value)
+    const pos = pickPosition(position)
+    if (!pos)
       return
 
-    const pos = viewer.scene.pickPosition(position)
+    const picked = viewer.scene.pick(position)
+    if (picked && picked?.id && picked?.id?.name === '__cesium-use_measure_distance_close') {
+      const entity = picked.id
+      dateSet.forEach((data) => {
+        const { entities } = data
+        if (!entities.contains(entity))
+          return
+
+        entities.removeAll()
+        dateSet.delete(data)
+      })
+    }
+
+    if (!state.value || !current.value)
+      return
 
     const { entities, positions } = current.value
 
@@ -108,13 +149,8 @@ export function useMeasureDistance(options: UseMeasureDistanceOptions = {}): Use
         position: pos,
         label: {
           text: 'Start',
-          showBackground: true,
-          font: '16px sans-serif',
-          horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-          verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-          pixelOffset: new Cesium.Cartesian2(0, -15),
         },
-      }, startEntityProps))
+      }, initialEntityProps, startEntityProps))
     }
     const onNormal = () => {
       const distance = Cesium.Cartesian3.distance(positions[__pointer], pos)
@@ -123,13 +159,8 @@ export function useMeasureDistance(options: UseMeasureDistanceOptions = {}): Use
         position: pos,
         label: {
           text: `${distance.toFixed(2)}m`,
-          showBackground: true,
-          font: '16px sans-serif',
-          horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-          verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-          pixelOffset: new Cesium.Cartesian2(0, -15),
         },
-      }, turnEntityProps))
+      }, initialEntityProps, turnEntityProps))
       __currentTurnList.value.push(turnEntity)
     }
 
@@ -140,9 +171,11 @@ export function useMeasureDistance(options: UseMeasureDistanceOptions = {}): Use
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
   useEvent(({ position }) => {
-    state.value = false
+    const pos = pickPosition(position)
+    if (!pos)
+      return
 
-    const pos = viewer.scene.pickPosition(position)
+    state.value = false
 
     const { entities } = current.value!
 
@@ -157,20 +190,32 @@ export function useMeasureDistance(options: UseMeasureDistanceOptions = {}): Use
       position: pos,
       label: {
         text: `Sum length: ${__fullLength.value.toFixed(2)}m`,
-        showBackground: true,
-        font: '16px sans-serif',
-        horizontalOrigin: Cesium.HorizontalOrigin.CENTER,
-        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
-        pixelOffset: new Cesium.Cartesian2(0, -15),
       },
-    }, endEntityProps))
+    }, initialEntityProps, endEntityProps))
+    entities.add(editEntity({
+      position: pos,
+      name: '__cesium-use_measure_distance_close',
+      label: {
+        text: '×',
+        font: '16px Helvetica',
+        fillColor: Cesium.Color.RED,
+        showBackground: true, // 指定标签后面背景的可见性
+        backgroundColor: Cesium.Color.WHITE, // 背景颜色
+        backgroundPadding: new Cesium.Cartesian2(2, 2.5),
+        pixelOffset: new Cesium.Cartesian2(20, 0),
+        disableDepthTestDistance: Number.POSITIVE_INFINITY,
+      },
+    }, closeEntityProps))
   }, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
 
   useEvent(({ endPosition }) => {
     if (!state.value || !current.value)
       return
 
-    const pos = viewer.scene.pickPosition(endPosition)
+    const pos = pickPosition(endPosition)
+    if (!pos)
+      return
+
     current.value.positions[__pointer + 1] = pos
   }, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
 
@@ -190,4 +235,15 @@ export function useMeasureDistance(options: UseMeasureDistanceOptions = {}): Use
     set: dateSet,
     clearAll,
   }
+}
+
+function pickPosition(position: Cesium.Cartesian2) {
+  const viewer = getViewer()
+
+  const picked = viewer.scene.pick(position)
+
+  if (picked && picked?.id && picked?.id?.position)
+    return picked.id.position.getValue(Cesium.JulianDate.now())
+
+  return viewer.scene.pickPosition(position)
 }
