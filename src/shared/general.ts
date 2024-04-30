@@ -1,3 +1,5 @@
+import type * as Cesium from 'cesium'
+
 export function toTypeString(value: unknown): string {
   return Object.prototype.toString.call(value)
 }
@@ -80,4 +82,12 @@ export function mergeDeep<T extends object = object, S extends object = T>(obj: 
 
 export function objectKeys<T extends object>(obj: T): (keyof T)[] {
   return Object.keys(obj) as (keyof T)[]
+}
+
+export function pickPosition(position: Cesium.Cartesian2) {
+  const viewer = getViewer()
+
+  const ray = viewer.camera.getPickRay(position)
+
+  return viewer.scene.globe.pick(ray!, viewer.scene)
 }

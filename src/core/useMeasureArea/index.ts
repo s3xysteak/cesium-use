@@ -1,7 +1,7 @@
 import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, ref, shallowRef, watch } from 'vue'
 import { defineColor, editEntity, entityCollection, useEvent } from '@/index'
-import { at } from '@/shared/general'
+import { at, pickPosition } from '@/shared/general'
 
 interface UseMeasureAreaOptions {
   format?: (area: number) => string
@@ -245,17 +245,6 @@ export function useMeasureArea(options: UseMeasureAreaOptions = {}): UseMeasureA
     set: dateSet,
     clearAll,
   }
-}
-
-function pickPosition(position: Cesium.Cartesian2) {
-  const viewer = getViewer()
-
-  const picked = viewer.scene.pick(position)
-
-  if (picked && picked?.id && picked?.id?.position)
-    return picked.id.position.getValue(Cesium.JulianDate.now())
-
-  return viewer.scene.pickPosition(position)
 }
 
 function getCenter(list: Cesium.Cartesian3[]): Cesium.Cartesian3 {

@@ -20,6 +20,7 @@ declare global {
   const isUndefined: typeof import('../src/shared/general')['isUndefined']
   const mergeDeep: typeof import('../src/shared/general')['mergeDeep']
   const objectKeys: typeof import('../src/shared/general')['objectKeys']
+  const pickPosition: typeof import('../src/shared/general')['pickPosition']
   const setViewer: typeof import('../src/core/viewerStore/index')['setViewer']
   const toCartesian3: typeof import('../src/shared/coordinate')['toCartesian3']
   const toTypeString: typeof import('../src/shared/general')['toTypeString']
