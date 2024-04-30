@@ -11,6 +11,6 @@ export const shared = defineConfig({
   vite: {
     publicDir: 'docs/public',
   },
-  base: '',
-  head: [['link', { rel: 'icon', href: '/cesium-use.svg' }]],
+  base: '/cesium-use/',
+  head: [['link', { rel: 'icon', href: '/cesium-use.webp' }]],
 })
