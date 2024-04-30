@@ -171,6 +171,9 @@ export function useMeasureDistance(options: UseMeasureDistanceOptions = {}): Use
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
   useEvent(({ position }) => {
+    if (!state.value || !current.value)
+      return
+
     const pos = pickPosition(position)
     if (!pos)
       return

@@ -179,6 +179,9 @@ export function useMeasureArea(options: UseMeasureAreaOptions = {}): UseMeasureA
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
   useEvent(({ position }) => {
+    if (!state.value || !current.value)
+      return
+
     const pos = pickPosition(position)
     if (!pos)
       return
