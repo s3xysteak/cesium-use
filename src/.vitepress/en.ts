@@ -9,6 +9,8 @@ export const en = defineConfig({
   description: 'Minimalism and elegant solution',
 
   themeConfig: {
+    logo: '/cesium-use.svg',
+
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Install', link: '/usage' },

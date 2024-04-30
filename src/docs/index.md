@@ -7,7 +7,7 @@ hero:
   text: Vue powered CesiumJS utility library
   tagline: Concise, modern, high-performance, focused on the development experience
   image:
-    src: /transparent.png
+    src: /cesium-use.svg
     alt: CesiumUse
   actions:
     - theme: brand

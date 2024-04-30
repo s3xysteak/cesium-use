@@ -1,6 +1,5 @@
 import { defineConfig } from 'vitepress'
 
-// https://vitepress.dev/reference/site-config
 export const shared = defineConfig({
   title: 'Cesium Use',
   rewrites: {
@@ -13,4 +12,5 @@ export const shared = defineConfig({
     publicDir: 'docs/public',
   },
   base: '/cesium-use/',
+  head: [['link', { rel: 'icon', href: '/cesium-use/cesium-use.svg' }]],
 })
