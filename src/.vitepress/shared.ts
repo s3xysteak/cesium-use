@@ -12,5 +12,5 @@ export const shared = defineConfig({
     publicDir: 'docs/public',
   },
   base: '/cesium-use/',
-  head: [['link', { rel: 'icon', href: '/cesium-use/cesium-use.svg' }]],
+  head: [['link', { rel: 'icon', href: '/cesium-use/cesium-use.webp' }]],
 })

@@ -9,7 +9,7 @@ export const zh = defineConfig({
   description: '优雅且简洁的解决方案',
 
   themeConfig: {
-    logo: '/cesium-use.svg',
+    logo: '/cesium-use.webp',
 
     outline: {
       label: '页面导航',
