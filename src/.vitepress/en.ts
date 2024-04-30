@@ -9,7 +9,7 @@ export const en = defineConfig({
   description: 'Minimalism and elegant solution',
 
   themeConfig: {
-    logo: '/cesium-use.webp',
+    logo: '/cesium-use.svg',
 
     nav: [
       { text: 'Home', link: '/' },
