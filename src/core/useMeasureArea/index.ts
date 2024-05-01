@@ -207,8 +207,8 @@ export function useMeasureArea(options: UseMeasureAreaOptions = {}): UseMeasureA
         text: '×',
         font: '16px Helvetica',
         fillColor: Cesium.Color.RED,
-        showBackground: true, // 指定标签后面背景的可见性
-        backgroundColor: Cesium.Color.WHITE, // 背景颜色
+        showBackground: true,
+        backgroundColor: Cesium.Color.WHITE,
         backgroundPadding: new Cesium.Cartesian2(2, 2.5),
         pixelOffset: new Cesium.Cartesian2(20, 0),
         disableDepthTestDistance: Number.POSITIVE_INFINITY,
