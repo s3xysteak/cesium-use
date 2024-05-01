@@ -19,10 +19,12 @@ declare global {
   const isSymbol: typeof import('../src/shared/general')['isSymbol']
   const isUndefined: typeof import('../src/shared/general')['isUndefined']
   const mergeDeep: typeof import('../src/shared/general')['mergeDeep']
+  const normalizeCoordinates: typeof import('../src/shared/coordinate')['normalizeCoordinates']
   const objectKeys: typeof import('../src/shared/general')['objectKeys']
   const pickPosition: typeof import('../src/shared/general')['pickPosition']
   const setViewer: typeof import('../src/core/viewerStore/index')['setViewer']
   const toCartesian3: typeof import('../src/shared/coordinate')['toCartesian3']
+  const toCoordinates: typeof import('../src/shared/coordinate')['toCoordinates']
   const toTypeString: typeof import('../src/shared/general')['toTypeString']
   const useViewerProvider: typeof import('../src/core/viewerStore/index')['useViewerProvider']
 }
