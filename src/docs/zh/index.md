@@ -7,7 +7,7 @@ hero:
   text: 由Vue驱动的现代CesiumJS工具库
   tagline: 简约、现代、高性能，专注于开发体验
   image:
-    src: /cesium-use.webp
+    src: /logo.webp
     alt: CesiumUse
   actions:
     - theme: brand
