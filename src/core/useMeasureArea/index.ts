@@ -53,7 +53,6 @@ const initialEntityProps: Cesium.Entity.ConstructorOptions = {
     outlineColor: Cesium.Color.RED,
     outlineWidth: 2,
     pixelSize: 6,
-    heightReference: Cesium.HeightReference.NONE,
     disableDepthTestDistance: Number.POSITIVE_INFINITY,
   },
 }
@@ -98,7 +97,7 @@ export function useMeasureArea(options: UseMeasureAreaOptions = {}): UseMeasureA
         horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
         verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
         disableDepthTestDistance: Number.POSITIVE_INFINITY,
-        heightReference: Cesium.HeightReference.RELATIVE_TO_TERRAIN,
+        heightReference: Cesium.HeightReference.CLAMP_TO_TERRAIN,
       },
     }, centerEntityProps))
 

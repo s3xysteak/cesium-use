@@ -62,7 +62,6 @@ const initialEntityProps: Cesium.Entity.ConstructorOptions = {
     outlineColor: Cesium.Color.RED,
     outlineWidth: 2,
     pixelSize: 6,
-    heightReference: Cesium.HeightReference.NONE,
     disableDepthTestDistance: Number.POSITIVE_INFINITY,
   },
 }
