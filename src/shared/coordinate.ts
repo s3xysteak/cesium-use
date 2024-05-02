@@ -25,7 +25,12 @@ export function normalizeCoordinates(source: MaybeCoordinates) {
         height: source.height ? Number(source.height) : undefined,
       }
 
-  if (Object.values(value).some(val => Number.isNaN(Number(val))))
+  if (Object.entries(value).some(([k, v]) => {
+    if (k === 'height')
+      return isUndefined(v) ? false : Number.isNaN(v)
+
+    return Number.isNaN(v)
+  }))
     throw new Error('[cesium-use] Invalid value which cannot be parsed to number.')
 
   return value
