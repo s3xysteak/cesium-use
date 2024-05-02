@@ -22,6 +22,8 @@ declare global {
   const normalizeCoordinates: typeof import('../src/shared/coordinate')['normalizeCoordinates']
   const objectKeys: typeof import('../src/shared/general')['objectKeys']
   const pickPosition: typeof import('../src/shared/general')['pickPosition']
+  const projectionPosition: typeof import('../src/shared/coordinate')['projectionPosition']
+  const rightAngle: typeof import('../src/shared/coordinate')['rightAngle']
   const setViewer: typeof import('../src/core/viewerStore/index')['setViewer']
   const toCartesian3: typeof import('../src/shared/coordinate')['toCartesian3']
   const toCoordinates: typeof import('../src/shared/coordinate')['toCoordinates']
