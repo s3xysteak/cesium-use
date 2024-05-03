@@ -61,6 +61,7 @@ export default defineConfig({
         ...Object.keys(pkg.devDependencies || {}),
       ],
     },
+    sourcemap: true,
   },
   resolve: {
     alias: {
