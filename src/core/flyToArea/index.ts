@@ -1,5 +1,5 @@
 import * as Cesium from 'cesium'
-import type { MaybeCartesian3OrLonLat } from '@/shared/coordinate'
+import type { MaybeCoordinates } from '@/shared/coordinate'
 
 export interface FlyToAreaOptions {
   onSingle: () => void
@@ -7,7 +7,7 @@ export interface FlyToAreaOptions {
 }
 
 export function flyToArea(
-  posList: MaybeCartesian3OrLonLat[],
+  posList: (MaybeCoordinates | Cesium.Cartesian3)[],
   options?: Partial<FlyToAreaOptions>,
 ) {
   const { onSingle, onEmpty } = options ?? {}

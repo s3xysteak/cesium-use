@@ -1,7 +1,6 @@
 import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, computed, ref, shallowRef, watch } from 'vue'
 import { defineColor, editEntity, entityCollection, useEvent } from '@/index'
-import { pickPosition } from '@/shared/general'
 import { projectionPosition, toCoordinates } from '@/shared/coordinate'
 
 export interface HeightOptions {

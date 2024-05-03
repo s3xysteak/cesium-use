@@ -45,7 +45,9 @@ export default defineConfig({
       '**/.{vscode,svn}/**',
     ],
     root: fileURLToPath(new URL('./', import.meta.url)),
-    includeSource: ['src/core/**/*.ts'],
+    includeSource: [
+      'src/core/**/*.ts',
+    ],
   },
   build: {
     lib: {

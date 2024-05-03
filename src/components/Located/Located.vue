@@ -1,7 +1,8 @@
 <script setup lang="ts">
+import type { Cartesian3 } from 'cesium'
 import { type Component, computed, onMounted, onUnmounted, ref } from 'vue'
 import { useElementBounding } from '@vueuse/core'
-import type { MaybeCartesian3OrLonLat } from '@/shared/coordinate'
+import type { MaybeCoordinates } from '@/shared/coordinate'
 
 interface Rect {
   width: number
@@ -38,7 +39,7 @@ const placementMap: Record<Placement, (rect: Rect) => Rect> = {
 }
 
 interface Props {
-  coordinate: MaybeCartesian3OrLonLat
+  coordinate: Cartesian3 | MaybeCoordinates
 
   /**
    * 元素方位
