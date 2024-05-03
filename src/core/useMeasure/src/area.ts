@@ -3,7 +3,7 @@ import { type Ref, type ShallowRef, ref, shallowRef, watch } from 'vue'
 import { defineColor, editEntity, entityCollection, useEvent } from '@/index'
 import { at, pickPosition } from '@/shared/general'
 
-interface UseMeasureAreaOptions {
+export interface AreaOptions {
   format?: (area: number) => string
   areaEntityProps?: Cesium.Entity.ConstructorOptions
   startEntityProps?: Cesium.Entity.ConstructorOptions
@@ -15,7 +15,7 @@ interface UseMeasureAreaOptions {
 
 interface AreaEntityData {
   /**
-   * All entities in made by `UseMeasureAreaOptions`.
+   * All entities in made by `AreaOptions`.
    */
   entities: ReturnType<typeof entityCollection>
 
@@ -25,7 +25,7 @@ interface AreaEntityData {
   positions: Cesium.Cartesian3[]
 }
 
-interface UseMeasureAreaReturn {
+export interface AreaReturn {
   /**
    * Whether the area measurement is in progress
    */
@@ -57,7 +57,7 @@ const initialEntityProps: Cesium.Entity.ConstructorOptions = {
   },
 }
 
-export function useMeasureArea(options: UseMeasureAreaOptions = {}): UseMeasureAreaReturn {
+export function area(options: AreaOptions = {}): AreaReturn {
   const {
     areaEntityProps = {},
     startEntityProps = {},

@@ -3,7 +3,7 @@ import { type Ref, type ShallowRef, ref, shallowRef, watch } from 'vue'
 import { defineColor, editEntity, entityCollection, useEvent } from '@/index'
 import { at, pickPosition } from '@/shared/general'
 
-interface UseMeasureDistanceOptions {
+export interface DistanceOptions {
   lineEntityProps?: Cesium.Entity.ConstructorOptions
   startEntityProps?: Cesium.Entity.ConstructorOptions
   turnEntityProps?: Cesium.Entity.ConstructorOptions
@@ -13,7 +13,7 @@ interface UseMeasureDistanceOptions {
 
 interface LineEntityData {
   /**
-   * All entities in made by `UseMeasureDistanceOptions`.
+   * All entities in made by `DistanceOptions`.
    */
   entities: ReturnType<typeof entityCollection>
 
@@ -23,7 +23,7 @@ interface LineEntityData {
   positions: Cesium.Cartesian3[]
 }
 
-interface UseMeasureDistanceReturn {
+export interface DistanceReturn {
   /**
    * Whether the distance measurement is in progress
    */
@@ -66,7 +66,7 @@ const initialEntityProps: Cesium.Entity.ConstructorOptions = {
   },
 }
 
-export function useMeasureDistance(options: UseMeasureDistanceOptions = {}): UseMeasureDistanceReturn {
+export function distance(options: DistanceOptions = {}): DistanceReturn {
   const {
     lineEntityProps = {},
     startEntityProps = {},

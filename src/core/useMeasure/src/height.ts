@@ -4,7 +4,7 @@ import { defineColor, editEntity, entityCollection, useEvent } from '@/index'
 import { pickPosition } from '@/shared/general'
 import { projectionPosition, toCoordinates } from '@/shared/coordinate'
 
-interface UseMeasureHeightOptions {
+export interface HeightOptions {
   format?: (height: number) => string
   heightEntityProps?: Cesium.Entity.ConstructorOptions
   turnEntityProps?: Cesium.Entity.ConstructorOptions
@@ -14,7 +14,7 @@ interface UseMeasureHeightOptions {
 
 interface HeightEntityData {
   /**
-   * All entities in made by `UseMeasureHeightOptions`.
+   * All entities in made by `HeightOptions`.
    */
   entities: ReturnType<typeof entityCollection>
 
@@ -26,7 +26,7 @@ interface HeightEntityData {
   turnPosition: Ref<Cesium.Cartesian3 | undefined>
 }
 
-interface UseMeasureHeightReturn {
+export interface HeightReturn {
   /**
    * Whether the height measurement is in progress
    */
@@ -67,7 +67,7 @@ const initialEntityProps: Cesium.Entity.ConstructorOptions = {
   },
 }
 
-export function useMeasureHeight(options: UseMeasureHeightOptions = {}): UseMeasureHeightReturn {
+export function height(options: HeightOptions = {}): HeightReturn {
   const {
     heightEntityProps = {},
     turnEntityProps = {},
