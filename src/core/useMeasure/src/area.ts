@@ -1,7 +1,6 @@
 import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, ref, shallowRef, watch } from 'vue'
 import { defineColor, editEntity, entityCollection, useEvent } from '@/index'
-import { at, pickPosition } from '@/shared/general'
 
 export interface AreaOptions {
   format?: (area: number) => string

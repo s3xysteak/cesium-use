@@ -9,8 +9,8 @@ import { configDefaults } from 'vitest/config'
 
 import AutoImport from 'unplugin-auto-import/vite'
 import dts from 'vite-plugin-dts'
-
 import UnoCSS from 'unocss/vite'
+import { autoImport as UtilsAutoImport } from '@s3xysteak/utils'
 
 import pkg from './package.json'
 import {
@@ -29,6 +29,9 @@ export default defineConfig({
     AutoImport({
       dirs: ['src/core/viewerStore', 'src/shared'],
       dts: 'types/auto-imports.d.ts',
+      imports: [
+        UtilsAutoImport(),
+      ],
     }),
 
     supportAutoImportPlugin(),
