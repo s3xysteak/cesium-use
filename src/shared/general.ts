@@ -84,7 +84,7 @@ export function objectKeys<T extends object>(obj: T): (keyof T)[] {
   return Object.keys(obj) as (keyof T)[]
 }
 
-export function pickPosition(position: Cesium.Cartesian2) {
+export function pickGlobePosition(position: Cesium.Cartesian2) {
   const viewer = getViewer()
 
   const ray = viewer.camera.getPickRay(position)

@@ -21,6 +21,7 @@ declare global {
   const mergeDeep: typeof import('../src/shared/general')['mergeDeep']
   const normalizeCoordinates: typeof import('../src/shared/coordinate')['normalizeCoordinates']
   const objectKeys: typeof import('../src/shared/general')['objectKeys']
+  const pickGlobePosition: typeof import('../src/shared/general')['pickGlobePosition']
   const pickPosition: typeof import('../src/shared/general')['pickPosition']
   const projectionPosition: typeof import('../src/shared/coordinate')['projectionPosition']
   const rightAngle: typeof import('../src/shared/coordinate')['rightAngle']

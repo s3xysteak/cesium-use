@@ -121,7 +121,7 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
   })
 
   useEvent(({ position }) => {
-    const pos = pickPosition(position)
+    const pos = pickGlobePosition(position)
     if (!pos)
       return
 
@@ -173,7 +173,7 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
     if (!state.value || !current.value)
       return
 
-    const pos = pickPosition(position)
+    const pos = pickGlobePosition(position)
     if (!pos)
       return
 
@@ -214,7 +214,7 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
     if (!state.value || !current.value)
       return
 
-    const pos = pickPosition(endPosition)
+    const pos = pickGlobePosition(endPosition)
     if (!pos)
       return
 

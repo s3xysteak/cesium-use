@@ -152,7 +152,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
   })
 
   useEvent(({ position }) => {
-    const pos = pickPosition(position)
+    const pos = pickGlobePosition(position)
     if (!pos)
       return
 
@@ -184,7 +184,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
     if (!state.value || !current.value)
       return
 
-    const pos = pickPosition(position)
+    const pos = pickGlobePosition(position)
     if (!pos)
       return
 
@@ -216,7 +216,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
     if (!state.value || !current.value || !current.value.positions.value[0])
       return
 
-    const pos = pickPosition(endPosition)
+    const pos = pickGlobePosition(endPosition)
     if (!pos)
       return
 
