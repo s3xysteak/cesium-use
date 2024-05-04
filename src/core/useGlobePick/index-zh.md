@@ -7,8 +7,10 @@
 ```js{4}
 // 通常可以结合 `useEvent` 使用
 
+const globePick = useGlobePick()
+
 useEvent(({ position }) => {
-  const pos = useGlobePick(position)
+  const pos = globePick(position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 ```
 
@@ -19,7 +21,7 @@ useEvent(({ position }) => {
 ::: details
 
 ```ts
-function useGlobePick(position: Cartesian2): Cartesian3 | undefined
+function useGlobePick(): (position: Cartesian2) => Cartesian3 | undefined
 ```
 
 :::

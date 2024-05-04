@@ -1,9 +1,6 @@
 import type { Cartesian2 } from 'cesium'
 
-export function useGlobePick(position: Cartesian2) {
+export function useGlobePick() {
   const viewer = getViewer()
-
-  const ray = viewer.camera.getPickRay(position)
-
-  return viewer.scene.globe.pick(ray!, viewer.scene)
+  return (position: Cartesian2) => viewer.scene.globe.pick(viewer.camera.getPickRay(position)!, viewer.scene)
 }

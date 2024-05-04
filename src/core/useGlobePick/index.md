@@ -7,8 +7,10 @@ Get the coordinates on the ellipsoid as rays.
 ```js{4}
 // Usually you can use it with `useEvent`
 
+const globePick = useGlobePick()
+
 useEvent(({ position }) => {
-  const pos = useGlobePick(position)
+  const pos = globePick(position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 ```
 
@@ -19,7 +21,7 @@ This method will only obtain the coordinates on the `ellipsoid+terrain`, and wil
 ::: details
 
 ```ts
-function useGlobePick(position: Cartesian2): Cartesian3 | undefined
+function useGlobePick(): (position: Cartesian2) => Cartesian3 | undefined
 ```
 
 :::
