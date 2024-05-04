@@ -23,7 +23,8 @@ usePoints(
   }),
 )
 
-const fly = () => useFlyToArea(data.map(item => [item.lon, item.lat]))
+const flyToArea = useFlyToArea()
+const fly = () => flyToArea(data.map(item => [item.lon, item.lat]))
 </script>
 
 <template>

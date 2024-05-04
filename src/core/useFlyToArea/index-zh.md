@@ -5,7 +5,8 @@
 ## 使用
 
 ```js
-useFlyToArea([[100, 20], ['120', 40], Cesium.Cartesian3.fromDegrees(110, 30)], {
+const flyToArea = useFlyToArea()
+flyToArea([[100, 20], [120, 40], [110, 30]], {
   onSingle: () => flyTo(id),
   onEmpty: () => initCamera()
 })
