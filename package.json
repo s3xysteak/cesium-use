@@ -71,6 +71,7 @@
     "consola": "^3.2.3",
     "eslint": "^8.57.0",
     "jsdom": "^24.0.0",
+    "markdown-it-mathjax3": "^4.3.2",
     "npm-run-all2": "^6.1.2",
     "typescript": "^5.4.5",
     "unocss": "^0.59.4",

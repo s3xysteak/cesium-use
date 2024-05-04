@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 
 const coreList = readdirSync('./src/core')
 const componentsList = readdirSync('./src/components')
+const utilsList = readdirSync('./src/utils')
 
 export const zh = defineConfig({
   lang: 'zh-Hans',
@@ -39,6 +40,13 @@ export const zh = defineConfig({
         items: componentsList.map(dir => ({
           text: dir,
           link: `/zh/components/${dir}.md`,
+        })),
+      },
+      {
+        text: '工具',
+        items: utilsList.map(dir => ({
+          text: dir,
+          link: `/zh/utils/${dir}.md`,
         })),
       },
     ],

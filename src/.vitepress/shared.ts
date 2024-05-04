@@ -13,4 +13,7 @@ export const shared = defineConfig({
   },
   base: '/cesium-use/',
   head: [['link', { rel: 'icon', href: '/cesium-use/logo.webp' }]],
+  markdown: {
+    math: true,
+  },
 })
