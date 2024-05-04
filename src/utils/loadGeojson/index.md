@@ -1,6 +1,6 @@
 # loadGeojson
 
-In a declarative manner, load GeoJSON concisely. This is a **pure function**.
+In a declarative manner, load GeoJSON concisely.
 
 ## Usage
 
@@ -42,7 +42,9 @@ For `onEntity` and `custom`, you can use them through **methods** rather than th
 const primitive = await loadGeojson({
   url: 'geojson/water.json',
 
-  custom: (dataSource) => {}, // [!code --]
+  custom: (dataSource) => { // [!code --]
+    console.log(this.url) // 'undefined' // [!code --]
+  }, // [!code --]
 
   custom(dataSource) { // [!code ++]
     console.log(this.url) // 'geojson/water.json' // [!code ++]

@@ -28,10 +28,10 @@ const pos = shallowRef([-100, 10])
 
 Where:
 
-- `v-model` binds a boolean value that controls the display and hiding of `Located`.
+- [required] `v-model` binds a boolean value that controls the display and hiding of `Located`.
+- [required] `coordinate` is used to control the fixed coordinates of `Located`.
 - `as` can change `Located` to the desired DOM, defaulting to `'div'`, or pass a component as shown in the example code.
 - `placement` provides a series of preset positions, defaulting to `bottomRight`, indicating the DOM is positioned at the bottom right of the coordinates (i.e., the top left corner of the DOM is fixed on the coordinates).
-- `coordinate` is used to control the fixed coordinates of `Located`.
 - `offset` is used to adjust the positioning offset of the DOM. `top` and `left` are in CSS units.
 
 ## Type Declarations

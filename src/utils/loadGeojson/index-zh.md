@@ -1,6 +1,6 @@
 # loadGeojson
 
-以约定式的方式，简洁地加载 geojson。这是一个**无副作用函数**。
+以约定式的方式，简洁地加载 geojson。
 
 ## 使用
 
@@ -42,7 +42,9 @@ async function loadPrimitive() {
 const primitive = await loadGeojson({
   url: 'geojson/water.json',
 
-  custom: (dataSource) => {}, // [!code --]
+  custom: (dataSource) => { // [!code --]
+    console.log(this.url) // 'undefined' // [!code --]
+  }, // [!code --]
 
   custom(dataSource) { // [!code ++]
     console.log(this.url) // 'geojson/water.json' // [!code ++]

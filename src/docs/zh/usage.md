@@ -51,7 +51,13 @@ export default defineConfig({
 ```
 
 `CesiumUseResolver`接受一个可选的对象作为参数，表示 `name -> alias` 的映射。
-以`CesiumUseResolver({ defineColor: 'color' })`为例：
+以如下配置为例：
+
+```js
+CesiumUseResolver({
+  defineColor: 'color'
+})
+```
 
 ```js
 // 映射前

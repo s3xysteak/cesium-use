@@ -51,7 +51,13 @@ export default defineConfig({
 ```
 
 The `CesiumUseResolver` function accepts an optional object as a parameter, representing the `name -> alias` mapping.
-For example, using `CesiumUseResolver({ defineColor: 'color' })`:
+For example:
+
+```js
+CesiumUseResolver({
+  defineColor: 'color'
+})
+```
 
 ```js
 // Before mapping

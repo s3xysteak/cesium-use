@@ -87,6 +87,10 @@ func(() => valGetter) // Getter
 - `setViewer` 通过一个模块级顶级变量保存 viewer。
 - `useViewerProvider` 利用 vue 的依赖注入实现 viewer 在组件间的传递。
 
-和许多 Vue 库的实践不同，Cesium Use **推荐**使用`setViewer`而不是基于依赖注入的`useViewerProvider`。因为依赖注入只能在 setup 调用栈中使用，而在 CesiumJS 中很难保证在同一个调用栈中完成所有实现。
+和许多 Vue 库的实践不同，Cesium Use **推荐**使用`setViewer`而不是基于依赖注入的`useViewerProvider`。
+
+::: warning
+`useViewerProvider` 尚未稳定，未来将废弃 `setViewer` 而改用稳定后的 `useViewerProvider`。
+:::
 
 更多相关内容见 [viewerStore](core/viewerStore.md)。

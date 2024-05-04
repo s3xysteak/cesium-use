@@ -87,6 +87,10 @@ For convenient Viewer instance management, Cesium Use provides three methods for
 - `setViewer` to save the viewer through a module-level top-level variable.
 - `useViewerProvider` to utilize Vue's dependency injection for viewer transfer between components.
 
-Unlike practices in many Vue libraries, Cesium Use **recommends** using `setViewer` over dependency injection-based `useViewerProvider`. This is because dependency injection can only be used within the setup call stack, which makes it challenging to ensure all implementations are completed within the same call stack in CesiumJS.
+Unlike practices in many Vue libraries, Cesium Use **recommends** using `setViewer` over dependency injection-based `useViewerProvider`.
+
+::: warning
+`useViewerProvider` is not stable yet and in the future, `setViewer` will be deprecated in favor of the stable `useViewerProvider`.
+:::
 
 For more related content, refer to [viewerStore](core/viewerStore.md).
