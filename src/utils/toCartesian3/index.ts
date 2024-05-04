@@ -1,5 +1,5 @@
 import * as Cesium from 'cesium'
-import type { MaybeCoordinates } from '@/shared/coordinate'
+import { type MaybeCoordinates, normalizeCoordinates } from '@/shared/coordinate'
 
 export function toCartesian3(source: Cesium.Cartesian3 | MaybeCoordinates): Cesium.Cartesian3 {
   if (source instanceof Cesium.Cartesian3)
