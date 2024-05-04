@@ -7,8 +7,7 @@ export interface UseFlyToAreaOptions {
   onEmpty: () => void
 }
 
-export function useFlyToArea() {
-  const viewer = getViewer()
+export function useFlyToArea(viewer = getViewer()) {
   return (
     posList: (MaybeCoordinates | Cesium.Cartesian3)[],
     options?: Partial<UseFlyToAreaOptions>,
