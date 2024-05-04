@@ -1,7 +1,7 @@
 import type { RouteRecordRaw } from 'vue-router'
 
 const modules = import.meta.glob([
-  '../../core/*/demo.vue',
+  '../../composables/*/demo.vue',
   '../../components/*/demo.vue',
   '../../utils/*/demo.vue',
 ])

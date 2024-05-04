@@ -93,4 +93,4 @@ Unlike practices in many Vue libraries, Cesium Use **recommends** using `setView
 `useViewerProvider` is not stable yet and in the future, `setViewer` will be deprecated in favor of the stable `useViewerProvider`.
 :::
 
-For more related content, refer to [viewerStore](core/viewerStore.md).
+For more related content, refer to [viewerStore](composables/viewerStore.md).

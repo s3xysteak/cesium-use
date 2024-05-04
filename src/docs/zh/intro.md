@@ -93,4 +93,4 @@ func(() => valGetter) // Getter
 `useViewerProvider` 尚未稳定，未来将废弃 `setViewer` 而改用稳定后的 `useViewerProvider`。
 :::
 
-更多相关内容见 [viewerStore](core/viewerStore.md)。
+更多相关内容见 [viewerStore](composables/viewerStore.md)。

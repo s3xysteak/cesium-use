@@ -25,7 +25,7 @@ export default defineConfig({
 
     dts({ rollupTypes: true }),
     AutoImport({
-      dirs: ['src/core/viewerStore'],
+      dirs: ['src/composables/viewerStore'],
       dts: 'types/auto-imports.d.ts',
       resolvers: [
         UtilsResolver(),
@@ -49,7 +49,7 @@ export default defineConfig({
     ],
     root: fileURLToPath(new URL('./', import.meta.url)),
     includeSource: [
-      'src/core/**/*.ts',
+      'src/composables/**/*.ts',
       'src/components/**/*.ts',
       'src/shared/**/*.ts',
       'src/utils/**/*.ts',

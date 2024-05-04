@@ -1,11 +1,11 @@
 # useGlobePick
 
-Get the coordinates on the ellipsoid as rays.
+以射线的方式获取椭球体上的坐标。
 
-## Usage
+## 使用
 
 ```js{4}
-// Usually you can use it with `useEvent`
+// 通常可以结合 `useEvent` 使用
 
 const globePick = useGlobePick()
 
@@ -14,9 +14,9 @@ useEvent(({ position }) => {
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 ```
 
-This method will only obtain the coordinates on the `ellipsoid+terrain`, and will ignore the tileset and model.
+这种方式只会获取 `椭球体 + 地形`上的坐标，而会忽略tileset和模型等。
 
-## Type Declaration
+## 类型声明
 
 ::: details
 

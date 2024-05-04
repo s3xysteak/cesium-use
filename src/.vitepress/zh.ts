@@ -1,7 +1,7 @@
 import { readdirSync } from 'node:fs'
 import { defineConfig } from 'vitepress'
 
-const coreList = readdirSync('./src/core')
+const composablesList = readdirSync('./src/composables')
 const componentsList = readdirSync('./src/components')
 const utilsList = readdirSync('./src/utils')
 
@@ -29,10 +29,10 @@ export const zh = defineConfig({
         ],
       },
       {
-        text: '核心',
-        items: coreList.map(dir => ({
+        text: '组合式函数',
+        items: composablesList.map(dir => ({
           text: dir,
-          link: `/zh/core/${dir}.md`,
+          link: `/zh/composables/${dir}.md`,
         })),
       },
       {

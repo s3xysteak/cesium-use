@@ -3,7 +3,7 @@ import { type Ref, type ShallowRef, computed, ref, shallowRef, watch } from 'vue
 import { defineColor, editEntity, useEntityCollection, useEvent } from '@/index'
 import { toCoordinates } from '@/utils/toCoordinates'
 import { projectionPosition } from '@/utils/projectionPosition'
-import { useGlobePick } from '@/core/useGlobePick'
+import { useGlobePick } from '@/composables/useGlobePick'
 
 export interface HeightOptions {
   format?: (height: number) => string
@@ -152,8 +152,9 @@ export function height(options: HeightOptions = {}): HeightReturn {
     immediate: true,
   })
 
+  const globePick = useGlobePick()
   useEvent(({ position }) => {
-    const pos = useGlobePick(position)
+    const pos = globePick(position)
     if (!pos)
       return
 
@@ -185,7 +186,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
     if (!state.value || !current.value)
       return
 
-    const pos = useGlobePick(position)
+    const pos = globePick(position)
     if (!pos)
       return
 
@@ -217,7 +218,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
     if (!state.value || !current.value || !current.value.positions.value[0])
       return
 
-    const pos = useGlobePick(endPosition)
+    const pos = globePick(endPosition)
     if (!pos)
       return
 

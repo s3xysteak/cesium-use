@@ -1,7 +1,7 @@
 import { readdirSync } from 'node:fs'
 import { defineConfig } from 'vitepress'
 
-const coreList = readdirSync('./src/core')
+const composablesList = readdirSync('./src/composables')
 const componentsList = readdirSync('./src/components')
 const utilsList = readdirSync('./src/utils')
 
@@ -26,21 +26,21 @@ export const en = defineConfig({
         ],
       },
       {
-        text: 'core',
-        items: coreList.map(dir => ({
+        text: 'Composables',
+        items: composablesList.map(dir => ({
           text: dir,
-          link: `core/${dir}.md`,
+          link: `composables/${dir}.md`,
         })),
       },
       {
-        text: 'component',
+        text: 'Component',
         items: componentsList.map(dir => ({
           text: dir,
           link: `components/${dir}.md`,
         })),
       },
       {
-        text: 'utils',
+        text: 'Utils',
         items: utilsList.map(dir => ({
           text: dir,
           link: `utils/${dir}.md`,
