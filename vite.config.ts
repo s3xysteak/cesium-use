@@ -12,11 +12,9 @@ import dts from 'vite-plugin-dts'
 import UnoCSS from 'unocss/vite'
 import UtilsResolver from '@s3xysteak/utils/resolver'
 
+import ExportCollector from 'unplugin-export-collector/vite'
+
 import pkg from './package.json'
-import {
-  supportAutoImportDts,
-  supportAutoImportPlugin,
-} from './src/plugins/supportAutoImport'
 
 export default defineConfig({
   plugins: [
@@ -25,7 +23,7 @@ export default defineConfig({
 
     UnoCSS(),
 
-    dts({ rollupTypes: true, afterBuild: supportAutoImportDts }),
+    dts({ rollupTypes: true }),
     AutoImport({
       dirs: ['src/core/viewerStore', 'src/shared'],
       dts: 'types/auto-imports.d.ts',
@@ -33,8 +31,13 @@ export default defineConfig({
         UtilsResolver(),
       ],
     }),
-
-    supportAutoImportPlugin(),
+    ExportCollector({
+      writeTo: './src/resolver.ts',
+      exportDefault: true,
+      exclude: [
+        'Located',
+      ],
+    }),
   ],
   test: {
     environment: 'jsdom',
@@ -51,9 +54,14 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: './src/index.ts',
-      name: 'cesium-use',
+      entry: [
+        './src/index.ts',
+        './src/resolver.ts',
+      ],
       formats: ['es'],
+      fileName(_, entryName) {
+        return entryName === 'index' ? 'index.mjs' : 'resolver.mjs'
+      },
     },
     rollupOptions: {
       external: [

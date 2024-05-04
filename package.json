@@ -18,12 +18,16 @@
     "utils"
   ],
   "exports": {
-    "types": "./dist/index.d.ts",
-    "import": "./dist/cesium-use.js",
-    "require": "./dist/cesium-use.umd.cjs"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs"
+    },
+    "./resolver": {
+      "types": "./dist/resolver.d.ts",
+      "default": "./dist/resolver.mjs"
+    }
   },
-  "main": "./dist/cesium-use.umd.cjs",
-  "module": "./dist/cesium-use.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
@@ -71,6 +75,7 @@
     "typescript": "^5.4.5",
     "unocss": "^0.59.4",
     "unplugin-auto-import": "^0.17.5",
+    "unplugin-export-collector": "^0.4.2",
     "vite": "^5.2.11",
     "vite-plugin-cesium-build": "^0.3.0",
     "vite-plugin-dts": "^3.9.0",
