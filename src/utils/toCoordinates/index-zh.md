@@ -1,6 +1,6 @@
 # toCoordinates
 
-将坐标规范化为 `Coordinate` 。
+将坐标规范化为经纬度。
 
 ## 使用
 

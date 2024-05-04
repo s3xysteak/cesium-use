@@ -1,6 +1,6 @@
 # toCoordinates
 
-Normalize a coordinate to `Coordinate` 。
+Normalize a coordinate to `Long & lat`。
 
 ## Usage
 
