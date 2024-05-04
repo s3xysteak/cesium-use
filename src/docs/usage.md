@@ -37,22 +37,21 @@ Using `unplugin-auto-import`, here is an example with `Vite`:
 import { defineConfig } from 'vite'
 
 import AutoImport from 'unplugin-auto-import/vite'
-import { autoImport as CesiumUseAutoImport } from 'cesium-use'
+import CesiumUseResolver from 'cesium-use/resolver'
 
 export default defineConfig({
   plugins: [
     AutoImport({
-      imports: [
-        // ...
-        CesiumUseAutoImport()
+      resolvers: [
+        CesiumUseResolver()
       ]
     })
   ]
 })
 ```
 
-The `autoImport` function accepts an optional object as a parameter, representing the `name -> alias` mapping.
-For example, using `autoImport({ defineColor: 'color' })`:
+The `CesiumUseResolver` function accepts an optional object as a parameter, representing the `name -> alias` mapping.
+For example, using `CesiumUseResolver({ defineColor: 'color' })`:
 
 ```js
 // Before mapping

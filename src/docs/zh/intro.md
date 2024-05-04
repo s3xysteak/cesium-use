@@ -72,9 +72,14 @@ const valGetter = 1
 func(() => valGetter) // Getter
 ```
 
-## Viewer 管理
+## 命名规范
 
-### viewerStore 函数
+`cesium-use` 遵循 `composable` 组合式函数命名规范。
+
+1. 所有以 `use` 开头的函数都是组合式函数，这意味着你应当在 `setup` 调用栈内调用它们。
+2. 所有非 `use` 开头的函数一定不是组合式函数。
+
+## Viewer 管理
 
 为了方便管理 Viewer 实例，Cesium Use 提供了三个方法以供使用。
 
@@ -85,56 +90,3 @@ func(() => valGetter) // Getter
 和许多 Vue 库的实践不同，Cesium Use **推荐**使用`setViewer`而不是基于依赖注入的`useViewerProvider`。因为依赖注入只能在 setup 调用栈中使用，而在 CesiumJS 中很难保证在同一个调用栈中完成所有实现。
 
 更多相关内容见 [viewerStore](core/viewerStore.md)。
-
-### 组件结构的最佳实践
-
-建议以一个承载 viewer 的组件作为祖先组件，在 viewer 被挂在后在保证子组件渲染。
-例如这样的结构：
-
-```md
-- earth-container.vue
-- Earth.vue
-```
-
-在`earth-container.vue`中:
-
-```vue {5,10-11,19}
-<script setup>
-import * as Cesium from 'cesium'
-import Earth from './Earth.vue'
-
-const isViewerMounted = ref(false)
-const viewerContainer = ref()
-onMounted(() => {
-  const viewer = new Cesium.Viewer(viewerContainer)
-
-  setViewer(viewer)
-  isViewerMounted.value = true
-})
-</script>
-
-<template>
-  <div>
-    <div ref="viewerContainer" />
-
-    <Earth v-if="isViewerMounted" />
-  </div>
-</template>
-```
-
-在 `Earth.vue` 中:
-
-```vue
-<script setup>
-import * as Cesium from 'cesium'
-const viewer = getViewer()
-console.log(viewer instanceof Cesium.Viewer) // true
-</script>
-
-<template>
-  <div />
-</template>
-```
-
-也就是说，强烈建议在一个单独的组件中完成 viewer 的初始化。
-以上述的`earth-container.vue`为例，他仅仅完成实例化 viewer 这一步操作，并且在实例化 viewer 后再渲染后代组件。其他后续操作都在`Earth.vue`以及其他子组件中进行。这样能保证在后续代码中顺利获取已经在容器组件中实例化的 viewer 实例。

@@ -72,9 +72,14 @@ const valGetter = 1
 func(() => valGetter) // Getter
 ```
 
-## Viewer Management
+## Naming Convention
 
-### viewerStore Function
+`cesium-use` follows the `composable` naming convention for functions.
+
+1. All functions starting with `use` are composable functions, which means you should call them within the `setup` call stack.
+2. All functions not starting with `use` are definitely not composable functions.
+
+## Viewer Management
 
 For convenient Viewer instance management, Cesium Use provides three methods for use.
 
@@ -85,56 +90,3 @@ For convenient Viewer instance management, Cesium Use provides three methods for
 Unlike practices in many Vue libraries, Cesium Use **recommends** using `setViewer` over dependency injection-based `useViewerProvider`. This is because dependency injection can only be used within the setup call stack, which makes it challenging to ensure all implementations are completed within the same call stack in CesiumJS.
 
 For more related content, refer to [viewerStore](core/viewerStore.md).
-
-### Best Practices for Component Structure
-
-It is recommended to have a parent component that houses the viewer, ensuring that child components render after the viewer is mounted.
-For example, this structure:
-
-```md
-- earth-container.vue
-- Earth.vue
-```
-
-In `earth-container.vue`:
-
-```vue {5,10-11,19}
-<script setup>
-import * as Cesium from 'cesium'
-import Earth from './Earth.vue'
-
-const isViewerMounted = ref(false)
-const viewerContainer = ref()
-onMounted(() => {
-  const viewer = new Cesium.Viewer(viewerContainer)
-
-  setViewer(viewer)
-  isViewerMounted.value = true
-})
-</script>
-
-<template>
-  <div>
-    <div ref="viewerContainer" />
-
-    <Earth v-if="isViewerMounted" />
-  </div>
-</template>
-```
-
-In `Earth.vue`:
-
-```vue
-<script setup>
-import * as Cesium from 'cesium'
-const viewer = getViewer()
-console.log(viewer instanceof Cesium.Viewer) // true
-</script>
-
-<template>
-  <div />
-</template>
-```
-
-In essence, it is strongly recommended to initialize the viewer in a separate component.
-Using the example of `earth-container.vue`, this component solely handles the viewer instantiation and renders child components after the viewer is instantiated. Subsequent operations are carried out in `Earth.vue` and other child components. This approach ensures smooth retrieval of the viewer instance instantiated in the container component in subsequent code.

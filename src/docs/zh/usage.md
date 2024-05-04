@@ -37,22 +37,21 @@ $ pnpm add -D unplugin-auto-import
 import { defineConfig } from 'vite'
 
 import AutoImport from 'unplugin-auto-import/vite'
-import { autoImport as CesiumUseAutoImport } from 'cesium-use'
+import CesiumUseResolver from 'cesium-use/resolver'
 
 export default defineConfig({
   plugins: [
     AutoImport({
-      imports: [
-        // ...
-        CesiumUseAutoImport()
+      resolvers: [
+        CesiumUseResolver()
       ]
     })
   ]
 })
 ```
 
-`autoImport`接受一个可选的对象作为参数，表示 `name -> alias` 的映射。
-以`autoImport({ defineColor: 'color' })`为例：
+`CesiumUseResolver`接受一个可选的对象作为参数，表示 `name -> alias` 的映射。
+以`CesiumUseResolver({ defineColor: 'color' })`为例：
 
 ```js
 // 映射前
