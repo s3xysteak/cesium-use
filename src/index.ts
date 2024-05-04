@@ -13,3 +13,8 @@ export * from './core/useMeasure'
 export * from './core/usePointerPosition'
 export * from './core/usePoints'
 export * from './core/useUnderground'
+
+export * from './utils/pickGlobePosition'
+export * from './utils/projectionPosition'
+export * from './utils/toCartesian3'
+export * from './utils/toCoordinates'
