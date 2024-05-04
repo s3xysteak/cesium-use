@@ -8,6 +8,7 @@ import {
   toValue,
 } from 'vue'
 import type { Viewer } from 'cesium'
+import { error } from '@/shared/errorHandler'
 
 // It can be null or undefined because it may be garbage collected.
 type StoredViewerInst = Viewer | null | undefined
@@ -25,7 +26,7 @@ export function getViewer(): Viewer {
 
   const v = toValue(viewer)
   if (!v)
-    throw new Error('cannot get viewer.')
+    error('cannot get viewer.')
   return v
 }
 

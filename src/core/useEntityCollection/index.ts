@@ -1,4 +1,5 @@
 import * as Cesium from 'cesium'
+import { error } from '@/shared/errorHandler'
 
 export function useEntityCollection(...args: ConstructorParameters<typeof Cesium.EntityCollection>) {
   return new EntityCollection(...args)
@@ -21,12 +22,12 @@ class EntityCollection extends Cesium.EntityCollection {
     const result = this.getById(id)
     if (result) {
       if (!this.viewer.entities.contains(result))
-        throw new Error('the entity in the collection but not in the viewer.')
+        error('the entity in the collection but not in the viewer.')
     }
     else {
       // result必为undefined
       if (this.viewer.entities.getById(id) !== undefined)
-        throw new Error('the entity not in the collection but in the viewer.')
+        error('the entity not in the collection but in the viewer.')
     }
     const entity = super.getOrCreateEntity(id)
 
@@ -49,7 +50,7 @@ class EntityCollection extends Cesium.EntityCollection {
     const me = super.removeById(id)
     const v = this.viewer.entities.removeById(id)
     if (me !== v)
-      throw new Error('The collection and viewer states are inconsistent.')
+      error('The collection and viewer states are inconsistent.')
 
     return me
   }

@@ -1,6 +1,7 @@
 import * as Cesium from 'cesium'
 import type { MaybeRefOrGetter } from 'vue'
 import { toValue, watchEffect } from 'vue'
+import { error } from '@/shared/errorHandler'
 
 // TODO: Type improvement
 export type UsePointsBillboardOptions = Omit<Cesium.Billboard.ConstructorOptions, 'position'>
@@ -105,7 +106,7 @@ export function usePoints<UsePointsItem extends object = object>(
   ) => {
     const point = points.get(id)
     if (point === undefined)
-      throw new Error('cannot find point with the id.')
+      error('cannot find point with the id.')
 
     const { billboard } = point
     const coordinate = (

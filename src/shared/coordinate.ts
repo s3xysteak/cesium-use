@@ -1,3 +1,5 @@
+import { error } from '@/shared/errorHandler'
+
 /**
  * `[longitude, latitude, height]` or `{ longitude, latitude, height }`
  */
@@ -28,7 +30,7 @@ export function normalizeCoordinates(source: MaybeCoordinates) {
 
     return Number.isNaN(v)
   }))
-    throw new Error('[cesium-use] Invalid value which cannot be parsed to number.')
+    error('Invalid value which cannot be parsed to number.')
 
   return value
 }
