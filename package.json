@@ -50,7 +50,7 @@
     "vue": "^3.4.0"
   },
   "dependencies": {
-    "@s3xysteak/utils": "^0.4.3",
+    "@s3xysteak/utils": "^0.5.0",
     "@vueuse/core": "^10.9.0"
   },
   "devDependencies": {
