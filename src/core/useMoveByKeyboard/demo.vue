@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { moveByKeyboard } from '.'
+import { useMoveByKeyboard } from '.'
 
 const input = ref<string>('10')
 const speed = computed(() =>
   Number.isNaN(Number(input.value)) ? 4 : Number(input.value),
 )
-moveByKeyboard({
+useMoveByKeyboard({
   distancePerFrame: speed,
   keybinding: {
     forward: 'ArrowUp',

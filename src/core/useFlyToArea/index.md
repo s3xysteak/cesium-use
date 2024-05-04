@@ -1,11 +1,11 @@
-# flyToArea
+# useFlyToArea
 
 Move the viewpoint to a position where all input coordinates are visible using `flyToBoundingSphere`.
 
 ## Usage
 
 ```js
-flyToArea([[100, 20], ['120', 40], Cesium.Cartesian3.fromDegrees(110, 30)], {
+useFlyToArea([[100, 20], ['120', 40], Cesium.Cartesian3.fromDegrees(110, 30)], {
   onSingle: () => flyTo(id),
   onEmpty: () => initCamera()
 })
@@ -21,14 +21,14 @@ By default:
 ::: details
 
 ```ts
-export interface FlyToAreaOptions {
+export interface UseFlyToAreaOptions {
   onSingle: () => void
   onEmpty: () => void
 }
 
-function flyToArea(
+function useFlyToArea(
   posList: MaybeCartesian3OrLonLat[],
-  options?: Partial<FlyToAreaOptions>
+  options?: Partial<UseFlyToAreaOptions>
 ): void
 ```
 

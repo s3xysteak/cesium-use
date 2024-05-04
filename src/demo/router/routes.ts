@@ -3,6 +3,7 @@ import type { RouteRecordRaw } from 'vue-router'
 const modules = import.meta.glob([
   '../../core/*/demo.vue',
   '../../components/*/demo.vue',
+  '../../utils/*/demo.vue',
 ])
 const demoList: RouteRecordRaw[] = Object.entries(modules).map(([key, val]) => {
   const [, name] = key.split('/').reverse()

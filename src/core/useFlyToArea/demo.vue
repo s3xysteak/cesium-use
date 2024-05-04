@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import img from '../usePoints/img.png'
-import { flyToArea, usePoints } from '@/index'
+import { useFlyToArea, usePoints } from '@/index'
 
 const data = [
   { id: 1, lon: '86', lat: '27' },
@@ -23,13 +23,11 @@ usePoints(
   }),
 )
 
-const fly = () => flyToArea(data.map(item => [item.lon, item.lat]))
+const fly = () => useFlyToArea(data.map(item => [item.lon, item.lat]))
 </script>
 
 <template>
-  <div>
-    <button bg-light absolute left-1 top-1 @click="fly">
-      Click me!
-    </button>
-  </div>
+  <button btn absolute left-1 top-1 @click="fly">
+    Click me!
+  </button>
 </template>

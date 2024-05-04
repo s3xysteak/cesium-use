@@ -1,9 +1,9 @@
 import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, computed, ref, shallowRef, watch } from 'vue'
-import { defineColor, editEntity, entityCollection, useEvent } from '@/index'
+import { defineColor, editEntity, useEntityCollection, useEvent } from '@/index'
 import { toCoordinates } from '@/utils/toCoordinates'
 import { projectionPosition } from '@/utils/projectionPosition'
-import { pickGlobePosition } from '@/utils/pickGlobePosition'
+import { useGlobePick } from '@/core/useGlobePick'
 
 export interface HeightOptions {
   format?: (height: number) => string
@@ -17,7 +17,7 @@ interface HeightEntityData {
   /**
    * All entities in made by `HeightOptions`.
    */
-  entities: ReturnType<typeof entityCollection>
+  entities: ReturnType<typeof useEntityCollection>
 
   /**
    * `[start, end]` positions.
@@ -85,7 +85,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
 
   const createEntity = (): HeightEntityData => {
     const positions = shallowRef<Cesium.Cartesian3[]>([])
-    const entities = entityCollection()
+    const entities = useEntityCollection()
 
     const turnPosition = computed(() => projectionPosition(positions.value[0], positions.value[1]))
 
@@ -153,7 +153,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
   })
 
   useEvent(({ position }) => {
-    const pos = pickGlobePosition(position)
+    const pos = useGlobePick(position)
     if (!pos)
       return
 
@@ -185,7 +185,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
     if (!state.value || !current.value)
       return
 
-    const pos = pickGlobePosition(position)
+    const pos = useGlobePick(position)
     if (!pos)
       return
 
@@ -217,7 +217,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
     if (!state.value || !current.value || !current.value.positions.value[0])
       return
 
-    const pos = pickGlobePosition(endPosition)
+    const pos = useGlobePick(endPosition)
     if (!pos)
       return
 

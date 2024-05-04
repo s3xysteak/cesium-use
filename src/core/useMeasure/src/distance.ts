@@ -1,8 +1,8 @@
 import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, ref, shallowRef, watch } from 'vue'
 import { at } from '@s3xysteak/utils'
-import { defineColor, editEntity, entityCollection, useEvent } from '@/index'
-import { pickGlobePosition } from '@/utils/pickGlobePosition'
+import { defineColor, editEntity, useEntityCollection, useEvent } from '@/index'
+import { useGlobePick } from '@/core/useGlobePick'
 
 export interface DistanceOptions {
   lineEntityProps?: Cesium.Entity.ConstructorOptions
@@ -16,7 +16,7 @@ interface LineEntityData {
   /**
    * All entities in made by `DistanceOptions`.
    */
-  entities: ReturnType<typeof entityCollection>
+  entities: ReturnType<typeof useEntityCollection>
 
   /**
    * Polyline positions.
@@ -89,7 +89,7 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
   const createEntity = (): LineEntityData => {
     const positions: Cesium.Cartesian3[] = []
 
-    const entities = entityCollection()
+    const entities = useEntityCollection()
 
     entities.add(editEntity({
       polyline: {
@@ -122,7 +122,7 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
   })
 
   useEvent(({ position }) => {
-    const pos = pickGlobePosition(position)
+    const pos = useGlobePick(position)
     if (!pos)
       return
 
@@ -174,7 +174,7 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
     if (!state.value || !current.value)
       return
 
-    const pos = pickGlobePosition(position)
+    const pos = useGlobePick(position)
     if (!pos)
       return
 
@@ -215,7 +215,7 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
     if (!state.value || !current.value)
       return
 
-    const pos = pickGlobePosition(endPosition)
+    const pos = useGlobePick(endPosition)
     if (!pos)
       return
 

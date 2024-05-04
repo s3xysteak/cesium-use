@@ -2,14 +2,14 @@ import * as Cesium from 'cesium'
 import type { MaybeCoordinates } from '@/shared/coordinate'
 import { toCartesian3 } from '@/utils/toCartesian3'
 
-export interface FlyToAreaOptions {
+export interface UseFlyToAreaOptions {
   onSingle: () => void
   onEmpty: () => void
 }
 
-export function flyToArea(
+export function useFlyToArea(
   posList: (MaybeCoordinates | Cesium.Cartesian3)[],
-  options?: Partial<FlyToAreaOptions>,
+  options?: Partial<UseFlyToAreaOptions>,
 ) {
   const { onSingle, onEmpty } = options ?? {}
 

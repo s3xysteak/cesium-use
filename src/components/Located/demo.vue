@@ -14,7 +14,7 @@ const coordinate = computed(() => [
 ])
 
 const MyButton = defineComponent((_, { slots }) => () => (
-  <button class="bg-indigo rounded-xl">{() => slots.default?.()}</button>
+  <button class="btn">{() => slots.default?.()}</button>
 ))
 </script>
 
@@ -30,7 +30,7 @@ const MyButton = defineComponent((_, { slots }) => () => (
     placement="top"
     :coordinate="coordinate"
   >
-    <div h-10 w-12 rounded>
+    <div>
       hello world!
     </div>
   </Located>

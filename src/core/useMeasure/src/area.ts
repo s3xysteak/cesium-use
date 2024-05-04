@@ -1,8 +1,8 @@
 import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, ref, shallowRef, watch } from 'vue'
 import { at } from '@s3xysteak/utils'
-import { defineColor, editEntity, entityCollection, useEvent } from '@/index'
-import { pickGlobePosition } from '@/utils/pickGlobePosition'
+import { defineColor, editEntity, useEntityCollection, useEvent } from '@/index'
+import { useGlobePick } from '@/core/useGlobePick'
 
 export interface AreaOptions {
   format?: (area: number) => string
@@ -18,7 +18,7 @@ interface AreaEntityData {
   /**
    * All entities in made by `AreaOptions`.
    */
-  entities: ReturnType<typeof entityCollection>
+  entities: ReturnType<typeof useEntityCollection>
 
   /**
    * Polygon positions.
@@ -80,7 +80,7 @@ export function area(options: AreaOptions = {}): AreaReturn {
 
   const createEntity = (): AreaEntityData => {
     const positions: Cesium.Cartesian3[] = []
-    const entities = entityCollection()
+    const entities = useEntityCollection()
     const val = {
       entities,
       positions,
@@ -138,7 +138,7 @@ export function area(options: AreaOptions = {}): AreaReturn {
   })
 
   useEvent(({ position }) => {
-    const pos = pickGlobePosition(position)
+    const pos = useGlobePick(position)
     if (!pos)
       return
 
@@ -182,7 +182,7 @@ export function area(options: AreaOptions = {}): AreaReturn {
     if (!state.value || !current.value)
       return
 
-    const pos = pickGlobePosition(position)
+    const pos = useGlobePick(position)
     if (!pos)
       return
 
@@ -222,7 +222,7 @@ export function area(options: AreaOptions = {}): AreaReturn {
     if (!state.value || !current.value)
       return
 
-    const pos = pickGlobePosition(endPosition)
+    const pos = useGlobePick(endPosition)
     if (!pos)
       return
 

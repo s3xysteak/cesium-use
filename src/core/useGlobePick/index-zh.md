@@ -1,4 +1,4 @@
-# pickGlobePosition
+# useGlobePick
 
 以射线的方式获取椭球体上的坐标。
 
@@ -8,7 +8,7 @@
 // 通常可以结合 `useEvent` 使用
 
 useEvent(({ position }) => {
-  const pos = pickGlobePosition(position)
+  const pos = useGlobePick(position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 ```
 
@@ -19,7 +19,7 @@ useEvent(({ position }) => {
 ::: details
 
 ```ts
-function pickGlobePosition(position: Cartesian2): Cartesian3 | undefined
+function useGlobePick(position: Cartesian2): Cartesian3 | undefined
 ```
 
 :::

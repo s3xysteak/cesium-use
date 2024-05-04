@@ -39,7 +39,7 @@ async function onClick() {
 </script>
 
 <template>
-  <button bg-light absolute top-10 left-10 @click="onClick">
+  <button btn absolute top-10 left-10 @click="onClick">
     {{ clickText }}
   </button>
 </template>

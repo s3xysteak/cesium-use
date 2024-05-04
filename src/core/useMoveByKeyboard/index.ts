@@ -2,21 +2,21 @@ import * as Cesium from 'cesium'
 import { type MaybeRefOrGetter, toValue, watchEffect } from 'vue'
 import { useMagicKeys } from '@vueuse/core'
 
-export type MoveByKeyboardKeybindingList =
+export type UseMoveByKeyboardKeybindingList =
   | 'forward'
   | 'backward'
   | 'left'
   | 'right'
   | 'down'
   | 'up'
-export interface MoveByKeyboardOptions {
+export interface UseMoveByKeyboardOptions {
   distancePerFrame?: MaybeRefOrGetter<number>
-  keybinding?: Partial<Record<MoveByKeyboardKeybindingList, string>>
+  keybinding?: Partial<Record<UseMoveByKeyboardKeybindingList, string>>
 }
 
-export function moveByKeyboard(options: MoveByKeyboardOptions = {}) {
+export function useMoveByKeyboard(options: UseMoveByKeyboardOptions = {}) {
   const { distancePerFrame = 4, keybinding: _keybinding } = options
-  const keybinding: Record<MoveByKeyboardKeybindingList, string>
+  const keybinding: Record<UseMoveByKeyboardKeybindingList, string>
     = Object.assign(
       {
         forward: 'w',
@@ -42,7 +42,7 @@ export function moveByKeyboard(options: MoveByKeyboardOptions = {}) {
   const camera = getViewer().camera
 
   const keyToCameraMoveMap: Record<
-    MoveByKeyboardKeybindingList,
+    UseMoveByKeyboardKeybindingList,
     (num: number) => void
   > = {
     forward: num =>
@@ -72,7 +72,7 @@ export function moveByKeyboard(options: MoveByKeyboardOptions = {}) {
       ),
   }
 
-  const move = (key: MoveByKeyboardKeybindingList) => {
+  const move = (key: UseMoveByKeyboardKeybindingList) => {
     const requestIdList: number[] = []
 
     const start = () => {

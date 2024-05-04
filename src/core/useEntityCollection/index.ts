@@ -1,6 +1,6 @@
 import * as Cesium from 'cesium'
 
-export function entityCollection(...args: ConstructorParameters<typeof Cesium.EntityCollection>) {
+export function useEntityCollection(...args: ConstructorParameters<typeof Cesium.EntityCollection>) {
   return new EntityCollection(...args)
 }
 

@@ -1,11 +1,11 @@
-# entityCollection
+# useEntityCollection
 
 The EntityCollection that automatically synchronizes with the Viewer.
 
 ## Usage
 
 ```js
-const collection = entityCollection()
+const collection = useEntityCollection()
 // This will synchronize with the context's viewer, eliminating the need for manually executing `viewer.entities.add()`.
 collection.add({
   polygon: {
@@ -14,7 +14,7 @@ collection.add({
 })
 ```
 
-The `entityCollection` will internally retrieve the viewer instance through `getViewer`.
+The `useEntityCollection` will internally retrieve the viewer instance through `getViewer`.
 
 ## Usage Declaration
 
@@ -23,7 +23,7 @@ The `entityCollection` will internally retrieve the viewer instance through `get
 ```ts
 // It functions identically to Cesium's EntityCollection, with the exception of overridden methods for adding, removing, updating, and querying entities.
 
-export function entityCollection(...args: ConstructorParameters<typeof Cesium.EntityCollection>) {
+export function useEntityCollection(...args: ConstructorParameters<typeof Cesium.EntityCollection>) {
   return new EntityCollection(...args)
 }
 

@@ -1,4 +1,4 @@
-# moveByKeyboard
+# useMoveByKeyboard
 
 To move forward, backward, left, and right, use `W S A D`. Press `Shift` to move downward and `Space` to move upward.
 
@@ -6,7 +6,7 @@ To move forward, backward, left, and right, use `W S A D`. Press `Shift` to move
 
 ```js
 const speed = ref(1)
-moveByKeyboard({
+useMoveByKeyboard({
   distancePerFrame: speed,
   keybinding: {
     forward: 'ArrowUp',
@@ -29,19 +29,19 @@ Key bindings are based on `useMagicKeys` implementation from `vueuse`. For more 
 ::: details
 
 ```ts
-export type MoveByKeyboardKeybindingList =
+export type UseMoveByKeyboardKeybindingList =
   | 'forward'
   | 'backward'
   | 'left'
   | 'right'
   | 'down'
   | 'up'
-export interface MoveByKeyboardOptions {
+export interface UseMoveByKeyboardOptions {
   distancePerFrame?: MaybeRefOrGetter<number>
-  keybinding?: Partial<Record<MoveByKeyboardKeybindingList, string>>
+  keybinding?: Partial<Record<UseMoveByKeyboardKeybindingList, string>>
 }
 
-export function moveByKeyboard(options: MoveByKeyboardOptions = {}): void
+export function useMoveByKeyboard(options: UseMoveByKeyboardOptions = {}): void
 ```
 
 :::

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import * as Cesium from 'cesium'
-import { entityCollection } from '@/index'
+import { useEntityCollection } from '@/index'
 
-const collection = entityCollection()
+const collection = useEntityCollection()
 collection.add({
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([-100, 30, -80, 70, -10, 40]),

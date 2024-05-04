@@ -1,4 +1,4 @@
-# moveByKeyboard
+# useMoveByKeyboard
 
 使用`W S A D`进行前后左右移动，使用`shift`向下移动，使用`space`向上移动。
 
@@ -6,7 +6,7 @@
 
 ```js
 const speed = ref(1)
-moveByKeyboard({
+useMoveByKeyboard({
   distancePerFrame: speed,
   keybinding: {
     forward: 'ArrowUp',
@@ -29,19 +29,19 @@ moveByKeyboard({
 ::: details
 
 ```ts
-export type MoveByKeyboardKeybindingList =
+export type UseMoveByKeyboardKeybindingList =
   | 'forward'
   | 'backward'
   | 'left'
   | 'right'
   | 'down'
   | 'up'
-export interface MoveByKeyboardOptions {
+export interface UseMoveByKeyboardOptions {
   distancePerFrame?: MaybeRefOrGetter<number>
-  keybinding?: Partial<Record<MoveByKeyboardKeybindingList, string>>
+  keybinding?: Partial<Record<UseMoveByKeyboardKeybindingList, string>>
 }
 
-export function moveByKeyboard(options: MoveByKeyboardOptions = {}): void
+export function useMoveByKeyboard(options: UseMoveByKeyboardOptions = {}): void
 ```
 
 :::

@@ -1,11 +1,11 @@
-# flyToArea
+# useFlyToArea
 
 基于`flyToBoundingSphere`将视角移动到刚好能看到所有输入坐标的位置。
 
 ## 使用
 
 ```js
-flyToArea([[100, 20], ['120', 40], Cesium.Cartesian3.fromDegrees(110, 30)], {
+useFlyToArea([[100, 20], ['120', 40], Cesium.Cartesian3.fromDegrees(110, 30)], {
   onSingle: () => flyTo(id),
   onEmpty: () => initCamera()
 })
@@ -21,14 +21,14 @@ flyToArea([[100, 20], ['120', 40], Cesium.Cartesian3.fromDegrees(110, 30)], {
 ::: details
 
 ```ts
-export interface FlyToAreaOptions {
+export interface UseFlyToAreaOptions {
   onSingle: () => void
   onEmpty: () => void
 }
 
-function flyToArea(
+function useFlyToArea(
   posList: MaybeCartesian3OrLonLat[],
-  options?: Partial<FlyToAreaOptions>
+  options?: Partial<UseFlyToAreaOptions>
 ): void
 ```
 
