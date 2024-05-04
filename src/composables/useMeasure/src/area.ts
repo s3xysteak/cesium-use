@@ -66,7 +66,7 @@ export function area(options: AreaOptions = {}): AreaReturn {
     endEntityProps = {},
     closeEntityProps = {},
     centerEntityProps = {},
-    format = area => `Area: ${(area / 1000_000).toFixed(2)} km²`,
+    format = area => area ? `Area: ${(area / 1000_000).toFixed(2)} km²` : '',
   } = options
 
   const state = ref(false)
