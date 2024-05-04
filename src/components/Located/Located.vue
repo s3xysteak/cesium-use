@@ -3,6 +3,7 @@ import type { Cartesian3 } from 'cesium'
 import { type Component, computed, onMounted, onUnmounted, ref } from 'vue'
 import { useElementBounding } from '@vueuse/core'
 import type { MaybeCoordinates } from '@/shared/coordinate'
+import { toCartesian3 } from '@/utils/toCartesian3'
 
 interface Rect {
   width: number

@@ -1,6 +1,3 @@
-import * as Cesium from 'cesium'
-import { makeDestructurable } from '@vueuse/core'
-
 /**
  * `[longitude, latitude, height]` or `{ longitude, latitude, height }`
  */
@@ -34,50 +31,4 @@ export function normalizeCoordinates(source: MaybeCoordinates) {
     throw new Error('[cesium-use] Invalid value which cannot be parsed to number.')
 
   return value
-}
-
-export function toCartesian3(source: Cesium.Cartesian3 | MaybeCoordinates): Cesium.Cartesian3 {
-  if (source instanceof Cesium.Cartesian3)
-    return source
-
-  const { longitude, latitude, height } = normalizeCoordinates(source)
-
-  return Cesium.Cartesian3.fromDegrees(longitude, latitude, height)
-}
-
-export function toCoordinates(source: Cesium.Cartesian3 | MaybeCoordinates) {
-  const createReturns = (
-    longitude: number,
-    latitude: number,
-    height: number | undefined,
-  ) => makeDestructurable(
-    {
-      longitude,
-      latitude,
-      height,
-    },
-    [
-      longitude,
-      latitude,
-      height,
-    ],
-  )
-
-  if (source instanceof Cesium.Cartesian3) {
-    const { longitude: _longitude, latitude: _latitude, height } = Cesium.Cartographic.fromCartesian(source)
-    const longitude = Cesium.Math.toDegrees(_longitude)
-    const latitude = Cesium.Math.toDegrees(_latitude)
-
-    return createReturns(longitude, latitude, height)
-  }
-
-  const { longitude, latitude, height } = normalizeCoordinates(source)
-
-  return createReturns(longitude, latitude, height)
-}
-
-// Get the projection position of p1 on p0
-export function projectionPosition(p0: Cesium.Cartesian3, p1: Cesium.Cartesian3): Cesium.Cartesian3 | undefined {
-  const k = Cesium.Cartesian3.dot(p0, p1) / Cesium.Cartesian3.dot(p0, p0)
-  return Cesium.Cartesian3.multiplyByScalar(p0, k, new Cesium.Cartesian3())
 }

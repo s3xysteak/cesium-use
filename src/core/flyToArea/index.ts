@@ -1,5 +1,6 @@
 import * as Cesium from 'cesium'
 import type { MaybeCoordinates } from '@/shared/coordinate'
+import { toCartesian3 } from '@/utils/toCartesian3'
 
 export interface FlyToAreaOptions {
   onSingle: () => void

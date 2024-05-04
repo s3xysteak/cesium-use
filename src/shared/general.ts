@@ -1,5 +1,3 @@
-import type * as Cesium from 'cesium'
-
 /** merge in 2 depth */
 export function mergeDeep<T extends object = object, S extends object = T>(obj: T, ...args: S[]) {
   return args.reduce((acc, arg) => {
@@ -18,12 +16,4 @@ export function mergeDeep<T extends object = object, S extends object = T>(obj: 
 
 export function objectKeys<T extends object>(obj: T): (keyof T)[] {
   return Object.keys(obj) as (keyof T)[]
-}
-
-export function pickGlobePosition(position: Cesium.Cartesian2) {
-  const viewer = getViewer()
-
-  const ray = viewer.camera.getPickRay(position)
-
-  return viewer.scene.globe.pick(ray!, viewer.scene)
 }

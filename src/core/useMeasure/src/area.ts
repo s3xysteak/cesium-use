@@ -2,6 +2,7 @@ import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, ref, shallowRef, watch } from 'vue'
 import { at } from '@s3xysteak/utils'
 import { defineColor, editEntity, entityCollection, useEvent } from '@/index'
+import { pickGlobePosition } from '@/utils/pickGlobePosition'
 
 export interface AreaOptions {
   format?: (area: number) => string
