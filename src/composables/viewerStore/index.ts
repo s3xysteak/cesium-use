@@ -26,7 +26,7 @@ export function getViewer(): Viewer {
 
   const v = toValue(viewer)
   if (!v)
-    error('cannot get viewer.')
+    error('Failed to get viewer.')
   return v
 }
 

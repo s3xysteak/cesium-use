@@ -41,6 +41,10 @@ onMounted(() => {
 
 //   isViewerMounted.value = true
 // })
+
+onUnmounted(() => {
+  setViewer(null) // For better GC
+})
 </script>
 
 <template>
@@ -112,7 +116,7 @@ export const useViewerProvider: (v: ShallowRef<Viewer>) => void
 Errors are typically caused by `getViewer`, which throws an error when attempting to retrieve the viewer instance.
 
 ::: danger Error Message
-Cannot get viewer.
+[cesium-use] Failed to get viewer.
 :::
 
 Here are some common ways to check for error causes.
