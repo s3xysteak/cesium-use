@@ -76,8 +76,8 @@ func(() => valGetter) // Getter
 
 `cesium-use` follows the `composable` naming convention for functions.
 
-1. All functions starting with `use` are composable functions, which means you should call them within the `setup` call stack.
-2. All functions not starting with `use` are definitely not composable functions.
+1. All functions starting with `use` are **definitely** composable functions, which means you should call them within the `setup` call stack.
+2. All functions not starting with `use` are **definitely NOT** composable functions.
 
 ## Viewer Management
 
