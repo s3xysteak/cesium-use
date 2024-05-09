@@ -1,10 +1,12 @@
 import type { RouteRecordRaw } from 'vue-router'
 
+// @ts-expect-error - demo has been ignored.
 const modules = import.meta.glob([
   '../../composables/*/demo.vue',
   '../../components/*/demo.vue',
   '../../utils/*/demo.vue',
 ])
+// @ts-expect-error - demo has been ignored.
 const demoList: RouteRecordRaw[] = Object.entries(modules).map(([key, val]) => {
   const [, name] = key.split('/').reverse()
 

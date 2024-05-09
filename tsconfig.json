@@ -17,19 +17,22 @@
     "types": [
       "vitest/importMeta"
     ],
-    "allowImportingTsExtensions": true,
 
     /* Linting */
     "strict": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noEmit": true,
+    "declaration": true,
+    "declarationDir": "./tsc-types",
     "isolatedModules": true,
     "skipLibCheck": true
   },
   "exclude": [
     "**/node_modules/**",
-    "**/dist/**"
+    "**/dist/**",
+    "src/demo",
+    "**/*.md",
+    "tsc-types"
   ]
 }
