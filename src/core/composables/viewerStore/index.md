@@ -82,7 +82,7 @@ export function doSomething() {
 
 ```vue
 <script setup>
-import { doSomething } from '@/utils/doSomething.js'
+import { doSomething } from '@/core/utils/doSomething.js'
 
 // If `getViewer()` can be executed correctly here.
 getViewer()

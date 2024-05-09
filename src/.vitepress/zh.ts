@@ -1,9 +1,9 @@
 import { readdirSync } from 'node:fs'
 import { defineConfig } from 'vitepress'
 
-const composablesList = readdirSync('./src/composables')
-const componentsList = readdirSync('./src/components')
-const utilsList = readdirSync('./src/utils')
+const composablesList = readdirSync('./src/core/composables')
+const componentsList = readdirSync('./src/core/components')
+const utilsList = readdirSync('./src/core/utils')
 
 export const zh = defineConfig({
   lang: 'zh-Hans',

@@ -1,9 +1,9 @@
 import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, computed, ref, shallowRef, watch } from 'vue'
 import { defineColor, editEntity, useEntityCollection, useEvent } from '@/index'
-import { toCoordinates } from '@/utils/toCoordinates'
-import { projectionPosition } from '@/utils/projectionPosition'
-import { useGlobePick } from '@/composables/useGlobePick'
+import { toCoordinates } from '@/core/utils/toCoordinates'
+import { projectionPosition } from '@/core/utils/projectionPosition'
+import { useGlobePick } from '@/core/composables/useGlobePick'
 
 export interface HeightOptions {
   format?: (height: number) => string

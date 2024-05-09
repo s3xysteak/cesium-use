@@ -4,4 +4,9 @@ export default antfu({
   rules: {
     'no-console': 'off',
   },
+}, {
+  ignores: [
+    '.vscode/settings.json',
+    'src/resolver.ts',
+  ],
 })
