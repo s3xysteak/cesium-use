@@ -43,7 +43,7 @@
     "build:types": "tsc --emitDeclarationOnly",
     "release": "esno ./scripts/release.ts",
     "build:only": "vite build",
-    "type:check": "vue-tsc --build --force",
+    "type:check": "vue-tsc --noEmit --allowImportingTsExtensions",
     "docs:dev": "vitepress dev src",
     "docs:build": "vitepress build src",
     "docs:preview": "vitepress preview src",
