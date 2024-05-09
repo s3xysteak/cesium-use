@@ -38,6 +38,7 @@ jobs:
           cache: pnpm
 
       - run: pnpm install
+      - run: pnpm build:types
       - run: pnpm docs:build
 
       - name: Upload artifact

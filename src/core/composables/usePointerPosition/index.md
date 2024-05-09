@@ -23,24 +23,3 @@ const [lon, lat, alt] = usePointerPosition({
   </div>
 </template>
 ```
-
-## Type Declaration
-
-::: details
-
-```ts
-export interface UsePointerPositionOptions {
-  throttle?: Parameters<typeof useThrottleFn>[1]
-  longitudeToFixed?: number
-  latitudeToFixed?: number
-  heightToFixed?: number
-}
-
-export function usePointerPosition(options: UsePointerPositionOptions = {}): {
-  longitude: Ref<string>
-  latitude: Ref<string>
-  altitude: Ref<string>
-} & Ref<string>[]
-```
-
-:::

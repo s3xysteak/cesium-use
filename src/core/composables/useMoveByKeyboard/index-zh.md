@@ -23,25 +23,3 @@ useMoveByKeyboard({
 ### 可选的按键
 
 按键绑定基于`vueuse`的`useMagicKeys`实现，更多可选的按键见[mozilla](https://developer.mozilla.org/zh-CN/docs/Web/API/KeyboardEvent/key)
-
-## 类型声明
-
-::: details
-
-```ts
-export type UseMoveByKeyboardKeybindingList =
-  | 'forward'
-  | 'backward'
-  | 'left'
-  | 'right'
-  | 'down'
-  | 'up'
-export interface UseMoveByKeyboardOptions {
-  distancePerFrame?: MaybeRefOrGetter<number>
-  keybinding?: Partial<Record<UseMoveByKeyboardKeybindingList, string>>
-}
-
-export function useMoveByKeyboard(options: UseMoveByKeyboardOptions = {}): void
-```
-
-:::

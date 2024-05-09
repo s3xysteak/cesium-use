@@ -53,24 +53,3 @@ const primitive = await loadGeojson({
 ```
 
 This is useful when you need to access the local scope.
-
-## Type Declarations
-
-::: details
-
-```ts
-export interface LoadGeojsonConfig<CustomReturns = any> {
-  url: Parameters<Cesium.GeoJsonDataSource['load']>[0]
-  dataSourceOptions?: Parameters<Cesium.GeoJsonDataSource['load']>[1]
-  onEntity?: (entity: Cesium.Entity) => void
-  custom?: (dataSource: Cesium.GeoJsonDataSource) => CustomReturns
-}
-
-function loadGeojson<T extends LoadGeojsonConfig<any>>(
-  config: T
-): Promise<
-  T['custom'] extends (...args: any[]) => infer R ? R : Cesium.GeoJsonDataSource
->
-```
-
-:::

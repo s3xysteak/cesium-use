@@ -42,22 +42,3 @@ const { state, clearAll } = useMeasure('height')
 Start measuring when `state` is `true`. Left click to pick the start point, double left click to pick the end point. It use `editEntity` to merge constructor options of all entities.
 
 Obtain the height by calculating the projected coordinates.
-
-## Type Declaration
-
-For more detailed types, please refer to the type declaration file.
-
-::: details
-
-```ts
-type UseMeasureType = 'area' | 'distance' | 'height'
-type UseMeasureOptions = AreaOptions | DistanceOptions | HeightOptions
-type UseMeasureReturns = AreaReturn | DistanceReturn | HeightReturn
-
-export function useMeasure(type: 'area', options: AreaOptions): AreaReturn
-export function useMeasure(type: 'distance', options: DistanceOptions): DistanceReturn
-export function useMeasure(type: 'height', options: HeightOptions): HeightReturn
-export function useMeasure(type: UseMeasureType, options: UseMeasureOptions): UseMeasureReturns
-```
-
-:::

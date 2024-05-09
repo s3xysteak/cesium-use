@@ -19,20 +19,3 @@ watchEffect(() => {
   state.value ? doWhenOn() : doWhenOff()
 })
 ```
-
-## Type Declaration
-
-:::details
-
-```ts
-export interface UseUndergroundOptions {
-  frontFaceAlphaByDistance: ConstructorParameters<typeof Cesium.NearFarScalar>
-}
-
-export function useUnderground(
-  initialState = false,
-  options?: MaybeRefOrGetter<Partial<UseUndergroundOptions>>
-): { state: Ref<boolean> }
-```
-
-:::

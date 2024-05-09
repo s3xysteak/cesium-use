@@ -97,21 +97,7 @@ doSomething()
 
 In fact, this is how the majority of functions in Cesium Use are implemented.
 
-## Type Declaration
-
-:::details
-
-```ts
-export const getViewer: () => Viewer
-
-export const setViewer: (v: Viewer) => void
-
-export const useViewerProvider: (v: ShallowRef<Viewer>) => void
-```
-
-:::
-
-### Corrections Guide
+## Corrections Guide
 
 Errors are typically caused by `getViewer`, which throws an error when attempting to retrieve the viewer instance.
 

@@ -21,31 +21,3 @@ const handler = useEvent((e) => {
 ```
 
 It is worth noting that when using `useEvent`, it is recommended to first provide the second parameter, which is `ScreenSpaceEventType`. This triggers function overloading in `useEvent` to offer better type hints.
-
-## Type Declaration
-
-:::details
-
-```ts
-export type SetInputActionArgs = Parameters<
-  InstanceType<typeof Cesium.ScreenSpaceEventHandler>['setInputAction']
->
-
-export function useEvent(
-  callback: Cesium.ScreenSpaceEventHandler.MotionEventCallback,
-  type: Cesium.ScreenSpaceEventType.MOUSE_MOVE
-): Cesium.ScreenSpaceEventHandler
-
-export function useEvent(
-  callback: Cesium.ScreenSpaceEventHandler.PositionedEventCallback,
-  type:
-    | Cesium.ScreenSpaceEventType.LEFT_CLICK
-    | Cesium.ScreenSpaceEventType.RIGHT_CLICK
-): Cesium.ScreenSpaceEventHandler
-
-export function useEvent(
-  ...args: SetInputActionArgs
-): Cesium.ScreenSpaceEventHandler
-```
-
-:::

@@ -21,17 +21,3 @@ const pos5 = toCoordinates({
   height: 10
 })
 ```
-
-## 类型声明
-
-::: details
-
-```ts
-function toCoordinates(source: Cesium.Cartesian3 | MaybeCoordinates): {
-  longitude: number
-  latitude: number
-  height: number | undefined
-} & (number | undefined)[]
-```
-
-:::

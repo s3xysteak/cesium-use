@@ -23,25 +23,3 @@ You can modify key bindings through the keybinding option.
 ### Optional Keys
 
 Key bindings are based on `useMagicKeys` implementation from `vueuse`. For more optional keys, see [mozilla](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key).
-
-## Usage Declaration
-
-::: details
-
-```ts
-export type UseMoveByKeyboardKeybindingList =
-  | 'forward'
-  | 'backward'
-  | 'left'
-  | 'right'
-  | 'down'
-  | 'up'
-export interface UseMoveByKeyboardOptions {
-  distancePerFrame?: MaybeRefOrGetter<number>
-  keybinding?: Partial<Record<UseMoveByKeyboardKeybindingList, string>>
-}
-
-export function useMoveByKeyboard(options: UseMoveByKeyboardOptions = {}): void
-```
-
-:::

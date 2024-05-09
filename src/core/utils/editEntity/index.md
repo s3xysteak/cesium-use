@@ -26,13 +26,3 @@ editEntity(
 )
 // This will change the material of the entity to red
 ```
-
-## Type Declarations
-
-::: details
-
-```ts
-function editEntity(entity: Entity, ...args: Entity.ConstructorOptions[]): Entity
-```
-
-:::

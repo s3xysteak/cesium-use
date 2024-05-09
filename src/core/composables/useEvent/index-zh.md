@@ -21,31 +21,3 @@ const handler = useEvent((e) => {
 ```
 
 值得一提的是，建议在使用`useEvent`时先提供第二个参数，也就是`ScreenSpaceEventType`。这会触发`useEvent`的函数重载，以提供更好的类型提示。
-
-## 类型声明
-
-:::details
-
-```ts
-export type SetInputActionArgs = Parameters<
-  InstanceType<typeof Cesium.ScreenSpaceEventHandler>['setInputAction']
->
-
-export function useEvent(
-  callback: Cesium.ScreenSpaceEventHandler.MotionEventCallback,
-  type: Cesium.ScreenSpaceEventType.MOUSE_MOVE
-): Cesium.ScreenSpaceEventHandler
-
-export function useEvent(
-  callback: Cesium.ScreenSpaceEventHandler.PositionedEventCallback,
-  type:
-    | Cesium.ScreenSpaceEventType.LEFT_CLICK
-    | Cesium.ScreenSpaceEventType.RIGHT_CLICK
-): Cesium.ScreenSpaceEventHandler
-
-export function useEvent(
-  ...args: SetInputActionArgs
-): Cesium.ScreenSpaceEventHandler
-```
-
-:::

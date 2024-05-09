@@ -26,13 +26,3 @@ editEntity(
 )
 // 这会将entity的材质改为红色
 ```
-
-## 类型声明
-
-::: details
-
-```ts
-function editEntity(entity: Entity, ...args: Entity.ConstructorOptions[]): Entity
-```
-
-:::

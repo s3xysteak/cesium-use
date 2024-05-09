@@ -15,21 +15,3 @@ collection.add({
 ```
 
 `useEntityCollection` 会在内部通过`getViewer`获取 viewer 实例。
-
-## 类型声明
-
-::: details
-
-```ts
-// 与Cesium.EntityCollection的使用完全相同，只是重写了增删改查方法
-
-export function useEntityCollection(...args: ConstructorParameters<typeof Cesium.EntityCollection>) {
-  return new EntityCollection(...args)
-}
-
-class EntityCollection extends Cesium.EntityCollection {
-  // ...
-}
-```
-
-:::

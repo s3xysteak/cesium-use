@@ -97,20 +97,6 @@ doSomething()
 
 事实上，绝大部分 CesiumUse 的函数都是这么做的。
 
-## 类型声明
-
-:::details
-
-```ts
-export const getViewer: () => Viewer
-
-export const setViewer: (v: Viewer) => void
-
-export const useViewerProvider: (v: ShallowRef<Viewer>) => void
-```
-
-:::
-
 ## 查错指南
 
 错误通常是由`getViewer`引起的，在`getViewer`尝试获取 viewer 实例失败后，会抛出错误。

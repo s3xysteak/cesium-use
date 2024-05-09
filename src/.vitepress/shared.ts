@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { markdownTransform } from './plugins/markdownTransform'
 
 export const shared = defineConfig({
   title: 'Cesium Use',
@@ -8,12 +9,15 @@ export const shared = defineConfig({
     'core/:part/:module/index.md': ':part/:module.md',
     'core/:part/:module/index-zh.md': 'zh/:part/:module.md',
   },
-  vite: {
-    publicDir: 'docs/public',
-  },
   base: '/cesium-use/',
   head: [['link', { rel: 'icon', href: '/cesium-use/logo.webp' }]],
   markdown: {
     math: true,
+  },
+  vite: {
+    publicDir: 'docs/public',
+    plugins: [
+      markdownTransform(),
+    ],
   },
 })

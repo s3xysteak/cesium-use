@@ -18,13 +18,3 @@ const pos5 = toCartesian3({
   height: 10
 })
 ```
-
-## Type Declaration
-
-::: details
-
-```ts
-function toCartesian3(source: Cesium.Cartesian3 | MaybeCoordinates): Cesium.Cartesian3
-```
-
-:::

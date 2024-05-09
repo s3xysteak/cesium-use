@@ -13,13 +13,3 @@ const projection = projectionPosition(p0, p1)
 1. $\text{projection} = k \cdot p_0$
 2. $(k \cdot p_0 - p_1) \cdot p_0 = 0$
 3. $k = \frac{{p_0 \cdot p_1}}{{p_0 \cdot p_0}}$
-
-## 类型声明
-
-::: details
-
-```ts
-function projectionPosition(p0: Cesium.Cartesian3, p1: Cesium.Cartesian3): Cesium.Cartesian3
-```
-
-:::

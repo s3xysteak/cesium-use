@@ -35,13 +35,3 @@ defineColor('#f00')
 // Cesium.Color.fromCssColorString('#f00').withAlpha(0.8)
 defineColor('#f00/80')
 ```
-
-## Type Declaration
-
-::: details
-
-```ts
-export const defineColor = (str: string) => Cesium.Color
-```
-
-:::

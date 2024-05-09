@@ -42,22 +42,3 @@ const { state, clearAll } = useMeasure('height')
 `state` 为 `true` 时开始测高，左键选择起点，双击左键选择终点。内部通过 `editEntity` 合并各个点的构造参数。
 
 通过计算投影坐标来获得高度。
-
-## 类型声明
-
-更多类型细节请见类型声明文件。
-
-::: details
-
-```ts
-type UseMeasureType = 'area' | 'distance' | 'height'
-type UseMeasureOptions = AreaOptions | DistanceOptions | HeightOptions
-type UseMeasureReturns = AreaReturn | DistanceReturn | HeightReturn
-
-export function useMeasure(type: 'area', options: AreaOptions): AreaReturn
-export function useMeasure(type: 'distance', options: DistanceOptions): DistanceReturn
-export function useMeasure(type: 'height', options: HeightOptions): HeightReturn
-export function useMeasure(type: UseMeasureType, options: UseMeasureOptions): UseMeasureReturns
-```
-
-:::

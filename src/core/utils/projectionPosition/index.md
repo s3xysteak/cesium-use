@@ -13,13 +13,3 @@ Give two vector $p_0 = (x_0, y_0, z_0)$ and $p_1 = (x_1, y_1, z_1)$, The derivat
 1. $\text{projection} = k \cdot p_0$
 2. $(k \cdot p_0 - p_1) \cdot p_0 = 0$
 3. $k = \frac{{p_0 \cdot p_1}}{{p_0 \cdot p_0}}$
-
-## Type Declaration
-
-::: details
-
-```ts
-function projectionPosition(p0: Cesium.Cartesian3, p1: Cesium.Cartesian3): Cesium.Cartesian3
-```
-
-:::

@@ -15,13 +15,3 @@ useEvent(({ position }) => {
 ```
 
 This method will only obtain the coordinates on the `ellipsoid + terrain`, and will ignore the tileset and model.
-
-## Type Declaration
-
-::: details
-
-```ts
-function useGlobePick(): (position: Cartesian2) => Cartesian3 | undefined
-```
-
-:::
