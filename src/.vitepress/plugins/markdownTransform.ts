@@ -47,7 +47,7 @@ ${types}
 : ''}
 ## ${lang?.source}
 
-[source](${`${URL}/${pkg}/${name}/index.${existsIndex ? 'ts' : 'vue'}`})${existDemo ? ` • [demo](${`${URL}/core/${pkg}/${name}/demo.vue`})` : ''}`
+[source](${`${URL}/${pkg}/${name}/index.${existsIndex ? 'ts' : 'vue'}`})${existDemo ? ` • [demo](${`${URL}/${pkg}/${name}/demo.vue`})` : ''}`
     },
   }
 }
