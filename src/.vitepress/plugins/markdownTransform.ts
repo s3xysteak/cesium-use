@@ -7,7 +7,7 @@ import { getTypeDeclaration } from '../utils'
 
 export function markdownTransform(): Plugin {
   const DIR_CORE = resolve(fileURLToPath(import.meta.url), '../../../core')
-  const DIR_TYPES = resolve(fileURLToPath(import.meta.url), '../../../tsc-types/src/core')
+  const DIR_TYPES = resolve(fileURLToPath(import.meta.url), '../../../../tsc-types/src/core')
   const hasTypes = fs.existsSync(DIR_TYPES)
 
   if (!hasTypes)
