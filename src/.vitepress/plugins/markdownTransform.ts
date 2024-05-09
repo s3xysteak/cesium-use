@@ -17,11 +17,11 @@ export function markdownTransform(): Plugin {
     name: 'docs-md-transform',
     enforce: 'pre',
     async transform(code, id) {
-      if (!id.match(/\.md\b/))
+      if (!id.match(/.+?core\/.+?\.md\b/))
         return
 
       const [pkg, name, i] = id.split('/').slice(-3)
-      const lang = langMap(i.split('-')[1].replace(/\.md$/, '') ?? 'en')
+      const lang = langMap(i.split('-')[1]?.replace(/\.md$/, '') ?? 'en')
 
       const types = await getTypeDeclaration(pkg, name)
 
