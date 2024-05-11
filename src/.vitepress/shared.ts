@@ -34,7 +34,7 @@ export const shared = defineConfig({
     ],
     server: {
       warmup: {
-        clientFiles: ['./components/Viewer.vue'],
+        clientFiles: [resolve(fileURLToPath(import.meta.url), '../components/Viewer.vue')],
       },
     },
     ssr: {

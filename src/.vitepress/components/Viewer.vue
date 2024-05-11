@@ -39,7 +39,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div relative>
+  <div overflow-hidden relative>
     <div ref="container" rounded h-full w-full />
 
     <slot v-if="isMounted" />

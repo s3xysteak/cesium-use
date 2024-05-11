@@ -12,10 +12,12 @@ const [lon, lat, alt] = usePointerPosition({
 </script>
 
 <template>
-  <input v-model="input" placeholder="throttle interval..." absolute left-10 top-10>
-  <div bg-light absolute left-10 top-30>
-    <div>lon : {{ lon }}</div>
-    <div>lat : {{ lat }}</div>
-    <div>height : {{ alt }}</div>
+  <div absolute left-4 top-4>
+    <input v-model="input" input placeholder="throttle interval .. ms...">
+    <div mt-2 rounded p-1 bg-light>
+      <div>lon : {{ lon }}</div>
+      <div>lat : {{ lat }}</div>
+      <div>height : {{ alt }}</div>
+    </div>
   </div>
 </template>

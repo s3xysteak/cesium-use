@@ -4,7 +4,7 @@
 
 ## 使用
 
-```js{4}
+```js{3}
 // 通常可以结合 `useEvent` 使用
 
 const globePick = useGlobePick()

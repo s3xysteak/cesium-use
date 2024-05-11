@@ -8,17 +8,17 @@ const speed = computed(() =>
 )
 useMoveByKeyboard({
   distancePerFrame: speed,
-  keybinding: {
-    forward: 'ArrowUp',
-    backward: 'ArrowDown',
-    left: 'ArrowLeft',
-    right: 'ArrowRight',
-  },
 })
 </script>
 
 <template>
-  <div absolute top-0 left-1>
-    <input v-model="input">
+  <div bg-blue-1 p-2 rounded absolute top-4 left-4>
+    speed: <input v-model="input" input>
+  </div>
+
+  <div bg-light rounded absolute top-4 right-4 p-2 text-sm>
+    tips:
+
+    Use WSAD keys to move the camera!
   </div>
 </template>

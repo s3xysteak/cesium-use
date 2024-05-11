@@ -13,7 +13,7 @@ function clearAll() {
 </script>
 
 <template>
-  <div flex="~ col gap-2" absolute top-10 left-10>
+  <div flex="~ col gap-2" absolute top-4 left-4>
     <button btn @click="area = !area">
       area Now: {{ area }}
     </button>

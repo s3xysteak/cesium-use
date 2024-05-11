@@ -4,7 +4,7 @@ Get the coordinates on the ellipsoid as rays.
 
 ## Usage
 
-```js{4}
+```js{3}
 // Usually you can use it with `useEvent`
 
 const globePick = useGlobePick()

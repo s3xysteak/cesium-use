@@ -6,6 +6,7 @@ export default defineConfig({
   shortcuts: [
     ['flex-center', 'items-center justify-center'],
     ['btn', 'bg-light b-1 b-solid b-dark rounded p-2 transition hover:bg-gray-2'],
+    ['input', 'bg-light b-1 b-solid b-dark px-2 rounded'],
   ],
   presets: [
     presetUno(),

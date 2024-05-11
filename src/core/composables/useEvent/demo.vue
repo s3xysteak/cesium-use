@@ -9,9 +9,10 @@ function addPoint(e: { position: any }) {
   viewer.entities.add({
     position: viewer.scene.pickPosition(e.position),
     point: {
-      pixelSize: 30,
-      outlineWidth: 10,
+      pixelSize: 20,
+      outlineWidth: 5,
       color: Cesium.Color.fromRandom({ alpha: 1 }),
+      disableDepthTestDistance: Number.POSITIVE_INFINITY,
     },
   })
 }
@@ -40,7 +41,12 @@ async function onClick() {
 </script>
 
 <template>
-  <button btn absolute top-10 left-10 @click="onClick">
+  <button absolute top-4 left-4 btn @click="onClick">
     {{ clickText }}
   </button>
+
+  <div p-2 absolute top-4 right-4 bg-light rounded text-sm>
+    tips:
+    <p>Right click to add point</p>
+  </div>
 </template>

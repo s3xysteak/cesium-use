@@ -40,7 +40,7 @@ useEvent((e) => {
 </script>
 
 <template>
-  <div absolute top-0 left-0 flex="~ col">
+  <div overflow-y-auto absolute top-4 bottom-4 left-4 flex="~ col">
     <button btn @click="random">
       random
     </button>

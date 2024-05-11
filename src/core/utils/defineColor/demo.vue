@@ -1,18 +1,26 @@
 <script setup lang="ts">
+import { ref, watchEffect } from 'vue'
 import * as Cesium from 'cesium'
-import { defineColor } from '@/index'
+import { defineColor, editEntity } from '@/index'
 import { getViewer } from '~composables/viewerStore'
 
 const viewer = getViewer()
 
-viewer.entities.add({
+const input = ref('#00ffff/50')
+const entity = viewer.entities.add({
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([-100, 30, -80, 70, -10, 40]),
-    material: defineColor('#f00'),
   },
+})
+watchEffect(() => {
+  editEntity(entity, {
+    polygon: {
+      material: defineColor(input.value),
+    },
+  })
 })
 </script>
 
 <template>
-  <div />
+  <input v-model="input" placeholder="rgb(0 255 255)" input absolute top-4 left-4>
 </template>
