@@ -1,6 +1,7 @@
 import { h } from 'vue'
 import Theme from 'vitepress/theme'
 import Layout from './Layout.vue'
+import 'virtual:uno.css'
 
 import './vars.css'
 

@@ -5,7 +5,7 @@ import type { Plugin } from 'vite'
 
 import { getTypeDeclaration } from '../utils'
 
-export function markdownTransform(): Plugin {
+function markdownTransform(): Plugin {
   const DIR_CORE = resolve(fileURLToPath(import.meta.url), '../../../core')
   const DIR_TYPES = resolve(fileURLToPath(import.meta.url), '../../../../tsc-types/src/core')
   const hasTypes = fs.existsSync(DIR_TYPES)
@@ -22,6 +22,30 @@ export function markdownTransform(): Plugin {
 
       const [pkg, name, i] = id.split('/').slice(-3)
       const lang = langMap(i.split('-')[1]?.replace(/\.md$/, '') ?? 'en')
+
+      const existDemo = fs.existsSync(`${DIR_CORE}/${pkg}/${name}/demo.vue`)
+      code += existDemo
+        ? `
+<script setup>
+import { defineAsyncComponent } from 'vue'
+const Viewer = defineAsyncComponent(() => import('${resolve(fileURLToPath(import.meta.url), '../../components/Viewer.vue')}'))
+const Demo = defineAsyncComponent(() => import('${DIR_CORE}/${pkg}/${name}/demo.vue'))
+</script>
+
+## demo
+
+<ClientOnly>
+  <Suspense>
+    <Viewer>
+      <Demo />
+    </Viewer>
+    <template #fallback>
+      Loading...
+    </template>
+  </Suspense>
+</ClientOnly>
+`
+        : ''
 
       const types = await getTypeDeclaration(pkg, name)
 
@@ -40,7 +64,6 @@ ${types}
         : ''
 
       const URL = 'https://github.com/s3xysteak/cesium-use/blob/main/src/core'
-      const existDemo = fs.existsSync(`${DIR_CORE}/${pkg}/${name}/demo.vue`)
       const existsIndex = fs.existsSync(`${DIR_CORE}/${pkg}/${name}/index.ts`)
 
       const sourceUrl = `${URL}/${pkg}/${name}/index.${existsIndex ? 'ts' : 'vue'}`
@@ -58,6 +81,8 @@ ${types}
     },
   }
 }
+
+export default markdownTransform
 
 function langMap(lang: string) {
   return {

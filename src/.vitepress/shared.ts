@@ -1,5 +1,11 @@
 import { defineConfig } from 'vitepress'
-import { markdownTransform } from './plugins/markdownTransform'
+
+import UnoCss from 'unocss/vite'
+
+import alias from '../../alias'
+
+import MarkdownTransform from './plugins/markdownTransform'
+import SupportCesium from './plugins/supportCesium'
 
 export const shared = defineConfig({
   title: 'Cesium Use',
@@ -17,7 +23,28 @@ export const shared = defineConfig({
   vite: {
     publicDir: 'docs/public',
     plugins: [
-      markdownTransform(),
+      SupportCesium(),
+      MarkdownTransform(),
+
+      UnoCss(),
     ],
+    server: {
+      warmup: {
+        clientFiles: ['./components/Viewer.vue'],
+      },
+    },
+    resolve: {
+      alias,
+    },
+    build: {
+      rollupOptions: {
+        external: ['cesium'],
+        output: {
+          globals: {
+            cesium: 'Cesium',
+          },
+        },
+      },
+    },
   },
 })
