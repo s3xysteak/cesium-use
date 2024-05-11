@@ -25,6 +25,7 @@ type Placement =
 const props = withDefaults(defineProps<Props>(), {
   placement: 'bottomRight',
   as: 'div',
+  teleportTo: 'body',
 })
 
 const placementMap: Record<Placement, (rect: Rect) => Rect> = {
@@ -59,6 +60,8 @@ interface Props {
   }>
 
   as?: string | Component
+
+  teleportTo?: string
 }
 
 const state = defineModel<boolean>({
@@ -128,14 +131,14 @@ const styleUsed = computed(() =>
 </script>
 
 <template>
-  <Teleport to="body">
+  <Teleport :to="teleportTo">
     <component
       :is="as"
       ref="el"
       :style="[
         styleUsed,
         {
-          position: 'fixed',
+          position: 'absolute',
           visibility: state && isShow ? 'visible' : 'hidden',
         },
       ]"
