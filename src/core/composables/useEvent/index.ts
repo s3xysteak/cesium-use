@@ -1,5 +1,6 @@
 import * as Cesium from 'cesium'
 import { getCurrentInstance, onUnmounted } from 'vue'
+import { getViewer } from '~composables/viewerStore'
 
 export type SetInputActionArgs = Parameters<
   InstanceType<typeof Cesium.ScreenSpaceEventHandler>['setInputAction']

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as Cesium from 'cesium'
 import { editEntity } from '.'
+import { getViewer } from '~composables/viewerStore'
 
 const viewer = getViewer()
 const entity = viewer.entities.add({

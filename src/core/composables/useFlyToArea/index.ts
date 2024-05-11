@@ -1,6 +1,7 @@
 import * as Cesium from 'cesium'
 import type { MaybeCoordinates } from '@/shared/coordinate'
 import { toCartesian3 } from '@/core/utils/toCartesian3'
+import { getViewer } from '~composables/viewerStore'
 
 export interface UseFlyToAreaOptions {
   onSingle: () => void

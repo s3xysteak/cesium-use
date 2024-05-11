@@ -1,6 +1,7 @@
 import * as Cesium from 'cesium'
 import { type MaybeRefOrGetter, toValue, watchEffect } from 'vue'
 import { useMagicKeys } from '@vueuse/core'
+import { getViewer } from '~composables/viewerStore'
 
 export type UseMoveByKeyboardKeybindingList =
   | 'forward'

@@ -1,6 +1,7 @@
 import * as Cesium from 'cesium'
 import type { MaybeRefOrGetter } from 'vue'
 import { ref, toValue, watchEffect } from 'vue'
+import { getViewer } from '~composables/viewerStore'
 
 export interface UseUndergroundOptions {
   frontFaceAlphaByDistance: ConstructorParameters<typeof Cesium.NearFarScalar>

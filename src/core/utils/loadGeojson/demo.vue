@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import geoHello from './hello.json'
 import { loadGeojson } from '@/index'
+import { getViewer } from '~composables/viewerStore'
 
 const viewer = getViewer()
 

@@ -2,6 +2,7 @@ import * as Cesium from 'cesium'
 import type { MaybeRefOrGetter } from 'vue'
 import { toValue, watchEffect } from 'vue'
 import { error } from '@/shared/errorHandler'
+import { getViewer } from '~composables/viewerStore'
 
 // TODO: Type improvement
 export type UsePointsBillboardOptions = Omit<Cesium.Billboard.ConstructorOptions, 'position'>

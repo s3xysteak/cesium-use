@@ -4,22 +4,25 @@ import { useMounted } from '@vueuse/core'
 import * as Cesium from 'cesium'
 import 'cesium/Build/Cesium/Widgets/widgets.css'
 
+// @ts-expect-error - not in includes
+import { setViewer } from '~composables/viewerStore'
+
 const isMounted = useMounted()
 
 const container = ref<HTMLDivElement>()
 onMounted(() => {
   const viewer = new Cesium.Viewer(container.value as HTMLDivElement, {
-    geocoder: false, // 是否显示地名查找控件
-    homeButton: false, // 是否显示主页按钮
-    selectionIndicator: false, // 是否显示选取指示器组件
-    sceneModePicker: false, // 是否显示场景按钮
-    baseLayerPicker: false, // 是否显示图层选择控件
-    fullscreenButton: false, // 是否全屏按钮
-    navigationHelpButton: false, // 是否显示导航帮助按钮
-    animation: false, // 是否创建动画小器件，左下角仪表
-    timeline: false, // 是否显示时间线控件
-    vrButton: false, // 是否创建vr部件
-    infoBox: false, // 是否显示点击要素之后显示的信息
+    geocoder: false,
+    homeButton: false,
+    selectionIndicator: false,
+    sceneModePicker: false,
+    baseLayerPicker: false,
+    fullscreenButton: false,
+    navigationHelpButton: false,
+    animation: false,
+    timeline: false,
+    vrButton: false,
+    infoBox: false,
     terrain: Cesium.Terrain.fromWorldTerrain(),
   })
 

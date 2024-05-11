@@ -4,6 +4,7 @@ import { defineColor, editEntity, useEntityCollection, useEvent } from '@/index'
 import { toCoordinates } from '@/core/utils/toCoordinates'
 import { projectionPosition } from '@/core/utils/projectionPosition'
 import { useGlobePick } from '@/core/composables/useGlobePick'
+import { getViewer } from '~composables/viewerStore'
 
 export interface HeightOptions {
   format?: (height: number) => string

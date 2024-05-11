@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import * as Cesium from 'cesium'
 import { useEvent } from '@/index'
+import { getViewer } from '~composables/viewerStore'
 
 const viewer = getViewer()
 function addPoint(e: { position: any }) {

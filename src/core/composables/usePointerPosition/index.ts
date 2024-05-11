@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import { makeDestructurable, useThrottleFn } from '@vueuse/core'
 import * as Cesium from 'cesium'
 import { useEvent } from '@/index'
+import { getViewer } from '~composables/viewerStore'
 
 export interface UsePointerPositionOptions {
   throttle?: Parameters<typeof useThrottleFn>[1]

@@ -7,12 +7,10 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { configDefaults } from 'vitest/config'
 
-import AutoImport from 'unplugin-auto-import/vite'
 import dts from 'vite-plugin-dts'
 import UnoCSS from 'unocss/vite'
-import UtilsResolver from '@s3xysteak/utils/resolver'
-
 import ExportCollector from 'unplugin-export-collector/vite'
+import alias from './alias'
 
 import pkg from './package.json'
 
@@ -24,13 +22,6 @@ export default defineConfig({
     UnoCSS(),
 
     dts({ rollupTypes: true }),
-    AutoImport({
-      dirs: ['src/core/composables/viewerStore'],
-      dts: 'types/auto-imports.d.ts',
-      resolvers: [
-        UtilsResolver(),
-      ],
-    }),
     ExportCollector({
       writeTo: './src/resolver.ts',
       exportDefault: true,
@@ -75,9 +66,7 @@ export default defineConfig({
     sourcemap: true,
   },
   resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-    },
+    alias,
   },
   define: {
     'import.meta.vitest': 'undefined',

@@ -3,6 +3,7 @@ import { type Ref, type ShallowRef, ref, shallowRef, watch } from 'vue'
 import { at } from '@s3xysteak/utils'
 import { defineColor, editEntity, useEntityCollection, useEvent } from '@/index'
 import { useGlobePick } from '@/core/composables/useGlobePick'
+import { getViewer } from '~composables/viewerStore'
 
 export interface DistanceOptions {
   lineEntityProps?: Cesium.Entity.ConstructorOptions

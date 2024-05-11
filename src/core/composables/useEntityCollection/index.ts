@@ -1,5 +1,6 @@
 import * as Cesium from 'cesium'
 import { error } from '@/shared/errorHandler'
+import { getViewer } from '~composables/viewerStore'
 
 export function useEntityCollection(...args: ConstructorParameters<typeof Cesium.EntityCollection>) {
   return new EntityCollection(...args)

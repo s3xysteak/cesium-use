@@ -3,6 +3,7 @@ import { shallowRef } from 'vue'
 import * as Cesium from 'cesium'
 import img from './img.png'
 import { useEvent, usePoints } from '@/index'
+import { getViewer } from '~composables/viewerStore'
 
 const data = shallowRef([
   { id: 1, lon: '86', lat: '27' },

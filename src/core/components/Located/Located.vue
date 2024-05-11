@@ -5,6 +5,8 @@ import { useElementBounding } from '@vueuse/core'
 import type { MaybeCoordinates } from '@/shared/coordinate'
 import { toCartesian3 } from '@/core/utils/toCartesian3'
 
+import { getViewer } from '~composables/viewerStore'
+
 interface Rect {
   width: number
   height: number

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as Cesium from 'cesium'
 import { defineColor } from '@/index'
+import { getViewer } from '~composables/viewerStore'
 
 const viewer = getViewer()
 

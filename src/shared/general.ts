@@ -1,3 +1,5 @@
+import { isObject } from '@s3xysteak/utils'
+
 /** merge in 2 depth */
 export function mergeDeep<T extends object = object, S extends object = T>(obj: T, ...args: S[]) {
   return args.reduce((acc, arg) => {
