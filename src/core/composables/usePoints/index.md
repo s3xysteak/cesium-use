@@ -37,9 +37,9 @@ const { points, flyTo, toggleShow } = usePoints(data, item => ({
 
 flyTo(1) // Move the camera to the point with ID 1 using `viewer.flyTo`.
 flyTo(2, (_, pos) => {
-  console.log('开始flyTo时执行的回调', pos)
+  console.log('Callback when flyTo start', pos)
 }).then(() => {
-  console.log('flyTo完成时执行的回调')
+  console.log('Callback when flyTo end')
 })
 
 toggleShow(false) // HIde all points
@@ -51,7 +51,7 @@ data.value = [{ id: 1, lon: '86', lat: '27' }] // This will trigger an update, c
 data.value = [] // Equal to clear all points
 ```
 
-函数返回的`points` 是一个 Map 类型的数据，存放了 `id -> { label, billboard }` 的键值对，你可以通过对 Map 的操作来获取对应点位的数据。
+The points returned by the function is a data of Map type, which stores key-value pairs of id -> { label, billboard }. You can retrieve the data for the corresponding location by manipulating the Map.
 
 ::: warning Tips for manually modifying points
 When adding, removing, or updating points using `points`, remember to manually synchronize with `billboardCollection` and `labelCollection`.

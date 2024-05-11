@@ -1,6 +1,9 @@
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitepress'
+import { extname, normalize, resolve } from 'pathe'
 
 import UnoCss from 'unocss/vite'
+import { viteStaticCopy } from 'vite-plugin-static-copy'
 
 import alias from '../../alias'
 
@@ -27,11 +30,15 @@ export const shared = defineConfig({
       MarkdownTransform(),
 
       UnoCss(),
+      viteStaticCopy(copyCesium(['Assets/*', 'ThirdParty/*', 'Widgets/*', 'Workers/*', 'index.js'])),
     ],
     server: {
       warmup: {
         clientFiles: ['./components/Viewer.vue'],
       },
+    },
+    ssr: {
+      external: ['cesium'],
     },
     resolve: {
       alias,
@@ -40,11 +47,22 @@ export const shared = defineConfig({
       rollupOptions: {
         external: ['cesium'],
         output: {
-          globals: {
-            cesium: 'Cesium',
+          paths: {
+            cesium: '/cesium-use/cesium-package/index.js',
           },
         },
       },
     },
   },
 })
+
+function copyCesium(items: string[]) {
+  return {
+    targets: [
+      ...items.map(item => ({
+        src: normalize(resolve(fileURLToPath(import.meta.url), '../../../node_modules/cesium/Build/Cesium/'.concat(item))),
+        dest: `cesium-package/${extname(item) ? '' : `${item.replace('*', '')}/`}`,
+      })),
+    ],
+  }
+}
