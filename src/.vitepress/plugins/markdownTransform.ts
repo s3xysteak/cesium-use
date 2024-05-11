@@ -25,15 +25,9 @@ export function markdownTransform(): Plugin {
 
       const types = await getTypeDeclaration(pkg, name)
 
-      const URL = 'https://github.com/s3xysteak/cesium-use/blob/main/src/core'
-
-      const existDemo = fs.existsSync(`${DIR_CORE}/${pkg}/${name}/demo.vue`)
-
-      const existsIndex = fs.existsSync(`${DIR_CORE}/${pkg}/${name}/index.ts`)
-
-      return `${code}
-${types
-? `
+      // types
+      code += types
+        ? `
 ## ${lang?.type}
 
 ::: details
@@ -42,12 +36,25 @@ ${types
 ${types}
 \`\`\`
 
-:::
-`
-: ''}
+:::`
+        : ''
+
+      const URL = 'https://github.com/s3xysteak/cesium-use/blob/main/src/core'
+      const existDemo = fs.existsSync(`${DIR_CORE}/${pkg}/${name}/demo.vue`)
+      const existsIndex = fs.existsSync(`${DIR_CORE}/${pkg}/${name}/index.ts`)
+
+      const sourceUrl = `${URL}/${pkg}/${name}/index.${existsIndex ? 'ts' : 'vue'}`
+
+      // source
+      code += `
 ## ${lang?.source}
 
-[source](${`${URL}/${pkg}/${name}/index.${existsIndex ? 'ts' : 'vue'}`})${existDemo ? ` • [demo](${`${URL}/${pkg}/${name}/demo.vue`})` : ''}`
+[source](${sourceUrl})`
+
+      // demo
+      code += existDemo ? ` • [demo](${`${URL}/${pkg}/${name}/demo.vue`})` : ''
+
+      return code
     },
   }
 }
