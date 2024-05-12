@@ -14,7 +14,7 @@ const MyButton = defineComponent((_, { slots }) => {
 </script>
 
 <template>
-  <div absolute top-4 left-4 flex="~ col">
+  <div absolute top-4 left-4 flex="~ col gap-y-2">
     <input v-model="lon" type="number" input placeholder="lon">
     <input v-model="lat" type="number" input placeholder="lat">
   </div>

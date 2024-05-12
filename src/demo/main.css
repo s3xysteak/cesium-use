@@ -1,7 +1,7 @@
 html,
 body,
 #app {
-  @apply c-base-c h-full m-0 p-0 bg-base-bg;
+  @apply h-full m-0 p-0;
 }
 
 ::-webkit-scrollbar {

@@ -41,12 +41,14 @@ async function onClick() {
 </script>
 
 <template>
-  <button absolute top-4 left-4 btn @click="onClick">
-    {{ clickText }}
-  </button>
+  <div panel>
+    <button btn @click="onClick">
+      {{ clickText }}
+    </button>
 
-  <div p-2 absolute top-4 right-4 bg-light rounded text-sm>
-    tips:
-    <p>Right click to add point</p>
+    <div b-t="1 solid light" pt-2 mt-2 text-sm>
+      tips:
+      <p>Right click to add point</p>
+    </div>
   </div>
 </template>

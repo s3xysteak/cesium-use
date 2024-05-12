@@ -12,13 +12,15 @@ useMoveByKeyboard({
 </script>
 
 <template>
-  <div bg-blue-1 p-2 rounded absolute top-4 left-4>
-    speed: <input v-model="input" input>
-  </div>
+  <div panel>
+    <div p-2 rounded>
+      speed: <input v-model="input" input>
+    </div>
 
-  <div bg-light rounded absolute top-4 right-4 p-2 text-sm>
-    tips:
+    <div mt-2 b-t="1 solid dark" dark:b-t-light rounded p-2 text-sm>
+      tips:
 
-    Use WSAD keys to move the camera!
+      Use WSAD keys to move the camera!
+    </div>
   </div>
 </template>
