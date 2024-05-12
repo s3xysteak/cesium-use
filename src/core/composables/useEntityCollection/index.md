@@ -5,7 +5,8 @@ The EntityCollection that automatically synchronizes with the Viewer.
 ## Usage
 
 ```js
-const collection = useEntityCollection()
+const collectionCreator = useEntityCollection()
+const collection = collectionCreator()
 // This will synchronize with the context's viewer, eliminating the need for manually executing `viewer.entities.add()`.
 collection.add({
   polygon: {
@@ -14,4 +15,4 @@ collection.add({
 })
 ```
 
-The `useEntityCollection` will internally retrieve the viewer instance through `getViewer`.
+The `useEntityCollection` will internally retrieve the viewer instance through `useViewer`.

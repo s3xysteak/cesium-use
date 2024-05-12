@@ -5,7 +5,7 @@ Simplify the usage of Cesium.Color, as it's practically its substitute.
 ## Usage
 
 ```js
-const viewer = getViewer()
+const viewer = useViewer()
 viewer.entities.add({
   polygon: {
     // ...

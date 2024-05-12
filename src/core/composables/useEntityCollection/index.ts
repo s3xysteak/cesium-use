@@ -2,16 +2,16 @@ import * as Cesium from 'cesium'
 import { throwError } from '~shared/errorHandler'
 import { useViewer } from '~composables/useViewer'
 
-export function useEntityCollection(...args: ConstructorParameters<typeof Cesium.EntityCollection>) {
-  return new EntityCollection(...args)
+export function useEntityCollection(viewer = useViewer()) {
+  return (...args: ConstructorParameters<typeof Cesium.EntityCollection>) => new EntityCollection(viewer, ...args)
 }
 
 class EntityCollection extends Cesium.EntityCollection {
   viewer: Cesium.Viewer
 
-  constructor(...args: ConstructorParameters<typeof Cesium.EntityCollection>) {
+  constructor(viewer: Cesium.Viewer, ...args: ConstructorParameters<typeof Cesium.EntityCollection>) {
     super(...args)
-    this.viewer = useViewer()
+    this.viewer = viewer
   }
 
   add(entity: Cesium.Entity | Cesium.Entity.ConstructorOptions) {

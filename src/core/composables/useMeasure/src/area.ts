@@ -19,7 +19,7 @@ interface AreaEntityData {
   /**
    * All entities in made by `AreaOptions`.
    */
-  entities: ReturnType<typeof useEntityCollection>
+  entities: ReturnType<ReturnType<typeof useEntityCollection>>
 
   /**
    * Polygon positions.
@@ -79,9 +79,12 @@ export function area(options: AreaOptions = {}): AreaReturn {
 
   const viewer = useViewer()
 
+  const entitiesCreator = useEntityCollection()
+  const eventCreator = useEvent()
+
   const createEntity = (): AreaEntityData => {
     const positions: Cesium.Cartesian3[] = []
-    const entities = useEntityCollection()
+    const entities = entitiesCreator()
     const val = {
       entities,
       positions,
@@ -139,7 +142,7 @@ export function area(options: AreaOptions = {}): AreaReturn {
   })
 
   const globePick = useGlobePick()
-  useEvent(({ position }) => {
+  eventCreator(({ position }) => {
     const pos = globePick(position)
     if (!pos)
       return
@@ -180,7 +183,7 @@ export function area(options: AreaOptions = {}): AreaReturn {
     positions[__pointer] = pos
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
-  useEvent(({ position }) => {
+  eventCreator(({ position }) => {
     if (!state.value || !current.value)
       return
 
@@ -220,7 +223,7 @@ export function area(options: AreaOptions = {}): AreaReturn {
     current.value = undefined
   }, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
 
-  useEvent(({ endPosition }) => {
+  eventCreator(({ endPosition }) => {
     if (!state.value || !current.value)
       return
 

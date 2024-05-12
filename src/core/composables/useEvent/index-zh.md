@@ -5,8 +5,10 @@
 
 ## 使用
 
-```js {10}
-const handler = useEvent((e) => {
+```js {12}
+const event = useEvent()
+
+const handler = event((e) => {
   viewer.entities.add({
     position: viewer.scene.pickPosition(e.position),
     point: {

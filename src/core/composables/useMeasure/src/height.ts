@@ -18,7 +18,7 @@ interface HeightEntityData {
   /**
    * All entities in made by `HeightOptions`.
    */
-  entities: ReturnType<typeof useEntityCollection>
+  entities: ReturnType<ReturnType<typeof useEntityCollection>>
 
   /**
    * `[start, end]` positions.
@@ -84,9 +84,12 @@ export function height(options: HeightOptions = {}): HeightReturn {
 
   const viewer = useViewer()
 
+  const entitiesCreator = useEntityCollection()
+  const eventCreator = useEvent()
+
   const createEntity = (): HeightEntityData => {
     const positions = shallowRef<Cesium.Cartesian3[]>([])
-    const entities = useEntityCollection()
+    const entities = entitiesCreator()
 
     const turnPosition = computed(() => projectionPosition(positions.value[0], positions.value[1]))
 
@@ -154,7 +157,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
   })
 
   const globePick = useGlobePick()
-  useEvent(({ position }) => {
+  eventCreator(({ position }) => {
     const pos = globePick(position)
     if (!pos)
       return
@@ -183,7 +186,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
     positions.value = [pos, pos]
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
-  useEvent(({ position }) => {
+  eventCreator(({ position }) => {
     if (!state.value || !current.value)
       return
 
@@ -215,7 +218,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
     current.value = undefined
   }, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
 
-  useEvent(({ endPosition }) => {
+  eventCreator(({ endPosition }) => {
     if (!state.value || !current.value || !current.value.positions.value[0])
       return
 

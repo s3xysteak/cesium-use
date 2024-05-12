@@ -33,7 +33,8 @@ const { flyTo, toggleShow } = usePoints(data, item => ({
   labelOptions: { text: String(item.id) },
 }))
 
-useEvent((e) => {
+const eventCreator = useEvent()
+eventCreator((e) => {
   const viewer = useViewer()
   viewer.scene.pick(e.position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)

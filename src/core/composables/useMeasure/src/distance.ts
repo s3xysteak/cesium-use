@@ -17,7 +17,7 @@ interface LineEntityData {
   /**
    * All entities in made by `DistanceOptions`.
    */
-  entities: ReturnType<typeof useEntityCollection>
+  entities: ReturnType<ReturnType<typeof useEntityCollection>>
 
   /**
    * Polyline positions.
@@ -87,10 +87,13 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
 
   const viewer = useViewer()
 
+  const entitiesCreator = useEntityCollection()
+  const eventCreator = useEvent()
+
   const createEntity = (): LineEntityData => {
     const positions: Cesium.Cartesian3[] = []
 
-    const entities = useEntityCollection()
+    const entities = entitiesCreator()
 
     entities.add(editEntity({
       polyline: {
@@ -123,7 +126,7 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
   })
 
   const globePick = useGlobePick()
-  useEvent(({ position }) => {
+  eventCreator(({ position }) => {
     const pos = globePick(position)
     if (!pos)
       return
@@ -172,7 +175,7 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
     positions[__pointer] = pos
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
-  useEvent(({ position }) => {
+  eventCreator(({ position }) => {
     if (!state.value || !current.value)
       return
 
@@ -213,7 +216,7 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
     }, closeEntityProps))
   }, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
 
-  useEvent(({ endPosition }) => {
+  eventCreator(({ endPosition }) => {
     if (!state.value || !current.value)
       return
 

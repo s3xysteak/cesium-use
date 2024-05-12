@@ -20,7 +20,8 @@ loadGeojson({
   viewer.dataSources.add(dataSource)
 })
 
-useEvent((e) => {
+const eventCreator = useEvent()
+eventCreator((e) => {
   const picked = viewer.scene.pick(e.position)
   if (!picked?.id?.demo)
     return

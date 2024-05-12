@@ -25,7 +25,8 @@ export function usePointerPosition(options: UsePointerPositionOptions = {}) {
   const lat = ref('')
   const alt = ref('')
 
-  useEvent(
+  const eventCreator = useEvent()
+  eventCreator(
     useThrottleFn((e: Cesium.ScreenSpaceEventHandler.MotionEvent) => {
       const position = viewer.scene.pickPosition(e.endPosition)
 

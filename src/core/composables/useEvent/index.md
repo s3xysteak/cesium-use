@@ -5,8 +5,10 @@ It serves as a simplified version of `ScreenSpaceEventHandler` with function ove
 
 ## Usage
 
-```js {10}
-const handler = useEvent((e) => {
+```js {12}
+const event = useEvent()
+
+const handler = event((e) => {
   viewer.entities.add({
     position: viewer.scene.pickPosition(e.position),
     point: {
@@ -15,7 +17,7 @@ const handler = useEvent((e) => {
       color: Cesium.Color.fromRandom({ alpha: 1 })
     }
   })
-}, Cesium.ScreenSpaceEventType.LEFT_CLICK) // Function overloading
+}, Cesium.ScreenSpaceEventType.LEFT_CLICK) // overloads
 
 // handler.destroy()
 ```

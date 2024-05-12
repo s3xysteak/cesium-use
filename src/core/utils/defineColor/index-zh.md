@@ -5,7 +5,7 @@
 ## 使用
 
 ```js
-const viewer = getViewer()
+const viewer = useViewer()
 viewer.entities.add({
   polygon: {
     // ...

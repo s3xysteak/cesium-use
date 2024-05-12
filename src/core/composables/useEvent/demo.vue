@@ -16,7 +16,8 @@ function addPoint(e: { position: any }) {
     },
   })
 }
-useEvent((e) => {
+const event = useEvent()
+event((e) => {
   addPoint(e)
 }, Cesium.ScreenSpaceEventType.RIGHT_CLICK)
 
@@ -32,7 +33,7 @@ const clickText = ref('left click do not work now')
 async function onClick() {
   clickText.value = 'left click works now!'
 
-  const handler = useEvent(addPoint, Cesium.ScreenSpaceEventType.LEFT_CLICK)
+  const handler = event(addPoint, Cesium.ScreenSpaceEventType.LEFT_CLICK)
   await delay(5000)
   handler.destroy()
 

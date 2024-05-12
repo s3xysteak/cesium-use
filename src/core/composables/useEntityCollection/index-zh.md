@@ -5,7 +5,8 @@
 ## 使用
 
 ```js
-const collection = useEntityCollection()
+const collectionCreator = useEntityCollection()
+const collection = collectionCreator()
 // 这会同步到上下文的viewer，无需手动再执行viewer.entities.add()
 collection.add({
   polygon: {
@@ -14,4 +15,4 @@ collection.add({
 })
 ```
 
-`useEntityCollection` 会在内部通过`getViewer`获取 viewer 实例。
+`useEntityCollection` 会在内部通过`useViewer`获取 viewer 实例。

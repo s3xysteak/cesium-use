@@ -2,7 +2,8 @@
 import * as Cesium from 'cesium'
 import { useEntityCollection } from '~/index'
 
-const collection = useEntityCollection()
+const collectionCreator = useEntityCollection()
+const collection = collectionCreator()
 collection.add({
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([-100, 30, -80, 70, -10, 40]),

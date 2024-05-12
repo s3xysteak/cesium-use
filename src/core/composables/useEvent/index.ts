@@ -6,43 +6,44 @@ export type SetInputActionArgs = Parameters<
   InstanceType<typeof Cesium.ScreenSpaceEventHandler>['setInputAction']
 >
 
-export function useEvent(
-  callback: Cesium.ScreenSpaceEventHandler.MotionEventCallback,
-  type: Cesium.ScreenSpaceEventType.MOUSE_MOVE
-): Cesium.ScreenSpaceEventHandler
+export function useEvent(viewer = useViewer()) {
+  function event(
+    callback: Cesium.ScreenSpaceEventHandler.MotionEventCallback,
+    type: Cesium.ScreenSpaceEventType.MOUSE_MOVE
+  ): Cesium.ScreenSpaceEventHandler
 
-export function useEvent(
-  callback: Cesium.ScreenSpaceEventHandler.PositionedEventCallback,
-  type:
-    | Cesium.ScreenSpaceEventType.LEFT_CLICK
-    | Cesium.ScreenSpaceEventType.RIGHT_CLICK
-    | Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
-): Cesium.ScreenSpaceEventHandler
+  function event(
+    callback: Cesium.ScreenSpaceEventHandler.PositionedEventCallback,
+    type:
+      | Cesium.ScreenSpaceEventType.LEFT_CLICK
+      | Cesium.ScreenSpaceEventType.RIGHT_CLICK
+      | Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
+  ): Cesium.ScreenSpaceEventHandler
 
-export function useEvent(
-  ...args: SetInputActionArgs
-): Cesium.ScreenSpaceEventHandler
+  function event(
+    ...args: SetInputActionArgs
+  ): Cesium.ScreenSpaceEventHandler
 
-export function useEvent(
-  ...args: SetInputActionArgs
-): Cesium.ScreenSpaceEventHandler {
-  const [action, type, modifier] = args
+  function event(...args: SetInputActionArgs): Cesium.ScreenSpaceEventHandler {
+    const [action, type, modifier] = args
 
-  const viewer = useViewer()
-  const handler = new Cesium.ScreenSpaceEventHandler(viewer.canvas)
+    const handler = new Cesium.ScreenSpaceEventHandler(viewer.canvas)
 
-  handler.setInputAction(
-    (e: any) => {
-      action(e)
-    },
-    type,
-    modifier,
-  )
+    handler.setInputAction(
+      (e: any) => {
+        action(e)
+      },
+      type,
+      modifier,
+    )
 
-  getCurrentInstance()
-  && onUnmounted(() => {
-    handler.destroy()
-  })
+    getCurrentInstance()
+    && onUnmounted(() => {
+      handler.destroy()
+    })
 
-  return handler
+    return handler
+  }
+
+  return event
 }
