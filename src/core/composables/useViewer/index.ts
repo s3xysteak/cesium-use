@@ -20,7 +20,7 @@ const INJECT_KEY_VIEWER: InjectionKey<ShallowRef<Viewer | undefined>> = Symbol('
 const CANNOT_GET_SETUP_CONTEXT = 'Failed to get viewer because cannot get setup context.'
 const UNDEFINED_VIEWER = 'Failed to get viewer because viewer is undefined now.'
 
-type UseViewerParam = 'throw-error' | 'no-throw-error' | 'silent'
+export type UseViewerParam = 'throw-error' | 'no-throw-error' | 'silent'
 export function useViewer(): Viewer
 export function useViewer(isThrowError: UseViewerParam = 'throw-error'): Viewer | undefined {
   const errorMap = {
