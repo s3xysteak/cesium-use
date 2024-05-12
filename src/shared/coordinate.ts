@@ -1,5 +1,5 @@
 import { isUndefined } from '@s3xysteak/utils'
-import { error } from '@/shared/errorHandler'
+import { throwError } from '~shared/errorHandler'
 
 /**
  * `[longitude, latitude, height]` or `{ longitude, latitude, height }`
@@ -31,7 +31,7 @@ export function normalizeCoordinates(source: MaybeCoordinates) {
 
     return Number.isNaN(v)
   }))
-    error('Invalid value which cannot be parsed to number.')
+    throwError('Invalid value which cannot be parsed to number.')
 
   return value
 }

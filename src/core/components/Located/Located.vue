@@ -2,10 +2,10 @@
 import type { Cartesian3 } from 'cesium'
 import { type Component, computed, onMounted, onUnmounted, ref } from 'vue'
 import { useElementBounding } from '@vueuse/core'
-import type { MaybeCoordinates } from '@/shared/coordinate'
-import { toCartesian3 } from '@/core/utils/toCartesian3'
+import type { MaybeCoordinates } from '~shared/coordinate'
+import { toCartesian3 } from '~utils/toCartesian3'
 
-import { getViewer } from '~composables/viewerStore'
+import { useViewer } from '~composables/useViewer'
 
 interface Rect {
   width: number
@@ -74,7 +74,7 @@ const styleRaw = ref<{ left: number, top: number } | ''>('')
 
 const { placement } = props
 
-const viewer = getViewer()
+const viewer = useViewer()
 
 const el = ref()
 

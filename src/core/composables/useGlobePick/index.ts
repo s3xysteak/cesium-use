@@ -1,6 +1,6 @@
 import type { Cartesian2 } from 'cesium'
-import { getViewer } from '~composables/viewerStore'
+import { useViewer } from '~composables/useViewer'
 
-export function useGlobePick(viewer = getViewer()) {
+export function useGlobePick(viewer = useViewer()) {
   return (position: Cartesian2) => viewer.scene.globe.pick(viewer.camera.getPickRay(position)!, viewer.scene)
 }

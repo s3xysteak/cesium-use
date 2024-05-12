@@ -1,6 +1,6 @@
 import * as Cesium from 'cesium'
 import { makeDestructurable } from '@vueuse/core'
-import { type MaybeCoordinates, normalizeCoordinates } from '@/shared/coordinate'
+import { type MaybeCoordinates, normalizeCoordinates } from '~shared/coordinate'
 
 export function toCoordinates(source: Cesium.Cartesian3 | MaybeCoordinates) {
   const createReturns = (

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as Cesium from 'cesium'
-import { useEntityCollection } from '@/index'
+import { useEntityCollection } from '~/index'
 
 const collection = useEntityCollection()
 collection.add({

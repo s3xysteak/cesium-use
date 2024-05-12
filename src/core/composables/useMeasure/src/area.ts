@@ -1,9 +1,9 @@
 import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, ref, shallowRef, watch } from 'vue'
 import { at } from '@s3xysteak/utils'
-import { defineColor, editEntity, useEntityCollection, useEvent } from '@/index'
-import { useGlobePick } from '@/core/composables/useGlobePick'
-import { getViewer } from '~composables/viewerStore'
+import { defineColor, editEntity, useEntityCollection, useEvent } from '~/index'
+import { useGlobePick } from '~composables/useGlobePick'
+import { useViewer } from '~composables/useViewer'
 
 export interface AreaOptions {
   format?: (area: number) => string
@@ -77,7 +77,7 @@ export function area(options: AreaOptions = {}): AreaReturn {
   let __pointer: number
   const __currentTurnList = shallowRef<Cesium.Entity[]>([])
 
-  const viewer = getViewer()
+  const viewer = useViewer()
 
   const createEntity = (): AreaEntityData => {
     const positions: Cesium.Cartesian3[] = []

@@ -1,4 +1,4 @@
-export * from './core/composables/viewerStore'
+export * from './core/composables/useViewer'
 
 export { default as Located } from './core/components/Located/Located.vue'
 

@@ -1,6 +1,6 @@
 # Introduction
 
-Cesium Use is a Vue-based CesiumJS utility library that offers a range of functions and components to simplify the development process based on CesiumJS, providing a better development experience and more powerful features.
+Cesium Use is a Vue-based CesiumJS utility library that offers a range of functions and components to simplify the development process based on CesiumJS, providing a better development experience and higher development efficiency.
 
 ::: tip Prerequisite Knowledge
 
@@ -18,9 +18,9 @@ Before using Cesium Use, it is assumed that you have a basic understanding of th
 import * as Cesium from 'cesium'
 import { Located } from 'cesium-use'
 
-// Automatically imported: import { getViewer, useEvent } from 'cesium-use'
+// Automatically imported: import { useViewer, useEvent } from 'cesium-use'
 
-const viewer = getViewer()
+const viewer = useViewer()
 
 const show = ref(true)
 const pos = shallowRef()
@@ -81,16 +81,9 @@ func(() => valGetter) // Getter
 
 ## Viewer Management
 
-For convenient Viewer instance management, Cesium Use provides three methods for use.
+For convenient Viewer instance management, Cesium Use provides two methods for use.
 
-- `getViewer` to retrieve the viewer instance.
-- `setViewer` to save the viewer through a module-level top-level variable.
-- `useViewerProvider` to utilize Vue's dependency injection for viewer transfer between components.
+- `useViewer` Get viewer instance by `provide / inject`.
+- `useViewerProvider` Inject viewer instance by `provide / inject`.
 
-Unlike practices in many Vue libraries, Cesium Use **recommends** using `setViewer` over dependency injection-based `useViewerProvider`.
-
-::: warning
-`useViewerProvider` is not stable yet and in the future, `setViewer` will be deprecated in favor of the stable `useViewerProvider`.
-:::
-
-For more related content, refer to [viewerStore](composables/viewerStore.md).
+For more related content, refer to [useViewer](composables/useViewer.md).

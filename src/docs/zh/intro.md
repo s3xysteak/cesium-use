@@ -1,6 +1,6 @@
 # 简介
 
-Cesium Use 是一个基于 Vue 的 CesiumJS 工具库，提供了一系列的函数与组件以供使用，旨在简化基于 CesiumJS 的开发流程，提供更好的开发体验和更强大的功能。
+Cesium Use 是一个基于 Vue 的 CesiumJS 工具库，提供了一系列的函数与组件以供使用，旨在简化基于 CesiumJS 的开发流程，提供更好的开发体验和更高的开发效率。
 
 ::: tip 前置知识
 
@@ -18,9 +18,9 @@ Cesium Use 是一个基于 Vue 的 CesiumJS 工具库，提供了一系列的函
 import * as Cesium from 'cesium'
 import { Located } from 'cesium-use'
 
-// 自动引入 import { getViewer, useEvent } from 'cesium-use'
+// 自动引入 import { useViewer, useEvent } from 'cesium-use'
 
-const viewer = getViewer()
+const viewer = useViewer()
 
 const show = ref(true)
 const pos = shallowRef()
@@ -81,16 +81,9 @@ func(() => valGetter) // Getter
 
 ## Viewer 管理
 
-为了方便管理 Viewer 实例，Cesium Use 提供了三个方法以供使用。
+为了方便管理 Viewer 实例，Cesium Use 提供了两个方法以供使用。
 
-- `getViewer` 获取 viewer 实例。
-- `setViewer` 通过一个模块级顶级变量保存 viewer。
-- `useViewerProvider` 利用 vue 的依赖注入实现 viewer 在组件间的传递。
+- `useViewer` 通过 `依赖注入` 获取 viewer 实例。
+- `useViewerProvider` 通过 `依赖注入` 注入 viewer 实例。
 
-和许多 Vue 库的实践不同，Cesium Use **推荐**使用`setViewer`而不是基于依赖注入的`useViewerProvider`。
-
-::: warning
-`useViewerProvider` 尚未稳定，未来将废弃 `setViewer` 而改用稳定后的 `useViewerProvider`。
-:::
-
-更多相关内容见 [viewerStore](composables/viewerStore.md)。
+更多相关内容见 [useViewer](composables/useViewer.md)。

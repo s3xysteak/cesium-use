@@ -1,8 +1,11 @@
 import { fileURLToPath } from 'node:url'
 
 export default r({
-  '@': './src',
+  '~': './src',
+  '~components': './src/core/components',
   '~composables': './src/core/composables',
+  '~utils': './src/core/utils',
+  '~shared': './src/shared',
 })
 
 function r(aliasMap: Record<string, string>) {

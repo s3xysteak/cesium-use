@@ -1,7 +1,7 @@
 import * as Cesium from 'cesium'
 import type { MaybeRefOrGetter } from 'vue'
 import { ref, toValue, watchEffect } from 'vue'
-import { getViewer } from '~composables/viewerStore'
+import { useViewer } from '~composables/useViewer'
 
 export interface UseUndergroundOptions {
   frontFaceAlphaByDistance: ConstructorParameters<typeof Cesium.NearFarScalar>
@@ -11,7 +11,7 @@ export function useUnderground(
   initialState = false,
   options?: MaybeRefOrGetter<Partial<UseUndergroundOptions>>,
 ) {
-  const viewer = getViewer()
+  const viewer = useViewer()
 
   function underOn() {
     const { frontFaceAlphaByDistance = [600.0, 0, 8000, 0.9] }

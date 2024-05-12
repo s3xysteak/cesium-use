@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { usePointerPosition } from '@/index'
+import { usePointerPosition } from '~/index'
 
 const input = ref('')
 const throttle = computed(() =>
@@ -15,7 +15,7 @@ const [lon, lat, alt] = usePointerPosition({
   <div panel>
     <input v-model="input" input placeholder="throttle interval .. ms...">
 
-    <div mt-2 rounded p-2 b-t="1 solid dark" dark:b-t-light>
+    <div mt-2 p-2 b-t="1 solid dark" dark:b-t-light>
       <div>lon : {{ lon }}</div>
       <div>lat : {{ lat }}</div>
       <div>height : {{ alt }}</div>

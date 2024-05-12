@@ -1,8 +1,8 @@
 import * as Cesium from 'cesium'
 import type { MaybeRefOrGetter } from 'vue'
 import { toValue, watchEffect } from 'vue'
-import { error } from '@/shared/errorHandler'
-import { getViewer } from '~composables/viewerStore'
+import { throwError } from '~shared/errorHandler'
+import { useViewer } from '~composables/useViewer'
 
 // TODO: Type improvement
 export type UsePointsBillboardOptions = Omit<Cesium.Billboard.ConstructorOptions, 'position'>
@@ -26,7 +26,7 @@ export function usePoints<UsePointsItem extends object = object>(
   data: MaybeRefOrGetter<UsePointsItem[]>,
   options: (item: UsePointsItem) => UsePointsOptions,
 ) {
-  const viewer = getViewer()
+  const viewer = useViewer()
 
   const points: Map<
     string,
@@ -107,7 +107,7 @@ export function usePoints<UsePointsItem extends object = object>(
   ) => {
     const point = points.get(id)
     if (point === undefined)
-      error('cannot find point with the id.')
+      throwError('cannot find point with the id.')
 
     const { billboard } = point
     const coordinate = (

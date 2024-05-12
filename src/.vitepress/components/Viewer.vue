@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import * as Cesium from 'cesium'
-import { onMounted, ref } from 'vue'
-import { setViewer } from '../../core/composables/viewerStore'
+import { ref } from 'vue'
+import { useViewerProvider } from '../../core/composables/useViewer'
 import 'cesium/Build/Cesium/Widgets/widgets.css'
 
-const isMounted = ref(false)
 const container = ref<HTMLDivElement>()
-onMounted(() => {
+const { isMounted } = useViewerProvider(() => {
   const viewer = new Cesium.Viewer(container.value as HTMLDivElement, {
     geocoder: false,
     homeButton: false,
@@ -36,9 +35,7 @@ onMounted(() => {
     direction: new Cesium.Cartesian3(0.35, -0.918, -0.283358),
   })
 
-  setViewer(viewer)
-
-  isMounted.value = true
+  return viewer
 })
 </script>
 

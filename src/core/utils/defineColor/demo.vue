@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue'
 import * as Cesium from 'cesium'
-import { defineColor, editEntity } from '@/index'
-import { getViewer } from '~composables/viewerStore'
+import { defineColor, editEntity } from '~/index'
+import { useViewer } from '~composables/useViewer'
 
-const viewer = getViewer()
+const viewer = useViewer()
 
 const input = ref('#00ffff/50')
 const entity = viewer.entities.add({

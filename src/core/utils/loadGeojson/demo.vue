@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import * as Cesium from 'cesium'
 import geoHello from './hello.json'
-import { loadGeojson, useEvent } from '@/index'
-import { getViewer } from '~composables/viewerStore'
+import { loadGeojson, useEvent } from '~/index'
+import { useViewer } from '~composables/useViewer'
 
-const viewer = getViewer()
+const viewer = useViewer()
 
 loadGeojson({
   url: geoHello,

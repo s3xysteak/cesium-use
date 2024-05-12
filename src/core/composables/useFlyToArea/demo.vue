@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import img from '../usePoints/img.png'
-import { useFlyToArea, usePoints } from '@/index'
+import { useFlyToArea, usePoints } from '~/index'
 
 const data = [
   { id: 1, lon: '86', lat: '27' },

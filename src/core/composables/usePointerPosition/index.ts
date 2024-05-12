@@ -1,8 +1,8 @@
 import { ref } from 'vue'
 import { makeDestructurable, useThrottleFn } from '@vueuse/core'
 import * as Cesium from 'cesium'
-import { useEvent } from '@/index'
-import { getViewer } from '~composables/viewerStore'
+import { useEvent } from '~/index'
+import { useViewer } from '~composables/useViewer'
 
 export interface UsePointerPositionOptions {
   throttle?: Parameters<typeof useThrottleFn>[1]
@@ -19,7 +19,7 @@ export function usePointerPosition(options: UsePointerPositionOptions = {}) {
     heightToFixed = 2,
   } = options
 
-  const viewer = getViewer()
+  const viewer = useViewer()
 
   const lon = ref('')
   const lat = ref('')

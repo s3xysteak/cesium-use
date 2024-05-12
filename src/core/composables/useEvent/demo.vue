@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import * as Cesium from 'cesium'
-import { useEvent } from '@/index'
-import { getViewer } from '~composables/viewerStore'
+import { useEvent } from '~/index'
+import { useViewer } from '~composables/useViewer'
 
-const viewer = getViewer()
+const viewer = useViewer()
 function addPoint(e: { position: any }) {
   viewer.entities.add({
     position: viewer.scene.pickPosition(e.position),

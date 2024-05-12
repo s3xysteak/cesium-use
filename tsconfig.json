@@ -9,8 +9,11 @@
     /* Bundler mode */
     "moduleResolution": "Bundler",
     "paths": {
-      "@/*": ["src/*"],
-      "~composables/*": ["src/core/composables/*"]
+      "~/*": ["src/*"],
+      "~components/*": ["src/core/components/*"],
+      "~composables/*": ["src/core/composables/*"],
+      "~utils/*": ["src/core/utils/*"],
+      "~shared/*": ["src/shared/*"]
     },
     "resolveJsonModule": true,
     "types": [

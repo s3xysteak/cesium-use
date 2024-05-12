@@ -1,7 +1,7 @@
 import * as Cesium from 'cesium'
 import { type MaybeRefOrGetter, toValue, watchEffect } from 'vue'
 import { useMagicKeys } from '@vueuse/core'
-import { getViewer } from '~composables/viewerStore'
+import { useViewer } from '~composables/useViewer'
 
 export type UseMoveByKeyboardKeybindingList =
   | 'forward'
@@ -40,7 +40,7 @@ export function useMoveByKeyboard(options: UseMoveByKeyboardOptions = {}) {
     up: keys[keybinding.up],
   }
 
-  const camera = getViewer().camera
+  const camera = useViewer().camera
 
   const keyToCameraMoveMap: Record<
     UseMoveByKeyboardKeybindingList,
