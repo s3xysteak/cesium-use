@@ -76,8 +76,8 @@ importers:
         specifier: ^0.59.4
         version: 0.59.4(postcss@8.4.38)(rollup@4.17.2)(vite@5.2.11(@types/node@20.12.11))
       unplugin-export-collector:
-        specifier: ^0.4.2
-        version: 0.4.2
+        specifier: ^0.4.3
+        version: 0.4.3
       vite:
         specifier: ^5.2.11
         version: 5.2.11(@types/node@20.12.11)
@@ -3100,8 +3100,8 @@ packages:
       vite:
         optional: true
 
-  unplugin-export-collector@0.4.2:
-    resolution: {integrity: sha512-nrE6uSUWFwrgDY6mzvv/A09LH2pYaTjm+jbM/mGVosMrrQQoVxRvhH4OEinNDW0E2sAsgdR5oGlZBNuEou2S7Q==}
+  unplugin-export-collector@0.4.3:
+    resolution: {integrity: sha512-jULHmXjjCBR8Ll1AR/JgVMS6wOaPuBhtx2K9koIwBwMgtCp9AKW7J7ST77oatrod8AAUxYFJVHcpX0OilAX1ag==}
 
   unplugin@1.10.1:
     resolution: {integrity: sha512-d6Mhq8RJeGA8UfKCu54Um4lFA0eSaRa3XxdAJg8tIdxbu1ubW0hBCZUL7yI2uGyYCRndvbK8FLHzqy2XKfeMsg==}
@@ -6635,7 +6635,7 @@ snapshots:
       - rollup
       - supports-color
 
-  unplugin-export-collector@0.4.2:
+  unplugin-export-collector@0.4.3:
     dependencies:
       '@s3xysteak/utils': 0.2.1
       '@swc/core': 1.5.5
