@@ -2,7 +2,6 @@ import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, ref, shallowRef, watch } from 'vue'
 import { at } from '@s3xysteak/utils'
 import { defineColor, editEntity, useEntityCollection, useEvent } from '~/index'
-import { useGlobePick } from '~composables/useGlobePick'
 import { useViewer } from '~composables/useViewer'
 
 export interface DistanceOptions {
@@ -125,9 +124,9 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
     immediate: true,
   })
 
-  const globePick = useGlobePick()
+  const pickPosition = (pos: Cesium.Cartesian2) => viewer.scene.pickPosition(pos)
   eventCreator(({ position }) => {
-    const pos = globePick(position)
+    const pos = pickPosition(position)
     if (!pos)
       return
 
@@ -179,7 +178,7 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
     if (!state.value || !current.value)
       return
 
-    const pos = globePick(position)
+    const pos = pickPosition(position)
     if (!pos)
       return
 
@@ -220,7 +219,7 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
     if (!state.value || !current.value)
       return
 
-    const pos = globePick(endPosition)
+    const pos = pickPosition(endPosition)
     if (!pos)
       return
 

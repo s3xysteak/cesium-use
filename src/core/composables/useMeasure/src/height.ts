@@ -3,7 +3,6 @@ import { type Ref, type ShallowRef, computed, ref, shallowRef, watch } from 'vue
 import { defineColor, editEntity, useEntityCollection, useEvent } from '~/index'
 import { toCoordinates } from '~utils/toCoordinates'
 import { projectionPosition } from '~utils/projectionPosition'
-import { useGlobePick } from '~composables/useGlobePick'
 import { useViewer } from '~composables/useViewer'
 
 export interface HeightOptions {
@@ -156,9 +155,9 @@ export function height(options: HeightOptions = {}): HeightReturn {
     immediate: true,
   })
 
-  const globePick = useGlobePick()
+  const pickPosition = (pos: Cesium.Cartesian2) => viewer.scene.pickPosition(pos)
   eventCreator(({ position }) => {
-    const pos = globePick(position)
+    const pos = pickPosition(position)
     if (!pos)
       return
 
@@ -190,7 +189,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
     if (!state.value || !current.value)
       return
 
-    const pos = globePick(position)
+    const pos = pickPosition(position)
     if (!pos)
       return
 
@@ -222,7 +221,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
     if (!state.value || !current.value || !current.value.positions.value[0])
       return
 
-    const pos = globePick(endPosition)
+    const pos = pickPosition(endPosition)
     if (!pos)
       return
 

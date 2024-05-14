@@ -1,5 +1,7 @@
 <script setup>
+import * as Cesium from 'cesium'
 import { useMeasure } from '.'
+import { useViewer } from '~/index'
 
 const { state: area, clearAll: areaClear } = useMeasure('area')
 const { state: distance, clearAll: distanceClear } = useMeasure('distance')
@@ -10,6 +12,15 @@ function clearAll() {
   distanceClear()
   heightClear()
 }
+
+const viewer = useViewer()
+async function run() {
+  const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(125737)
+  viewer.scene.primitives.add(tileset)
+
+  viewer.flyTo(tileset)
+}
+run()
 </script>
 
 <template>
