@@ -15,7 +15,7 @@ function clearAll() {
 
 const viewer = useViewer()
 async function run() {
-  const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(125737)
+  const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2464651)
   viewer.scene.primitives.add(tileset)
 
   viewer.flyTo(tileset)
