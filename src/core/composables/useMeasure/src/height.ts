@@ -1,6 +1,6 @@
 import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, computed, ref, shallowRef, watch } from 'vue'
-import { defineColor, editEntity, useEntityCollection, useEvent } from '~/index'
+import { defineColor, editEntity, useEntityCollection, useEventHandler } from '~/index'
 import { toCoordinates } from '~utils/toCoordinates'
 import { projectionPosition } from '~utils/projectionPosition'
 import { useViewer } from '~composables/useViewer'
@@ -84,7 +84,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
   const viewer = useViewer()
 
   const entitiesCreator = useEntityCollection()
-  const eventCreator = useEvent()
+  const eventHandler = useEventHandler()
 
   const createEntity = (): HeightEntityData => {
     const positions = shallowRef<Cesium.Cartesian3[]>([])
@@ -156,7 +156,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
   })
 
   const pickPosition = (pos: Cesium.Cartesian2) => viewer.scene.pickPosition(pos)
-  eventCreator(({ position }) => {
+  eventHandler(({ position }) => {
     const pos = pickPosition(position)
     if (!pos)
       return
@@ -185,7 +185,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
     positions.value = [pos, pos]
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
-  eventCreator(({ position }) => {
+  eventHandler(({ position }) => {
     if (!state.value || !current.value)
       return
 
@@ -217,7 +217,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
     current.value = undefined
   }, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
 
-  eventCreator(({ endPosition }) => {
+  eventHandler(({ endPosition }) => {
     if (!state.value || !current.value || !current.value.positions.value[0])
       return
 

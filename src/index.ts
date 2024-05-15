@@ -3,7 +3,7 @@ export * from './core/composables/useViewer'
 export { default as Located } from './core/components/Located/Located.vue'
 
 export * from './core/composables/useEntityCollection'
-export * from './core/composables/useEvent'
+export * from './core/composables/useEventHandler'
 export * from './core/composables/useFlyToArea'
 export * from './core/composables/useMeasure'
 export * from './core/composables/useGlobePick'

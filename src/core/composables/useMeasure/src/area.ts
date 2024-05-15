@@ -1,7 +1,7 @@
 import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, ref, shallowRef, watch } from 'vue'
 import { at } from '@s3xysteak/utils'
-import { defineColor, editEntity, useEntityCollection, useEvent } from '~/index'
+import { defineColor, editEntity, useEntityCollection, useEventHandler } from '~/index'
 import { useViewer } from '~composables/useViewer'
 
 export interface AreaOptions {
@@ -79,7 +79,7 @@ export function area(options: AreaOptions = {}): AreaReturn {
   const viewer = useViewer()
 
   const entitiesCreator = useEntityCollection()
-  const eventCreator = useEvent()
+  const eventHandler = useEventHandler()
 
   const createEntity = (): AreaEntityData => {
     const positions: Cesium.Cartesian3[] = []
@@ -142,7 +142,7 @@ export function area(options: AreaOptions = {}): AreaReturn {
 
   const pickPosition = (pos: Cesium.Cartesian2) => viewer.scene.pickPosition(pos)
 
-  eventCreator(({ position }) => {
+  eventHandler(({ position }) => {
     const pos = pickPosition(position)
     if (!pos)
       return
@@ -183,7 +183,7 @@ export function area(options: AreaOptions = {}): AreaReturn {
     positions[__pointer] = pos
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
-  eventCreator(({ position }) => {
+  eventHandler(({ position }) => {
     if (!state.value || !current.value)
       return
 
@@ -223,7 +223,7 @@ export function area(options: AreaOptions = {}): AreaReturn {
     current.value = undefined
   }, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
 
-  eventCreator(({ endPosition }) => {
+  eventHandler(({ endPosition }) => {
     if (!state.value || !current.value)
       return
 

@@ -18,14 +18,14 @@ Cesium Use 是一个基于 Vue 的 CesiumJS 工具库，提供了一系列的函
 import * as Cesium from 'cesium'
 import { Located } from 'cesium-use'
 
-// 自动引入 import { useViewer, useEvent } from 'cesium-use'
+// 自动引入 import { useViewer, useEventHandler } from 'cesium-use'
 
 const viewer = useViewer()
 
 const show = ref(true)
 const pos = shallowRef()
 
-useEvent((e) => {
+useEventHandler((e) => {
   pos.value = viewer.scene.pickPosition(e.position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 </script>

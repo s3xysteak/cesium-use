@@ -5,11 +5,11 @@
 ## 使用
 
 ```js{3}
-// 通常可以结合 `useEvent` 使用
+// 通常可以结合 `useEventHandler` 使用
 
 const globePick = useGlobePick()
 
-useEvent(({ position }) => {
+useEventHandler(({ position }) => {
   const pos = globePick(position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 ```

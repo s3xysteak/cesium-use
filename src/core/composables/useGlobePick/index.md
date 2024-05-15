@@ -5,11 +5,11 @@ Get the coordinates on the ellipsoid as rays.
 ## Usage
 
 ```js{3}
-// Usually you can use it with `useEvent`
+// Usually you can use it with `useEventHandler`
 
 const globePick = useGlobePick()
 
-useEvent(({ position }) => {
+useEventHandler(({ position }) => {
   const pos = globePick(position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 ```

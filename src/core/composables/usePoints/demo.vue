@@ -2,7 +2,7 @@
 import { shallowRef } from 'vue'
 import * as Cesium from 'cesium'
 import img from './img.png'
-import { useEvent, usePoints } from '~/index'
+import { useEventHandler, usePoints } from '~/index'
 import { useViewer } from '~composables/useViewer'
 
 const data = shallowRef([
@@ -33,8 +33,8 @@ const { flyTo, toggleShow } = usePoints(data, item => ({
   labelOptions: { text: String(item.id) },
 }))
 
-const eventCreator = useEvent()
-eventCreator((e) => {
+const eventHandler = useEventHandler()
+eventHandler((e) => {
   const viewer = useViewer()
   viewer.scene.pick(e.position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)

@@ -1,7 +1,7 @@
 import { ref } from 'vue'
 import { makeDestructurable, useThrottleFn } from '@vueuse/core'
 import * as Cesium from 'cesium'
-import { useEvent } from '~/index'
+import { useEventHandler } from '~/index'
 import { useViewer } from '~composables/useViewer'
 
 export interface UsePointerPositionOptions {
@@ -25,8 +25,8 @@ export function usePointerPosition(options: UsePointerPositionOptions = {}) {
   const lat = ref('')
   const alt = ref('')
 
-  const eventCreator = useEvent()
-  eventCreator(
+  const eventHandler = useEventHandler()
+  eventHandler(
     useThrottleFn((e: Cesium.ScreenSpaceEventHandler.MotionEvent) => {
       const position = viewer.scene.pickPosition(e.endPosition)
 

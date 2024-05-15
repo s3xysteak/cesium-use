@@ -18,14 +18,14 @@ Before using Cesium Use, it is assumed that you have a basic understanding of th
 import * as Cesium from 'cesium'
 import { Located } from 'cesium-use'
 
-// Automatically imported: import { useViewer, useEvent } from 'cesium-use'
+// Automatically imported: import { useViewer, useEventHandler } from 'cesium-use'
 
 const viewer = useViewer()
 
 const show = ref(true)
 const pos = shallowRef()
 
-useEvent((e) => {
+useEventHandler((e) => {
   pos.value = viewer.scene.pickPosition(e.position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 </script>

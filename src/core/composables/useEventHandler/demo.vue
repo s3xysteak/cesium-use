@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import * as Cesium from 'cesium'
-import { useEvent } from '~/index'
+import { useEventHandler } from '~/index'
 import { useViewer } from '~composables/useViewer'
 
 const viewer = useViewer()
@@ -16,12 +16,12 @@ function addPoint(e: { position: any }) {
     },
   })
 }
-const event = useEvent()
-event((e) => {
+const eventHandler = useEventHandler()
+eventHandler((e) => {
   addPoint(e)
 }, Cesium.ScreenSpaceEventType.RIGHT_CLICK)
 
-// How to use `useEvent` without vue instance
+// How to use `useEventHandler` without vue instance
 
 function delay(time: number) {
   return new Promise((res) => {
@@ -33,7 +33,7 @@ const clickText = ref('left click do not work now')
 async function onClick() {
   clickText.value = 'left click works now!'
 
-  const handler = event(addPoint, Cesium.ScreenSpaceEventType.LEFT_CLICK)
+  const handler = eventHandler(addPoint, Cesium.ScreenSpaceEventType.LEFT_CLICK)
   await delay(5000)
   handler.destroy()
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import * as Cesium from 'cesium'
 import geoHello from './hello.json'
-import { loadGeojson, useEvent } from '~/index'
+import { loadGeojson, useEventHandler } from '~/index'
 import { useViewer } from '~composables/useViewer'
 
 const viewer = useViewer()
@@ -20,8 +20,8 @@ loadGeojson({
   viewer.dataSources.add(dataSource)
 })
 
-const eventCreator = useEvent()
-eventCreator((e) => {
+const eventHandler = useEventHandler()
+eventHandler((e) => {
   const picked = viewer.scene.pick(e.position)
   if (!picked?.id?.demo)
     return

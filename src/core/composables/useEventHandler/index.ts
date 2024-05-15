@@ -6,13 +6,13 @@ export type SetInputActionArgs = Parameters<
   InstanceType<typeof Cesium.ScreenSpaceEventHandler>['setInputAction']
 >
 
-export function useEvent(viewer = useViewer()) {
-  function event(
+export function useEventHandler(viewer = useViewer()) {
+  function eventHandler(
     callback: Cesium.ScreenSpaceEventHandler.MotionEventCallback,
     type: Cesium.ScreenSpaceEventType.MOUSE_MOVE
   ): Cesium.ScreenSpaceEventHandler
 
-  function event(
+  function eventHandler(
     callback: Cesium.ScreenSpaceEventHandler.PositionedEventCallback,
     type:
       | Cesium.ScreenSpaceEventType.LEFT_CLICK
@@ -20,11 +20,11 @@ export function useEvent(viewer = useViewer()) {
       | Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
   ): Cesium.ScreenSpaceEventHandler
 
-  function event(
+  function eventHandler(
     ...args: SetInputActionArgs
   ): Cesium.ScreenSpaceEventHandler
 
-  function event(...args: SetInputActionArgs): Cesium.ScreenSpaceEventHandler {
+  function eventHandler(...args: SetInputActionArgs): Cesium.ScreenSpaceEventHandler {
     const [action, type, modifier] = args
 
     const handler = new Cesium.ScreenSpaceEventHandler(viewer.canvas)
@@ -45,5 +45,5 @@ export function useEvent(viewer = useViewer()) {
     return handler
   }
 
-  return event
+  return eventHandler
 }
