@@ -1,5 +1,6 @@
 import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, computed, ref, shallowRef, watch } from 'vue'
+import { pickPosition as _pickPosition } from '../utils'
 import { defineColor, editEntity, useEntityCollection, useEventHandler } from '~/index'
 import { toCoordinates } from '~utils/toCoordinates'
 import { projectionPosition } from '~utils/projectionPosition'
@@ -155,7 +156,7 @@ export function height(options: HeightOptions = {}): HeightReturn {
     immediate: true,
   })
 
-  const pickPosition = (pos: Cesium.Cartesian2) => viewer.scene.pickPosition(pos)
+  const pickPosition = (pos: Cesium.Cartesian2) => _pickPosition(pos, viewer)
   eventHandler(({ position }) => {
     const pos = pickPosition(position)
     if (!pos)

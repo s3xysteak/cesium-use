@@ -1,6 +1,7 @@
 import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, ref, shallowRef, watch } from 'vue'
 import { at } from '@s3xysteak/utils'
+import { pickPosition as _pickPosition } from '../utils'
 import { defineColor, editEntity, useEntityCollection, useEventHandler } from '~/index'
 import { useViewer } from '~composables/useViewer'
 
@@ -101,7 +102,6 @@ export function area(options: AreaOptions = {}): AreaReturn {
         horizontalOrigin: Cesium.HorizontalOrigin.LEFT,
         verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
         disableDepthTestDistance: Number.POSITIVE_INFINITY,
-        heightReference: Cesium.HeightReference.CLAMP_TO_TERRAIN,
       },
     }, centerEntityProps))
 
@@ -112,16 +112,13 @@ export function area(options: AreaOptions = {}): AreaReturn {
             return [...positions, positions[0]]
           return positions
         }, false),
-        clampToGround: true,
-        classificationType: Cesium.ClassificationType.TERRAIN,
         material: defineColor('#ff0000/80'),
         width: 2,
       },
       polygon: {
         hierarchy: new Cesium.CallbackProperty(() => new Cesium.PolygonHierarchy(positions), false),
-        clampToGround: true,
-        classificationType: Cesium.ClassificationType.TERRAIN,
         material: defineColor('#ff0000/20'),
+        perPositionHeight: true,
       },
     }, areaEntityProps))
 
@@ -140,8 +137,7 @@ export function area(options: AreaOptions = {}): AreaReturn {
     immediate: true,
   })
 
-  const pickPosition = (pos: Cesium.Cartesian2) => viewer.scene.pickPosition(pos)
-
+  const pickPosition = (pos: Cesium.Cartesian2) => _pickPosition(pos, viewer)
   eventHandler(({ position }) => {
     const pos = pickPosition(position)
     if (!pos)

@@ -1,6 +1,7 @@
 import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, ref, shallowRef, watch } from 'vue'
 import { at } from '@s3xysteak/utils'
+import { pickPosition as _pickPosition } from '../utils'
 import { defineColor, editEntity, useEntityCollection, useEventHandler } from '~/index'
 import { useViewer } from '~composables/useViewer'
 
@@ -98,8 +99,6 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
       polyline: {
         width: 2,
         positions: new Cesium.CallbackProperty(() => positions, false),
-        clampToGround: true,
-        classificationType: Cesium.ClassificationType.TERRAIN,
         material: defineColor('#ff0000/60'),
       },
     }, lineEntityProps))
@@ -124,7 +123,7 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
     immediate: true,
   })
 
-  const pickPosition = (pos: Cesium.Cartesian2) => viewer.scene.pickPosition(pos)
+  const pickPosition = (pos: Cesium.Cartesian2) => _pickPosition(pos, viewer)
   eventHandler(({ position }) => {
     const pos = pickPosition(position)
     if (!pos)
