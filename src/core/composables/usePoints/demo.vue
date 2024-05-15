@@ -49,7 +49,7 @@ eventHandler((e) => {
       show
     </button>
 
-    <button v-for="i in data" :key="i.id" btn @click="flyTo(i.id)">
+    <button v-for="i in data" :key="i.id" class="btn" @click="flyTo(i.id)">
       {{ i.id }}
     </button>
   </div>
