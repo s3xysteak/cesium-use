@@ -1,9 +1,14 @@
 # useWaterPlane
 
+::: warning Experimental Feature
+It is an experimental feature. It is not guaranteed to reach stable status and the API may change before it does.
+:::
+
 The water surface with reflections.
 
 ## Usage
 ```js
+// Basic params.
 const waterPrimitive = useWaterPlane({
   normalMapUrl: WaterImage,
   positions: positions.map(item => Cesium.Cartographic.fromDegrees(...item)),
@@ -25,7 +30,13 @@ watchEffect(() => {
   waterPrimitive.distortionScale = form.distortionScale
 })
 
+// Show and hide
 function toggleShow() {
   waterPrimitive.show = !waterPrimitive.show
+}
+
+// Destroy
+function destroy() {
+  waterPrimitive.destroy()
 }
 ```
