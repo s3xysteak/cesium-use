@@ -40,7 +40,7 @@ const { isMounted } = useViewerProvider(() => {
 </script>
 
 <template>
-  <div overflow-hidden relative>
+  <div relative>
     <div ref="container" rounded h-full w-full />
 
     <slot v-if="isMounted" />

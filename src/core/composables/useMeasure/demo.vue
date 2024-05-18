@@ -24,7 +24,7 @@ run()
 </script>
 
 <template>
-  <div flex="~ col gap-2" absolute top-4 left-4>
+  <div panel flex="~ col gap-2">
     <button btn @click="area = !area">
       area Now: {{ area }}
     </button>

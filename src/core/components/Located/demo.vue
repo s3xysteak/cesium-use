@@ -14,9 +14,15 @@ const MyButton = defineComponent((_, { slots }) => {
 </script>
 
 <template>
-  <div absolute top-4 left-4 flex="~ col gap-y-2">
-    <input v-model="lon" type="number" input placeholder="lon">
-    <input v-model="lat" type="number" input placeholder="lat">
+  <div panel-absolute w-25 flex="~ col gap-y-2">
+    <label>
+      longitude:
+      <input v-model="lon" w-20 type="number" input placeholder="lon">
+    </label>
+    <label>
+      latitude:
+      <input v-model="lat" w-20 type="number" input placeholder="lat">
+    </label>
   </div>
 
   <div id="teleport-container" />

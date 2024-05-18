@@ -47,9 +47,9 @@ async function onClick() {
       {{ clickText }}
     </button>
 
-    <div b-t="1 solid light" pt-2 mt-2 text-sm>
+    <div b-t="1 solid light" pt-2 mt-2>
       tips:
-      <p>Right click to add point</p>
+      <p>Right click to add point!</p>
     </div>
   </div>
 </template>

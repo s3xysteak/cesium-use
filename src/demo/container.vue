@@ -41,7 +41,9 @@ useViewerProvider(() => {
 </script>
 
 <template>
-  <div ref="container" h-full w-full />
+  <div relative>
+    <div ref="container" rounded h-full w-full />
 
-  <RouterView v-if="isMounted" />
+    <RouterView v-if="isMounted" />
+  </div>
 </template>
