@@ -3,7 +3,7 @@ import { reactive, watchEffect } from 'vue'
 import * as Cesium from 'cesium'
 import WaterImage from './waterNormals.jpg'
 import { useWaterPlane } from '.'
-import { useViewer } from '~/index'
+import { useViewer, defineColor } from '~/index'
 
 const viewer = useViewer()
 
@@ -50,6 +50,7 @@ const form = reactive({
   height: 10,
   reflectivity: 0.15,
   rippleSize: 100,
+  waterColor: '#020E12',
   waterAlpha: 0.9,
   distortionScale: 10,
 })
@@ -57,6 +58,7 @@ watchEffect(() => {
   primitive.height = form.height
   primitive.reflectivity = form.reflectivity
   primitive.rippleSize = form.rippleSize
+  primitive.waterColor = defineColor(form.waterColor)
   primitive.waterAlpha = form.waterAlpha
   primitive.distortionScale = form.distortionScale
 })
@@ -79,6 +81,10 @@ function toggleShow() {
     <label>
       rippleSize:
       <input v-model="form.rippleSize" input type="number">
+    </label>
+    <label>
+      waterColor:
+      <input v-model="form.waterColor" input type="color">
     </label>
     <label>
       waterAlpha:
