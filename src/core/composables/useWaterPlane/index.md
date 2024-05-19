@@ -8,10 +8,12 @@ The water surface with reflections.
 
 ## Usage
 ```js
+const waterPlane = useWaterPlane()
+
 // Basic params.
-const waterPrimitive = useWaterPlane({
+const primitive = waterPlane({
   normalMapUrl: WaterImage,
-  positions: positions.map(item => Cesium.Cartographic.fromDegrees(...item)),
+  positions: positions.map(item => Cesium.Cartographic.fromDegrees(item[0], item[1])),
   height: 10,
 })
 
@@ -23,20 +25,20 @@ const form = reactive({
   distortionScale: 10,
 })
 watchEffect(() => {
-  waterPrimitive.height = form.height
-  waterPrimitive.reflectivity = form.reflectivity
-  waterPrimitive.rippleSize = form.rippleSize
-  waterPrimitive.waterAlpha = form.waterAlpha
-  waterPrimitive.distortionScale = form.distortionScale
+  primitive.height = form.height
+  primitive.reflectivity = form.reflectivity
+  primitive.rippleSize = form.rippleSize
+  primitive.waterAlpha = form.waterAlpha
+  primitive.distortionScale = form.distortionScale
 })
 
 // Show and hide
 function toggleShow() {
-  waterPrimitive.show = !waterPrimitive.show
+  primitive.show = !primitive.show
 }
 
 // Destroy
 function destroy() {
-  waterPrimitive.destroy()
+  primitive.destroy()
 }
 ```

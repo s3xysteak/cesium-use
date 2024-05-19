@@ -38,7 +38,9 @@ const positions = [
   ],
 ]
 
-const waterPrimitive = useWaterPlane({
+const waterPlane = useWaterPlane()
+
+const primitive = waterPlane({
   normalMapUrl: WaterImage,
   positions: positions.map(item => Cesium.Cartographic.fromDegrees(item[0], item[1])),
   height: 10,
@@ -52,15 +54,15 @@ const form = reactive({
   distortionScale: 10,
 })
 watchEffect(() => {
-  waterPrimitive.height = form.height
-  waterPrimitive.reflectivity = form.reflectivity
-  waterPrimitive.rippleSize = form.rippleSize
-  waterPrimitive.waterAlpha = form.waterAlpha
-  waterPrimitive.distortionScale = form.distortionScale
+  primitive.height = form.height
+  primitive.reflectivity = form.reflectivity
+  primitive.rippleSize = form.rippleSize
+  primitive.waterAlpha = form.waterAlpha
+  primitive.distortionScale = form.distortionScale
 })
 
 function toggleShow() {
-  waterPrimitive.show = !waterPrimitive.show
+  primitive.show = !primitive.show
 }
 </script>
 
@@ -94,7 +96,7 @@ function toggleShow() {
     </div>
     <div>
       destroy:
-      <button btn @click="waterPrimitive.destroy">
+      <button btn @click="primitive.destroy">
         destroy
       </button>
     </div>

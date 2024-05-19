@@ -27,33 +27,35 @@ export type UseWaterPlaneOptions = {
   sunShiny?: number
 } & Omit<WaterPrimitiveConstructorOptions, OmitProperties>
 
-export function useWaterPlane(options: UseWaterPlaneOptions) {
-  const {
-    scene = useViewer().scene,
-    rippleSize = 100,
-    waterColor = defineColor('#020E12'),
-    waterAlpha = 0.9,
-    reflectivity = 0.2,
-    distortionScale = 10,
-    flowDegrees = 0,
-    lightDirection = new Cesium.Cartesian3(0, 0, 1),
-    sunShiny = 100,
-  } = options
+export function useWaterPlane(viewer = useViewer()) {
+  return (options: UseWaterPlaneOptions) => {
+    const {
+      scene = viewer.scene,
+      rippleSize = 100,
+      waterColor = defineColor('#020E12'),
+      waterAlpha = 0.9,
+      reflectivity = 0.2,
+      distortionScale = 10,
+      flowDegrees = 0,
+      lightDirection = new Cesium.Cartesian3(0, 0, 1),
+      sunShiny = 100,
+    } = options
 
-  const primitive = new WaterPrimitive({
-    ...options,
-    scene,
-    rippleSize,
-    waterColor,
-    waterAlpha,
-    reflectivity,
-    distortionScale,
-    flowDegrees,
-    lightDirection,
-    sunShiny,
-  })
+    const primitive = new WaterPrimitive({
+      ...options,
+      scene,
+      rippleSize,
+      waterColor,
+      waterAlpha,
+      reflectivity,
+      distortionScale,
+      flowDegrees,
+      lightDirection,
+      sunShiny,
+    })
 
-  return primitive
+    return primitive
+  }
 }
 
 export interface WaterPrimitiveConstructorOptions {
