@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import * as Cesium from 'cesium'
+import { noop } from '@s3xysteak/utils'
 import { useEventHandler } from '~/index'
 import { useViewer } from '~composables/useViewer'
 
@@ -39,17 +40,79 @@ async function onClick() {
 
   clickText.value = 'left click do not work now!'
 }
+
+const eventListener = useEventHandler('preRender')
+
+const num = ref(100)
+
+interface UseTweenNumberOptions {
+  from: number
+  to: number
+  duration: number
+  onUpdated?: (value: number) => void
+  onComplete?: () => void
+}
+const easeOut = (t: number) => 1 - (1 - t) ** 5
+function tweenNumber({
+  from,
+  to,
+  duration,
+  onUpdated = noop,
+  onComplete = noop,
+}: UseTweenNumberOptions) {
+  const start = performance.now()
+
+  const hook = () => {
+    const now = performance.now()
+    const progress = Math.min(now - start, duration)
+    const value = from + (to - from) * easeOut(progress / duration)
+
+    if (progress > duration)
+      return stop()
+
+    onUpdated(value)
+  }
+
+  eventListener.add(hook)
+
+  function stop() {
+    eventListener.delete(hook)
+    onComplete()
+  }
+
+  return stop
+}
 </script>
 
 <template>
-  <div panel>
-    <button btn @click="onClick">
-      {{ clickText }}
-    </button>
+  <div panel flex>
+    <section>
+      <button btn @click="onClick">
+        {{ clickText }}
+      </button>
 
-    <div b-t="1 solid light" pt-2 mt-2>
-      tips:
-      <p>Right click to add point!</p>
-    </div>
+      <div b-t="1 solid light" pt-2 mt-2>
+        tips:
+        <p>Right click to add point!</p>
+      </div>
+    </section>
+
+    <section m-l-xl p-l-xl b-l="1 solid gray">
+      {{ num.toFixed(2) }}
+      <button ml-2 btn @click="tweenNumber({ from: num, to: num + 10, duration: 1000, onUpdated: val => { num = val } })">
+        + 10
+      </button>
+      <button ml-2 btn @click="tweenNumber({ from: num, to: num - 10, duration: 1000, onUpdated: val => { num = val } })">
+        - 10
+      </button>
+      <button ml-2 btn @click="tweenNumber({ from: num, to: 10, duration: 1000, onUpdated: val => { num = val } })">
+        = 10
+      </button>
+
+      <div b-t="1 solid light" pt-2 mt-2>
+        tips:
+        <p>Number animation based on `Scene.preRender` !</p>
+      </div>
+    </section>
   </div>
 </template>

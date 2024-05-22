@@ -1,4 +1,5 @@
 import * as Cesium from 'cesium'
+import { tryOnScopeDispose } from '@vueuse/core'
 import { getCurrentInstance, onUnmounted } from 'vue'
 import { useViewer } from '~composables/useViewer'
 
@@ -6,7 +7,17 @@ export type SetInputActionArgs = Parameters<
   InstanceType<typeof Cesium.ScreenSpaceEventHandler>['setInputAction']
 >
 
-export function useEventHandler(viewer = useViewer()) {
+export type UseEventHandlerParam = 'preRender' | 'postRender' | 'preUpdate' | 'postUpdate'
+
+export function useEventHandler(): ReturnType<typeof onEventHandler>
+export function useEventHandler(param: UseEventHandlerParam): ReturnType<typeof onEventListener>
+export function useEventHandler(param?: UseEventHandlerParam) {
+  const viewer = useViewer()
+
+  return param ? onEventListener(viewer, param) : onEventHandler(viewer)
+}
+
+function onEventHandler(viewer: Cesium.Viewer) {
   function eventHandler(
     callback: Cesium.ScreenSpaceEventHandler.MotionEventCallback,
     type: Cesium.ScreenSpaceEventType.MOUSE_MOVE
@@ -46,4 +57,18 @@ export function useEventHandler(viewer = useViewer()) {
   }
 
   return eventHandler
+}
+
+function onEventListener(viewer: Cesium.Viewer, param: UseEventHandlerParam) {
+  const hooks: Set<() => void> = new Set()
+  const listener = viewer.scene[param].addEventListener(() => {
+    hooks.forEach(hook => hook())
+  })
+
+  tryOnScopeDispose(() => {
+    viewer.scene[param].removeEventListener(listener)
+    hooks.clear()
+  })
+
+  return hooks
 }
