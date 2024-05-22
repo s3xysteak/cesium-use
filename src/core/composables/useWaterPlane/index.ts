@@ -261,6 +261,14 @@ class WaterPrimitive {
     this._material!.uniforms.size = val
   }
 
+  get waterColor() {
+    return this._material!.uniforms.waterColor
+  }
+
+  set waterColor(val) {
+    this._material!.uniforms.waterColor = val
+  }
+
   get waterAlpha() {
     return this._material!.uniforms.waterAlpha
   }
