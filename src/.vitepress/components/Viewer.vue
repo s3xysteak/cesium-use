@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import * as Cesium from 'cesium'
 import { ref } from 'vue'
+import { useFullscreen } from '@vueuse/core'
 import { useViewerProvider } from '../../core/composables/useViewer'
 import 'cesium/Build/Cesium/Widgets/widgets.css'
 
@@ -37,11 +38,20 @@ const { isMounted } = useViewerProvider(() => {
 
   return viewer
 })
+
+const box = ref<HTMLDivElement>()
+const { toggle, isFullscreen } = useFullscreen(box)
 </script>
 
 <template>
-  <div relative>
+  <div ref="box" relative :class=" isFullscreen && 'overflow-y-auto bg-light dark:bg-dark'">
     <div ref="container" rounded h-full w-full />
+
+    <div my-2 flex="~ center">
+      <button btn @click="toggle">
+        Toggle fullscreen
+      </button>
+    </div>
 
     <slot v-if="isMounted" />
   </div>
