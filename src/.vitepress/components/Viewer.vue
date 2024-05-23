@@ -46,7 +46,7 @@ const { toggle, isFullscreen } = useFullscreen(box)
 <template>
   <div ref="box" relative :class=" isFullscreen && 'overflow-y-auto bg-light dark:bg-dark'">
     <button v-show="!isFullscreen" mb-2 btn @click="toggle">
-      Toggle fullscreen
+      Fullscreen
     </button>
 
     <div ref="container" rounded h-full w-full />
