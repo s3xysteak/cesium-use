@@ -45,13 +45,11 @@ const { toggle, isFullscreen } = useFullscreen(box)
 
 <template>
   <div ref="box" relative :class=" isFullscreen && 'overflow-y-auto bg-light dark:bg-dark'">
-    <div ref="container" rounded h-full w-full />
+    <button v-show="!isFullscreen" mb-2 btn @click="toggle">
+      Toggle fullscreen
+    </button>
 
-    <div my-2 flex="~ center">
-      <button btn @click="toggle">
-        Toggle fullscreen
-      </button>
-    </div>
+    <div ref="container" rounded h-full w-full />
 
     <slot v-if="isMounted" />
   </div>
