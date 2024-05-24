@@ -3,7 +3,7 @@
 It serves as a simplified version of `ScreenSpaceEventHandler` with function overloading.
 `useEventHandler` will attempt to automatically unregister events when the component is unmounted. If the current context is not within the setup call stack, you can manually unregister events using its return value.
 
-If a string is passed as a parameter, an event for creating the Scene will be created, and it will automatically be unregistered when the component is unmounted.
+If a `Cesium.Event` is passed as a parameter, an event will be created, and it will automatically be unregistered when the component is unmounted.
 
 ## Usage
 
@@ -28,18 +28,19 @@ const handler = eventHandler((e) => {
 
 It is worth noting that when using `eventHandler`, it is recommended to first provide the second parameter, which is `ScreenSpaceEventType`. This triggers function overloading in `eventHandler` to offer better type hints.
 
-### A Event of Scene
+### Cesium.Event
 
 ```js {1}
-const eventListener = useEventHandler('preRender')
+const eventListener = useEventHandler(viewer.scene.preRender)
 
 function hook() {
   console.log('Call in preRender!')
 }
 
 eventListener.add(hook)
-
+eventListener.has(hook)
 eventListener.delete(hook)
+eventListener.clear()
 ```
 
-`useEventHandler('preRender')` Returns a `Set`, which stores the callback function called in `preRender`.
+`useEventHandler(viewer.scene.preRender)` Returns a `Set`, which stores the callback function called in `preRender`.

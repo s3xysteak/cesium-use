@@ -41,7 +41,7 @@ async function onClick() {
   clickText.value = 'left click do not work now!'
 }
 
-const eventListener = useEventHandler('preRender')
+const eventListener = useEventHandler(viewer.scene.preRender)
 
 const num = ref(100)
 
