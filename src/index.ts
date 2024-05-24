@@ -11,6 +11,7 @@ export * from './core/composables/useMoveByKeyboard'
 export * from './core/composables/usePointerPosition'
 export * from './core/composables/usePoints'
 export * from './core/composables/useUnderground'
+export * from './core/composables/useTimeline'
 
 export * from './core/utils/defineColor'
 export * from './core/utils/editEntity'

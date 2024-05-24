@@ -24,6 +24,10 @@ useViewerProvider(() => {
     vrButton: false,
     infoBox: false,
     terrain: Cesium.Terrain.fromWorldTerrain(),
+
+    /** Support high resolution screen */
+    useBrowserRecommendedResolution: false,
+    msaaSamples: 4,
   })
 
   viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(
