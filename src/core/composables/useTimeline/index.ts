@@ -30,7 +30,7 @@ export function useTimeline(viewer = useViewer()) {
   const paused = ref<boolean>(getIsPaused())
 
   const onTick = useEventHandler(viewer.clock.onTick)
-  onTick.add(() => {
+  onTick(() => {
     currentTime.value = getUnix(viewer.clock.currentTime)
     startTime.value = getUnix(viewer.clock.startTime)
     stopTime.value = getUnix(viewer.clock.stopTime)

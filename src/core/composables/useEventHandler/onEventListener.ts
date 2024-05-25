@@ -2,7 +2,7 @@ import type * as Cesium from 'cesium'
 import { tryOnScopeDispose } from '@vueuse/core'
 
 export function onEventListener(event: Cesium.Event) {
-  const hooks: Set<() => void> = new Set()
+  const hooks: Set<(...args: any[]) => void> = new Set()
 
   const listener = event.addEventListener(() => {
     hooks.forEach(hook => hook())
@@ -13,5 +13,9 @@ export function onEventListener(event: Cesium.Event) {
     hooks.clear()
   })
 
-  return hooks
+  return (fn: (...args: any[]) => void) => {
+    hooks.add(fn)
+
+    return () => hooks.delete(fn)
+  }
 }

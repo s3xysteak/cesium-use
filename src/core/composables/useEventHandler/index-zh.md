@@ -31,16 +31,16 @@ const handler = eventHandler((e) => {
 ### Cesium.Event
 
 ```js {1}
-const eventListener = useEventHandler(viewer.scene.preRender)
+const onPreRender = useEventHandler(viewer.scene.preRender)
 
-function hook() {
+onPreRender(() => {
   console.log('Call in preRender!')
-}
+})
+const remove = onPreRender(() => {
+  console.log('Call in preRender too!')
+})
 
-eventListener.add(hook)
-eventListener.has(hook)
-eventListener.delete(hook)
-eventListener.clear()
+remove() // 注销回调函数。 注销成功时返回true，否则返回false。
 ```
 
-`useEventHandler(viewer.scene.preRender)` 返回一个 `Set`，其内部存放在preRender钩子中的回调函数。
+`useEventHandler(viewer.scene.preRender)` 返回一个回调钩子，用于添加回调函数。

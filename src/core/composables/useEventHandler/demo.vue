@@ -41,7 +41,7 @@ async function onClick() {
   clickText.value = 'left click do not work now!'
 }
 
-const eventListener = useEventHandler(viewer.scene.preRender)
+const onPreRender = useEventHandler(viewer.scene.preRender)
 
 const num = ref(100)
 
@@ -62,7 +62,7 @@ function tweenNumber({
 }: UseTweenNumberOptions) {
   const start = performance.now()
 
-  const hook = () => {
+  const remove = onPreRender(() => {
     const now = performance.now()
     const progress = Math.min(now - start, duration)
     const value = from + (to - from) * easeOut(progress / duration)
@@ -71,12 +71,10 @@ function tweenNumber({
       return stop()
 
     onUpdated(value)
-  }
-
-  eventListener.add(hook)
+  })
 
   function stop() {
-    eventListener.delete(hook)
+    remove()
     onComplete()
   }
 

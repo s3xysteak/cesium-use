@@ -31,16 +31,16 @@ It is worth noting that when using `eventHandler`, it is recommended to first pr
 ### Cesium.Event
 
 ```js {1}
-const eventListener = useEventHandler(viewer.scene.preRender)
+const onPreRender = useEventHandler(viewer.scene.preRender)
 
-function hook() {
+onPreRender(() => {
   console.log('Call in preRender!')
-}
+})
+const remove = onPreRender(() => {
+  console.log('Call in preRender too!')
+})
 
-eventListener.add(hook)
-eventListener.has(hook)
-eventListener.delete(hook)
-eventListener.clear()
+remove() // Unregister the callback hook. It returns true when remove successfully or false when failed.
 ```
 
-`useEventHandler(viewer.scene.preRender)` Returns a `Set`, which stores the callback function called in `preRender`.
+`useEventHandler(viewer.scene.preRender)` Returns a callback hook, used to add callback functions.
