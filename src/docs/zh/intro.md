@@ -25,7 +25,8 @@ const viewer = useViewer()
 const show = ref(true)
 const pos = shallowRef()
 
-useEventHandler((e) => {
+const eventHandler = useEventHandler()
+eventHandler((e) => {
   pos.value = viewer.scene.pickPosition(e.position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 </script>

@@ -9,7 +9,8 @@
 
 const globePick = useGlobePick()
 
-useEventHandler(({ position }) => {
+const eventHandler = useEventHandler()
+eventHandler(({ position }) => {
   const pos = globePick(position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 ```
