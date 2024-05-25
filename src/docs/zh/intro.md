@@ -13,7 +13,7 @@ Cesium Use 是一个基于 Vue 的 CesiumJS 工具库，提供了一系列的函
 
 ## 示例
 
-```vue {5,7,12,18-20}
+```vue {5,7,12,19-21}
 <script setup>
 import * as Cesium from 'cesium'
 import { Located } from 'cesium-use'

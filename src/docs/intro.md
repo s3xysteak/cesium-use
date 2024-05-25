@@ -13,7 +13,7 @@ Before using Cesium Use, it is assumed that you have a basic understanding of th
 
 ## Example
 
-```vue {5,7,12,18-20}
+```vue {5,7,12,19-21}
 <script setup>
 import * as Cesium from 'cesium'
 import { Located } from 'cesium-use'
