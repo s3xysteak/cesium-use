@@ -2,49 +2,49 @@ import * as Cesium from 'cesium'
 import { readonly, ref, watchEffect } from 'vue'
 import { useEventHandler, useViewer } from '~/index'
 
-export function useTimeline(viewer = useViewer()) {
+export function useTimeline(clock = useViewer().clock) {
   const getUnix = (time: Cesium.JulianDate) => Cesium.JulianDate.toDate(time).getTime()
-  const getIsPaused = () => !viewer.clock.shouldAnimate || !viewer.clock.canAnimate
+  const getIsPaused = () => !clock.shouldAnimate || !clock.canAnimate
 
   /** Unix timestamp in milliseconds */
-  const currentTime = ref<number>(getUnix(viewer.clock.currentTime))
+  const currentTime = ref<number>(getUnix(clock.currentTime))
   watchEffect(() => {
-    viewer.clock.currentTime = Cesium.JulianDate.fromDate(new Date(currentTime.value))
+    clock.currentTime = Cesium.JulianDate.fromDate(new Date(currentTime.value))
   })
 
-  const rate = ref<number>(viewer.clock.multiplier)
+  const rate = ref<number>(clock.multiplier)
   watchEffect(() => {
-    viewer.clock.multiplier = rate.value
+    clock.multiplier = rate.value
   })
 
-  const startTime = ref<number>(getUnix(viewer.clock.startTime))
+  const startTime = ref<number>(getUnix(clock.startTime))
   watchEffect(() => {
-    viewer.clock.startTime = Cesium.JulianDate.fromDate(new Date(startTime.value))
+    clock.startTime = Cesium.JulianDate.fromDate(new Date(startTime.value))
   })
 
-  const stopTime = ref<number>(getUnix(viewer.clock.stopTime))
+  const stopTime = ref<number>(getUnix(clock.stopTime))
   watchEffect(() => {
-    viewer.clock.stopTime = Cesium.JulianDate.fromDate(new Date(stopTime.value))
+    clock.stopTime = Cesium.JulianDate.fromDate(new Date(stopTime.value))
   })
 
   const paused = ref<boolean>(getIsPaused())
 
-  const onTick = useEventHandler(viewer.clock.onTick)
+  const onTick = useEventHandler(clock.onTick)
   onTick(() => {
-    currentTime.value = getUnix(viewer.clock.currentTime)
-    startTime.value = getUnix(viewer.clock.startTime)
-    stopTime.value = getUnix(viewer.clock.stopTime)
+    currentTime.value = getUnix(clock.currentTime)
+    startTime.value = getUnix(clock.startTime)
+    stopTime.value = getUnix(clock.stopTime)
 
     paused.value = getIsPaused()
 
-    rate.value = viewer.clock.multiplier
+    rate.value = clock.multiplier
   })
 
   const play = () => {
-    viewer.clock.shouldAnimate = true
+    clock.shouldAnimate = true
   }
   const pause = () => {
-    viewer.clock.shouldAnimate = false
+    clock.shouldAnimate = false
   }
 
   return {
