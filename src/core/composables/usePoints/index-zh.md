@@ -1,5 +1,7 @@
 # usePoints
 
+::experimental::
+
 打点并且响应式的更新数据。
 
 - 第一个参数为一个数组，`usePoints`遍历这个数组以进行打点。

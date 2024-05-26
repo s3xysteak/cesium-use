@@ -1,8 +1,6 @@
 # useWaterPlane
 
-::: warning Experimental Feature
-It is an experimental feature. It is not guaranteed to reach stable status and the API may change before it does.
-:::
+::experimental::
 
 The water surface with reflections.
 

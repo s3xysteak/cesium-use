@@ -1,5 +1,7 @@
 # usePoints
 
+::experimental::
+
 Plot points and update data reactively.
 
 - The first parameter is an array that `usePoints` iterates through to plot points.

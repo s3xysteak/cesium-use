@@ -21,8 +21,12 @@ function markdownTransform(): Plugin {
         return
 
       const [pkg, name, i] = id.split('/').slice(-3)
-      const lang = langMap(i.split('-')[1]?.replace(/\.md$/, '') ?? 'en')
+      const lang = langMap(i.split('-')[1]?.replace(/\.md$/, '') ?? 'en')!
 
+      // replace
+      code = code.replace(varMap('experimental')!, lang.experimental)
+
+      // demo
       const existDemo = fs.existsSync(`${DIR_CORE}/${pkg}/${name}/demo.vue`)
       code += existDemo
         ? `
@@ -68,6 +72,8 @@ ${types}
 
       const sourceUrl = `${URL}/${pkg}/${name}/index.${existsIndex ? 'ts' : 'vue'}`
 
+      // ## Source
+
       // source
       code += `
 ## ${lang?.source}
@@ -89,10 +95,26 @@ function langMap(lang: string) {
     en: {
       type: 'Type Declarations',
       source: 'Source',
+      experimental: `
+::: warning Experimental Feature
+It is an experimental feature. It is not guaranteed to reach stable status and the API may change before it does.
+:::
+      `.trim(),
     },
     zh: {
       type: '类型声明',
       source: '源码',
+      experimental: `
+::: warning 实验性功能
+这是一项实验性功能。它不一定会最终成为稳定功能，并且在稳定之前相关 API 也可能会发生变化。
+:::
+      `.trim(),
     },
   }[lang]
+}
+
+function varMap(varKey: string) {
+  return {
+    experimental: '::experimental::',
+  }[varKey]
 }
