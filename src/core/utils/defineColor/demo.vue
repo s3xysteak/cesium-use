@@ -22,5 +22,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <input v-model="input" placeholder="rgb(0 255 255)" input absolute top-4 left-4>
+  <div panel>
+    Color : <input v-model="input" placeholder="rgb(0 255 255)" input>
+  </div>
 </template>

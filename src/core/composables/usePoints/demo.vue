@@ -41,7 +41,7 @@ eventHandler((e) => {
 </script>
 
 <template>
-  <div overflow-y-auto absolute top-4 bottom-4 left-4 flex="~ col gap-y-2">
+  <div overflow-y-auto max-h-60 panel flex="~ col gap-y-2">
     <button btn @click="random">
       random
     </button>
@@ -50,7 +50,7 @@ eventHandler((e) => {
     </button>
 
     <button v-for="i in data" :key="i.id" class="btn" @click="flyTo(i.id)">
-      {{ i.id }}
+      Fly to {{ i.id }}
     </button>
   </div>
 </template>

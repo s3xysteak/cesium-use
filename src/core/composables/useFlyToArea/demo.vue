@@ -28,7 +28,9 @@ const fly = () => flyToArea(data.map(item => [item.lon, item.lat]))
 </script>
 
 <template>
-  <button btn absolute left-1 top-1 @click="fly">
-    Click me!
-  </button>
+  <div panel>
+    <button btn @click="fly">
+      Click me to fly!
+    </button>
+  </div>
 </template>

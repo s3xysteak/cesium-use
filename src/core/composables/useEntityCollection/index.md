@@ -1,12 +1,12 @@
 # useEntityCollection
 
-The EntityCollection that automatically synchronizes with the Viewer.
+The EntityCollection that automatically synchronizes with the Viewer. Extends `Cesium.EntityCollection` .
 
 ## Usage
 
 ```js
-const collectionCreator = useEntityCollection()
-const collection = collectionCreator()
+const entityCollection = useEntityCollection()
+const collection = entityCollection()
 // This will synchronize with the context's viewer, eliminating the need for manually executing `viewer.entities.add()`.
 collection.add({
   polygon: {

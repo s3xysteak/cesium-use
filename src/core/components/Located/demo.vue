@@ -1,20 +1,32 @@
 <script setup lang="ts">
+import * as Cesium from 'cesium'
 import { computed, defineComponent, h, ref } from 'vue'
 import Located from './Located.vue'
+import { toCartesian3, useViewer } from '~/index'
 
 const show = ref(true)
 const lon = ref<number | ''>(-100)
 const lat = ref<number | ''>(40)
 
-const coordinate = computed(() => [lon.value === '' ? -100 : lon.value, lat.value === '' ? 40 : lat.value])
+const coordinate = computed(() => [lon.value === '' ? -100 : lon.value, lat.value === '' ? 40 : lat.value, 1000])
 
 const MyButton = defineComponent((_, { slots }) => {
   return () => h('button', { class: 'btn' }, slots.default?.())
 })
+
+const viewer = useViewer()
+viewer.entities.add({
+  position: new Cesium.CallbackProperty(() => toCartesian3(coordinate.value), false) as any,
+  point: {
+    pixelSize: 10,
+    color: Cesium.Color.RED,
+    disableDepthTestDistance: Number.POSITIVE_INFINITY,
+  },
+})
 </script>
 
 <template>
-  <div panel-absolute w-25 flex="~ col gap-y-2">
+  <div panel w-25 flex="~ col gap-y-2">
     <label>
       longitude:
       <input v-model="lon" w-20 type="number" input placeholder="lon">
