@@ -7,6 +7,16 @@ import { toCartesian3 } from '~utils/toCartesian3'
 
 import { useViewer } from '~composables/useViewer'
 
+defineOptions({
+  name: 'Located',
+})
+
+const props = withDefaults(defineProps<Props>(), {
+  placement: 'bottomRight',
+  as: 'div',
+  teleportTo: 'body',
+})
+
 interface Rect {
   width: number
   height: number
@@ -21,12 +31,6 @@ type Placement =
   | 'bottom'
   | 'bottomLeft'
   | 'left'
-
-const props = withDefaults(defineProps<Props>(), {
-  placement: 'bottomRight',
-  as: 'div',
-  teleportTo: 'body',
-})
 
 const placementMap: Record<Placement, (rect: Rect) => Rect> = {
   topLeft: rect => ({

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import * as Cesium from 'cesium'
 import { computed, defineComponent, h, ref } from 'vue'
-import Located from './Located.vue'
+import Located from './index.vue'
 import { toCartesian3, useViewer } from '~/index'
 
 const show = ref(true)

@@ -1,6 +1,6 @@
 export * from './core/composables/useViewer'
 
-export { default as Located } from './core/components/Located/Located.vue'
+export { default as Located } from './core/components/Located/index.vue'
 
 export * from './core/composables/useEntityCollection'
 export * from './core/composables/useEventHandler'
