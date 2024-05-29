@@ -1,7 +1,7 @@
 {
   "name": "cesium-use",
   "type": "module",
-  "version": "0.10.1",
+  "version": "0.10.2",
   "private": false,
   "description": "Vue powered CesiumJS utility library",
   "author": "s3xysteak",
