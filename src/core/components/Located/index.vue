@@ -1,153 +1,50 @@
 <script setup lang="ts">
 import type { Cartesian3 } from 'cesium'
-import { type Component, computed, onMounted, onUnmounted, ref } from 'vue'
-import { useElementBounding } from '@vueuse/core'
+import { type Component, ref } from 'vue'
+import type { Nullable } from '@s3xysteak/utils'
 import type { MaybeCoordinates } from '~shared/coordinate'
-import { toCartesian3 } from '~utils/toCartesian3'
-
-import { useViewer } from '~composables/useViewer'
+import { type UseLocatedOptions, useLocated } from '~/index'
 
 defineOptions({
   name: 'Located',
 })
 
-const props = withDefaults(defineProps<Props>(), {
-  placement: 'bottomRight',
-  as: 'div',
-  teleportTo: 'body',
-})
+const props = withDefaults(defineProps<{
+  coordinate: Nullable<Cartesian3 | MaybeCoordinates>
 
-interface Rect {
-  width: number
-  height: number
-}
+  placement?: UseLocatedOptions['placement']
 
-type Placement =
-  | 'topLeft'
-  | 'top'
-  | 'topRight'
-  | 'right'
-  | 'bottomRight'
-  | 'bottom'
-  | 'bottomLeft'
-  | 'left'
-
-const placementMap: Record<Placement, (rect: Rect) => Rect> = {
-  topLeft: rect => ({
-    width: -rect.width,
-    height: -rect.height,
-  }),
-  top: rect => ({ width: -rect.width / 2, height: -rect.height }),
-  topRight: rect => ({ width: 0, height: -rect.height }),
-  right: rect => ({ width: 0, height: -rect.height / 2 }),
-  bottomRight: _rect => ({ width: 0, height: 0 }),
-  bottom: rect => ({ width: -rect.width / 2, height: 0 }),
-  bottomLeft: rect => ({ width: -rect.width, height: 0 }),
-  left: rect => ({ width: -rect.width, height: -rect.height / 2 }),
-}
-
-interface Props {
-  coordinate: Cartesian3 | MaybeCoordinates
-
-  /**
-   * 元素方位
-   * @default 'bottomRight'
-   */
-  placement?: Placement
-
-  /**
-   * 偏差
-   */
-  offset?: Partial<{
-    left: number
-    top: number
-  }>
+  offset?: UseLocatedOptions['offset']
 
   as?: string | Component
-
-  teleportTo?: string
-}
-
-const state = defineModel<boolean>({
-  required: true,
+}>(), {
+  as: 'div',
 })
-/**
- * 样式的原始形式，不能直接使用，单位`px`。
- */
-const styleRaw = ref<{ left: number, top: number } | ''>('')
-
-const { placement } = props
-
-const viewer = useViewer()
+const state = defineModel<boolean>({
+  default: true,
+})
 
 const el = ref()
-
-const isShow = ref(true)
-
-const { width, height } = useElementBounding(el)
-
-function update() {
-  if (!state.value)
-    return
-
-  const coordinate = props.coordinate
-  if (!coordinate)
-    return
-
-  const position = viewer.scene.cartesianToCanvasCoordinates(
-    toCartesian3(coordinate),
-  )
-
-  // position在奇怪的时候会是undefined，并不知道为什么
-  if (!position) {
-    isShow.value = false
-    return
-  }
-  isShow.value = true
-
-  const offsetPlacement = placementMap[placement]({
-    width: width.value,
-    height: height.value,
-  })
-
-  styleRaw.value = {
-    left:
-      position.x + (offsetPlacement?.width ?? 0) + (props.offset?.left ?? 0),
-    top: position.y + (offsetPlacement?.height ?? 0) + (props.offset?.top ?? 0),
-  }
-}
-
-onMounted(() => {
-  viewer.scene.postRender.addEventListener(update)
+const { style, show } = useLocated(el, {
+  state,
+  coordinate: () => props.coordinate,
+  offset: props.offset,
+  placement: props.placement,
 })
-onUnmounted(() => {
-  viewer.scene.postRender.removeEventListener(update)
-})
-
-const styleUsed = computed(() =>
-  styleRaw.value
-    ? {
-        left: `${styleRaw.value.left}px`,
-        top: `${styleRaw.value.top}px`,
-      }
-    : '',
-)
 </script>
 
 <template>
-  <Teleport :to="teleportTo">
-    <component
-      :is="as"
-      ref="el"
-      :style="[
-        styleUsed,
-        {
-          position: 'absolute',
-          visibility: state && isShow ? 'visible' : 'hidden',
-        },
-      ]"
-    >
-      <slot />
-    </component>
-  </Teleport>
+  <component
+    :is="as"
+    ref="el"
+    :style="[
+      style,
+      {
+        position: 'absolute',
+        visibility: show ? 'visible' : 'hidden',
+      },
+    ]"
+  >
+    <slot />
+  </component>
 </template>

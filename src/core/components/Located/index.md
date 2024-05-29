@@ -2,6 +2,15 @@
 
 Locate a DOM element on a coordinate.
 
+For more detailed type declarations and source code, refer to [useLocated](/composables/useLocated.md) 。
+
+| Name                | Type                                     | Default           |
+| ------------------- | ---------------------------------------- | ----------------- |
+| (v-model)modelValue | boolean                                  | true              |
+| coordinate          | Nullable<Cartesian3 \| MaybeCoordinates> | **required**      |
+| placement           | UseLocatedOptions['placement']           | 'bottomRight'     |
+| as                  | string \| Component                      | 'div'             |
+
 ## Usage
 
 ```vue
@@ -9,70 +18,20 @@ Locate a DOM element on a coordinate.
 import { Located } from 'cesium-use'
 import MyButton from './MyButton.vue'
 
-const show = ref(true)
-const pos = shallowRef([-100, 10])
+const state = ref(true)
+const coordinate = ref([-100, 10])
 </script>
 
 <template>
   <Located
-    v-model="show"
+    v-model="state"
     :as="MyButton"
     placement="top"
-    :coordinate="pos"
-    :offset="{ top: 10, left: 20 }"
+    :coordinate
   >
-    <div>hello world!</div>
+    <div>
+      Hello world!
+    </div>
   </Located>
 </template>
 ```
-
-Where:
-
-- [required] `v-model` binds a boolean value that controls the display and hiding of `Located`.
-- [required] `coordinate` is used to control the fixed coordinates of `Located`.
-- `as` can change `Located` to the desired DOM, defaulting to `'div'`, or pass a component as shown in the example code.
-- `placement` provides a series of preset positions, defaulting to `bottomRight`, indicating the DOM is positioned at the bottom right of the coordinates (i.e., the top left corner of the DOM is fixed on the coordinates).
-- `offset` is used to adjust the positioning offset of the DOM. `top` and `left` are in CSS units.
-
-## Type Declarations
-
-:::details
-
-```ts
-interface Rect {
-  width: number
-  height: number
-}
-
-type Placement =
-  | 'topLeft'
-  | 'top'
-  | 'topRight'
-  | 'right'
-  | 'bottomRight'
-  | 'bottom'
-  | 'bottomLeft'
-  | 'left'
-
-interface Props {
-  coordinate: MaybeCartesian3OrLonLat
-
-  /**
-   * DOM element placement
-   * @default 'bottomRight'
-   */
-  placement?: Placement
-
-  /**
-   * Dom css offset
-   */
-  offset?: Partial<{
-    left: number
-    top: number
-  }>
-
-  as?: string | Component
-}
-```
-
-:::
