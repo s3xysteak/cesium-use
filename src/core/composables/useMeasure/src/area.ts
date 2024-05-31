@@ -2,7 +2,7 @@ import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, ref, shallowRef, watch } from 'vue'
 import { at } from '@s3xysteak/utils'
 import { pickPosition as _pickPosition } from '../utils'
-import { defineColor, editEntity, useEntityCollection, useEventHandler } from '~/index'
+import { defineColor, editEntity, linkEntityCollection, useEntityCollection, useEventHandler } from '~/index'
 import { useViewer } from '~composables/useViewer'
 
 export interface AreaOptions {
@@ -19,7 +19,7 @@ interface AreaEntityData {
   /**
    * All entities in made by `AreaOptions`.
    */
-  entities: ReturnType<ReturnType<typeof useEntityCollection>>
+  entities: Cesium.EntityCollection
 
   /**
    * Polygon positions.
@@ -79,7 +79,8 @@ export function area(options: AreaOptions = {}): AreaReturn {
 
   const viewer = useViewer()
 
-  const entitiesCreator = useEntityCollection()
+  const entities = useEntityCollection()
+  const entitiesCreator = () => linkEntityCollection(entities)
   const eventHandler = useEventHandler()
 
   const createEntity = (): AreaEntityData => {

@@ -2,6 +2,8 @@
 
 The EntityCollection that automatically synchronizes with the Viewer, essentially it is an encapsulation of [linkEntityCollection](/utils/linkEntityCollection.md).
 
+It will clear the `Cesium.EntityCollection` it returned while leaving the scope.
+
 ## Usage
 
 ```js

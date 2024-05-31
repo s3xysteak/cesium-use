@@ -1,7 +1,7 @@
 import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, computed, ref, shallowRef, watch } from 'vue'
 import { pickPosition as _pickPosition } from '../utils'
-import { defineColor, editEntity, useEntityCollection, useEventHandler } from '~/index'
+import { defineColor, editEntity, linkEntityCollection, useEntityCollection, useEventHandler } from '~/index'
 import { toCoordinates } from '~utils/toCoordinates'
 import { projectionPosition } from '~utils/projectionPosition'
 import { useViewer } from '~composables/useViewer'
@@ -18,7 +18,7 @@ interface HeightEntityData {
   /**
    * All entities in made by `HeightOptions`.
    */
-  entities: ReturnType<ReturnType<typeof useEntityCollection>>
+  entities: Cesium.EntityCollection
 
   /**
    * `[start, end]` positions.
@@ -84,7 +84,8 @@ export function height(options: HeightOptions = {}): HeightReturn {
 
   const viewer = useViewer()
 
-  const entitiesCreator = useEntityCollection()
+  const entities = useEntityCollection()
+  const entitiesCreator = () => linkEntityCollection(entities)
   const eventHandler = useEventHandler()
 
   const createEntity = (): HeightEntityData => {
