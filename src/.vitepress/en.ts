@@ -29,21 +29,21 @@ export const en = defineConfig({
         text: 'Composables',
         items: composablesList.map(dir => ({
           text: dir,
-          link: `composables/${dir}.md`,
+          link: `/composables/${dir}.md`,
         })),
       },
       {
         text: 'Component',
         items: componentsList.map(dir => ({
           text: dir,
-          link: `components/${dir}.md`,
+          link: `/components/${dir}.md`,
         })),
       },
       {
         text: 'Utils',
         items: utilsList.map(dir => ({
           text: dir,
-          link: `utils/${dir}.md`,
+          link: `/utils/${dir}.md`,
         })),
       },
     ],
