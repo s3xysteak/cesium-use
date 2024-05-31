@@ -7,9 +7,7 @@
 ## 使用
 
 ```js
-const collection = new Cesium.EntityCollection()
-
-linkEntityCollection(viewer.entities, collection)
+const collection = linkEntityCollection(viewer.entities)
 
 const entity = collection.add({})
 viewer.entities.contains(entity) // true!
@@ -26,30 +24,13 @@ collection.contains(entityOfTarget) // false!
 ```js
 const father = new Cesium.EntityCollection()
 
-const son1 = new Cesium.EntityCollection()
-const son2 = new Cesium.EntityCollection()
+const son1 = linkEntityCollection(father)
 
-linkEntityCollection(father, son1)
+const son2 = new Cesium.EntityCollection()
 linkEntityCollection(father, son2) // 也可以链接多个 EntityCollection。
 
 linkEntityCollection(viewer.entities, father)
 
 const e = son1.add({})
 viewer.entities.contains(e) // true!
-```
-
-也可以调用其返回值以解除链接：
-
-```js
-const collection = new Cesium.EntityCollection()
-
-const unlink = linkEntityCollection(viewer.entities, collection)
-
-const e = collection.add({})
-viewer.entities.contains(e) // true!
-
-unlink()
-
-collection.remove(e)
-viewer.entities.contains(e) // still true!
 ```

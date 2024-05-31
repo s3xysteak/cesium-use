@@ -1,6 +1,9 @@
-import type * as Cesium from 'cesium'
+import * as Cesium from 'cesium'
 
-export function linkEntityCollection(target: Cesium.EntityCollection, source: Cesium.EntityCollection) {
+export function linkEntityCollection(
+  target: Cesium.EntityCollection,
+  source: Cesium.EntityCollection = new Cesium.EntityCollection(),
+) {
   source.values.forEach((entity) => {
     if (source.values.length === 0)
       return
@@ -8,7 +11,7 @@ export function linkEntityCollection(target: Cesium.EntityCollection, source: Ce
     target.add(entity)
   })
 
-  return source.collectionChanged.addEventListener((_: any, added: Cesium.Entity[], removed: Cesium.Entity[]) => {
+  source.collectionChanged.addEventListener((_: any, added: Cesium.Entity[], removed: Cesium.Entity[]) => {
     added.forEach((entity) => {
       target.add(entity)
     })
@@ -17,4 +20,6 @@ export function linkEntityCollection(target: Cesium.EntityCollection, source: Ce
       target.remove(entity)
     })
   })
+
+  return source
 }

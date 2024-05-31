@@ -17,6 +17,15 @@ describe.concurrent('linkEntityCollection', () => {
     expect(target.contains(e)).toBe(true)
   })
 
+  it('should work with add by default param', () => {
+    const [target] = prepare()
+
+    const source = linkEntityCollection(target)
+
+    const e = source.add({})
+    expect(target.contains(e)).toBe(true)
+  })
+
   it('should work with remove by source', () => {
     const [target, source] = prepare()
 
@@ -41,10 +50,9 @@ describe.concurrent('linkEntityCollection', () => {
 
   it('should work with multiple entity collections', () => {
     const target = new Cesium.EntityCollection()
-    const [source1, source2] = prepare()
 
-    linkEntityCollection(target, source1)
-    linkEntityCollection(source1, source2)
+    const source1 = linkEntityCollection(target, new Cesium.EntityCollection())
+    const source2 = linkEntityCollection(source1, new Cesium.EntityCollection())
 
     const e = source2.add({})
 
