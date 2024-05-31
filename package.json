@@ -41,7 +41,7 @@
     "test-once": "vitest run",
     "build": "run-p type:check \"build:only {@}\" --",
     "build:types": "tsc --emitDeclarationOnly",
-    "release": "esno ./scripts/release.ts",
+    "release": "pnpm type:check && esno ./scripts/release.ts",
     "build:only": "vite build",
     "type:check": "vue-tsc --noEmit --allowImportingTsExtensions",
     "docs:dev": "vitepress dev src",
