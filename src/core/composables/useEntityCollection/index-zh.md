@@ -1,12 +1,11 @@
 # useEntityCollection
 
-与 Viewer 自动同步的 EntityCollection。继承 `Cesium.EntityCollection` 。
+与 Viewer 自动同步的 EntityCollection，本质上是 [linkEntityCollection](/zh/utils/linkEntityCollection.md) 的封装。
 
 ## 使用
 
 ```js
-const entityCollection = useEntityCollection()
-const collection = entityCollection()
+const collection = useEntityCollection()
 // 这会同步到上下文的viewer，无需手动再执行viewer.entities.add()
 collection.add({
   polygon: {
