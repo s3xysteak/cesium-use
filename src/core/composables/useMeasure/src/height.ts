@@ -142,7 +142,9 @@ export function height(options: HeightOptions = {}): HeightReturn {
       label: {
         text: 'end',
       },
-    }, initialEntityProps, endEntityProps))
+    }, initialEntityProps, {
+      point: undefined,
+    }, endEntityProps))
 
     dateSet.add(val)
 
@@ -186,6 +188,17 @@ export function height(options: HeightOptions = {}): HeightReturn {
     positions.value = [pos, pos]
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
+  eventHandler(({ endPosition }) => {
+    if (!state.value || !current.value || !current.value.positions.value[0])
+      return
+
+    const pos = pickPosition(endPosition)
+    if (!pos)
+      return
+
+    current.value.positions.value = [current.value.positions.value[0], pos]
+  }, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
+
   eventHandler(({ position }) => {
     if (!state.value || !current.value)
       return
@@ -213,21 +226,10 @@ export function height(options: HeightOptions = {}): HeightReturn {
         pixelOffset: new Cesium.Cartesian2(20, 0),
         disableDepthTestDistance: Number.POSITIVE_INFINITY,
       },
-    }, closeEntityProps))
+    }, { point: initialEntityProps.point }, closeEntityProps))
 
     current.value = undefined
   }, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
-
-  eventHandler(({ endPosition }) => {
-    if (!state.value || !current.value || !current.value.positions.value[0])
-      return
-
-    const pos = pickPosition(endPosition)
-    if (!pos)
-      return
-
-    current.value.positions.value = [current.value.positions.value[0], pos]
-  }, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
 
   function clearAll() {
     state.value = false
