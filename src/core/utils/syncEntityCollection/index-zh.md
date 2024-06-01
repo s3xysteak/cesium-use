@@ -1,13 +1,13 @@
-# linkEntityCollection
+# syncEntityCollection
 
 > Keep on keeping on!
 
-Link two `Cesium.EntityCollection` , to synchronize the source collection to the target collection in one direction.
+链接两个 `Cesium.EntityCollection` ，使原集合单向同步到目标集合。
 
-## Usage
+## 使用
 
 ```js
-const collection = linkEntityCollection(viewer.entities)
+const collection = syncEntityCollection(viewer.entities)
 
 const entity = collection.add({})
 viewer.entities.contains(entity) // true!
@@ -19,17 +19,17 @@ const entityOfTarget = viewer.entities.add({})
 collection.contains(entityOfTarget) // false!
 ```
 
-You can also embed links `Cesium.EntityCollection` ：
+你也可以嵌套的链接 `Cesium.EntityCollection` ：
 
 ```js
 const father = new Cesium.EntityCollection()
 
-const son1 = linkEntityCollection(father)
+const son1 = syncEntityCollection(father)
 
 const son2 = new Cesium.EntityCollection()
-linkEntityCollection(father, son2) // or multiples EntityCollections.
+syncEntityCollection(father, son2) // 也可以链接多个 EntityCollection。
 
-linkEntityCollection(viewer.entities, father)
+syncEntityCollection(viewer.entities, father)
 
 const e = son1.add({})
 viewer.entities.contains(e) // true!

@@ -1,6 +1,6 @@
 # useEntityCollection
 
-与 Viewer 自动同步的 EntityCollection，本质上是 [linkEntityCollection](/zh/utils/linkEntityCollection.md) 的封装。
+与 Viewer 自动同步的 EntityCollection，本质上是 [syncEntityCollection](/zh/utils/syncEntityCollection.md) 的封装。
 
 在离开作用于时自动清空返回的集合。
 

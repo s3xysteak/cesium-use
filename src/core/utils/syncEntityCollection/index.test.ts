@@ -1,8 +1,8 @@
 import * as Cesium from 'cesium'
 import { describe, expect, it } from 'vitest'
-import { linkEntityCollection } from '.'
+import { syncEntityCollection } from '.'
 
-describe.concurrent('linkEntityCollection', () => {
+describe.concurrent('syncEntityCollection', () => {
   const prepare = () => [
     new Cesium.EntityCollection(),
     new Cesium.EntityCollection(),
@@ -11,7 +11,7 @@ describe.concurrent('linkEntityCollection', () => {
   it('should work with add by source', () => {
     const [target, source] = prepare()
 
-    linkEntityCollection(target, source)
+    syncEntityCollection(target, source)
 
     const e = source.add({})
     expect(target.contains(e)).toBe(true)
@@ -20,7 +20,7 @@ describe.concurrent('linkEntityCollection', () => {
   it('should work with add by default param', () => {
     const [target] = prepare()
 
-    const source = linkEntityCollection(target)
+    const source = syncEntityCollection(target)
 
     const e = source.add({})
     expect(target.contains(e)).toBe(true)
@@ -29,7 +29,7 @@ describe.concurrent('linkEntityCollection', () => {
   it('should work with remove by source', () => {
     const [target, source] = prepare()
 
-    linkEntityCollection(target, source)
+    syncEntityCollection(target, source)
 
     const e = source.add({})
     source.remove(e)
@@ -40,7 +40,7 @@ describe.concurrent('linkEntityCollection', () => {
   it('should work with removeAll by source', () => {
     const [target, source] = prepare()
 
-    linkEntityCollection(target, source)
+    syncEntityCollection(target, source)
 
     const e = source.add({})
     source.removeAll()
@@ -51,8 +51,8 @@ describe.concurrent('linkEntityCollection', () => {
   it('should work with multiple entity collections', () => {
     const target = new Cesium.EntityCollection()
 
-    const source1 = linkEntityCollection(target, new Cesium.EntityCollection())
-    const source2 = linkEntityCollection(source1, new Cesium.EntityCollection())
+    const source1 = syncEntityCollection(target, new Cesium.EntityCollection())
+    const source2 = syncEntityCollection(source1, new Cesium.EntityCollection())
 
     const e = source2.add({})
 

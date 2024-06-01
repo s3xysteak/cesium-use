@@ -2,7 +2,7 @@ import * as Cesium from 'cesium'
 import { type Ref, type ShallowRef, ref, shallowRef, watch } from 'vue'
 import { at } from '@s3xysteak/utils'
 import { pickPosition as _pickPosition } from '../utils'
-import { defineColor, editEntity, linkEntityCollection, useEntityCollection, useEventHandler } from '~/index'
+import { defineColor, editEntity, syncEntityCollection, useEntityCollection, useEventHandler } from '~/index'
 import { useViewer } from '~composables/useViewer'
 
 export interface AreaOptions {
@@ -80,7 +80,7 @@ export function area(options: AreaOptions = {}): AreaReturn {
   const viewer = useViewer()
 
   const entities = useEntityCollection()
-  const entitiesCreator = () => linkEntityCollection(entities)
+  const entitiesCreator = () => syncEntityCollection(entities)
   const eventHandler = useEventHandler()
 
   const createEntity = (): AreaEntityData => {

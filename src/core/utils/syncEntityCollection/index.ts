@@ -1,6 +1,6 @@
 import * as Cesium from 'cesium'
 
-export function linkEntityCollection(
+export function syncEntityCollection(
   target: Cesium.EntityCollection,
   source: Cesium.EntityCollection = new Cesium.EntityCollection(),
 ) {

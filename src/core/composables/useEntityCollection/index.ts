@@ -1,8 +1,8 @@
 import { tryOnScopeDispose } from '@vueuse/core'
-import { linkEntityCollection, useViewer } from '~/index'
+import { syncEntityCollection, useViewer } from '~/index'
 
 export function useEntityCollection(viewer = useViewer()) {
-  const collection = linkEntityCollection(viewer.entities)
+  const collection = syncEntityCollection(viewer.entities)
 
   tryOnScopeDispose(() => {
     collection.removeAll()
