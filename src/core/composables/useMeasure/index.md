@@ -1,5 +1,7 @@
 # useMeasure
 
+::experimental::
+
 A collection of measure tools, for various measurements in GIS.
 
 ## Usage
