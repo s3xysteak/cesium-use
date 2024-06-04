@@ -4,6 +4,8 @@
 
 ## 使用
 
+这会将entity的材质改为红色，高度改为1：
+
 ```js
 const entity = viewer.entities.add({
   polygon: {
@@ -15,6 +17,7 @@ editEntity(
   entity,
   {
     polygon: {
+      height: 1,
       material: Cesium.Color.AQUA,
     },
   },
@@ -24,5 +27,4 @@ editEntity(
     },
   },
 )
-// 这会将entity的材质改为红色
 ```
