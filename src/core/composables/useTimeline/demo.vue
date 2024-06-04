@@ -61,10 +61,10 @@ viewer.trackedEntity = entity
   <div>
     <div flex="~ items-center gap-x-4">
       <p panel>
-        Current Time: {{ new Date(currentTime).toLocaleString() }}
+        Start Time: {{ new Date(startTime).toLocaleString() }}
       </p>
       <p panel>
-        Start Time: {{ new Date(startTime).toLocaleString() }}
+        Current Time: {{ new Date(currentTime).toLocaleString() }}
       </p>
       <p panel>
         Stop Time: {{ new Date(stopTime).toLocaleString() }}
