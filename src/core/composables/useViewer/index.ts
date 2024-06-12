@@ -53,7 +53,7 @@ export function useViewerProvider(fn: () => Awaitable<Viewer>) {
     const val = fn()
 
     isPromise(val)
-      ? val.then(v => setViewer(v))
+      ? val.then(v => setViewer(v as Viewer))
       : setViewer(val as Viewer)
   })
 

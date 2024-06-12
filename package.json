@@ -55,38 +55,41 @@
     "vue": "^3.4.0"
   },
   "dependencies": {
-    "@s3xysteak/utils": "^0.5.1",
-    "@vueuse/core": "^10.9.0"
+    "@s3xysteak/utils": "^0.6.1",
+    "@vueuse/core": "^10.10.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.18.0",
+    "@antfu/eslint-config": "^2.21.1",
     "@tsconfig/node20": "^20.1.4",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^20.12.12",
-    "@unocss/reset": "^0.60.2",
-    "@unocss/transformer-directives": "^0.60.2",
-    "@vitejs/plugin-vue": "^5.0.4",
+    "@types/node": "^20.14.2",
+    "@unocss/reset": "^0.61.0",
+    "@unocss/transformer-directives": "^0.61.0",
+    "@vitejs/plugin-vue": "^5.0.5",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.5.1",
-    "cesium": "^1.117.0",
+    "cesium": "^1.118.2",
     "consola": "^3.2.3",
     "eslint": "^8.57.0",
     "fs-extra": "^11.2.0",
-    "jsdom": "^24.0.0",
+    "jsdom": "^24.1.0",
     "markdown-it-mathjax3": "^4.3.2",
-    "npm-run-all2": "^6.1.2",
+    "npm-run-all2": "^6.2.0",
     "pathe": "^1.1.2",
-    "prettier": "^3.2.5",
+    "prettier": "^3.3.2",
     "typescript": "^5.4.5",
-    "unocss": "^0.60.2",
+    "unocss": "^0.61.0",
     "unplugin-export-collector": "^0.4.3",
-    "vite": "^5.2.11",
+    "vite": "^5.2.13",
     "vite-plugin-dts": "^3.9.1",
-    "vite-plugin-static-copy": "^1.0.4",
-    "vitepress": "1.1.4",
+    "vite-plugin-static-copy": "^1.0.5",
+    "vitepress": "1.2.3",
     "vitest": "^1.6.0",
     "vue": "^3.4.27",
-    "vue-router": "^4.3.2",
-    "vue-tsc": "^2.0.18"
+    "vue-router": "^4.3.3",
+    "vue-tsc": "^2.0.21"
+  },
+  "resolutions": {
+    "protobufjs": "7.2.6"
   }
 }
