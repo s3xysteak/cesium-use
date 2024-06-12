@@ -39,7 +39,7 @@ export function useViewer(isThrowError: UseViewerParam = 'throw-error'): Viewer 
   return viewerInject
 }
 
-export function useViewerProvider(fn: Awaitable<() => Viewer>) {
+export function useViewerProvider(fn: () => Awaitable<Viewer>) {
   const viewer = shallowRef<Viewer>()
 
   /** `True` when viewer has been mounted */
@@ -50,12 +50,11 @@ export function useViewerProvider(fn: Awaitable<() => Viewer>) {
     isMounted.value = true
   }
   onMounted(() => {
-    // @ts-expect-error - has handled with promise
     const val = fn()
 
     isPromise(val)
       ? val.then(v => setViewer(v))
-      : setViewer(val)
+      : setViewer(val as Viewer)
   })
 
   provide(INJECT_KEY_VIEWER, viewer)
