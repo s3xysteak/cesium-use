@@ -1,16 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useMounted } from '@vueuse/core'
 import * as Cesium from 'cesium'
 import 'cesium/Build/Cesium/Widgets/widgets.css'
 
 // @ts-expect-error - not in includes
 import { useViewerProvider } from '~composables/useViewer'
 
-const isMounted = useMounted()
-
 const container = ref<HTMLDivElement>()
-useViewerProvider(() => {
+const { isMounted } = useViewerProvider(() => {
   const viewer = new Cesium.Viewer(container.value as HTMLDivElement, {
     geocoder: false,
     homeButton: false,
