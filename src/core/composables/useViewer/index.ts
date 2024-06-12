@@ -62,5 +62,6 @@ export function useViewerProvider(fn: Awaitable<() => Viewer>) {
 
   return {
     isMounted,
+    viewer,
   }
 }
