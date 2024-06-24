@@ -59,4 +59,14 @@ describe.concurrent('syncEntityCollection', () => {
     expect(source1.contains(e)).toBe(true)
     expect(target.contains(e)).toBe(true)
   })
+
+  it('should have the correct collection of the entity', () => {
+    const target = new Cesium.EntityCollection()
+
+    const source = syncEntityCollection(target)
+
+    const e = source.add({})
+
+    expect(e.entityCollection.id === source.id).toBe(true)
+  })
 })

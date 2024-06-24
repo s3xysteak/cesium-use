@@ -7,7 +7,10 @@ export function syncEntityCollection(
   source.values.forEach(entity => target.add(entity))
 
   source.collectionChanged.addEventListener((_: any, added: Cesium.Entity[], removed: Cesium.Entity[]) => {
-    added.forEach(entity => target.add(entity))
+    added.forEach((entity) => {
+      target.add(entity)
+      entity.entityCollection = source
+    })
     removed.forEach(entity => target.remove(entity))
   })
 
