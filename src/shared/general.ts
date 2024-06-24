@@ -4,13 +4,10 @@ import { isObject } from '@s3xysteak/utils'
 export function mergeDeep<T extends object = object, S extends object = T>(obj: T, ...args: S[]) {
   return args.reduce((acc, arg) => {
     objectKeys(arg).forEach((key) => {
-      // @ts-expect-error - key
-      if (isObject(arg[key]) && isObject(acc[key]))
-        // @ts-expect-error - key
-        Object.assign(acc[key], arg[key])
+      if (isObject(arg[key]) && isObject((acc as any)[key]))
+        Object.assign((acc as any)[key], arg[key])
       else
-        // @ts-expect-error - key
-        acc[key] = arg[key]
+        (acc as any)[key] = arg[key]
     })
     return acc
   }, obj)
