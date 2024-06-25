@@ -43,6 +43,7 @@ export const shared = defineConfig({
     resolve: {
       alias,
     },
+    envDir: resolve(fileURLToPath(import.meta.url), '..'),
     build: {
       rollupOptions: {
         external: ['cesium'],

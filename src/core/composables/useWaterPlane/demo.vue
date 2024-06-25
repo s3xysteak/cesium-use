@@ -2,39 +2,40 @@
 import { reactive, watchEffect } from 'vue'
 import * as Cesium from 'cesium'
 import WaterImage from './waterNormals.jpg'
+import glb from './golden_eagle.glb?url'
 import { useWaterPlane } from '.'
-import { useViewer, defineColor } from '~/index'
+import { defineColor, toCartesian3, useViewer } from '~/index'
 
 const viewer = useViewer()
 
-async function run() {
-  const tileset = await Cesium.Cesium3DTileset.fromIonAssetId(2464651)
-  viewer.scene.primitives.add(tileset)
-
-  viewer.flyTo(tileset)
-}
-run()
+viewer.flyTo(viewer.entities.add({
+  position: toCartesian3(119.95, 31.8, 100),
+  model: {
+    uri: glb,
+    scale: 100,
+  },
+}))
 
 const positions = [
   [
-    -76.36747995597236,
-    34.96256844815245,
+    119.78,
+    31.98,
   ],
   [
-    -76.37906600247254,
-    34.93306058888281,
+    119.78,
+    31.62,
   ],
   [
-    -76.33575625722067,
-    34.93249520055339,
+    120.15,
+    31.62,
   ],
   [
-    -76.33575625722067,
-    34.96335970042942,
+    120.15,
+    31.98,
   ],
   [
-    -76.36747995597236,
-    34.96256844815245,
+    119.78,
+    31.98,
   ],
 ]
 
@@ -47,12 +48,12 @@ const primitive = waterPlane({
 })
 
 const form = reactive({
-  height: 10,
+  height: 100,
   reflectivity: 0.15,
-  rippleSize: 100,
+  rippleSize: 1000,
   waterColor: '#020E12',
   waterAlpha: 0.9,
-  distortionScale: 10,
+  distortionScale: 50,
 })
 watchEffect(() => {
   primitive.height = form.height

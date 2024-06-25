@@ -55,6 +55,8 @@ const entity = viewer.entities.add({
 })
 
 viewer.trackedEntity = entity
+
+play()
 </script>
 
 <template>

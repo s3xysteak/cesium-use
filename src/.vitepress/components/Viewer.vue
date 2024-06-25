@@ -5,6 +5,9 @@ import { useFullscreen } from '@vueuse/core'
 import { useViewerProvider } from '../../core/composables/useViewer'
 import 'cesium/Build/Cesium/Widgets/widgets.css'
 
+// @ts-expect-error - vite env
+Cesium.Ion.defaultAccessToken = import.meta.env.VITE_ION_TOKEN
+
 const container = ref<HTMLDivElement>()
 const { isMounted } = useViewerProvider(() => {
   const viewer = new Cesium.Viewer(container.value as HTMLDivElement, {
