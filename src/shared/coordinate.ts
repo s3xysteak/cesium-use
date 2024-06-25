@@ -30,8 +30,9 @@ export function normalizeCoordinates(source: MaybeCoordinates) {
       return isUndefined(v) ? false : Number.isNaN(v)
 
     return Number.isNaN(v)
-  }))
+  })) {
     throwError('Invalid value which cannot be parsed to number.')
+  }
 
   return value
 }
