@@ -73,8 +73,10 @@ export function useLocated(el: MaybeRefOrGetter<Nullable<HTMLElement>>, options:
     if (!state.value)
       return
 
-    if (!coordinate.value)
+    if (!coordinate.value) {
+      __show.value = false
       return
+    }
 
     const pos = viewer.scene.cartesianToCanvasCoordinates(toCartesian3(coordinate.value))
 
