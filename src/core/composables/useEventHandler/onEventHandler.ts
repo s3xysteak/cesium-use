@@ -1,8 +1,8 @@
 import * as Cesium from 'cesium'
-import { tryOnScopeDispose } from '@vueuse/core'
+import type { createEventHook } from '@vueuse/core'
 
 export type SetInputActionArgs = Parameters<InstanceType<typeof Cesium.ScreenSpaceEventHandler>['setInputAction']>
-export function onEventHandler(viewer: Cesium.Viewer) {
+export function onEventHandler(viewer: Cesium.Viewer, disposeHook: ReturnType<typeof createEventHook>) {
   function eventHandler(
     callback: Cesium.ScreenSpaceEventHandler.MotionEventCallback,
     type: Cesium.ScreenSpaceEventType.MOUSE_MOVE
@@ -20,22 +20,20 @@ export function onEventHandler(viewer: Cesium.Viewer) {
     ...args: SetInputActionArgs
   ): Cesium.ScreenSpaceEventHandler
 
+  // * Impl
+
   function eventHandler(...args: SetInputActionArgs): Cesium.ScreenSpaceEventHandler {
     const [action, type, modifier] = args
 
     const handler = new Cesium.ScreenSpaceEventHandler(viewer.canvas)
 
     handler.setInputAction(
-      (e: any) => {
-        action(e)
-      },
+      (e: any) => action(e),
       type,
       modifier,
     )
 
-    tryOnScopeDispose(() => {
-      handler.destroy()
-    })
+    disposeHook.on(() => handler.destroy())
 
     return handler
   }

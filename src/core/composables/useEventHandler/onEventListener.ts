@@ -1,14 +1,14 @@
 import type * as Cesium from 'cesium'
-import { tryOnScopeDispose } from '@vueuse/core'
+import type { createEventHook } from '@vueuse/core'
 
-export function onEventListener(event: Cesium.Event) {
+export function onEventListener(event: Cesium.Event, disposeHook: ReturnType<typeof createEventHook>) {
   const hooks: Set<(...args: any[]) => void> = new Set()
 
   const listener = event.addEventListener(() => {
     hooks.forEach(hook => hook())
   })
 
-  tryOnScopeDispose(() => {
+  disposeHook.on(() => {
     listener()
     hooks.clear()
   })
