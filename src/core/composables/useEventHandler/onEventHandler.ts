@@ -33,7 +33,7 @@ export function onEventHandler(viewer: Cesium.Viewer, disposeHook: ReturnType<ty
       modifier,
     )
 
-    disposeHook.on(() => handler.destroy())
+    disposeHook.on(() => handler.isDestroyed() || handler.destroy())
 
     return handler
   }
