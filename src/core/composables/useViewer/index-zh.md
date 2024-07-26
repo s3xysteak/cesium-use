@@ -11,9 +11,16 @@
 
 ## 使用
 
-对于父组件，使用 `useViewerProvider` 注入viewer。useViewerProvider方法接受一个返回viewer实例的回调函数，其返回的viewer实例将会被注入。该回调函数会在 `onMounted` 钩子中调用，因此可以放心的在回调函数中使用DOM引用。
+### useViewerProvider
 
-`isMounted` 是一个布尔值响应式变量，其初始值总是false，在viewer被挂载后变为true，这可以作为viewer被挂载的信号使用。
+对于父组件，使用 `useViewerProvider` 注入viewer。useViewerProvider接受一个返回viewer实例的回调函数，这个函数可以是异步的:
+
+`useViewerProvider(() => new Cesium.Viewer(container.value))`
+
+该回调函数会在 `onMounted` 钩子中调用，因此可以放心的在回调函数中使用DOM引用。
+
+- `isMounted` 是其返回值之一。其初始值总是`ref(false)`，并在 `Viewer` 完成挂载后变为 `ref(true)`。
+- `viewer` 是其返回值之一。其初始值为 `shallowRef(undefined)`，在`Viewer`挂载后为 `shallowRef(viewer)`。这是一个备用选项，大多数情况下你都不需要使用它。建议隔离业务组件与初始化`Viewer`的组件，以避免处理`Viewer`是否挂载带来的复杂度。
 
 ```vue
 <script setup>
@@ -28,11 +35,12 @@ const { isMounted } = useViewerProvider(() => {
 
 <template>
   <div ref="container" />
-  <div>
-    <slot v-if="isMounted" />
-  </div>
+  <!-- 确保子组件创建时，viewer已经完成初始化 -->
+  <slot v-if="isMounted" />
 </template>
 ```
+
+### useViewer
 
 对于子组件，使用 `useViewer` 获取父组件提供的viewer实例。
 

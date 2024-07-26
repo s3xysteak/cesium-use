@@ -13,21 +13,41 @@ Cesium Use 是一个基于 Vue 的 CesiumJS 工具库，提供了一系列的函
 
 ## 示例
 
-```vue {5,7,12,19-21}
+初始化 Viewer 的示例：
+
+```vue
 <script setup>
+import Comp from './Comp.vue'
+const container = ref(null)
+
+// 初始化 Viewer
+const { isMounted } = useViewerProvider(() => new Cesium.Viewer(container.value))
+</script>
+
+<template>
+  <div ref="container" />
+  <Comp v-if="isMounted" />
+</template>
+```
+
+使用Viewer的示例：
+
+```vue {6,8,13,20-22}
+<script setup>
+// Comp.vue
 import * as Cesium from 'cesium'
 import { Located } from 'cesium-use'
 
 // 自动引入 import { useViewer, useEventHandler } from 'cesium-use'
 
-const viewer = useViewer()
+const viewer = useViewer() // 通过依赖注入从祖先组件获取`Viewer`
 
 const show = ref(true)
 const pos = shallowRef()
 
 const eventHandler = useEventHandler()
-eventHandler((e) => {
-  pos.value = viewer.scene.pickPosition(e.position)
+eventHandler(({ position }) => {
+  pos.value = viewer.scene.pickPosition(position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 </script>
 
@@ -40,6 +60,10 @@ eventHandler((e) => {
 
 ::: details 代码解释
 在点击 cesium 的地球时，一个写着"I am Cesium Use!"的窗口会被固定在所点击的坐标上。
+
+- `useViewer()` 通过依赖注入从祖先组件获取`Viewer`，几乎等价于 `inject('viewer-key')`
+
+- `useEventHandler` 在这里创建了一个`ScreenSpaceEventHandler`的工厂函数
 :::
 
 上面的示例展示了 Cesium Use 最基本的几个功能：
@@ -48,7 +72,10 @@ eventHandler((e) => {
 - **函数与组件:** 提供了一系列函数与组件，以覆盖多种使用情况。
 - **自动引入:** 自带对 `unplugin-auto-import` 的支持，这使得你无需手动引入其提供的方法。
 - **Viewer 管理:** 提供了一些函数以对 Viewer 进行管理，这能方便的获取 Viewer 实例。
-- **类型支持:** Cesium Use 是使用`typescript`进行开发的，但致力于为 ts 与 js 用户带来同样舒适的开发体验。
+
+::: tip
+[点击这里](https://stackblitz.com/edit/vitejs-vite-t6qklc?file=src%2FComp.vue) 在线运行上面的示例！
+:::
 
 ## 响应式支持
 

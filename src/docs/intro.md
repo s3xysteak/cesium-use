@@ -13,21 +13,41 @@ Before using Cesium Use, it is assumed that you have a basic understanding of th
 
 ## Example
 
-```vue {5,7,12,19-21}
+Example of initializing Viewer：
+
+```vue
 <script setup>
+import Comp from './Comp.vue'
+const container = ref(null)
+
+// Initialize Viewer
+const { isMounted } = useViewerProvider(() => new Cesium.Viewer(container.value))
+</script>
+
+<template>
+  <div ref="container" />
+  <Comp v-if="isMounted" />
+</template>
+```
+
+Example of using Viewer:
+
+```vue {6,8,13,20-22}
+<script setup>
+// Comp.vue
 import * as Cesium from 'cesium'
 import { Located } from 'cesium-use'
 
-// Automatically imported: import { useViewer, useEventHandler } from 'cesium-use'
+// Auto import import { useViewer, useEventHandler } from 'cesium-use'
 
-const viewer = useViewer()
+const viewer = useViewer() // Get Viewer injected from parent component.
 
 const show = ref(true)
 const pos = shallowRef()
 
 const eventHandler = useEventHandler()
-eventHandler((e) => {
-  pos.value = viewer.scene.pickPosition(e.position)
+eventHandler(({ position }) => {
+  pos.value = viewer.scene.pickPosition(position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 </script>
 
@@ -40,6 +60,10 @@ eventHandler((e) => {
 
 ::: details Code Explanation
 When clicking on the Earth in Cesium, a window displaying "I am Cesium Use!" will be fixed at the clicked coordinates.
+
+- `useViewer()` get `Viewer` injected from parent component, which is almost equal to `inject('viewer-key')`.
+
+- `useEventHandler` create a factory function of `ScreenSpaceEventHandler`.
 :::
 
 The above example demonstrates several key features of Cesium Use:
@@ -48,7 +72,10 @@ The above example demonstrates several key features of Cesium Use:
 - **Functions and Components:** Offers a range of functions and components to cover various use cases.
 - **Automatic Import:** Supports `unplugin-auto-import`, eliminating the need for manually importing provided methods.
 - **Viewer Management:** Provides functions for managing the Viewer, making it easy to obtain the Viewer instance.
-- **Type Support:** Developed using TypeScript, Cesium Use aims to provide an equally comfortable development experience for both TypeScript and JavaScript users.
+
+::: tip
+[Click here](https://stackblitz.com/edit/vitejs-vite-t6qklc?file=src%2FComp.vue) to play the example above online!
+:::
 
 ## Reactive Support
 

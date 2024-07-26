@@ -11,9 +11,16 @@ For more details about `provide / inject`, please refer to [vue document](https:
 
 ## Usage
 
-For the parent component, use `useViewerProvider` to inject the viewer. The `useViewerProvider` method takes a callback function that returns a viewer instance, which will then be injected. This callback function is called within the `onMounted` hook, allowing you to safely use DOM references within it.
+### useViewerProvider
 
-`isMounted` is a reactive boolean variable that initially holds the value `false`. It switches to `true` after the viewer is mounted, serving as a signal for when the viewer is mounted.
+For parent component, use `useViewerProvider` to inject `Viewer`. `useViewerProvider` receives a callback returned a viewer instance, which can also be async function:
+
+`useViewerProvider(() => new Cesium.Viewer(container.value))`
+
+The callback function will be called in `onMounted` hook, therefore, you can safely use DOM references in callback functions.
+
+- `isMounted` is one of its return values. Its initial value is always `ref(false)`, and it changes to `ref(true)` after the `Viewer` is mounted.
+- `viewer` is one of its return values. Its initial value is `shallowRef(undefined)`, and it changes to `shallowRef(viewer)` after the `Viewer` is mounted. This is an alternative option, and in most cases, you don't need to use it. It's recommended to isolate the business components from the component initializing the `Viewer` to avoid the complexity of handling whether the `Viewer` is mounted.
 
 ```vue
 <script setup>
@@ -28,11 +35,12 @@ const { isMounted } = useViewerProvider(() => {
 
 <template>
   <div ref="container" />
-  <div>
-    <slot v-if="isMounted" />
-  </div>
+  <!-- Confirm when the child component is created, viewer has been initialized -->
+  <slot v-if="isMounted" />
 </template>
 ```
+
+### useViewer
 
 For child component, use `useViewer` to get the `viewer` instance provided by parent component.
 
