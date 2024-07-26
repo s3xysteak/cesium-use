@@ -18,7 +18,7 @@ $ pnpm add cesium-use
 $ yarn add cesium-use
 ```
 
-接下来阅读 [useViewer](composables/useViewer.md) 章节以了解如何初始化`Viewer`。
+建议首先阅读 [useViewer](composables/useViewer.md) 章节以了解如何初始化`Viewer`。
 
 :::
 
