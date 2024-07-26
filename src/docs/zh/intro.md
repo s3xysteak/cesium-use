@@ -17,6 +17,7 @@ Cesium Use 是一个基于 Vue 的 CesiumJS 工具库，提供了一系列的函
 
 ```vue
 <script setup>
+import * as Cesium from 'cesium'
 import Comp from './Comp.vue'
 const container = ref(null)
 

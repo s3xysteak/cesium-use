@@ -17,6 +17,7 @@ Example of initializing Viewer：
 
 ```vue
 <script setup>
+import * as Cesium from 'cesium'
 import Comp from './Comp.vue'
 const container = ref(null)
 
