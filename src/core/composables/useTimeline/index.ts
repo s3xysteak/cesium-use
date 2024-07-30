@@ -2,6 +2,9 @@ import * as Cesium from 'cesium'
 import { readonly, ref, watchEffect } from 'vue'
 import { useEventHandler, useViewer } from '~/index'
 
+/**
+ * Reactive timeline. Used To control currentTime, start/endTime, time rate...
+ */
 export function useTimeline(clock = useViewer().clock) {
   const getUnix = (time: Cesium.JulianDate) => Cesium.JulianDate.toDate(time).getTime()
   const getIsPaused = () => !clock.shouldAnimate || !clock.canAnimate

@@ -34,6 +34,11 @@ export interface UseLocatedOptions {
   }
 }
 
+/**
+ * Fix DOM on a Cartesian3.
+ *
+ * Component version please use `import { Located } from 'cesium-use'`
+ */
 export function useLocated(el: MaybeRefOrGetter<Nullable<HTMLElement>>, options: Partial<UseLocatedOptions> = {}) {
   const {
     state: _state,

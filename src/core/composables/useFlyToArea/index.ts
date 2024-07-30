@@ -8,6 +8,14 @@ export interface UseFlyToAreaOptions {
   onEmpty: () => void
 }
 
+/**
+ * Move the viewpoint to a position where all input coordinates are visible using `flyToBoundingSphere`.
+ * @example
+ * ```js
+ * const flyToArea = useFlyToArea()
+ * flyToArea([[120, 40], [130, 30]])
+ * ```
+ */
 export function useFlyToArea(viewer = useViewer()) {
   return (
     posList: (MaybeCoordinates | Cesium.Cartesian3)[],

@@ -15,6 +15,11 @@ export interface UseMoveByKeyboardOptions {
   keybinding?: Partial<Record<UseMoveByKeyboardKeybindingList, string>>
 }
 
+/**
+ * Moving parallel to the ground.
+ *
+ * To move forward, backward, left, and right, use `W S A D`. Press `Shift` to move downward and `Space` to move upward.
+ */
 export function useMoveByKeyboard(options: UseMoveByKeyboardOptions = {}) {
   const { distancePerFrame = 4, keybinding: _keybinding } = options
   const keybinding: Record<UseMoveByKeyboardKeybindingList, string>

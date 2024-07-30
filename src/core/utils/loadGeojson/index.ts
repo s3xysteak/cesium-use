@@ -7,6 +7,9 @@ export interface LoadGeojsonConfig<CustomReturns = any> {
   custom?: (dataSource: Cesium.GeoJsonDataSource) => CustomReturns
 }
 
+/**
+ * Load geojson without side effects.
+ */
 export async function loadGeojson<T extends LoadGeojsonConfig>(
   config: T,
 ): Promise<

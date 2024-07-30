@@ -1,5 +1,12 @@
 import * as Cesium from 'cesium'
 
+/**
+ * Sync two `Cesium.EntityCollection`.
+ *
+ * To synchronize the source collection to the target collection **in one direction**.
+ *
+ * If no second argument is provided, a new `Cesium.EntityCollection` will be created.
+ */
 export function syncEntityCollection(
   target: Cesium.EntityCollection,
   source: Cesium.EntityCollection = new Cesium.EntityCollection(),
