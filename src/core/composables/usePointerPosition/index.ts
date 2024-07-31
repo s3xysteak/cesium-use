@@ -11,6 +11,22 @@ export interface UsePointerPositionOptions {
   heightToFixed?: number
 }
 
+/**
+ * Obtain the current mouse's latitude, longitude, and altitude reactively.
+ *
+ * Implement optional throttling based on `vueuse`'s `useThrottleFn`.
+ *
+ * @example
+ * ```js
+ *
+ * // const { longitude, latitude, altitude } = usePointerPosition()
+ *
+ * // If you prefer the array destructuring syntax.
+ * const [lon, lat, alt] = usePointerPosition({
+ *   throttle: 150 // Throttling for 150ms.
+ * })
+ * ```
+ */
 export function usePointerPosition(options: UsePointerPositionOptions = {}) {
   const {
     throttle,

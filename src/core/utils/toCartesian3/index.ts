@@ -4,6 +4,9 @@ import { type MaybeCoordinates, normalizeCoordinates } from '~shared/coordinate'
 
 type NumberOrString = number | string
 
+/**
+ * Normalized coordinates/Cartesian3/... to `Cesium.Cartesian3`.
+ */
 export function toCartesian3(longitude: NumberOrString, latitude: NumberOrString, altitude?: NumberOrString): Cesium.Cartesian3
 export function toCartesian3(source: Cesium.Cartesian3 | MaybeCoordinates): Cesium.Cartesian3
 export function toCartesian3(

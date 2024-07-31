@@ -1,5 +1,7 @@
 # useMoveByKeyboard
 
+平行于地面移动。
+
 使用`W S A D`进行前后左右移动，使用`shift`向下移动，使用`space`向上移动。
 
 ## 使用

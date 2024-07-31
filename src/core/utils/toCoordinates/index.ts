@@ -2,6 +2,9 @@ import * as Cesium from 'cesium'
 import { makeDestructurable } from '@vueuse/core'
 import { type MaybeCoordinates, normalizeCoordinates } from '~shared/coordinate'
 
+/**
+ * Normalized Cartesian3/coordinates/... to coordinates.
+ */
 export function toCoordinates(source: Cesium.Cartesian3 | MaybeCoordinates) {
   const createReturns = (
     longitude: number,

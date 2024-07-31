@@ -1,5 +1,8 @@
 import * as Cesium from 'cesium'
 
+/**
+ * Define a `Cesium.Color` from a string.
+ */
 export function defineColor(str: string): Cesium.Color {
   if (str.startsWith('rgb') || str.startsWith('hsl'))
     return Cesium.Color.fromCssColorString(str)

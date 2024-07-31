@@ -1,5 +1,7 @@
 # useMoveByKeyboard
 
+Moving parallel to the ground.
+
 To move forward, backward, left, and right, use `W S A D`. Press `Shift` to move downward and `Space` to move upward.
 
 ## 使用

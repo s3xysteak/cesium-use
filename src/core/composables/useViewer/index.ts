@@ -39,6 +39,9 @@ export function useViewer(isThrowError: UseViewerParam = 'throw-error'): Viewer 
   return viewerInject
 }
 
+/**
+ * Accept a callback which will be called in `onMounted` hook and return a `Cesium.Viewer` instance. It can also be a async function.
+ */
 export function useViewerProvider(fn: () => Awaitable<Viewer>) {
   const viewer = shallowRef<Viewer>()
 
