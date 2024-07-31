@@ -39,24 +39,24 @@ $ pnpm add -D unplugin-auto-import
 import { defineConfig } from 'vite'
 
 import AutoImport from 'unplugin-auto-import/vite'
-import CesiumUseResolver from 'cesium-use/resolver'
+import CesiumUseImports from 'cesium-use/imports'
 
 export default defineConfig({
   plugins: [
     AutoImport({
-      resolvers: [
-        CesiumUseResolver()
+      imports: [
+        CesiumUseImports()
       ]
     })
   ]
 })
 ```
 
-`CesiumUseResolver`接受一个可选的对象作为参数，表示 `name -> alias` 的映射。
+`CesiumUseImports`接受一个可选的对象作为参数，表示 `name -> alias` 的映射。
 以如下配置为例：
 
 ```js
-CesiumUseResolver({
+CesiumUseImports({
   defineColor: 'color'
 })
 ```
@@ -75,6 +75,21 @@ import { defineColor } from 'cesium-use'
 import { defineColor as color } from 'cesium-use'
 ```
 
-::: warning
-目前只支持对函数进行自动引入，暂不支持对组件进行自动引入。
-:::
+你还可以使用 [unplugin-vue-components](https://github.com/unplugin/unplugin-vue-components) 对组件进行自动引入：
+
+```js
+import { defineConfig } from 'vite'
+
+import Components from 'unplugin-vue-components/vite'
+import CesiumUseResolvers from 'cesium-use/resolvers'
+
+export default defineConfig({
+  plugins: [
+    Components({
+      resolvers: [
+        CesiumUseResolvers()
+      ]
+    })
+  ]
+})
+```

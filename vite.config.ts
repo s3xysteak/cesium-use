@@ -21,8 +21,6 @@ export default defineConfig({
 
     dts({ rollupTypes: true }),
     ExportCollector({
-      writeTo: './src/resolver.ts',
-      exportDefault: true,
       exclude: [
         'Located',
       ],
@@ -48,11 +46,12 @@ export default defineConfig({
     lib: {
       entry: [
         './src/index.ts',
-        './src/resolver.ts',
+        './src/imports.ts',
+        './src/resolvers.ts',
       ],
       formats: ['es'],
       fileName(_, entryName) {
-        return entryName === 'index' ? 'index.mjs' : 'resolver.mjs'
+        return `${entryName}.mjs`
       },
     },
     rollupOptions: {

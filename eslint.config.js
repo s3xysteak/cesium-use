@@ -7,6 +7,7 @@ export default antfu({
 }, {
   ignores: [
     '.vscode/settings.json',
-    'src/resolver.ts',
+    'src/imports.ts',
+    'src/resolvers.ts',
   ],
 })

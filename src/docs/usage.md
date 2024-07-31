@@ -39,24 +39,24 @@ Using `unplugin-auto-import`, here is an example with `Vite`:
 import { defineConfig } from 'vite'
 
 import AutoImport from 'unplugin-auto-import/vite'
-import CesiumUseResolver from 'cesium-use/resolver'
+import CesiumUseImports from 'cesium-use/imports'
 
 export default defineConfig({
   plugins: [
     AutoImport({
-      resolvers: [
-        CesiumUseResolver()
+      imports: [
+        CesiumUseImports()
       ]
     })
   ]
 })
 ```
 
-The `CesiumUseResolver` function accepts an optional object as a parameter, representing the `name -> alias` mapping.
+The `CesiumUseImports` function accepts an optional object as a parameter, representing the `name -> alias` mapping.
 For example:
 
 ```js
-CesiumUseResolver({
+CesiumUseImports({
   defineColor: 'color'
 })
 ```
@@ -75,6 +75,21 @@ import { defineColor } from 'cesium-use'
 import { defineColor as color } from 'cesium-use'
 ```
 
-::: warning
-Currently, automatic import supports functions only and does not support automatic import for components.
-:::
+You can also use [unplugin-vue-components](https://github.com/unplugin/unplugin-vue-components) to auto-import components:
+
+```js
+import { defineConfig } from 'vite'
+
+import Components from 'unplugin-vue-components/vite'
+import CesiumUseResolvers from 'cesium-use/resolvers'
+
+export default defineConfig({
+  plugins: [
+    Components({
+      resolvers: [
+        CesiumUseResolvers()
+      ]
+    })
+  ]
+})
+```
