@@ -78,6 +78,9 @@ importers:
       unplugin-export-collector:
         specifier: ^0.6.0
         version: 0.6.0
+      unplugin-vue-components:
+        specifier: ^0.27.3
+        version: 0.27.3(@babel/parser@7.25.0)(rollup@4.19.1)(vue@3.4.35(typescript@5.5.4))
       vite:
         specifier: ^5.3.5
         version: 5.3.5(@types/node@22.0.0)
@@ -3341,6 +3344,19 @@ packages:
 
   unplugin-export-collector@0.6.0:
     resolution: {integrity: sha512-2CEl9jnWO8mM1P5EV3gcqNnYqVrrmXT5y6SmdYPRJId3zdE7CSthZ0N+d9Y2JajQNuZpmTuR83o+6ztg9timBA==}
+
+  unplugin-vue-components@0.27.3:
+    resolution: {integrity: sha512-5wg7lbdg5ZcrAQNzyYK+6gcg/DG8K6rO+f5YeuvqGHs/PhpapBvpA4O/0ex/pFthE5WgRk43iWuRZEMLVsdz4Q==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@babel/parser': ^7.15.8
+      '@nuxt/kit': ^3.2.2
+      vue: 2 || 3
+    peerDependenciesMeta:
+      '@babel/parser':
+        optional: true
+      '@nuxt/kit':
+        optional: true
 
   unplugin@1.12.0:
     resolution: {integrity: sha512-KeczzHl2sATPQUx1gzo+EnUkmN4VmGBYRRVOZSGvGITE9rGHRDGqft6ONceP3vgXcyJ2XjX5axG5jMWUwNCYLw==}
@@ -7101,6 +7117,25 @@ snapshots:
       unplugin: 1.12.0
     transitivePeerDependencies:
       - '@swc/helpers'
+
+  unplugin-vue-components@0.27.3(@babel/parser@7.25.0)(rollup@4.19.1)(vue@3.4.35(typescript@5.5.4)):
+    dependencies:
+      '@antfu/utils': 0.7.10
+      '@rollup/pluginutils': 5.1.0(rollup@4.19.1)
+      chokidar: 3.6.0
+      debug: 4.3.6
+      fast-glob: 3.3.2
+      local-pkg: 0.5.0
+      magic-string: 0.30.11
+      minimatch: 9.0.5
+      mlly: 1.7.1
+      unplugin: 1.12.0
+      vue: 3.4.35(typescript@5.5.4)
+    optionalDependencies:
+      '@babel/parser': 7.25.0
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
 
   unplugin@1.12.0:
     dependencies:
