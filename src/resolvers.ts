@@ -1,9 +1,10 @@
-import type {  ComponentResolver } from 'unplugin-vue-components';
+import type { ComponentResolver } from 'unplugin-vue-components'
 
-const list = ['Located']
+/** Automatically generate by `/plugins/resolvers.ts` */
+const LIST: Array<string> = []
 
-export default function resolvers():ComponentResolver {
-  const set = new Set(list)
+export default function resolvers(): ComponentResolver {
+  const set = new Set(LIST)
 
   return {
     type: 'component',

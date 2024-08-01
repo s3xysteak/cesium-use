@@ -10,6 +10,7 @@ import dts from 'vite-plugin-dts'
 import UnoCSS from 'unocss/vite'
 import ExportCollector from 'unplugin-export-collector/vite'
 import alias from './alias'
+import HandleResolvers from './plugins/resolvers'
 
 import pkg from './package.json'
 
@@ -25,6 +26,7 @@ export default defineConfig({
         'Located',
       ],
     }),
+    HandleResolvers(),
   ],
   test: {
     environment: 'jsdom',
