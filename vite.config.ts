@@ -62,7 +62,7 @@ export default defineConfig({
         ...Object.keys(pkg.devDependencies || {}),
       ],
     },
-    sourcemap: true,
+    minify: false,
   },
   resolve: {
     alias,
