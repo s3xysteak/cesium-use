@@ -1,7 +1,9 @@
+// * Components
 export { default as Located } from './core/components/Located/index.vue'
 
+// * Composables
+export * from './core/composables/useEntityCollection'
 export * from './core/composables/useEventHandler'
-
 export * from './core/composables/useFlyToArea'
 export * from './core/composables/useGlobePick'
 export * from './core/composables/useLocated'
@@ -12,6 +14,7 @@ export * from './core/composables/usePoints'
 export * from './core/composables/useTimeline'
 export * from './core/composables/useViewer'
 
+// * Utils
 export * from './core/utils/defineColor'
 export * from './core/utils/editEntity'
 export * from './core/utils/loadGeojson'
