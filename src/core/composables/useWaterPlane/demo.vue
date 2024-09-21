@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { reactive, watchEffect } from 'vue'
 import * as Cesium from 'cesium'
-import WaterImage from './waterNormals.jpg'
-import glb from './golden_eagle.glb?url'
-import { useWaterPlane } from '.'
+import { reactive, watchEffect } from 'vue'
 import { defineColor, toCartesian3, useViewer } from '~/index'
+import { useWaterPlane } from '.'
+import glb from './golden_eagle.glb?url'
+import WaterImage from './waterNormals.jpg'
 
 const viewer = useViewer()
 

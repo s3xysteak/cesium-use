@@ -1,6 +1,6 @@
-import * as Cesium from 'cesium'
 import { makeDestructurable } from '@vueuse/core'
 import { type MaybeCoordinates, normalizeCoordinates } from '~shared/coordinate'
+import * as Cesium from 'cesium'
 
 /**
  * Normalized Cartesian3/coordinates/... to coordinates.

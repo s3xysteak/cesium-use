@@ -1,17 +1,17 @@
-import {
-  type InjectionKey,
-  type ShallowRef,
-  getCurrentInstance,
-  inject,
-  onMounted,
-  provide,
-  ref,
-  shallowRef,
-  toValue,
-} from 'vue'
 import type { Viewer } from 'cesium'
 import { type Awaitable, isPromise, noop } from '@s3xysteak/utils'
 import { error, throwError } from '~shared/errorHandler'
+import {
+  getCurrentInstance,
+  inject,
+  type InjectionKey,
+  onMounted,
+  provide,
+  ref,
+  type ShallowRef,
+  shallowRef,
+  toValue,
+} from 'vue'
 
 // Injection key
 const INJECT_KEY_VIEWER: InjectionKey<ShallowRef<Viewer | undefined>> = Symbol('viewer')

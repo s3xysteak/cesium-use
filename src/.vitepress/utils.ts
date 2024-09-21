@@ -20,7 +20,7 @@ export async function getTypeDeclaration(pkg: string, name: string): Promise<str
     .replace('/// <reference types="cesium/Source/Cesium.js" />', '')
     .replace(/import\(.*?\)\./g, '')
     .replace(/import[\s\S]+?from ?["'][\s\S]+?["']/g, '')
-    .replace(/export {}/g, '')
+    .replace(/export \{\}/g, '')
 
   const prettier = await import('prettier')
   return (await prettier

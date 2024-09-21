@@ -1,9 +1,9 @@
-import * as Cesium from 'cesium'
-import { type Ref, type ShallowRef, ref, shallowRef, watch } from 'vue'
 import { at } from '@s3xysteak/utils'
-import { pickPosition as _pickPosition } from '../utils'
-import { defineColor, editEntity, syncEntityCollection, useEventHandler } from '~/index'
 import { useViewer } from '~composables/useViewer'
+import * as Cesium from 'cesium'
+import { type Ref, ref, type ShallowRef, shallowRef, watch } from 'vue'
+import { defineColor, editEntity, syncEntityCollection, useEventHandler } from '~/index'
+import { pickPosition as _pickPosition } from '../utils'
 
 export interface AreaOptions {
   format?: (area: number) => string

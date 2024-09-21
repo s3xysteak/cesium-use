@@ -1,8 +1,8 @@
-import { ref } from 'vue'
 import { makeDestructurable, useThrottleFn } from '@vueuse/core'
-import * as Cesium from 'cesium'
-import { useEventHandler } from '~/index'
 import { useViewer } from '~composables/useViewer'
+import * as Cesium from 'cesium'
+import { ref } from 'vue'
+import { useEventHandler } from '~/index'
 
 export interface UsePointerPositionOptions {
   throttle?: Parameters<typeof useThrottleFn>[1]

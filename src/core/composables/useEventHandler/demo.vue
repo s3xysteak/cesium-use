@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import * as Cesium from 'cesium'
 import { noop } from '@s3xysteak/utils'
-import { useEventHandler } from '~/index'
 import { useViewer } from '~composables/useViewer'
+import * as Cesium from 'cesium'
+import { ref } from 'vue'
+import { useEventHandler } from '~/index'
 
 const viewer = useViewer()
 function addPoint(e: { position: any }) {

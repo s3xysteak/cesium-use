@@ -1,8 +1,8 @@
 import * as Cesium from 'cesium'
-import { useViewer } from '../useViewer'
-import WATER_MATERIAL from './WaterMaterial.glsl?raw'
-import VERTEX from './VertexShader.glsl?raw'
 import { defineColor } from '~/core/utils/defineColor'
+import { useViewer } from '../useViewer'
+import VERTEX from './VertexShader.glsl?raw'
+import WATER_MATERIAL from './WaterMaterial.glsl?raw'
 
 type OmitProperties =
   | 'scene'
@@ -574,8 +574,9 @@ class WaterPrimitive {
       && colorTexture.width === width
       && colorTexture.height === height
       && this._hdr === hdrEnabled
-    )
+    ) {
       return
+    }
 
     this._destroyResource()
     this._hdr = hdrEnabled

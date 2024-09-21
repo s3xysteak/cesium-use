@@ -1,5 +1,5 @@
-import * as Cesium from 'cesium'
 import type { createEventHook } from '@vueuse/core'
+import * as Cesium from 'cesium'
 
 export type SetInputActionArgs = Parameters<InstanceType<typeof Cesium.ScreenSpaceEventHandler>['setInputAction']>
 export function onEventHandler(viewer: Cesium.Viewer, disposeHook: ReturnType<typeof createEventHook>) {

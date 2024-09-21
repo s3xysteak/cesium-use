@@ -1,18 +1,18 @@
 /// <reference types="vitest" />
 
-import { URL, fileURLToPath } from 'node:url'
+import { fileURLToPath, URL } from 'node:url'
 
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { configDefaults } from 'vitest/config'
-
-import dts from 'vite-plugin-dts'
 import UnoCSS from 'unocss/vite'
 import ExportCollector from 'unplugin-export-collector/vite'
-import alias from './alias'
-import HandleResolvers from './plugins/resolvers'
 
+import { defineConfig } from 'vite'
+import dts from 'vite-plugin-dts'
+import { configDefaults } from 'vitest/config'
+import alias from './alias'
 import pkg from './package.json'
+
+import HandleResolvers from './plugins/resolvers'
 
 export default defineConfig({
   plugins: [

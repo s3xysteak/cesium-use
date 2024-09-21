@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { useFullscreen } from '@vueuse/core'
 import * as Cesium from 'cesium'
 import { ref } from 'vue'
-import { useFullscreen } from '@vueuse/core'
 import { useViewerProvider } from '../../core/composables/useViewer'
 import 'cesium/Build/Cesium/Widgets/widgets.css'
 

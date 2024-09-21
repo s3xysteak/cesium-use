@@ -39,7 +39,7 @@ async function loadPrimitive() {
 对于`onEntity`和`custom`，你可以通过**方法**去使用它，而不是通过**箭头函数**去使用它：
 
 ```ts
-const primitive = await loadGeojson({
+loadGeojson({
   url: 'geojson/water.json',
 
   custom: (dataSource) => { // [!code --]

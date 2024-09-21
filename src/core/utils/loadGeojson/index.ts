@@ -13,8 +13,8 @@ export interface LoadGeojsonConfig<CustomReturns = any> {
 export async function loadGeojson<T extends LoadGeojsonConfig>(
   config: T,
 ): Promise<
-  T['custom'] extends (...args: any[]) => infer R ? R : Cesium.GeoJsonDataSource
-> {
+    T['custom'] extends (...args: any[]) => infer R ? R : Cesium.GeoJsonDataSource
+  > {
   const { url, dataSourceOptions, onEntity, custom } = config
 
   const dataSource = await Cesium.GeoJsonDataSource.load(url, dataSourceOptions)

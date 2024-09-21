@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
-import * as Cesium from 'cesium'
-import { defineColor, editEntity } from '~/index'
 import { useViewer } from '~composables/useViewer'
+import * as Cesium from 'cesium'
+import { ref, watchEffect } from 'vue'
+import { defineColor, editEntity } from '~/index'
 
 const viewer = useViewer()
 

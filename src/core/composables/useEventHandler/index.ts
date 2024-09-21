@@ -1,8 +1,8 @@
 import type * as Cesium from 'cesium'
 import { createEventHook, tryOnScopeDispose } from '@vueuse/core'
+import { useViewer } from '~composables/useViewer'
 import { onEventHandler } from './onEventHandler'
 import { onEventListener } from './onEventListener'
-import { useViewer } from '~composables/useViewer'
 
 /**
  * If no params, similar to `Cesium.ScreenSpaceEventHandler`.

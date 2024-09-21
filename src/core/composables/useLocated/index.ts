@@ -1,8 +1,8 @@
-import type { Cartesian3 } from 'cesium'
-import { toRefs, useElementBounding } from '@vueuse/core'
-import { type MaybeRefOrGetter, type Ref, computed, ref, toValue } from 'vue'
 import type { Nullable } from '@s3xysteak/utils'
 import type { MaybeCoordinates } from '~shared/coordinate'
+import type { Cartesian3 } from 'cesium'
+import { toRefs, useElementBounding } from '@vueuse/core'
+import { computed, type MaybeRefOrGetter, type Ref, ref, toValue } from 'vue'
 import { toCartesian3, useEventHandler, useViewer } from '~/index'
 
 type Placement =

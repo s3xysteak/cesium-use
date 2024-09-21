@@ -1,6 +1,6 @@
-import { type AreaOptions, type AreaReturn, area } from './src/area'
-import { type DistanceOptions, type DistanceReturn, distance } from './src/distance'
-import { type HeightOptions, type HeightReturn, height } from './src/height'
+import { area, type AreaOptions, type AreaReturn } from './src/area'
+import { distance, type DistanceOptions, type DistanceReturn } from './src/distance'
+import { height, type HeightOptions, type HeightReturn } from './src/height'
 
 type UseMeasureType = 'area' | 'distance' | 'height'
 type UseMeasureOptions = AreaOptions | DistanceOptions | HeightOptions

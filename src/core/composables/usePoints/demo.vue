@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { shallowRef } from 'vue'
-import * as Cesium from 'cesium'
-import img from './img.png'
-import { useEventHandler, usePoints } from '~/index'
 import { useViewer } from '~composables/useViewer'
+import * as Cesium from 'cesium'
+import { shallowRef } from 'vue'
+import { useEventHandler, usePoints } from '~/index'
+import img from './img.png'
 
 const data = shallowRef([
   { id: 1, lon: '86', lat: '27' },

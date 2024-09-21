@@ -39,7 +39,7 @@ async function loadPrimitive() {
 For `onEntity` and `custom`, you can use them through **methods** rather than through **arrow functions**:
 
 ```ts
-const primitive = await loadGeojson({
+loadGeojson({
   url: 'geojson/water.json',
 
   custom: (dataSource) => { // [!code --]

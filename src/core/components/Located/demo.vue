@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import * as Cesium from 'cesium'
 import { computed, defineComponent, h, ref } from 'vue'
-import Located from './index.vue'
 import { toCartesian3, useEventHandler, useViewer } from '~/index'
+import Located from './index.vue'
 
 const viewer = useViewer()
 

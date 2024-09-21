@@ -1,10 +1,10 @@
-import * as Cesium from 'cesium'
-import { type Ref, type ShallowRef, computed, ref, shallowRef, watch } from 'vue'
-import { pickPosition as _pickPosition } from '../utils'
-import { defineColor, editEntity, syncEntityCollection, useEventHandler } from '~/index'
-import { toCoordinates } from '~utils/toCoordinates'
-import { projectionPosition } from '~utils/projectionPosition'
 import { useViewer } from '~composables/useViewer'
+import { projectionPosition } from '~utils/projectionPosition'
+import { toCoordinates } from '~utils/toCoordinates'
+import * as Cesium from 'cesium'
+import { computed, type Ref, ref, type ShallowRef, shallowRef, watch } from 'vue'
+import { defineColor, editEntity, syncEntityCollection, useEventHandler } from '~/index'
+import { pickPosition as _pickPosition } from '../utils'
 
 export interface HeightOptions {
   format?: (height: number) => string

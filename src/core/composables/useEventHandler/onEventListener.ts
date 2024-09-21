@@ -1,5 +1,5 @@
-import type * as Cesium from 'cesium'
 import type { createEventHook } from '@vueuse/core'
+import type * as Cesium from 'cesium'
 
 export function onEventListener(event: Cesium.Event, disposeHook: ReturnType<typeof createEventHook>) {
   const hooks: Set<(...args: any[]) => void> = new Set()

@@ -1,9 +1,9 @@
 import { fileURLToPath } from 'node:url'
-import { defineConfig } from 'vitepress'
 import { extname, normalize, resolve } from 'pathe'
-
 import UnoCss from 'unocss/vite'
+
 import { viteStaticCopy } from 'vite-plugin-static-copy'
+import { defineConfig } from 'vitepress'
 
 import alias from '../../alias'
 

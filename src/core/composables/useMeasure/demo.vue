@@ -1,7 +1,7 @@
 <script setup>
 import * as Cesium from 'cesium'
-import { useMeasure } from '.'
 import { useViewer } from '~/index'
+import { useMeasure } from '.'
 
 const { state: area, clearAll: areaClear } = useMeasure('area')
 const { state: distance, clearAll: distanceClear } = useMeasure('distance')

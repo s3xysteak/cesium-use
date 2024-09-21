@@ -1,6 +1,6 @@
+import type { Plugin } from 'vite'
 import fs from 'node:fs/promises'
 import process from 'node:process'
-import type { Plugin } from 'vite'
 
 import { resolve } from 'pathe'
 

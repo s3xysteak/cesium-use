@@ -1,7 +1,7 @@
+import type { Plugin } from 'vite'
 import { fileURLToPath } from 'node:url'
 import fs from 'fs-extra'
 import { resolve } from 'pathe'
-import type { Plugin } from 'vite'
 
 import { getTypeDeclaration } from '../utils'
 

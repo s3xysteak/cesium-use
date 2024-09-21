@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { Cartesian3 } from 'cesium'
-import { type Component, ref } from 'vue'
 import type { Nullable } from '@s3xysteak/utils'
 import type { MaybeCoordinates } from '~shared/coordinate'
-import { type UseLocatedOptions, useLocated } from '~/index'
+import type { Cartesian3 } from 'cesium'
+import { type Component, ref } from 'vue'
+import { useLocated, type UseLocatedOptions } from '~/index'
 
 defineOptions({
   name: 'Located',

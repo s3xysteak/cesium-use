@@ -36,10 +36,10 @@ $ pnpm add -D unplugin-auto-import
 使用`unplugin-auto-import`，这里以`Vite`为例：
 
 ```js
-import { defineConfig } from 'vite'
+import CesiumUseImports from 'cesium-use/imports'
 
 import AutoImport from 'unplugin-auto-import/vite'
-import CesiumUseImports from 'cesium-use/imports'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [
@@ -78,10 +78,10 @@ import { defineColor as color } from 'cesium-use'
 你还可以使用 [unplugin-vue-components](https://github.com/unplugin/unplugin-vue-components) 对组件进行自动引入：
 
 ```js
-import { defineConfig } from 'vite'
+import CesiumUseResolvers from 'cesium-use/resolvers'
 
 import Components from 'unplugin-vue-components/vite'
-import CesiumUseResolvers from 'cesium-use/resolvers'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [

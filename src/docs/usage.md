@@ -36,10 +36,10 @@ For more information about `unplugin-auto-import`, please visit [its GitHub repo
 Using `unplugin-auto-import`, here is an example with `Vite`:
 
 ```js
-import { defineConfig } from 'vite'
+import CesiumUseImports from 'cesium-use/imports'
 
 import AutoImport from 'unplugin-auto-import/vite'
-import CesiumUseImports from 'cesium-use/imports'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [
@@ -78,10 +78,10 @@ import { defineColor as color } from 'cesium-use'
 You can also use [unplugin-vue-components](https://github.com/unplugin/unplugin-vue-components) to auto-import components:
 
 ```js
-import { defineConfig } from 'vite'
+import CesiumUseResolvers from 'cesium-use/resolvers'
 
 import Components from 'unplugin-vue-components/vite'
-import CesiumUseResolvers from 'cesium-use/resolvers'
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [
