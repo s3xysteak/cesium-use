@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import * as Cesium from 'cesium'
 import { computed } from 'vue'
-import { useTimeline } from '.'
 import { useViewer } from '~/index'
+import { useTimeline } from '.'
 
 const viewer = useViewer()
 
@@ -19,7 +19,9 @@ function addValueByTime(time: Cesium.JulianDate) {
 }
 viewer.entities.add({
   polyline: {
-    positions: new Cesium.CallbackProperty((time) => {
+    positions: new Cesium.CallbackProperty((time, r) => {
+      if (!time)
+        return r
       return [
         Cesium.Cartesian3.fromDegrees(-120, 35, 0),
         Cesium.Cartesian3.fromDegrees(-120 + addValueByTime(time), 35, 0),
@@ -32,7 +34,9 @@ viewer.entities.add({
   },
 })
 const entity = viewer.entities.add({
-  position: new Cesium.CallbackProperty((time) => {
+  position: new Cesium.CallbackProperty((time, r) => {
+    if (!time)
+      return r
     return Cesium.Cartesian3.fromDegrees(
       -120 + addValueByTime(time),
       35,
@@ -46,7 +50,7 @@ const entity = viewer.entities.add({
     heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
   },
   label: {
-    text: new Cesium.CallbackProperty(time => `${(-120 + addValueByTime(time)).toFixed(6)}, 35`, false),
+    text: new Cesium.CallbackProperty((time, r) => time ? `${(-120 + addValueByTime(time)).toFixed(6)}, 35` : r, false),
     font: '16px sans-serif',
     pixelOffset: new Cesium.Cartesian2(0, -20),
     heightReference: Cesium.HeightReference.CLAMP_TO_GROUND,
