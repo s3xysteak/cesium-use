@@ -7,15 +7,11 @@
 ::: code-group
 
 ```sh [npm]
-$ npm add cesium-use
+$ npm i cesium-use
 ```
 
 ```sh [pnpm]
-$ pnpm add cesium-use
-```
-
-```sh [yarn]
-$ yarn add cesium-use
+$ pnpm i cesium-use
 ```
 
 建议首先阅读 [useViewer](composables/useViewer.md) 章节以了解如何初始化`Viewer`。
@@ -28,7 +24,7 @@ $ yarn add cesium-use
 使用如下命令安装`unplugin-auto-import`:
 
 ```sh
-$ pnpm add -D unplugin-auto-import
+$ pnpm i -D unplugin-auto-import
 ```
 
 更多关于`unplugin-auto-import`的内容请移步[其 github 仓库](https://github.com/unplugin/unplugin-auto-import)。

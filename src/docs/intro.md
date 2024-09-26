@@ -1,6 +1,6 @@
 # Introduction
 
-Cesium Use is a Vue-based CesiumJS utility library that offers a range of functions and components to simplify the development process based on CesiumJS, providing a better development experience and higher development efficiency.
+Cesium Use is a Vue-based CesiumJS utility library that offers a range of functions and components to simplify the development process based on CesiumJS.
 
 ::: tip Prerequisite Knowledge
 
@@ -13,58 +13,80 @@ Before using Cesium Use, it is assumed that you have a basic understanding of th
 
 ## Example
 
-Example of initializing Viewer：
+Click on the earth to see the result!
+
+<script setup>
+import { defineAsyncComponent } from 'vue'
+const Viewer = defineAsyncComponent(() => import('../.vitepress/components/Viewer.vue'))
+const Demo = defineAsyncComponent(() => import('../.vitepress/components/IntroDemo.vue'))
+</script>
+
+<ClientOnly>
+  <Suspense>
+    <Viewer overflow-hidden>
+      <Demo />
+    </Viewer>
+    <template #fallback>
+      Loading...
+    </template>
+  </Suspense>
+</ClientOnly>
+
+::: details Code
+
+The structure is:
+
+```vue
+<template>
+  <Viewer>
+    <Demo />
+  </Viewer>
+</template>
+```
+
+The code of `Viewer.vue` :
 
 ```vue
 <script setup>
-import * as Cesium from 'cesium'
-import Comp from './Comp.vue'
-const container = ref(null)
+import { useViewerProvider } from 'cesium-use'
 
-// Initialize Viewer
+const container = useTemplateRef('container')
 const { isMounted } = useViewerProvider(() => new Cesium.Viewer(container.value))
 </script>
 
 <template>
-  <div ref="container" />
-  <Comp v-if="isMounted" />
+  <div relative>
+    <div ref="container" h-full w-full />
+    <slot v-if="isMounted" />
+  </div>
 </template>
 ```
 
-Example of using Viewer:
+And the code of `Demo.vue` :
 
-```vue {6,8,13,20-22}
+```vue
 <script setup>
-// Comp.vue
-import * as Cesium from 'cesium'
-import { Located } from 'cesium-use'
+import { Located, useEventHandler, useViewer } from 'cesium-use'
 
-// Auto import import { useViewer, useEventHandler } from 'cesium-use'
-
-const viewer = useViewer() // Get Viewer injected from parent component.
+const viewer = useViewer()
 
 const show = ref(true)
 const pos = shallowRef()
 
-const eventHandler = useEventHandler()
-eventHandler(({ position }) => {
+const handler = useEventHandler()
+handler(({ position }) => {
   pos.value = viewer.scene.pickPosition(position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 </script>
 
 <template>
   <Located v-model="show" :coordinate="pos">
-    <div>I am Cesium Use!</div>
+    <div bg-gradient-to-r shadow-lg from-rose to-blue text-nowrap c-white rounded p-4>
+      I am Cesium Use!
+    </div>
   </Located>
 </template>
 ```
-
-::: details Code Explanation
-When clicking on the Earth in Cesium, a window displaying "I am Cesium Use!" will be fixed at the clicked coordinates.
-
-- `useViewer()` get `Viewer` injected from parent component, which is almost equal to `inject('viewer-key')`.
-
-- `useEventHandler` create a factory function of `ScreenSpaceEventHandler`.
 :::
 
 The above example demonstrates several key features of Cesium Use:
@@ -75,31 +97,8 @@ The above example demonstrates several key features of Cesium Use:
 - **Viewer Management:** Provides functions for managing the Viewer, making it easy to obtain the Viewer instance.
 
 ::: tip
-[Click here](https://stackblitz.com/edit/vitejs-vite-t6qklc?file=src%2FComp.vue) to play the example above online!
+Play the example above online on [stackblitz](https://stackblitz.com/edit/vitejs-vite-t6qklc?file=src%2FDemo.vue)!
 :::
-
-## Reactive Support
-
-Cesium Use inherently fully supports reactive passing of parameters in getter style. All parameters expecting reactive variables can use the following standardized variables:
-
-- Primitive values.
-- Basic reactive variables, such as values wrapped in `ref`.
-- Getter style, such as `() => val`.
-
-Example:
-
-```js
-import { func } from 'cesium-use' // This function doesn't actually exist; this is just an example.
-
-const valRaw = 1 // Primitive value
-func(valRaw)
-
-const valRef = ref(1) // Reactive
-func(valRef)
-
-const valGetter = 1
-func(() => valGetter) // Getter
-```
 
 ## Naming Convention
 

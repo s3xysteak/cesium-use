@@ -1,6 +1,6 @@
 # 简介
 
-Cesium Use 是一个基于 Vue 的 CesiumJS 工具库，提供了一系列的函数与组件以供使用，旨在简化基于 CesiumJS 的开发流程，提供更好的开发体验和更高的开发效率。
+Cesium Use 是一个基于 Vue 的 CesiumJS 工具库，提供了一系列的函数与组件以供使用，旨在简化基于 CesiumJS 的开发流程。
 
 ::: tip 前置知识
 
@@ -13,58 +13,80 @@ Cesium Use 是一个基于 Vue 的 CesiumJS 工具库，提供了一系列的函
 
 ## 示例
 
-初始化 Viewer 的示例：
+在地球上点击以查看结果！
+
+<script setup>
+import { defineAsyncComponent } from 'vue'
+const Viewer = defineAsyncComponent(() => import('../../.vitepress/components/Viewer.vue'))
+const Demo = defineAsyncComponent(() => import('../../.vitepress/components/IntroDemo.vue'))
+</script>
+
+<ClientOnly>
+  <Suspense>
+    <Viewer overflow-hidden>
+      <Demo />
+    </Viewer>
+    <template #fallback>
+      Loading...
+    </template>
+  </Suspense>
+</ClientOnly>
+
+::: details 代码
+
+其结构如下：
+
+```vue
+<template>
+  <Viewer>
+    <Demo />
+  </Viewer>
+</template>
+```
+
+其中 `Viewer.vue` 的代码:
 
 ```vue
 <script setup>
-import * as Cesium from 'cesium'
-import Comp from './Comp.vue'
-const container = ref(null)
+import { useViewerProvider } from 'cesium-use'
 
-// 初始化 Viewer
+const container = useTemplateRef('container')
 const { isMounted } = useViewerProvider(() => new Cesium.Viewer(container.value))
 </script>
 
 <template>
-  <div ref="container" />
-  <Comp v-if="isMounted" />
+  <div relative>
+    <div ref="container" h-full w-full />
+    <slot v-if="isMounted" />
+  </div>
 </template>
 ```
 
-使用Viewer的示例：
+其中 `Demo.vue` 的代码:
 
-```vue {6,8,13,20-22}
+```vue
 <script setup>
-// Comp.vue
-import * as Cesium from 'cesium'
-import { Located } from 'cesium-use'
+import { Located, useEventHandler, useViewer } from 'cesium-use'
 
-// 自动引入 import { useViewer, useEventHandler } from 'cesium-use'
-
-const viewer = useViewer() // 通过依赖注入从祖先组件获取`Viewer`
+const viewer = useViewer()
 
 const show = ref(true)
 const pos = shallowRef()
 
-const eventHandler = useEventHandler()
-eventHandler(({ position }) => {
+const handler = useEventHandler()
+handler(({ position }) => {
   pos.value = viewer.scene.pickPosition(position)
 }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 </script>
 
 <template>
   <Located v-model="show" :coordinate="pos">
-    <div>I am Cesium Use!</div>
+    <div bg-gradient-to-r shadow-lg from-rose to-blue text-nowrap c-white rounded p-4>
+      I am Cesium Use!
+    </div>
   </Located>
 </template>
 ```
-
-::: details 代码解释
-在点击 cesium 的地球时，一个写着"I am Cesium Use!"的窗口会被固定在所点击的坐标上。
-
-- `useViewer()` 通过依赖注入从祖先组件获取`Viewer`，几乎等价于 `inject('viewer-key')`
-
-- `useEventHandler` 在这里创建了一个`ScreenSpaceEventHandler`的工厂函数
 :::
 
 上面的示例展示了 Cesium Use 最基本的几个功能：
@@ -75,31 +97,8 @@ eventHandler(({ position }) => {
 - **Viewer 管理:** 提供了一些函数以对 Viewer 进行管理，这能方便的获取 Viewer 实例。
 
 ::: tip
-[点击这里](https://stackblitz.com/edit/vitejs-vite-t6qklc?file=src%2FComp.vue) 在线运行上面的示例！
+在 [stackblitz](https://stackblitz.com/edit/vitejs-vite-t6qklc?file=src%2FDemo.vue) 上在线运行前面的示例！
 :::
-
-## 响应式支持
-
-Cesium Use 生来就完全支持 Getter 风格的响应式传参，所有期望响应式变量的参数都可以使用以下规范的变量：
-
-- 原始值。
-- 基础的响应式变量，如被`ref`包装的值。
-- Getter 风格，如`() => val`
-
-示例：
-
-```js
-import { func } from 'cesium-use' // 事实上并没有这个函数，这里只是举例。
-
-const valRaw = 1 // 原始值
-func(valRaw)
-
-const valRef = ref(1) // 响应式
-func(valRef)
-
-const valGetter = 1
-func(() => valGetter) // Getter
-```
 
 ## 命名规范
 
