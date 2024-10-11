@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.14.4",
   "private": false,
+  "packageManager": "pnpm@9.11.0",
   "description": "Vue powered CesiumJS utility library",
   "author": "s3xysteak",
   "license": "MIT",
@@ -51,6 +52,7 @@
     "docs:dev": "vitepress dev src",
     "docs:build": "vitepress build src",
     "docs:preview": "vitepress preview src",
+    "publish:ci": "pnpm publish --access public --no-git-checks",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
