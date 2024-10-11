@@ -5,7 +5,7 @@ import { toRefs, useElementBounding } from '@vueuse/core'
 import { computed, type MaybeRefOrGetter, type Ref, ref, toValue } from 'vue'
 import { toCartesian3, useEventHandler, useViewer } from '~/index'
 
-type Placement =
+export type UseLocatedPlacement =
   | 'topLeft'
   | 'top'
   | 'topRight'
@@ -27,10 +27,10 @@ export interface UseLocatedOptions {
   /**
    * @default 'bottomRight'
    */
-  placement: Placement
+  placement: MaybeRefOrGetter<Nullable<UseLocatedPlacement>>
   offset: {
-    left?: number
-    top?: number
+    left?: MaybeRefOrGetter<Nullable<number>>
+    top?: MaybeRefOrGetter<Nullable<number>>
   }
 }
 
@@ -40,11 +40,13 @@ export interface UseLocatedOptions {
  * Component version please use `import { Located } from 'cesium-use'`
  */
 export function useLocated(el: MaybeRefOrGetter<Nullable<HTMLElement>>, options: Partial<UseLocatedOptions> = {}) {
+  const defaultPlacement = 'bottomRight'
+
   const {
     state: _state,
     coordinate: _coordinate,
     initialValue = true,
-    placement = 'bottomRight',
+    placement,
     offset = {},
   } = options
 
@@ -57,7 +59,7 @@ export function useLocated(el: MaybeRefOrGetter<Nullable<HTMLElement>>, options:
 
   const { width, height } = useElementBounding(el)
 
-  const placementMap: Record<Placement, (rect: { width: number, height: number }) => { width: number, height: number }> = {
+  const placementMap: Record<UseLocatedPlacement, (rect: { width: number, height: number }) => { width: number, height: number }> = {
     topLeft: rect => ({
       width: -rect.width,
       height: -rect.height,
@@ -91,14 +93,14 @@ export function useLocated(el: MaybeRefOrGetter<Nullable<HTMLElement>>, options:
     }
     __show.value = true
 
-    const offsetPlacement = placementMap[placement]({
+    const offsetPlacement = placementMap[toValue(placement) ?? defaultPlacement]({
       width: width.value,
       height: height.value,
     })
 
     position.value = {
-      x: pos.x + (offsetPlacement.width ?? 0) + (offset.left ?? 0),
-      y: pos.y + (offsetPlacement.height ?? 0) + (offset.top ?? 0),
+      x: pos.x + (offsetPlacement.width ?? 0) + (toValue(offset.left) ?? 0),
+      y: pos.y + (offsetPlacement.height ?? 0) + (toValue(offset.top) ?? 0),
     }
   })
 

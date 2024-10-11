@@ -33,6 +33,9 @@ viewer.entities.add({
     disableDepthTestDistance: Number.POSITIVE_INFINITY,
   },
 })
+
+const left = ref(0)
+const top = ref(0)
 </script>
 
 <template>
@@ -55,6 +58,16 @@ viewer.entities.add({
     <button ml-4 btn @click="state = !state">
       Now {{ state ? 'Show' : 'Hide' }}
     </button>
+
+    <label>
+      left :
+      <input v-model="left" type="number">
+    </label>
+
+    <label>
+      top :
+      <input v-model="top" type="number">
+    </label>
   </div>
 
   <Located
@@ -62,6 +75,7 @@ viewer.entities.add({
     :as="MyButton"
     placement="top"
     :coordinate="coordinate"
+    :offset="{ left, top }"
   >
     <div>
       Hello world!

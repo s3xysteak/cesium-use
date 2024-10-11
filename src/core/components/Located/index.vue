@@ -3,7 +3,7 @@ import type { Nullable } from '@s3xysteak/utils'
 import type { MaybeCoordinates } from '~shared/coordinate'
 import type { Cartesian3 } from 'cesium'
 import { type Component, ref } from 'vue'
-import { useLocated, type UseLocatedOptions } from '~/index'
+import { useLocated, type UseLocatedPlacement } from '~/index'
 
 defineOptions({
   name: 'Located',
@@ -12,9 +12,12 @@ defineOptions({
 const props = withDefaults(defineProps<{
   coordinate: Nullable<Cartesian3 | MaybeCoordinates>
 
-  placement?: UseLocatedOptions['placement']
+  placement?: Nullable<UseLocatedPlacement>
 
-  offset?: UseLocatedOptions['offset']
+  offset?: {
+    left?: Nullable<number>
+    top?: Nullable<number>
+  }
 
   as?: string | Component
 }>(), {
@@ -28,8 +31,11 @@ const el = ref()
 const { style, show } = useLocated(el, {
   state,
   coordinate: () => props.coordinate,
-  offset: props.offset,
-  placement: props.placement,
+  offset: {
+    left: () => props.offset?.left,
+    top: () => props.offset?.top,
+  },
+  placement: () => props.placement,
 })
 </script>
 
