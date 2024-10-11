@@ -2,11 +2,11 @@
 
 Based on [syncEntityCollection](/utils/syncEntityCollection.md), this will return a newly created `EntityCollection` that is synchronized with `viewer.entities` and will automatically be cleared when leaving the context.
 
-Due to its wide range of use cases, this concise wrapper was created.
+Due to its wide range of use cases, this simple wrapper was created.
 
 ## Usage
 
-Get viewer by `useViewer`：
+Basic usage:
 
 ```ts
 const entities = useEntityCollection()

@@ -2,11 +2,11 @@
 
 基于 [syncEntityCollection](/zh/utils/syncEntityCollection.md) 实现，这将会返回一个新创建的、与 `viewer.entities` 同步的 `EntityCollection`，并在离开上下文时自动清空。
 
-因为其使用场景如此广泛，于是有了这个简洁的封装。
+因为其使用场景如此广泛，于是有了这个简单的封装。
 
 ## 使用
 
-其通过 `useViewer` 获取viewer：
+基本使用：
 
 ```ts
 const entities = useEntityCollection()

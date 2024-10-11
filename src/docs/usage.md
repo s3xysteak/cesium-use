@@ -7,15 +7,11 @@ It is recommended to install using a package management tool. Here is an example
 ::: code-group
 
 ```sh [npm]
-$ npm add cesium-use
+$ npm i cesium-use
 ```
 
 ```sh [pnpm]
-$ pnpm add cesium-use
-```
-
-```sh [yarn]
-$ yarn add cesium-use
+$ pnpm i cesium-use
 ```
 
 Recommend reading [useViewer](composables/useViewer.md) chapter first to learn how to initialize `Viewer`.
@@ -28,7 +24,7 @@ This is an optional step, but using automatic import significantly enhances the 
 To install `unplugin-auto-import`, use the following command:
 
 ```sh
-$ pnpm add -D unplugin-auto-import
+$ pnpm i -D unplugin-auto-import
 ```
 
 For more information about `unplugin-auto-import`, please visit [its GitHub repository](https://github.com/unplugin/unplugin-auto-import).
