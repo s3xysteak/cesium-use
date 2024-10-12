@@ -61,12 +61,12 @@ const top = ref(0)
 
     <label>
       left :
-      <input v-model="left" type="number">
+      <input v-model="left" input w-34 type="number">
     </label>
 
     <label>
       top :
-      <input v-model="top" type="number">
+      <input v-model="top" input w-34 type="number">
     </label>
   </div>
 
