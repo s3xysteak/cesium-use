@@ -4,13 +4,13 @@
 
 更详细的类型声明与源码参见 [useLocated](/zh/composables/useLocated.md) 。
 
-| 名称                 | 类型                                                | 默认值             |
-| ------------------- | -------------------------------------------------- | ----------------- |
-| (v-model)modelValue | boolean                                            | true              |
-| coordinate          | Nullable<Cartesian3 \| MaybeCoordinates>           | **required**      |
-| placement?           | Nullable<UseLocatedPlacement>                     | 'bottomRight'     |
-| as?                  | string \| Component                               | 'div'             |
-| offset?              | { left: Nullable<number>, top: Nullable<number> } | {}                |
+| 名称                 | 类型                                                   | 默认值         |
+| ------------------- | ----------------------------------------------------- | ------------- |
+| (v-model)modelValue | boolean                                               | true          |
+| coordinate          | Nullable\<Cartesian3 \| MaybeCoordinates\>            | **required**  |
+| placement?          | Nullable\<UseLocatedPlacement\>                       | 'bottomRight' |
+| as?                 | string \| Component                                   | 'div'         |
+| offset?             | { left: Nullable\<number\>, top: Nullable\<number\> } | {}            |
 
 ## 使用
 
