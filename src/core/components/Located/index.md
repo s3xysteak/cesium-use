@@ -4,12 +4,13 @@ Locate a DOM element on a coordinate.
 
 For more detailed type declarations and source code, refer to [useLocated](/composables/useLocated.md) 。
 
-| Name                | Type                                     | Default           |
-| ------------------- | ---------------------------------------- | ----------------- |
-| (v-model)modelValue | boolean                                  | true              |
-| coordinate          | Nullable<Cartesian3 \| MaybeCoordinates> | **required**      |
-| placement           | UseLocatedOptions['placement']           | 'bottomRight'     |
-| as                  | string \| Component                      | 'div'             |
+| Name                 | Type                                              | Default           |
+| -------------------- | ------------------------------------------------- | ----------------- |
+| (v-model)modelValue  | boolean                                           | true              |
+| coordinate           | Nullable<Cartesian3 \| MaybeCoordinates>          | **required**      |
+| placement?           | Nullable<UseLocatedPlacement>                     | 'bottomRight'     |
+| as?                  | string \| Component                               | 'div'             |
+| offset?              | { left: Nullable<number>, top: Nullable<number> } | {}                |
 
 ## Usage
 
