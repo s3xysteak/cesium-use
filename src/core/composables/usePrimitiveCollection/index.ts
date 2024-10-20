@@ -13,8 +13,8 @@ export function usePrimitiveCollection(source = useViewer().scene.primitives) {
 
   source.add(primitives)
   tryOnScopeDispose(() => {
-    source.remove(primitives)
     primitives.removeAll()
+    source.remove(primitives)
   })
 
   return primitives
