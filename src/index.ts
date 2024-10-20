@@ -11,6 +11,7 @@ export * from './core/composables/useMeasure'
 export * from './core/composables/useMoveByKeyboard'
 export * from './core/composables/usePointerPosition'
 export * from './core/composables/usePoints'
+export * from './core/composables/usePrimitiveCollection'
 export * from './core/composables/useTimeline'
 export * from './core/composables/useViewer'
 
