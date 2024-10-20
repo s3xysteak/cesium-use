@@ -20,7 +20,7 @@ entities.add({
 // It will be cleared automatically when the component is unmounted
 ```
 
-Since `useViewer` must be called within the setup context, a way to proactively pass the `viewer` is provided to handle edge cases:
+You can pass a `entities` manually as the target synchronized with:
 
 ```ts
 const viewer = useViewer()
@@ -28,7 +28,7 @@ const scope = effectScope() // Provide a scope so that it can uninstall effect a
 
 function load() {
   scope.run(() => {
-    useEntityCollection(viewer)
+    useEntityCollection(viewer.entities)
   })
 }
 ```

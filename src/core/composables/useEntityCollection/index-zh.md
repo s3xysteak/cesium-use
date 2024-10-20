@@ -20,7 +20,7 @@ entities.add({
 // 组件销毁时自动清空
 ```
 
-由于 `useViewer` 必须在setup上下文中调用，因此提供了主动传递 `viewer` 的方式，以应对边缘情况：
+你可以手动传入一个 `entities` 作为同步的目标：
 
 ```ts
 const viewer = useViewer()
@@ -28,7 +28,7 @@ const scope = effectScope() // 提供一个作用域方便其自动卸载副作�
 
 function load() {
   scope.run(() => {
-    useEntityCollection(viewer)
+    useEntityCollection(viewer.entities)
   })
 }
 ```
