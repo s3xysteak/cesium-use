@@ -6,6 +6,7 @@ import { defineColor, editEntity, syncEntityCollection, useEventHandler } from '
 import { pickPosition as _pickPosition } from '../utils'
 
 export interface DistanceOptions {
+  format?: (area: number) => string
   lineEntityProps?: Cesium.Entity.ConstructorOptions
   startEntityProps?: Cesium.Entity.ConstructorOptions
   turnEntityProps?: Cesium.Entity.ConstructorOptions
@@ -75,6 +76,7 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
     turnEntityProps = {},
     endEntityProps = {},
     closeEntityProps = {},
+    format = num => `Sum length: ${num.toFixed(2)}m`,
   } = options
 
   const state = ref(false)
@@ -195,7 +197,7 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
     entities.add(editEntity({
       position: pos,
       label: {
-        text: `Sum length: ${__fullLength.value.toFixed(2)}m`,
+        text: format(__fullLength.value),
       },
     }, initialEntityProps, endEntityProps))
     entities.add(editEntity({
