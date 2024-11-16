@@ -19,7 +19,7 @@ export const shared = defineConfig({
     'core/:part/:module/index-zh.md': 'zh/:part/:module.md',
   },
   base: '/cesium-use/',
-  head: [['link', { rel: 'icon', href: '/cesium-use/logo.webp' }]],
+  head: [['link', { rel: 'icon', href: '/cesium-use/logo.png' }]],
   markdown: {
     math: true,
   },

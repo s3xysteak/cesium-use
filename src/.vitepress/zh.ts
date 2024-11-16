@@ -10,7 +10,7 @@ export const zh = defineConfig({
   description: '优雅且简洁的解决方案',
 
   themeConfig: {
-    logo: '/logo.webp',
+    logo: '/logo.png',
 
     outline: {
       label: '页面导航',

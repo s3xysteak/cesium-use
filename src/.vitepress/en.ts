@@ -10,7 +10,7 @@ export const en = defineConfig({
   description: 'Minimalism and elegant solution',
 
   themeConfig: {
-    logo: '/logo.webp',
+    logo: '/logo.png',
 
     nav: [
       { text: 'Home', link: '/' },
