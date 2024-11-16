@@ -15,7 +15,18 @@
 
 对于父组件，使用 `useViewerProvider` 注入viewer。useViewerProvider接受一个返回viewer实例的回调函数，这个函数可以是异步的:
 
-`useViewerProvider(() => new Cesium.Viewer(container.value))`
+```ts
+useViewerProvider(() => new Cesium.Viewer(container.value))
+```
+
+```ts
+useViewerProvider(async () => {
+  await fetch('/some/data')
+  const viewer = new Cesium.Viewer(container.value)
+  // ...
+  return viewer
+})
+```
 
 该回调函数会在 `onMounted` 钩子中调用，因此可以放心的在回调函数中使用DOM引用。
 
@@ -24,10 +35,10 @@
 
 ```vue
 <script setup>
-const container = ref(null)
+const container = useTemplateRef('container')
 
 const { isMounted } = useViewerProvider(() => {
-  const viewer = new Cesium.Viewer(container)
+  const viewer = new Cesium.Viewer(container.value)
   // ...
   return viewer
 })

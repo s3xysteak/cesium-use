@@ -15,7 +15,18 @@ For more details about `provide / inject`, please refer to [vue document](https:
 
 For parent component, use `useViewerProvider` to inject `Viewer`. `useViewerProvider` receives a callback returned a viewer instance, which can also be async function:
 
-`useViewerProvider(() => new Cesium.Viewer(container.value))`
+```ts
+useViewerProvider(() => new Cesium.Viewer(container.value))
+```
+
+```ts
+useViewerProvider(async () => {
+  await fetch('/some/data')
+  const viewer = new Cesium.Viewer(container.value)
+  // ...
+  return viewer
+})
+```
 
 The callback function will be called in `onMounted` hook, therefore, you can safely use DOM references in callback functions.
 
@@ -24,10 +35,10 @@ The callback function will be called in `onMounted` hook, therefore, you can saf
 
 ```vue
 <script setup>
-const container = ref(null)
+const container = useTemplateRef('container')
 
 const { isMounted } = useViewerProvider(() => {
-  const viewer = new Cesium.Viewer(container)
+  const viewer = new Cesium.Viewer(container.value)
   // ...
   return viewer
 })
@@ -35,7 +46,7 @@ const { isMounted } = useViewerProvider(() => {
 
 <template>
   <div ref="container" />
-  <!-- Confirm when the child component is created, viewer has been initialized -->
+  <!-- 确保子组件创建时，viewer已经完成初始化 -->
   <slot v-if="isMounted" />
 </template>
 ```
