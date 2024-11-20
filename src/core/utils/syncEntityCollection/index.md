@@ -2,6 +2,8 @@
 
 Sync two `Cesium.EntityCollection` , to synchronize the source collection to the target collection **in one direction**.
 
+For the corresponding composable function, please refer to [useEntityCollection](/composables/useEntityCollection).
+
 ## Usage
 
 In the example below, additions and deletions to `collection` will be synchronized with `viewer.entities`, but additions and deletions in `viewer.entities` do not affect `collection`.

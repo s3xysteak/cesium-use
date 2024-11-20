@@ -2,6 +2,8 @@
 
 同步两个 `Cesium.EntityCollection` ，使原集合**单向**同步到目标集合。
 
+对应的组合式函数请移步 [useEntityCollection](/zh/composables/useEntityCollection)。
+
 ## 使用
 
 在下面的例子中，对 `collection` 的新增和删除将会被同步到 `viewer.entities` 中， 但 `viewer.entities` 中的新增和删除不影响 `collection`。
