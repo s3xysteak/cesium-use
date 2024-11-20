@@ -1,8 +1,7 @@
 import { at } from '@s3xysteak/utils'
-import { useViewer } from '~composables/useViewer'
 import * as Cesium from 'cesium'
-import { type Ref, ref, type ShallowRef, shallowRef, watch } from 'vue'
-import { defineColor, editEntity, syncEntityCollection, useEventHandler } from '~/index'
+import { ref, type Ref, shallowRef, type ShallowRef, watch } from 'vue'
+import { defineColor, editEntity, syncEntityCollection, useEventHandler, useViewer } from '~/index'
 import { pickPosition as _pickPosition } from '../utils'
 
 export interface DistanceOptions {
@@ -46,6 +45,8 @@ export interface DistanceReturn {
    * Clear all distance measurement entities
    */
   clearAll: () => void
+
+  stop: () => void
 }
 
 const initialEntityProps: Cesium.Entity.ConstructorOptions = {
@@ -175,25 +176,25 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
     positions[__pointer] = pos
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
-  eventHandler(({ position }) => {
+  function stop() {
     if (!state.value || !current.value)
-      return
-
-    const pos = pickPosition(position)
-    if (!pos)
       return
 
     state.value = false
 
-    const { entities } = current.value!
+    const { entities, positions } = current.value
 
-    const shouldBeRemoved = [at(__currentTurnList.value, -1), at(__currentTurnList.value, -2)]
+    const shouldBeRemoved = [at(__currentTurnList.value, -1)]
 
     shouldBeRemoved.forEach((last) => {
+      if (!last)
+        return
       entities.removeById(last.id)
       __currentTurnList.value.pop()
     })
 
+    positions.pop()
+    const pos = at(positions ?? [], -1)
     entities.add(editEntity({
       position: pos,
       label: {
@@ -214,6 +215,9 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
         disableDepthTestDistance: Number.POSITIVE_INFINITY,
       },
     }, closeEntityProps))
+  }
+  eventHandler(() => {
+    stop()
   }, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
 
   eventHandler(({ endPosition }) => {
@@ -242,5 +246,6 @@ export function distance(options: DistanceOptions = {}): DistanceReturn {
     current,
     set: dateSet,
     clearAll,
+    stop,
   }
 }

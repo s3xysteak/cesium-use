@@ -1,9 +1,7 @@
-import { useViewer } from '~composables/useViewer'
-import { projectionPosition } from '~utils/projectionPosition'
-import { toCoordinates } from '~utils/toCoordinates'
+import { at } from '@s3xysteak/utils'
 import * as Cesium from 'cesium'
-import { computed, type Ref, ref, type ShallowRef, shallowRef, watch } from 'vue'
-import { defineColor, editEntity, syncEntityCollection, useEventHandler } from '~/index'
+import { computed, ref, type Ref, shallowRef, type ShallowRef, watch } from 'vue'
+import { defineColor, editEntity, projectionPosition, syncEntityCollection, toCoordinates, useEventHandler, useViewer } from '~/index'
 import { pickPosition as _pickPosition } from '../utils'
 
 export interface HeightOptions {
@@ -48,6 +46,8 @@ export interface HeightReturn {
    * Clear all height measurement entities
    */
   clearAll: () => void
+
+  stop: () => void
 }
 
 const initialEntityProps: Cesium.Entity.ConstructorOptions = {
@@ -199,22 +199,16 @@ export function height(options: HeightOptions = {}): HeightReturn {
     current.value.positions.value = [current.value.positions.value[0], pos]
   }, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
 
-  eventHandler(({ position }) => {
+  function stop() {
     if (!state.value || !current.value)
-      return
-
-    const pos = pickPosition(position)
-    if (!pos)
       return
 
     state.value = false
 
-    const { entities, positions } = current.value!
+    const { entities, positions } = current.value
 
-    positions.value = [positions.value[0], pos]
-
-    entities.add(editEntity({
-      position: pos,
+    entities?.add(editEntity({
+      position: at(positions?.value ?? [], -1),
       name: '__cesium-use_measure_height_close',
       label: {
         text: '×',
@@ -229,6 +223,9 @@ export function height(options: HeightOptions = {}): HeightReturn {
     }, { point: initialEntityProps.point }, closeEntityProps))
 
     current.value = undefined
+  }
+  eventHandler(() => {
+    stop()
   }, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
 
   function clearAll() {
@@ -246,5 +243,6 @@ export function height(options: HeightOptions = {}): HeightReturn {
     current,
     set: dateSet,
     clearAll,
+    stop,
   }
 }

@@ -1,8 +1,7 @@
 import { at } from '@s3xysteak/utils'
-import { useViewer } from '~composables/useViewer'
 import * as Cesium from 'cesium'
-import { type Ref, ref, type ShallowRef, shallowRef, watch } from 'vue'
-import { defineColor, editEntity, syncEntityCollection, useEventHandler } from '~/index'
+import { ref, type Ref, shallowRef, type ShallowRef, watch } from 'vue'
+import { defineColor, editEntity, syncEntityCollection, useEventHandler, useViewer } from '~/index'
 import { pickPosition as _pickPosition } from '../utils'
 
 export interface AreaOptions {
@@ -47,6 +46,8 @@ export interface AreaReturn {
    * Clear all area measurement entities
    */
   clearAll: () => void
+
+  stop: () => void
 }
 
 const initialEntityProps: Cesium.Entity.ConstructorOptions = {
@@ -179,24 +180,25 @@ export function area(options: AreaOptions = {}): AreaReturn {
     positions[__pointer] = pos
   }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
 
-  eventHandler(({ position }) => {
+  function stop() {
     if (!state.value || !current.value)
-      return
-
-    const pos = pickPosition(position)
-    if (!pos)
       return
 
     state.value = false
 
-    const { entities } = current.value!
+    const { entities, positions } = current.value
 
     const shouldBeRemoved = [at(__currentTurnList.value, -1), at(__currentTurnList.value, -2)]
 
     shouldBeRemoved.forEach((last) => {
+      if (!last)
+        return
       entities.removeById(last.id)
       __currentTurnList.value.pop()
     })
+
+    positions.pop()
+    const pos = at(positions ?? [], -1)
 
     entities.add(editEntity({
       position: pos,
@@ -217,6 +219,10 @@ export function area(options: AreaOptions = {}): AreaReturn {
     }, closeEntityProps))
 
     current.value = undefined
+  }
+
+  eventHandler(() => {
+    stop()
   }, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
 
   eventHandler(({ endPosition }) => {
@@ -245,6 +251,7 @@ export function area(options: AreaOptions = {}): AreaReturn {
     current,
     set: dateSet,
     clearAll,
+    stop,
   }
 }
 
