@@ -1,7 +1,9 @@
+import { isFunction } from '@s3xysteak/utils'
 import { useMagicKeys } from '@vueuse/core'
 import { useViewer } from '~composables/useViewer'
 import * as Cesium from 'cesium'
-import { type MaybeRefOrGetter, toValue, watchEffect } from 'vue'
+
+import { type MaybeRef, toValue, watchEffect } from 'vue'
 import { useEventHandler } from '../useEventHandler'
 
 export type UseMoveByKeyboardKeybindingList =
@@ -12,7 +14,7 @@ export type UseMoveByKeyboardKeybindingList =
   | 'down'
   | 'up'
 export interface UseMoveByKeyboardOptions {
-  distancePerFrame?: MaybeRefOrGetter<number>
+  distancePerFrame?: MaybeRef<number> | ((key: UseMoveByKeyboardKeybindingList) => number)
   keybinding?: Partial<Record<UseMoveByKeyboardKeybindingList, string>>
 }
 
@@ -22,7 +24,11 @@ export interface UseMoveByKeyboardOptions {
  * To move forward, backward, left, and right, use `W S A D`. Press `Shift` to move downward and `Space` to move upward.
  */
 export function useMoveByKeyboard(options: UseMoveByKeyboardOptions = {}) {
-  const { distancePerFrame = 4, keybinding: _keybinding } = options
+  const {
+    distancePerFrame = 4,
+    keybinding: _keybinding,
+  } = options
+
   const keybinding: Record<UseMoveByKeyboardKeybindingList, string>
     = Object.assign(
       {
@@ -86,7 +92,7 @@ export function useMoveByKeyboard(options: UseMoveByKeyboardOptions = {}) {
 
     const start = () => {
       stop = onPreRender(() => {
-        const speed = toValue(distancePerFrame)
+        const speed = isFunction(distancePerFrame) ? distancePerFrame(key) : toValue(distancePerFrame)
         if (speed === 0)
           return
         keyToCameraMoveMap[key](speed)
