@@ -2,6 +2,7 @@ import { useMagicKeys } from '@vueuse/core'
 import { useViewer } from '~composables/useViewer'
 import * as Cesium from 'cesium'
 import { type MaybeRefOrGetter, toValue, watchEffect } from 'vue'
+import { useEventHandler } from '../useEventHandler'
 
 export type UseMoveByKeyboardKeybindingList =
   | 'forward'
@@ -45,7 +46,8 @@ export function useMoveByKeyboard(options: UseMoveByKeyboardOptions = {}) {
     up: keys[keybinding.up],
   }
 
-  const camera = useViewer().camera
+  const viewer = useViewer()
+  const camera = viewer.camera
 
   const keyToCameraMoveMap: Record<
     UseMoveByKeyboardKeybindingList,
@@ -78,27 +80,21 @@ export function useMoveByKeyboard(options: UseMoveByKeyboardOptions = {}) {
       ),
   }
 
+  const onPreRender = useEventHandler(viewer.scene.preRender)
   const move = (key: UseMoveByKeyboardKeybindingList) => {
-    const requestIdList: number[] = []
+    let stop = () => {}
 
     const start = () => {
-      const id = requestAnimationFrame(start)
-      requestIdList.push(id)
-
-      const speed = toValue(distancePerFrame)
-      if (speed === 0)
-        return
-      keyToCameraMoveMap[key](speed)
-    }
-    const end = () => {
-      requestIdList.forEach((id) => {
-        cancelAnimationFrame(id)
+      stop = onPreRender(() => {
+        const speed = toValue(distancePerFrame)
+        if (speed === 0)
+          return
+        keyToCameraMoveMap[key](speed)
       })
-      requestIdList.length = 0
     }
 
     const animate = (val: boolean) => {
-      val ? start() : end()
+      val ? start() : stop()
     }
 
     return { animate }
