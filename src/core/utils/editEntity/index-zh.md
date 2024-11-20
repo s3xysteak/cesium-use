@@ -28,3 +28,15 @@ editEntity(
   },
 )
 ```
+
+## 演练场
+
+```js
+editEntity(A, B)
+```
+
+<script setup>
+import Playground from './Playground.vue'
+</script>
+
+<Playground />
