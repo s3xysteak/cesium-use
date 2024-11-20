@@ -4,6 +4,8 @@ import { useEventHandler, useViewer } from '~/index'
 
 /**
  * Reactive timeline. Used To control currentTime, start/endTime, time rate...
+ *
+ * Time are all Unix Time Stamp in milliseconds.
  */
 export function useTimeline(clock = useViewer().clock) {
   const getUnix = (time: Cesium.JulianDate) => Cesium.JulianDate.toDate(time).getTime()
