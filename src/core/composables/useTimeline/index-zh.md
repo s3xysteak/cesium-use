@@ -19,3 +19,15 @@ play()
 `currentTime`, `startTime`, `stopTime` 都是精确到毫秒的Unix时间戳。`rate` 用于控制时间流速，小于0时可以让时间倒流。需要注意的是，`paused` 为只读属性。如果希望让时间暂停/流动，请调用 `play()`或`pause()` 方法。
 
 更多用法请见Demo与类型声明。
+
+### 返回值
+
+返回值都为函数或者响应式变量。
+
+- `rate`: number，表示时间流动速率。
+- `paused`: 只读的boolean，表示时间是否停止。
+- `currentTime`: number，表示当前时间(unix时间戳)。
+- `startTime`: number，表示时间轴的开始时间(unix时间戳)。
+- `stopTime`: number， 表示时间轴的结束时间(unix时间戳)。
+- `play`: 函数，用于使时间开始流动。
+- `pause`: 函数，用于使时间暂停。
