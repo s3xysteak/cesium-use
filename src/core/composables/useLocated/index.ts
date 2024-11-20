@@ -45,7 +45,7 @@ export interface UseLocatedOptions {
  * const state = ref(false)
  * const coordinate = ref(new Cesium.Cartesian3(123, 456, 789))
  *
- * const el = ref(null)
+ * const el = useTemplateRef('el')
  * const { style, show } = useLocated(el, {
  *   state,
  *   coordinate,
