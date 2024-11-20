@@ -10,7 +10,7 @@ export interface UseFlyToAreaOptions {
 
 /**
  * Move the viewpoint to a position where all input coordinates are visible using `flyToBoundingSphere`.
- * @example
+ * ## example
  * ```js
  * const flyToArea = useFlyToArea()
  * flyToArea([[120, 40], [130, 30]])

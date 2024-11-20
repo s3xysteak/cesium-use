@@ -4,6 +4,13 @@ import * as Cesium from 'cesium'
 
 /**
  * Normalized Cartesian3/coordinates/... to coordinates.
+ *
+ * ## example
+ * ```js
+ * toCoordinates([120, 80])
+ * toCoordinates([120, 80, 1000])
+ * toCoordinates(Cesium.Cartesian3.fromDegrees(120, 80))
+ * ```
  */
 export function toCoordinates(source: Cesium.Cartesian3 | MaybeCoordinates) {
   const createReturns = (

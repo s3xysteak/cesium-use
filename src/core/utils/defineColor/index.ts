@@ -2,6 +2,14 @@ import * as Cesium from 'cesium'
 
 /**
  * Define a `Cesium.Color` from a string.
+ *
+ * ## example
+ * ```js
+ * defineColor('#00ff00/60') // #00ff00 with 60% alpha
+ * defineColor('green/60')
+ * defineColor('green')
+ * defineColor('rgb(0 255 0)')
+ * ```
  */
 export function defineColor(str: string): Cesium.Color {
   if (str.startsWith('rgb') || str.startsWith('hsl'))

@@ -6,6 +6,21 @@ import * as Cesium from 'cesium'
  * To synchronize the source collection to the target collection **in one direction**.
  *
  * If no second argument is provided, a new `Cesium.EntityCollection` will be created.
+ *
+ * ## example
+ *
+ * ```js
+ * const collection = syncEntityCollection(viewer.entities)
+ *
+ * const entity = collection.add({})
+ * viewer.entities.contains(entity) // true!
+ *
+ * collection.remove(entity)
+ * viewer.entities.contains(entity) // false!
+ *
+ * const entityOfTarget = viewer.entities.add({})
+ * collection.contains(entityOfTarget) // false!
+ * ```
  */
 export function syncEntityCollection(
   target: Cesium.EntityCollection,

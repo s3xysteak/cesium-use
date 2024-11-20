@@ -21,6 +21,16 @@ const CANNOT_GET_SETUP_CONTEXT = 'Failed to get viewer because cannot get setup 
 const UNDEFINED_VIEWER = 'Failed to get viewer because viewer is undefined now.'
 
 export type UseViewerParam = 'throw-error' | 'no-throw-error' | 'silent'
+
+/**
+ * Get `viewer` from the context.
+ *
+ * ## example
+ * ```js
+ * const viewer = useViewer() // strictly check viewer is existence
+ * const viewerMaybeUndefined = useViewer('silent')
+ * ```
+ */
 export function useViewer(): Viewer
 export function useViewer(isThrowError: UseViewerParam = 'throw-error'): Viewer | undefined {
   const errorMap = {
@@ -41,6 +51,22 @@ export function useViewer(isThrowError: UseViewerParam = 'throw-error'): Viewer 
 
 /**
  * Accept a callback which will be called in `onMounted` hook and return a `Cesium.Viewer` instance. It can also be a async function.
+ *
+ * ## example
+ * ```js
+ * // normal
+ * useViewerProvider(() => new Cesium.Viewer(container.value))
+ *
+ * // async callback
+ * useViewerProvider(async () => {
+ *   await fetch('/my/data')
+ *   const viewer = new Cesium.Viewer(container.value)
+ *   return viewer
+ * })
+ *
+ * // returns
+ * const { isMounted, viewer } = useViewerProvider(() => new Cesium.Viewer(container.value))
+ * ```
  */
 export function useViewerProvider(fn: () => Awaitable<Viewer>) {
   const viewer = shallowRef<Viewer>()

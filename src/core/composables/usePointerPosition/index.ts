@@ -16,7 +16,7 @@ export interface UsePointerPositionOptions {
  *
  * Implement optional throttling based on `vueuse`'s `useThrottleFn`.
  *
- * @example
+ * ## example
  * ```js
  *
  * // const { longitude, latitude, altitude } = usePointerPosition()

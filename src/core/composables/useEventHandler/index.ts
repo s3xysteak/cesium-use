@@ -10,7 +10,7 @@ import { onEventListener } from './onEventListener'
  *
  * The side effect will be collected to context of `useEventHandler` and be cleared on scope dispose.
  *
- * @example
+ * ## example
  * ```js
  * const eventHandler = useEventHandler()
  * eventHandler(() => {

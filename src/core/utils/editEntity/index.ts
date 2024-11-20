@@ -4,11 +4,23 @@ import { mergeDeep } from '~shared/general'
 /**
  * Merge `Entity.ConstructorOptions` two depths deep.
  *
+ * ## example
+ *
  * ```js
- * editEntity({ name: '1' }, { name: '2' })
+ * editEntity(
+ *   { name: '1' },
+ *   { name: '2' }
+ * )
  * // { name: '2' }
  *
- * editEntity({ label: { text: 'foo', font: 'bar' } }, { label: { font: 'bold' } })
+ * editEntity(
+ *   {
+ *     label: { text: 'foo', font: 'bar' }
+ *   },
+ *   {
+ *     label: { font: 'bold' }
+ *   }
+ * )
  * // { label: { text: 'foo', font: 'bold' } } // two depths deep
  * ```
  */

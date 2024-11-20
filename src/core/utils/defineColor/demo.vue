@@ -1,23 +1,31 @@
 <script setup lang="ts">
-import { useViewer } from '~composables/useViewer'
 import * as Cesium from 'cesium'
 import { ref, watchEffect } from 'vue'
-import { defineColor, editEntity } from '~/index'
-
-const viewer = useViewer()
+import { defineColor, editEntity, useEntityCollection } from '~/index'
 
 const input = ref('#00ffff/50')
-const entity = viewer.entities.add({
+
+const entities = useEntityCollection()
+const entity = entities.add({
   polygon: {
     hierarchy: Cesium.Cartesian3.fromDegreesArray([-100, 30, -80, 70, -10, 40]),
   },
 })
 watchEffect(() => {
-  editEntity(entity, {
-    polygon: {
-      material: defineColor(input.value),
-    },
-  })
+  try {
+    editEntity(entity, {
+      polygon: {
+        material: defineColor(input.value),
+      },
+    })
+  }
+  catch {
+    editEntity(entity, {
+      polygon: {
+        material: defineColor('#00ffff/50'),
+      },
+    })
+  }
 })
 </script>
 
