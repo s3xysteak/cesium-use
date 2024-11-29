@@ -15,8 +15,8 @@ export const shared = defineConfig({
   rewrites: {
     'docs/:markdown.md': ':markdown.md',
     'docs/:lang/:markdown.md': ':lang/:markdown.md',
-    'core/:part/:module/index.md': ':part/:module.md',
-    'core/:part/:module/index-zh.md': 'zh/:part/:module.md',
+    ':part/:module/index.md': ':part/:module.md',
+    ':part/:module/index-zh.md': 'zh/:part/:module.md',
   },
   base: '/cesium-use/',
   head: [['link', { rel: 'icon', href: '/cesium-use/logo.png' }]],

@@ -1,9 +1,9 @@
 import { readdirSync } from 'node:fs'
 import { defineConfig } from 'vitepress'
 
-const composablesList = readdirSync('./src/core/composables')
-const componentsList = readdirSync('./src/core/components')
-const utilsList = readdirSync('./src/core/utils')
+const composablesList = readdirSync('./packages/composables')
+const componentsList = readdirSync('./packages/components')
+const utilsList = readdirSync('./packages/utils')
 
 export const en = defineConfig({
   lang: 'en-US',

@@ -1,2 +1,2 @@
-src/docs/public/logo.* filter=lfs diff=lfs merge=lfs -text
-src/core/composables/useWaterPlane/golden_eagle.glb filter=lfs diff=lfs merge=lfs -text
+packages/docs/public/logo.* filter=lfs diff=lfs merge=lfs -text
+packages/composables/useWaterPlane/golden_eagle.glb filter=lfs diff=lfs merge=lfs -text

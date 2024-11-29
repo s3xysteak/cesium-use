@@ -7,6 +7,6 @@ export default antfu({
 }, {
   ignores: [
     '.vscode/settings.json',
-    'src/imports.ts',
+    'packages/imports.ts',
   ],
 })

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { effectScope } from 'vue'
-import { toCartesian3 } from '~/core/utils/toCartesian3'
+import { toCartesian3 } from '~/utils/toCartesian3'
 import { useEntityCollection } from '.'
 import { useViewer } from '../useViewer'
 

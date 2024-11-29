@@ -2,7 +2,7 @@ import { fileURLToPath } from 'node:url'
 import fs from 'fs-extra'
 import { join, resolve } from 'pathe'
 
-const DIR_TYPES = resolve(fileURLToPath(import.meta.url), '../../../tsc-types/src/core')
+const DIR_TYPES = resolve(fileURLToPath(import.meta.url), '../../../tsc-types/packages')
 
 export async function getTypeDeclaration(pkg: string, name: string): Promise<string | undefined> {
   const typingFilepath = join(DIR_TYPES, `${pkg}/${name}/index.d.ts`)

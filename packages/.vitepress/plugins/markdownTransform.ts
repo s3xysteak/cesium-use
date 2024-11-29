@@ -6,8 +6,8 @@ import { resolve } from 'pathe'
 import { getTypeDeclaration } from '../utils'
 
 function markdownTransform(): Plugin {
-  const DIR_CORE = resolve(fileURLToPath(import.meta.url), '../../../core')
-  const DIR_TYPES = resolve(fileURLToPath(import.meta.url), '../../../../tsc-types/src/core')
+  const DIR_CORE = resolve(fileURLToPath(import.meta.url), '../../..')
+  const DIR_TYPES = resolve(fileURLToPath(import.meta.url), '../../../../tsc-types/packages')
   const hasTypes = fs.existsSync(DIR_TYPES)
 
   if (!hasTypes)
@@ -17,7 +17,7 @@ function markdownTransform(): Plugin {
     name: 'docs-md-transform',
     enforce: 'pre',
     async transform(code, id) {
-      if (!id.match(/.+?core\/.+?\.md\b/))
+      if (!id.match(/packages\/(?:components|composables|utils)\/.+?\.md/))
         return
 
       const [pkg, name, i] = id.split('/').slice(-3)
@@ -67,7 +67,7 @@ ${types}
 :::`
         : ''
 
-      const URL = 'https://github.com/s3xysteak/cesium-use/blob/main/src/core'
+      const URL = 'https://github.com/s3xysteak/cesium-use/blob/main/packages'
       const existsIndex = fs.existsSync(`${DIR_CORE}/${pkg}/${name}/index.ts`)
 
       const sourceUrl = `${URL}/${pkg}/${name}/index.${existsIndex ? 'ts' : 'vue'}`

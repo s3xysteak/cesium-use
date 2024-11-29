@@ -1,8 +1,8 @@
 tsc-types
 
 # Logs
-src/.vitepress/cache
-src/.vitepress/dist
+packages/.vitepress/cache
+packages/.vitepress/dist
 logs
 *.log
 npm-debug.log*

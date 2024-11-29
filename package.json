@@ -49,9 +49,9 @@
     "release": "pnpm type:check && bumpp",
     "build:only": "vite build",
     "type:check": "vue-tsc --noEmit --allowImportingTsExtensions && tsc --noEmit",
-    "docs:dev": "vitepress dev src",
-    "docs:build": "vitepress build src",
-    "docs:preview": "vitepress preview src",
+    "docs:dev": "vitepress dev packages",
+    "docs:build": "vitepress build packages",
+    "docs:preview": "vitepress preview packages",
     "publish:ci": "pnpm publish --access public --no-git-checks",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"

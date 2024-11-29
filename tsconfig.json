@@ -9,11 +9,11 @@
     /* Bundler mode */
     "moduleResolution": "Bundler",
     "paths": {
-      "~/*": ["src/*"],
-      "~components/*": ["src/core/components/*"],
-      "~composables/*": ["src/core/composables/*"],
-      "~utils/*": ["src/core/utils/*"],
-      "~shared/*": ["src/shared/*"]
+      "~/*": ["packages/*"],
+      "~components/*": ["packages/components/*"],
+      "~composables/*": ["packages/composables/*"],
+      "~utils/*": ["packages/utils/*"],
+      "~shared/*": ["packages/shared/*"]
     },
     "resolveJsonModule": true,
     "types": [
@@ -33,7 +33,7 @@
   "exclude": [
     "**/node_modules/**",
     "**/dist/**",
-    "src/demo",
+    "packages/demo",
     "**/*.md",
     "tsc-types"
   ]

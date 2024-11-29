@@ -2,9 +2,9 @@ import type { RouteRecordRaw } from 'vue-router'
 
 // @ts-expect-error - demo has been ignored.
 const modules = import.meta.glob([
-  '../../core/composables/*/demo.vue',
-  '../../core/components/*/demo.vue',
-  '../../core/utils/*/demo.vue',
+  '../../composables/*/demo.vue',
+  '../../components/*/demo.vue',
+  '../../utils/*/demo.vue',
 ])
 // @ts-expect-error - demo has been ignored.
 const demoList: RouteRecordRaw[] = Object.entries(modules).map(([key, val]) => {

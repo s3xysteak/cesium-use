@@ -2,7 +2,7 @@
 import { useFullscreen } from '@vueuse/core'
 import * as Cesium from 'cesium'
 import { ref } from 'vue'
-import { useViewerProvider } from '../../core/composables/useViewer'
+import { useViewerProvider } from '../../composables/useViewer'
 import 'cesium/Build/Cesium/Widgets/widgets.css'
 
 // @ts-expect-error - vite env

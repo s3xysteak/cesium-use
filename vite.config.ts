@@ -22,6 +22,8 @@ export default defineConfig({
 
     dts({ rollupTypes: true }),
     ExportCollector({
+      writeTo: './packages/imports.ts',
+      entries: ['./packages/index'],
       exclude: [
         'Located',
       ],
@@ -38,18 +40,18 @@ export default defineConfig({
     ],
     root: fileURLToPath(new URL('./', import.meta.url)),
     includeSource: [
-      'src/core/composables/**/*.ts',
-      'src/core/components/**/*.ts',
-      'src/core/utils/**/*.ts',
-      'src/shared/**/*.ts',
+      'packages/composables/**/*.ts',
+      'packages/components/**/*.ts',
+      'packages/utils/**/*.ts',
+      'packages/shared/**/*.ts',
     ],
   },
   build: {
     lib: {
       entry: [
-        './src/index.ts',
-        './src/imports.ts',
-        './src/resolvers.ts',
+        './packages/index.ts',
+        './packages/imports.ts',
+        './packages/resolvers.ts',
       ],
       formats: ['es'],
       fileName(_, entryName) {
@@ -74,7 +76,7 @@ export default defineConfig({
     host: '0.0.0.0',
     warmup: {
       clientFiles: [
-        './src/demo/container.vue',
+        './packages/demo/container.vue',
       ],
     },
   },

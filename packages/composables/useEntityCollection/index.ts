@@ -1,5 +1,5 @@
 import { tryOnScopeDispose } from '@vueuse/core'
-import { syncEntityCollection } from '~/core/utils/syncEntityCollection'
+import { syncEntityCollection } from '~/utils/syncEntityCollection'
 import { useViewer } from '../useViewer'
 
 /**

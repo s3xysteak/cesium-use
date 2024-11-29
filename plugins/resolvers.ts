@@ -9,10 +9,10 @@ export default function (): Plugin {
     name: 'cesium-use/handle-resolvers',
     enforce: 'pre',
     async transform(code, id) {
-      if (!id.endsWith('/src/resolvers.ts'))
+      if (!id.endsWith('/packages/resolvers.ts'))
         return
 
-      const val = await fs.readdir(resolve(process.cwd(), './src/core/components'))
+      const val = await fs.readdir(resolve(process.cwd(), './packages/components'))
 
       const start = code.indexOf('[', code.indexOf('LIST'))
       const end = code.indexOf(']', start + 1)

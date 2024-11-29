@@ -1,5 +1,5 @@
 import * as Cesium from 'cesium'
-import { defineColor } from '~/core/utils/defineColor'
+import { defineColor } from '~/utils/defineColor'
 import { useViewer } from '../useViewer'
 import VERTEX from './VertexShader.glsl?raw'
 import WATER_MATERIAL from './WaterMaterial.glsl?raw'
