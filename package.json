@@ -75,7 +75,7 @@
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.6.0",
     "bumpp": "^9.8.1",
-    "cesium": "^1.123.1",
+    "cesium": "^1.127.0",
     "consola": "^3.2.3",
     "eslint": "^9.15.0",
     "fs-extra": "^11.2.0",
