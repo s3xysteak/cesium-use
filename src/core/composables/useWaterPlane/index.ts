@@ -118,32 +118,18 @@ class WaterPrimitive {
     const positions = options.positions
     this._show = true
 
-    this._positions = []
+    this._positions = positions.map(position =>
+      Cesium.Cartesian3.fromRadians(position.longitude, position.latitude, this._height),
+    )
 
-    const [
-      cosLatitudeSum,
-      cosLatitudeSinLongitudeSum,
-      sinLatitudeSum,
-    ] = positions
-      .reduce((acc, position) => {
-        const { latitude, longitude } = position
+    const sumCartesian = this._positions.reduce((sum, cartesian) => {
+      return Cesium.Cartesian3.add(sum, cartesian, new Cesium.Cartesian3())
+    }, new Cesium.Cartesian3())
 
-        this._positions.push(Cesium.Cartesian3.fromRadians(position.longitude, position.latitude, this._height))
+    const averageCartesian = Cesium.Cartesian3.divideByScalar(sumCartesian, positions.length, new Cesium.Cartesian3())
+    this._reflectorWorldPosition = averageCartesian.clone()
+    this._originalReflectorWorldPosition = averageCartesian.clone()
 
-        return [
-          acc[0] + Math.cos(latitude) * Math.cos(longitude),
-          acc[1] + Math.cos(latitude) * Math.sin(longitude),
-          acc[2] + Math.sin(latitude),
-        ]
-      }, [0, 0, 0])
-      .map(item => item /= positions.length)
-
-    const averageLongitude = Math.atan2(cosLatitudeSinLongitudeSum, cosLatitudeSum)
-    const distanceToSurface = Math.sqrt(cosLatitudeSum * cosLatitudeSum + cosLatitudeSinLongitudeSum * cosLatitudeSinLongitudeSum)
-    const averageLatitude = Math.atan2(sinLatitudeSum, distanceToSurface)
-
-    this._reflectorWorldPosition = Cesium.Cartesian3.fromRadians(averageLongitude, averageLatitude, this._height)
-    this._originalReflectorWorldPosition = this._reflectorWorldPosition.clone()
     this._normal = Cesium.Ellipsoid.WGS84.geodeticSurfaceNormal(this._reflectorWorldPosition)
     this._waterPlane = Cesium.Plane.fromPointNormal(this._reflectorWorldPosition, this._normal)
 

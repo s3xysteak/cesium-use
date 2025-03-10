@@ -1,20 +1,21 @@
 <script setup lang="ts">
 import * as Cesium from 'cesium'
 import { reactive, watchEffect } from 'vue'
-import { defineColor, toCartesian3, useViewer } from '~/index'
+import { defineColor, toCartesian3, toCoordinates, useViewer } from '~/index'
 import { useWaterPlane } from '.'
 import glb from './golden_eagle.glb?url'
 import WaterImage from './waterNormals.jpg'
 
 const viewer = useViewer()
 
-viewer.flyTo(viewer.entities.add({
-  position: toCartesian3(119.95, 31.8, 100),
+const entityList = Array.from({ length: 5 }, (_, k) => 100 + 20 * (k + 1) - 60).map(v => viewer.entities.add({
+  position: toCartesian3(119.95 + v / 20000, 31.8, v),
   model: {
     uri: glb,
     scale: 100,
   },
 }))
+viewer.flyTo(entityList[2])
 
 const positions = [
   [
@@ -44,7 +45,7 @@ const waterPlane = useWaterPlane()
 const primitive = waterPlane({
   normalMapUrl: WaterImage,
   positions: positions.map(item => Cesium.Cartographic.fromDegrees(item[0], item[1])),
-  height: 10,
+  height: -1000,
 })
 
 const form = reactive({
@@ -67,6 +68,23 @@ watchEffect(() => {
 function toggleShow() {
   primitive.show = !primitive.show
 }
+
+const middleEntityPosition = toCoordinates(entityList[2].position!.getValue(viewer.clock.currentTime)!)
+viewer.entities.add({
+  position: new Cesium.CallbackPositionProperty(
+    () => toCartesian3(
+      middleEntityPosition.longitude,
+      middleEntityPosition.latitude,
+      form.height,
+    ),
+    false,
+  ),
+  point: {
+    pixelSize: 4,
+    color: defineColor('#f00'),
+    disableDepthTestDistance: Infinity,
+  },
+})
 </script>
 
 <template>
